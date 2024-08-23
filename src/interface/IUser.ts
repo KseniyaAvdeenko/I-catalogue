@@ -7,7 +7,9 @@ export interface INewUser extends IUserBase{
     email: string;
     re_password: string;
 }
-
+export interface INewUserResponse extends INewUser{
+    id: number
+}
 export interface IUser {
     id: number;
     username: string;

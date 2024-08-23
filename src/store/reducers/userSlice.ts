@@ -1,26 +1,47 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
+import {IUser} from "../../interface/IUser";
 
-export const initialState = {
-    isLoading: false,
-    error: '',
+interface IUserInitial {
+    errorCurrentUser: string;
+    errorUsers: string;
+    errorUser: string;
+    currentUser: IUser|null;
+    user: IUser|null;
+    users: IUser[]|null;
+}
+
+export const initialState:IUserInitial = {
+    errorCurrentUser: '',
+    errorUsers: '',
+    errorUser: '',
+    currentUser: null,
+    user: null,
+    users: null,
 }
 
 export const userSlice = createSlice({
     name: 'users',
     initialState,
-    reducers: {},
-        // userFetching(state){
-        //     state.isLoading = true;
-        // },
-        // userFetchingSuccess(state, action:PayloadAction<IUser[]>){
-        //     state.isLoading = false;
-        //     state.error = '';
-        //     state.users = action.payload
-        // },
-        // userFetchingFail(state, action:PayloadAction<string>){
-        //     state.isLoading = false;
-        //     state.error = action.payload;
-        // },
+    reducers: {
+        loadingCurrentUserSuccess(state, action: PayloadAction<IUser>) {
+            state.currentUser = action.payload
+        },
+        loadingCurrentUserFail(state, action: PayloadAction<string>) {
+            state.errorCurrentUser = action.payload
+        },
+        loadingUsersSuccess(state, action: PayloadAction<IUser[]>) {
+            state.users = action.payload
+        },
+        loadingUsersFail(state, action: PayloadAction<string>) {
+            state.errorUsers= action.payload
+        },
+        loadingUserSuccess(state, action: PayloadAction<IUser>) {
+            state.user = action.payload
+        },
+        loadingUserFail(state, action: PayloadAction<string>) {
+            state.errorUser = action.payload
+        },
+    }
 })
 
 

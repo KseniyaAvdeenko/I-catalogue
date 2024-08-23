@@ -3,7 +3,7 @@ import styles from './Auth.module.sass'
 import {IUserBase} from "../../interface/IUser";
 import {useAppDispatch, useAppSelector} from "../../hooks/redux";
 import {loginUser} from "../../store/actions/authAction";
-import {redirect, useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import AdminHeader from "../../components/AdminHeader/AdminHeader";
 import AdminFooter from "../../components/AdminFooter/AdminFooter";
 
@@ -33,7 +33,10 @@ const SignIn = () => {
     }
     const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        if (user.username && user.password) dispatch(loginUser(user))
+        if (user.username && user.password) {
+            dispatch(loginUser(user))
+            setUser({...user, username: '', password: ''})
+        }
     }
     if (auth.isAuth) {
         navigate('/admin_page/')
@@ -54,6 +57,7 @@ const SignIn = () => {
                                    onFocus={() => setUsernameLabel({...usernameLabel, top: '-2rem', color: '#926B6A'})}
                                    onBlur={e => onBlurInput(e)}
                                    onChange={e => onChangeHandler(e)}
+                                   value={user.username}
                             />
                         </div>
                         <div className={styles.auth__inputContainer}>
@@ -61,6 +65,7 @@ const SignIn = () => {
                             <input type="password" name='password' id='password'
                                    onFocus={() => setPasswordLabel({...passwordLabel, top: '-2rem', color: '#926B6A'})}
                                    onBlur={e => onBlurInput(e)}
+                                   value={user.password}
                                    onChange={e => onChangeHandler(e)}/>
                         </div>
                         <button type={"submit"} className={styles.auth__button}>Войти</button>
@@ -69,9 +74,7 @@ const SignIn = () => {
             </main>
             <AdminFooter/>
         </>
-
-    )
-        ;
+    );
 };
 
 export default SignIn;
