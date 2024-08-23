@@ -1,0 +1,41 @@
+@import "../../assets/styles/Common.module"
+.adminHeader
+  display: flex
+  width: 100%
+  justify-content: space-between
+  align-items: center
+  height: fit-content
+  background: $bg300
+  @extend .p_15
+  @extend .baseFont
+
+.auth
+  display: flex
+  width: 20%
+
+  &__items
+    margin-right: 2rem
+    text-decoration: none
+    cursor: pointer
+
+  &__link
+    position: relative
+    color: $text100
+    transition: all .5s ease
+
+    &:hover
+      color: $primary100
+      font-weight: bold
+
+  &__link:after
+    content: ''
+    position: absolute
+    width: 0
+    height: .2rem
+    left: 0
+    bottom: -5%
+    background: $primary100
+    transition: width .5s ease
+
+  &__link:hover:after
+    width: 100%
