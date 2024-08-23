@@ -1,8 +1,58 @@
 @import "../../assets/styles/Common.module"
 
 .auth
+  color: $text100
+  font-family: $baseFont
+
   &__container
+    background: $bg100
     width: 100%
-    min-height: calc(100vh - 5.5rem - 6rem)
+    min-height: calc(100vh - 6.5rem - 6rem)
     @extend .flexRow
     justify-content: center
+
+  &__form
+    @extend .flexColumn
+    align-items: center
+    @extend .p_30
+    background: #fff
+    width: 30%
+    border-radius: 2rem
+
+  &__formContainer
+    @extend .flexColumn
+    align-items: center
+    width: 100%
+
+  &__inputContainer
+    position: relative
+    width: 100%
+    @extend .mb_25
+    & label
+      @extend .baseFont
+      position: absolute
+      color: $text100
+      font-weight: 600
+      left: 1rem
+      top: 1rem
+    & input
+      @extend .auth_input
+      @extend .p_10
+      width: 100%
+      &:focus
+        outline: none
+        border-bottom-color: $accent200
+  &__heading
+    @extend .baseFont
+    font-size: $h4
+    font-weight: 700
+    @extend .mb_10
+
+  &__button
+    @extend .baseAdminButton
+
+.auth_input
+  border-top: none
+  border-left: none
+  border-right: none
+  border-bottom: .3rem solid $text100

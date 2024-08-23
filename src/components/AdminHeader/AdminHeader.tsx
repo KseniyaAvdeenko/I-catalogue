@@ -2,15 +2,23 @@ import React from 'react';
 import styles from './AdminHeader.module.sass'
 import AppLogo from '../../assets/img/I-Catalogue.png'
 import {useAppDispatch, useAppSelector} from "../../hooks/redux";
-import authReducer from "../../store/reducers/authSlice";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
+import {logout} from "../../store/actions/authAction";
 
 interface IAdminHeader {
     children?: React.ReactNode | null
 }
 
 const AdminHeader: React.FC<IAdminHeader> = ({children}) => {
+    const navigate = useNavigate()
     const auth = useAppSelector(state => state.authReducer)
+    const dispatch = useAppDispatch()
+    const logOut = ()=>{
+        dispatch(logout())
+        navigate('/sign_in/')
+    }
+
+    // console.log(auth)
     return (
         <header className={styles.adminHeader}>
             <img src={AppLogo} alt="app logo"/>
@@ -19,11 +27,14 @@ const AdminHeader: React.FC<IAdminHeader> = ({children}) => {
                 {auth.isAuth
                     ? <>
                         <div className={styles.auth__items}></div>
-                        <div className={styles.auth__items}>Выход</div>
+                        <div className={[styles.auth__items, styles.auth__link].join(' ')}
+                             onClick={logOut}>Выход
+                        </div>
                     </>
                     : <>
-                        <Link to={'sing-in'} className={styles.auth__items}>Вход</Link>
-                        <Link to={'sign-up'} className={styles.auth__items}>Регистрация</Link>
+                        <Link to={'/sign_in/'} className={[styles.auth__items, styles.auth__link].join(' ')}>Вход</Link>
+                        <Link to={'/sign_up/'}
+                              className={[styles.auth__items, styles.auth__link].join(' ')}>Регистрация</Link>
                     </>
                 }
             </div>
