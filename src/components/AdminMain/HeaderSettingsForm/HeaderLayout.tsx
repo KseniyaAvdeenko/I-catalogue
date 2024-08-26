@@ -15,22 +15,21 @@ const HeaderLayout: React.FC<IHeaderLayoutProps> = ({isLoading, headerLayout, on
             <div className={styles.choiceBox__container}>
                 {headerLayouts.map(layout => (
                     layout.id === headerLayout
-                        ?<label htmlFor={layout.id} className={[styles.choiceBox, styles.choiceBox_selected].join(' ')}>
+                        ?
+                        <label htmlFor={layout.id} className={[styles.choiceBox, styles.choiceBox_selected].join(' ')}>
                             <img key={layout.id} src={layout.image} alt={layout.id}/>
                             <input type="radio" name="headerLayout" id={layout.id}/>
                         </label>
-                        :<label htmlFor={layout.id} className={styles.choiceBox}>
+                        : <label htmlFor={layout.id} className={styles.choiceBox}>
                             <img key={layout.id} src={layout.image} alt={layout.id}/>
                             <input
                                 type="radio"
                                 name="headerLayout"
                                 id={layout.id}
                                 value={layout.id}
-                                onChange={e=>onChangeHandler(e)}
+                                onChange={e => onChangeHandler(e)}
                             />
                         </label>
-
-
                 ))}
             </div>
 
