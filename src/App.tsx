@@ -3,7 +3,7 @@ import {BrowserRouter, Routes, Route} from "react-router-dom";
 import Main from "./pages/Main";
 import SingIn from "./pages/Authentication/SingIn";
 import SignUp from "./pages/Authentication/SingUp";
-import AdminPage from "./pages/AdminPage";
+import AdminPage from "./pages/AdminPage/AdminPage";
 
 
 function App() {

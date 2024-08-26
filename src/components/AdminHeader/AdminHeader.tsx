@@ -21,8 +21,8 @@ const AdminHeader: React.FC<IAdminHeader> = ({children}) => {
     }
     useEffect(()=>{
         if(localStorage.access) dispatch(loadCurrentUser())
-    },[localStorage.access])
-    console.log(currentUser)
+    },[])
+    //console.log(currentUser, localStorage.access)
     return (
         <header className={styles.adminHeader}>
             <img src={AppLogo} alt="app logo"/>

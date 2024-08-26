@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import styles from './Auth.module.sass'
 import {IUserBase} from "../../interface/IUser";
 import {useAppDispatch, useAppSelector} from "../../hooks/redux";
@@ -29,6 +29,7 @@ const SignIn = () => {
     }
 
     const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+        e.preventDefault()
         setUser({...user, [e.target.name]: e.target.value})
     }
     const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
@@ -38,9 +39,12 @@ const SignIn = () => {
             setUser({...user, username: '', password: ''})
         }
     }
-    if (auth.isAuth) {
-        navigate('/admin_page/')
-    }
+    useEffect(() => {
+        if (auth.isAuth) {
+            navigate('/admin_page/')
+        }
+    }, [auth.isAuth])
+
 
     return (
         <>
