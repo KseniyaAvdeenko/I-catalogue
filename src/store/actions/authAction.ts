@@ -20,7 +20,6 @@ export const logout = () => async (dispatch: AppDispatch) => {
 export const registerUser = (user: INewUser) => async (dispatch: AppDispatch) => {
     try {
         const response = await axios.post<INewUserResponse>(apiUrl + 'auth/users/', user)
-        //console.log(response.data)
         dispatch(authSlice.actions.registerSuccess())
     } catch (error) {
         dispatch(authSlice.actions.registerFail('Ошибка'))
@@ -38,7 +37,6 @@ export const refreshToken = (refresh: string) => async (dispatch: AppDispatch) =
         const body = JSON.stringify({refresh: localStorage.getItem('refresh')})
         try {
             const response = await axios.post<{ access: string, refresh: string }>(apiUrl + 'auth/jwt/refresh/', body, config)
-            //console.log(response.data)
             dispatch(authSlice.actions.refreshSuccess(response.data))
         } catch (error) {
             dispatch(authSlice.actions.refreshFail())

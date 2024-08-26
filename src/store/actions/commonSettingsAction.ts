@@ -26,7 +26,7 @@ export const updateCommonSettings = (id: number, data: any) => async (dispatch: 
             Object.keys(data).map((key) => {
                 formData.set(key, data[key])
             })
-            const response = await axios.patch<ICommonSettings>(apiUrl + `/common_page_settings/common_page_settings/${id}/`, formData, getAuthConfigMultipart(localStorage.access));
+            const response = await axios.patch<ICommonSettings>(apiUrl + `common_page_settings/common_page_settings/${id}/`, formData, getAuthConfigMultipart(localStorage.access));
             dispatch(commonSettingsSlice.actions.updateCommonSettingsSuccess(response.data));
         } catch {
             dispatch(commonSettingsSlice.actions.updateCommonSettingsFail('Ошибка'));

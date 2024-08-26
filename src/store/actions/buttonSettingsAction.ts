@@ -1,6 +1,6 @@
 import {AppDispatch} from "../store";
 import {userSlice} from "../reducers/userSlice";
-import axios from "axios/index";
+import axios from "axios";
 import {IButtonSettings} from "../../interface/ICommonSettings";
 import {apiUrl, getAuthConfigApplicationJson} from "./apiUrl";
 import {buttonSettingsSlice} from "../reducers/buttonSettingsSlice";
@@ -8,13 +8,6 @@ import {buttonSettingsSlice} from "../reducers/buttonSettingsSlice";
 export const loadButtonSettings = () => async (dispatch: AppDispatch) => {
     if (localStorage.access) {
         try {
-            // const config = {
-            //      headers: {
-            //          'Content-Type': 'application/json',
-            //          'Authorization': `JWT ${localStorage.getItem('access')}`,
-            //          'Accept': 'application/json'
-            //      }
-            //  };
             dispatch(buttonSettingsSlice.actions.buttonSettingsFetching())
             const response = await axios.get<IButtonSettings>(apiUrl + 'common_page_settings/button_settings/get_button/', getAuthConfigApplicationJson(localStorage.access))
             dispatch(buttonSettingsSlice.actions.loadButtonSettingsSuccess(response.data))

@@ -1,6 +1,7 @@
 export const apiUrl = 'http://127.0.0.1:8000/'
 
 export const formData = new FormData()
+export const reader = new FileReader();
 
 export function getAuthConfigApplicationJson(access: string): any {
     return {

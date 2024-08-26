@@ -10,13 +10,6 @@ import {headerSettingsSlice} from "../reducers/headerSettingsSlice";
 export const loadHeaderSettings = () => async (dispatch: AppDispatch) => {
     if (localStorage.access) {
         try {
-            // const config = {
-            //     headers: {
-            //         'Content-Type': 'application/json',
-            //         'Authorization': `JWT ${localStorage.getItem('access')}`,
-            //         'Accept': 'application/json'
-            //     }
-            // };
             dispatch(headerSettingsSlice.actions.headerSettingsFetching())
             const response = await axios.get<IHeaderSettings>(apiUrl + 'common_page_settings/header_settings/get_header/', getAuthConfigApplicationJson(localStorage.access))
             dispatch(headerSettingsSlice.actions.loadHeaderSettingsSuccess(response.data))
@@ -31,13 +24,6 @@ export const loadHeaderSettings = () => async (dispatch: AppDispatch) => {
 export const updateHeaderSettings = (id: number, data: any) => async (dispatch: AppDispatch) => {
     if (localStorage.access) {
         try {
-            // const config = {
-            //     headers: {
-            //         'Content-Type': 'application/json',
-            //         'Authorization': `JWT ${localStorage.access}`,
-            //         'Accept': 'application/json'
-            //     }
-            // };
             const body = JSON.stringify(data)
             const response = await axios.patch<IHeaderSettings>(apiUrl + `common_page_settings/header_settings/${id}/`, body, getAuthConfigApplicationJson(localStorage.access))
             dispatch(headerSettingsSlice.actions.updateHeaderSettingsSuccess(response.data))

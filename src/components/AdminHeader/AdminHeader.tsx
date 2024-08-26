@@ -5,6 +5,10 @@ import {useAppDispatch, useAppSelector} from "../../hooks/redux";
 import {Link, useNavigate} from "react-router-dom";
 import {logout} from "../../store/actions/authAction";
 import {loadCurrentUser} from "../../store/actions/userAction";
+import {loadCommonSettings} from "../../store/actions/commonSettingsAction";
+import {loadFooterSettings} from "../../store/actions/footerSettingsAction";
+import {loadHeaderSettings} from "../../store/actions/headerSettingsAction";
+import {loadButtonSettings} from "../../store/actions/buttonSettingsAction";
 
 interface IAdminHeader {
     children?: React.ReactNode | null
@@ -15,13 +19,20 @@ const AdminHeader: React.FC<IAdminHeader> = ({children}) => {
     const auth = useAppSelector(state => state.authReducer)
     const {currentUser, errorCurrentUser} = useAppSelector(state => state.userReducer)
     const dispatch = useAppDispatch()
-    const logOut = ()=>{
+    const logOut = () => {
         dispatch(logout())
         navigate('/sign_in/')
     }
-    useEffect(()=>{
-        if(localStorage.access) dispatch(loadCurrentUser())
-    },[])
+    useEffect(() => {
+        if (localStorage.access) {
+            dispatch(loadCurrentUser())
+            dispatch(loadCommonSettings())
+            dispatch(loadFooterSettings())
+            dispatch(loadHeaderSettings())
+            dispatch(loadButtonSettings())
+        }
+
+    }, [localStorage.access])
     //console.log(currentUser, localStorage.access)
     return (
         <header className={styles.adminHeader}>
@@ -30,7 +41,8 @@ const AdminHeader: React.FC<IAdminHeader> = ({children}) => {
             <div className={styles.auth}>
                 {auth.isAuth
                     ? <>
-                        <div className={styles.auth__items} style={{cursor: 'default'}}>{currentUser?.username ?? ''}</div>
+                        <div className={styles.auth__items}
+                             style={{cursor: 'default'}}>{currentUser?.username ?? ''}</div>
                         <div className={[styles.auth__items, styles.auth__link].join(' ')}
                              onClick={logOut}>Выход
                         </div>
