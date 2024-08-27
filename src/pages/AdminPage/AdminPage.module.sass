@@ -1,0 +1,18 @@
+@import "../../assets/styles/Common.module"
+
+.AdminPage
+  @extend .baseFont
+  display: flex
+  @extend .p_30
+  width: 100%
+  min-height: calc(100vh - 6rem - 6rem)
+  background: $bg100
+  &_notAuth
+    @extend .baseFont
+    @extend .flexRow
+    justify-content: center
+    background: $bg100
+    min-height: calc(100vh - 6rem - 6rem)
+
+
+

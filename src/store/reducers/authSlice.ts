@@ -1,50 +1,55 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
+import {IAuth} from "../../interface/IUser";
+import {encodeToken} from "../../hooks/encodeDecodeTokens";
 
 interface IAuthState {
     isSignedUp: boolean;
     isAuth: boolean;
     error: string;
     refresh: string;
-    access: string
+    access: string;
+    lastLogin: string;
 }
 const initialState: IAuthState = {
     isAuth: false,
     isSignedUp: false,
     error: '',
-    access: localStorage.access || '',
-    refresh: localStorage.refresh || ''
+    access: '',
+    refresh: '',
+    lastLogin: ''
 }
 
 export const authSlice = createSlice({
     name: 'auth',
     initialState,
     reducers: {
-        registerSuccess(state){
+        registerSuccess(state, action: PayloadAction<boolean>){
             state.isAuth = false;
-            state.isSignedUp = true
+            state.isSignedUp = action.payload
         },
         registerFail(state, action:PayloadAction<string>){
             state.error = action.payload;
             state.isAuth = false;
             state.isSignedUp = false;
         },
-        loginSuccess(state, action:PayloadAction<{access:string, refresh: string}>){
+        loginSuccess(state, action:PayloadAction<IAuth>){
             state.isAuth = true;
             state.error = '';
             state.access = action.payload.access;
             state.refresh = action.payload.refresh;
-            localStorage.setItem('access', action.payload.access);
-            localStorage.setItem('refresh', action.payload.refresh);
+            localStorage.setItem('access', encodeToken(action.payload.access));
+            localStorage.setItem('refresh', encodeToken(action.payload.refresh));
         },
         loginFail(state, action:PayloadAction<string>){
             state.error = action.payload;
             state.isAuth = false;
         },
-        refreshSuccess(state, action:PayloadAction<{access:string, refresh: string}>){
+
+        refreshSuccess(state, action:PayloadAction<IAuth>){
             state.access = action.payload.access;
             state.refresh = action.payload.refresh;
-            localStorage.setItem('access', action.payload.access);
-            localStorage.setItem('refresh', action.payload.refresh);
+            localStorage.setItem('access', encodeToken(action.payload.access));
+            localStorage.setItem('refresh', encodeToken(action.payload.refresh));
         },
         refreshFail(state){
             state.access = '';

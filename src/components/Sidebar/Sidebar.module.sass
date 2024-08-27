@@ -1,0 +1,40 @@
+@import "../../assets/styles/Common.module"
+
+.Sidebar
+  &__container
+    @extend .flexColumn
+    flex-basis: 24%
+    @extend .p_20
+    min-height: calc(100vh - 12rem - 6rem)
+    border-right: 2px solid $primary100
+
+  &__items
+    @extend .flexColumn
+    width: 100%
+
+  &__itemsContainer
+    @extend .flexRow
+    justify-content: space-between
+    cursor: pointer
+    width: 100%
+
+  &__heading
+    font-size: $h6
+    font-weight: 700
+    text-decoration: none
+    &:hover
+      color: $primary100
+
+  &__itemContainer
+    padding-left: 2rem
+    width: 100%
+    @extend .flexColumn
+    margin-top: 1.5rem
+
+  &__item
+    cursor: pointer
+    @extend .mb_15
+    &:hover
+      color: $primary100
+    &_margin
+      @extend .mb_15
