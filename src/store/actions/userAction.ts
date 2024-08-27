@@ -3,25 +3,27 @@ import {AppDispatch} from "../store";
 import axios from "axios";
 import {apiUrl, getAuthConfigApplicationJson} from "./apiUrl";
 import {userSlice} from "../reducers/userSlice";
+import {authSlice} from "../reducers/authSlice";
 
 
-export const loadCurrentUser = () => async (dispatch: AppDispatch) => {
-    if (localStorage.access) {
+export const loadCurrentUser = (access: string) => async (dispatch: AppDispatch) => {
+    if (access) {
         try {
-            const response = await axios.get<IUser>(apiUrl + 'auth/users/me/', getAuthConfigApplicationJson(localStorage.access))
+            const response = await axios.get<IUser>(apiUrl + 'auth/users/me/', getAuthConfigApplicationJson(access))
             dispatch(userSlice.actions.loadingCurrentUserSuccess(response.data))
         } catch (error) {
             dispatch(userSlice.actions.loadingCurrentUserFail('Что-то пошло не так'))
+            dispatch(authSlice.actions.loginFail('Что-то пошло не так'))
         }
     } else {
         dispatch(userSlice.actions.loadingCurrentUserFail('Вы не авторизованы'))
     }
 }
 
-export const loadUsers = () => async (dispatch: AppDispatch) => {
-    if (localStorage.access) {
+export const loadUsers = (access: string) => async (dispatch: AppDispatch) => {
+    if (access) {
         try {
-            const response = await axios.get<IUser[]>(apiUrl + 'auth/users/', getAuthConfigApplicationJson(localStorage.access))
+            const response = await axios.get<IUser[]>(apiUrl + 'auth/users/', getAuthConfigApplicationJson(access))
             dispatch(userSlice.actions.loadingUsersSuccess(response.data))
         } catch (error) {
             dispatch(userSlice.actions.loadingUsersFail('Что-то пошло не так'))
@@ -30,10 +32,10 @@ export const loadUsers = () => async (dispatch: AppDispatch) => {
         dispatch(userSlice.actions.loadingCurrentUserFail('Вы не авторизованы'))
     }
 }
-export const loadUser = (id: number) => async (dispatch: AppDispatch) => {
-    if (localStorage.access) {
+export const loadUser = (access: string, id: number) => async (dispatch: AppDispatch) => {
+    if (access) {
         try {
-            const response = await axios.get<IUser>(apiUrl + `auth/users/${id}/`, getAuthConfigApplicationJson(localStorage.access))
+            const response = await axios.get<IUser>(apiUrl + `auth/users/${id}/`, getAuthConfigApplicationJson(access))
             dispatch(userSlice.actions.loadingUserSuccess(response.data))
         } catch (error) {
             dispatch(userSlice.actions.loadingUserFail('Что-то пошло не так'))

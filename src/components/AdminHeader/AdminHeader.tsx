@@ -9,6 +9,7 @@ import {loadCommonSettings} from "../../store/actions/commonSettingsAction";
 import {loadFooterSettings} from "../../store/actions/footerSettingsAction";
 import {loadHeaderSettings} from "../../store/actions/headerSettingsAction";
 import {loadButtonSettings} from "../../store/actions/buttonSettingsAction";
+import {decodeToken} from "../../hooks/encodeDecodeTokens";
 
 interface IAdminHeader {
     children?: React.ReactNode | null
@@ -19,19 +20,20 @@ const AdminHeader: React.FC<IAdminHeader> = ({children}) => {
     const auth = useAppSelector(state => state.authReducer)
     const {currentUser, errorCurrentUser} = useAppSelector(state => state.userReducer)
     const dispatch = useAppDispatch()
+
+    //--methods
     const logOut = () => {
         dispatch(logout())
         navigate('/sign_in/')
     }
     useEffect(() => {
         if (localStorage.access) {
-            dispatch(loadCurrentUser())
-            dispatch(loadCommonSettings())
-            dispatch(loadFooterSettings())
-            dispatch(loadHeaderSettings())
-            dispatch(loadButtonSettings())
+            dispatch(loadCurrentUser(decodeToken(localStorage.access)))
+            dispatch(loadCommonSettings(decodeToken(localStorage.access)))
+            dispatch(loadFooterSettings(decodeToken(localStorage.access)))
+            dispatch(loadHeaderSettings(decodeToken(localStorage.access)))
+            dispatch(loadButtonSettings(decodeToken((localStorage.access))))
         }
-
     }, [localStorage.access])
     //console.log(currentUser, localStorage.access)
     return (

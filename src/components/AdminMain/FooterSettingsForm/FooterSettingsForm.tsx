@@ -11,16 +11,17 @@ import FooterContactsFontSize from "./FooterContactsFontSize";
 import FooterNavLinksFontColorHover from "./FooterNavLinksFontColorHover";
 import FooterCopyrightsContent from "./FooterCopyrightsContent";
 import FooterContentLayout from "./FooterContentLayout";
+import {decodeToken} from "../../../hooks/encodeDecodeTokens";
 
 const FooterSettingsForm = () => {
     const {footerSettings, error, isLoading} = useAppSelector(state => state.footerSettingsReducer);
     const dispatch = useAppDispatch();
     //methods
     const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-        if (footerSettings) {
+        if (footerSettings && localStorage.access) {
             e.target.type === 'checkbox'
-                ? dispatch(updateFooterSettings(footerSettings.id, {[e.target.name]: e.target.checked}))
-                : dispatch(updateFooterSettings(footerSettings.id, {[e.target.name]: e.target.value}))
+                ? dispatch(updateFooterSettings(decodeToken(localStorage.access), footerSettings.id, {[e.target.name]: e.target.checked}))
+                : dispatch(updateFooterSettings(decodeToken(localStorage.access), footerSettings.id, {[e.target.name]: e.target.value}))
         }
     }
     console.log(footerSettings)

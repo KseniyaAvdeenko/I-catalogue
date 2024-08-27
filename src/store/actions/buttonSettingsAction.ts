@@ -5,11 +5,11 @@ import {IButtonSettings} from "../../interface/ICommonSettings";
 import {apiUrl, getAuthConfigApplicationJson} from "./apiUrl";
 import {buttonSettingsSlice} from "../reducers/buttonSettingsSlice";
 
-export const loadButtonSettings = () => async (dispatch: AppDispatch) => {
-    if (localStorage.access) {
+export const loadButtonSettings = (access: string, ) => async (dispatch: AppDispatch) => {
+    if (access) {
         try {
             dispatch(buttonSettingsSlice.actions.buttonSettingsFetching())
-            const response = await axios.get<IButtonSettings>(apiUrl + 'common_page_settings/button_settings/get_button/', getAuthConfigApplicationJson(localStorage.access))
+            const response = await axios.get<IButtonSettings>(apiUrl + 'common_page_settings/button_settings/get_button/', getAuthConfigApplicationJson(access))
             dispatch(buttonSettingsSlice.actions.loadButtonSettingsSuccess(response.data))
         } catch (e) {
             dispatch(buttonSettingsSlice.actions.loadButtonSettingsFail('Ошибка'))
@@ -19,11 +19,11 @@ export const loadButtonSettings = () => async (dispatch: AppDispatch) => {
     }
 }
 
-export const updateButtonSettings = (id: number, data: any) => async (dispatch: AppDispatch) => {
-    if (localStorage.access) {
+export const updateButtonSettings = (access: string, id: number, data: any) => async (dispatch: AppDispatch) => {
+    if (access) {
         try {
             const body = JSON.stringify(data)
-            const response = await axios.patch<IButtonSettings>(apiUrl + `common_page_settings/button_settings/${id}/`, body, getAuthConfigApplicationJson(localStorage.access))
+            const response = await axios.patch<IButtonSettings>(apiUrl + `common_page_settings/button_settings/${id}/`, body, getAuthConfigApplicationJson(access))
             dispatch(buttonSettingsSlice.actions.updateButtonSettingsSuccess(response.data))
         } catch (e) {
             dispatch(buttonSettingsSlice.actions.updateButtonSettingsFail('Ошибка'))
@@ -33,10 +33,10 @@ export const updateButtonSettings = (id: number, data: any) => async (dispatch: 
     }
 }
 
-export const restoreButtonSettings = (id: number) => async (dispatch: AppDispatch) => {
-    if (localStorage.access) {
+export const restoreButtonSettings = (access: string, id: number) => async (dispatch: AppDispatch) => {
+    if (access) {
         try {
-            const response = await axios.patch<boolean>(apiUrl + `common_page_settings/button_settings/${id}/restore_button/`, getAuthConfigApplicationJson(localStorage.access))
+            const response = await axios.patch<boolean>(apiUrl + `common_page_settings/button_settings/${id}/restore_button/`, getAuthConfigApplicationJson(access))
             dispatch(buttonSettingsSlice.actions.restoreButtonSettingsSuccess(response.data))
         } catch (e) {
             dispatch(buttonSettingsSlice.actions.restoreButtonSettingsFail(false))

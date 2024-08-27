@@ -9,6 +9,7 @@ import Logo from "./Logo";
 import {reader} from "../../../store/actions/apiUrl";
 import Favicon from "./Favicon";
 import {IOptions} from "../../../interface/IAdminPageComponets";
+import {decodeToken} from "../../../hooks/encodeDecodeTokens";
 
 interface ICommonSettingsFormProps {
 
@@ -28,7 +29,7 @@ const CommonSettingsForm: React.FC<ICommonSettingsFormProps> = () => {
         {imgDisplay: 'block', background: '#F2F2F2'})
     //methods
     const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-        if (commonSettings) {
+        if (commonSettings && localStorage.access) {
             if (e.target.type === 'file') {
                 const file = e.target.files?.[0];
                 if (file) {
@@ -41,9 +42,9 @@ const CommonSettingsForm: React.FC<ICommonSettingsFormProps> = () => {
                         })
                     }
                 }
-                dispatch(updateCommonSettings(commonSettings.id, {[e.target.name]: file}))
+                dispatch(updateCommonSettings(decodeToken(localStorage.access), commonSettings.id, {[e.target.name]: file}))
             } else {
-                dispatch(updateCommonSettings(commonSettings.id, {[e.target.name]: e.target.value}))
+                dispatch(updateCommonSettings(decodeToken(localStorage.access), commonSettings.id, {[e.target.name]: e.target.value}))
             }
         }
         if (e.target.name === 'basicFontFamily') {

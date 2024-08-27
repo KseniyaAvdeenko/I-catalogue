@@ -10,17 +10,17 @@ import ButtonBorderWidth from "./ButtonBorderWidth";
 import ButtonTextColor from "./ButtonTextColor";
 import ButtonTextFontSize from "./ButtonTextFontSize";
 import {updateButtonSettings} from "../../../store/actions/buttonSettingsAction";
+import {decodeToken} from "../../../hooks/encodeDecodeTokens";
 
 const ButtonSettingsForm = () => {
     const {buttonSettings, error, isLoading, restored} = useAppSelector(state => state.buttonSettingsReducer);
     const dispatch = useAppDispatch();
     //methods
     const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-        if (buttonSettings) {
+        if (buttonSettings && localStorage.access) {
             e.target.type === 'checkbox'
-                ? dispatch(updateButtonSettings(buttonSettings.id, {[e.target.name]: e.target.checked}))
-                : dispatch(updateButtonSettings(buttonSettings.id, {[e.target.name]: e.target.value}))
-
+                ? dispatch(updateButtonSettings(decodeToken(localStorage.access), buttonSettings.id, {[e.target.name]: e.target.checked}))
+                : dispatch(updateButtonSettings(decodeToken(localStorage.access), buttonSettings.id, {[e.target.name]: e.target.value}))
         }
     }
     console.log(buttonSettings)

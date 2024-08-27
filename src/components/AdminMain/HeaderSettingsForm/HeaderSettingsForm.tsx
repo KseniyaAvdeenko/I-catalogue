@@ -12,6 +12,7 @@ import HeaderNavLinksColorHover from "./HeaderNavLinksColorHover";
 import HeaderNavLinksFontColorHoverStyle from "./HeaderNavLinksFontColorHoverStyle";
 import HeaderLayout from "./HeaderLayout";
 import {IOptions} from "../../../interface/IAdminPageComponets";
+import {decodeToken} from "../../../hooks/encodeDecodeTokens";
 
 const HeaderSettingsForm = () => {
     const {headerSettings, error, isLoading, restored} = useAppSelector(state => state.headerSettingsReducer);
@@ -22,10 +23,10 @@ const HeaderSettingsForm = () => {
     })
     //methods
     const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-        if (headerSettings) {
+        if (headerSettings && localStorage.access) {
             e.target.type === 'checkbox'
-                ? dispatch(updateHeaderSettings(headerSettings.id, {[e.target.name]: e.target.checked}))
-                : dispatch(updateHeaderSettings(headerSettings.id, {[e.target.name]: e.target.value}))
+                ? dispatch(updateHeaderSettings(decodeToken(localStorage.access), headerSettings.id, {[e.target.name]: e.target.checked}))
+                : dispatch(updateHeaderSettings(decodeToken(localStorage.access), headerSettings.id, {[e.target.name]: e.target.value}))
 
         }
         if (e.target.name === 'navLinksFontColorHoverStyle') {

@@ -4,10 +4,12 @@ import Main from "./pages/Main";
 import SingIn from "./pages/Authentication/SingIn";
 import SignUp from "./pages/Authentication/SingUp";
 import AdminPage from "./pages/AdminPage/AdminPage";
-
+import {useAppSelector} from "./hooks/redux";
 
 function App() {
-    // const auth = useAppSelector(state => state.authReducer)
+    //const auth = useAppSelector(state => state.authReducer)
+    const date = new Date().toISOString()
+    console.log(typeof date)
     return (
         <BrowserRouter>
             <Routes>

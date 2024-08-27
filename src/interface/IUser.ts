@@ -19,3 +19,8 @@ export interface IUser {
     date_joined: string;
     last_login: string;
 }
+
+export interface IAuth{
+    access: string;
+    refresh: string;
+}
