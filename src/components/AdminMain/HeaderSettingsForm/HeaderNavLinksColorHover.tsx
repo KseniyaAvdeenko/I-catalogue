@@ -1,9 +1,8 @@
 import React from 'react';
 import styles from "../AdminMain.module.sass";
+import {IAdminComponentsProps} from "../../../interface/IAdminPageComponets";
 
-interface IHeaderNavLinksColorHoverProps {
-    isLoading: boolean;
-    onChangeHandler: Function;
+interface IHeaderNavLinksColorHoverProps extends IAdminComponentsProps{
     navLinksFontColorHover: string | undefined
 }
 

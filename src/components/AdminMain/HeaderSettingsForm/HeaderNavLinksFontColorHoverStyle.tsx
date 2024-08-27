@@ -1,11 +1,10 @@
 import React, {useState} from 'react';
 import styles from "../AdminMain.module.sass";
-import {INavLinksHoverStyle, IOptions, navLinksHoverStyles} from "../Options";
+import {navLinksHoverStyles} from "../Options";
+import {IAdminComponentsProps, INavLinksHoverStyle, IOptions} from "../../../interface/IAdminPageComponets";
 
 
-interface INavLinksFontColorHoverStyleProps {
-    isLoading: boolean;
-    onChangeHandler: Function;
+interface INavLinksFontColorHoverStyleProps extends IAdminComponentsProps{
     navLinksFontColorHoverStyle: string | undefined;
     hoverStyleOptionsVisibility: IOptions
     setHoverStyleOptionsVisibility: Function

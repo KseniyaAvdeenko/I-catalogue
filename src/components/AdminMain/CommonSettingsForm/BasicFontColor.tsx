@@ -1,10 +1,9 @@
 import React from 'react';
 import styles from "../AdminMain.module.sass";
+import {IAdminComponentsProps} from "../../../interface/IAdminPageComponets";
 
-interface IBasicFontColorProps {
+interface IBasicFontColorProps extends IAdminComponentsProps{
     basicFontColor: string|undefined;
-    isLoading: boolean;
-    onChangeHandler: Function
 }
 
 const BasicFontColor: React.FC<IBasicFontColorProps> = ({isLoading, basicFontColor, onChangeHandler}) => {

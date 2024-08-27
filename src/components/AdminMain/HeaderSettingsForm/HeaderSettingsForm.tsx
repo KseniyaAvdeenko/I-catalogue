@@ -1,21 +1,17 @@
 import React, {useState} from 'react';
 import styles from "../AdminMain.module.sass";
 import {useAppDispatch, useAppSelector} from "../../../hooks/redux";
-import {reader} from "../../../store/actions/apiUrl";
-import {updateCommonSettings} from "../../../store/actions/commonSettingsAction";
 import HeaderBackground from "./HeaderBackground";
 import HeaderBorderBottom from "./HeaderBorderBottom";
 import {updateHeaderSettings} from "../../../store/actions/headerSettingsAction";
 import HeaderBottomBorderColor from "./HeaderBottomBorderColor";
-import headerBorderBottom from "./HeaderBorderBottom";
 import HeaderFontColor from "./HeaderFontColor";
 import HeaderNavLinksFontSize from "./HeaderNavLinksFontSize";
 import HeaderContactsFontColor from "./HeaderContactsFontColor";
 import HeaderNavLinksColorHover from "./HeaderNavLinksColorHover";
 import HeaderNavLinksFontColorHoverStyle from "./HeaderNavLinksFontColorHoverStyle";
-import {IOptions} from "../Options";
 import HeaderLayout from "./HeaderLayout";
-import headerLayout from "./HeaderLayout";
+import {IOptions} from "../../../interface/IAdminPageComponets";
 
 const HeaderSettingsForm = () => {
     const {headerSettings, error, isLoading, restored} = useAppSelector(state => state.headerSettingsReducer);
@@ -41,9 +37,9 @@ const HeaderSettingsForm = () => {
             })
         }
     }
-    console.log(headerSettings)
+    // console.log(headerSettings)
     return (
-        <div className={[styles.AdminMain__container].join(' ')}>
+        <section id={'headerSettingsSection'} className={[styles.AdminMain__container, styles.AdminMain__container_margin].join(' ')}>
             <h3 className={styles.AdminMain__subheading}>Настройка “шапки” сайта</h3>
             <div className={styles.AdminMain__formContainer}>
                 <div className={styles.form__items}>
@@ -104,7 +100,7 @@ const HeaderSettingsForm = () => {
                     />
                 </div>
             </div>
-        </div>
+        </section>
     );
 };
 

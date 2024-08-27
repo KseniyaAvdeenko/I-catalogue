@@ -1,12 +1,12 @@
 import React from 'react';
-import styles from "../AdminMain.module.sass";
 import {IAdminComponentsProps} from "../../../interface/IAdminPageComponets";
+import styles from "../AdminMain.module.sass";
 
-interface IHeaderNavLinksFontSizeProps extends IAdminComponentsProps{
-    navLinksFontSize: number|undefined;
+interface IFooterNavLinksFontSizeProps extends IAdminComponentsProps {
+    navLinksFontSize: number|undefined
 }
 
-const HeaderNavLinksFontSize: React.FC<IHeaderNavLinksFontSizeProps> = ({isLoading, navLinksFontSize,onChangeHandler}) => {
+const FooterNavLinksFontSize: React.FC<IFooterNavLinksFontSizeProps> = ({isLoading, navLinksFontSize, onChangeHandler}) => {
     return (
         <div className={styles.form__inputContainer}>
             <label htmlFor="navLinksFontSize">Размер шрифта навигационных ссылок</label>
@@ -21,4 +21,4 @@ const HeaderNavLinksFontSize: React.FC<IHeaderNavLinksFontSizeProps> = ({isLoadi
     );
 };
 
-export default HeaderNavLinksFontSize;
+export default FooterNavLinksFontSize;

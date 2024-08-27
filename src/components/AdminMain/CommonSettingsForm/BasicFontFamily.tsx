@@ -1,12 +1,11 @@
 import React, {useState} from 'react';
 import styles from "../AdminMain.module.sass";
-import {appFonts, IOptions} from "../Options";
+import {appFonts} from "../Options";
+import {IAdminComponentsProps, IOptions} from "../../../interface/IAdminPageComponets";
 
 
-interface IBasicFontFamilyProps {
-    isLoading: boolean;
+interface IBasicFontFamilyProps extends IAdminComponentsProps{
     basicFontFamily: string | undefined;
-    onChangeHandler: Function;
     fontOptionsVisibility: IOptions;
     setFontOptionsVisibility: Function
 }

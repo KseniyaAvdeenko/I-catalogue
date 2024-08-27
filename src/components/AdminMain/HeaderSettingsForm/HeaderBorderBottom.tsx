@@ -1,9 +1,8 @@
 import React from 'react';
 import styles from "../AdminMain.module.sass";
+import {IAdminComponentsProps} from "../../../interface/IAdminPageComponets";
 
-interface IHeaderBorderBottomProps {
-    isLoading: boolean;
-    onChangeHandler: Function;
+interface IHeaderBorderBottomProps extends IAdminComponentsProps{
     headerBorderBottom: boolean
 }
 

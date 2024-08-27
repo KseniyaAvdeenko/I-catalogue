@@ -1,10 +1,9 @@
 import React from 'react';
 import styles from "../AdminMain.module.sass";
+import {IAdminComponentsProps} from "../../../interface/IAdminPageComponets";
 
-interface IBasicFontSizeProps {
-    isLoading: boolean;
+interface IBasicFontSizeProps extends IAdminComponentsProps{
     basicFontSize: number | undefined
-    onChangeHandler: Function
 }
 
 const BasicFontSize: React.FC<IBasicFontSizeProps> = ({isLoading, basicFontSize, onChangeHandler}) => {

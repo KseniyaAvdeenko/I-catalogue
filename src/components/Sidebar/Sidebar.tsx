@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import styles from './Sidebar.module.sass';
 import ArrowDown from '../../assets/img/arrowDown.png'
+import {NavLink} from "react-router-dom";
 
 interface ISidebarProps {
 
@@ -29,9 +30,8 @@ const Sidebar: React.FC<ISidebarProps> = ({}) => {
                          alt="arrowDown"/>
                 </div>
                 <div className={styles.Sidebar__itemContainer} style={{display: commonSettingsItems.display}}>
-                    <div className={[styles.Sidebar__item, styles.Sidebar__item_margin].join(' ')}>Общие настройки
-                        сайта
-                    </div>
+                    <div className={[styles.Sidebar__item, styles.Sidebar__item_margin].join(' ')}>
+                        Общие настройки сайта</div>
                     <div className={[styles.Sidebar__item, styles.Sidebar__item_margin].join(' ')}>Настройка ‘шапки
                         сайта’
                     </div>

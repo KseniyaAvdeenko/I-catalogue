@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import styles from "../AdminMain.module.sass";
 import {useAppDispatch, useAppSelector} from "../../../hooks/redux";
-import {IOptions} from "../Options";
 import {updateCommonSettings} from "../../../store/actions/commonSettingsAction";
 import BasicFontColor from "./BasicFontColor";
 import BasicFontSize from "./BasicFontSize";
@@ -9,6 +8,7 @@ import BasicFontFamily from "./BasicFontFamily";
 import Logo from "./Logo";
 import {reader} from "../../../store/actions/apiUrl";
 import Favicon from "./Favicon";
+import {IOptions} from "../../../interface/IAdminPageComponets";
 
 interface ICommonSettingsFormProps {
 
@@ -52,7 +52,7 @@ const CommonSettingsForm: React.FC<ICommonSettingsFormProps> = () => {
     }
     console.log(commonSettings)
     return (
-        <div className={[styles.AdminMain__container, styles.AdminMain__container_margin].join(' ')}>
+        <section id={'commonSettingsSection'} className={[styles.AdminMain__container, styles.AdminMain__container_margin].join(' ')}>
             <h2 className={styles.AdminMain__heading}>Общие настройки сайта</h2>
             <div className={styles.AdminMain__formContainer}>
                 <div className={styles.form__items}>
@@ -87,7 +87,7 @@ const CommonSettingsForm: React.FC<ICommonSettingsFormProps> = () => {
                     setFaviconInput={setFaviconInput}
                 />
             </div>
-        </div>
+        </section>
     );
 };
 

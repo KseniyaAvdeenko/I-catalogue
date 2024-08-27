@@ -1,10 +1,11 @@
-import Layout1 from '../../assets/img/Layout1.png';
-import Layout2 from '../../assets/img/Layout2.png';
+import HeaderLayout1 from '../../assets/img/Layout1.png';
+import HeaderLayout2 from '../../assets/img/Layout2.png';
+import {IFonts, IHeaderLayout, INavLinksHoverStyle} from "../../interface/IAdminPageComponets";
+import FooterLayout1 from '../../assets/img/FooterLayout1.png';
+import FooterLayout2 from '../../assets/img/FooterLayout2.png';
+import FooterLayout3 from '../../assets/img/FooterLayout3.png';
 
-export interface IFonts {
-    id: string;
-    font:string;
-}
+
 export const appFonts: IFonts[] = [
     {id: 'Raleway', font: 'Raleway'},
     {id: 'Rubik', font: 'Rubik'},
@@ -22,11 +23,6 @@ export const appFonts: IFonts[] = [
     {id: 'Comfortaa', font: 'Comfortaa'},
 ]
 
-export interface INavLinksHoverStyle{
-    id: string;
-    style: string;
-}
-
 export const navLinksHoverStyles: INavLinksHoverStyle[] = [
     {id: 'none', style: 'Без стиля'},
     {id: 'changeColor', style: 'Смена цвета'},
@@ -34,18 +30,13 @@ export const navLinksHoverStyles: INavLinksHoverStyle[] = [
     {id: 'overline&underline', style: 'Верхнее и нижнее подчеркивания'},
 ]
 
-export interface IOptions {
-    open: boolean;
-    display: string;
-    bottom: string;
-}
-
-export interface IHeaderLayout{
-    id: string;
-    image: string
-}
-
 export const headerLayouts: IHeaderLayout[] = [
-    {id: '1', image: Layout1},
-    {id: '2', image: Layout2}
+    {id: '1', image: HeaderLayout1},
+    {id: '2', image: HeaderLayout2}
+]
+
+export const footerLayouts: IHeaderLayout[] = [
+    {id: '1', image: FooterLayout1},
+    {id: '2', image: FooterLayout2},
+    {id: '3', image: FooterLayout3},
 ]

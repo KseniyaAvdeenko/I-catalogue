@@ -1,8 +1,9 @@
 import React, {useEffect} from 'react';
 import styles from "../AdminMain.module.sass";
 import Download from "../../../assets/img/Download.png";
+import {IAdminComponentsProps} from "../../../interface/IAdminPageComponets";
 
-interface IFaviconProps {
+interface IFaviconProps{
     onChangeHandler: Function
     favicon: string | undefined;
     faviconInput: { imgDisplay: string, background: string }

@@ -1,9 +1,9 @@
 import React from 'react';
 import styles from "../AdminMain.module.sass";
-interface IHeaderFontColorProps{
-    isLoading: boolean;
+import {IAdminComponentsProps} from "../../../interface/IAdminPageComponets";
+
+interface IHeaderFontColorProps extends IAdminComponentsProps{
     fontColor: string|undefined;
-    onChangeHandler: Function;
 }
 const HeaderFontColor: React.FC<IHeaderFontColorProps> = ({isLoading, fontColor, onChangeHandler}) => {
     return (

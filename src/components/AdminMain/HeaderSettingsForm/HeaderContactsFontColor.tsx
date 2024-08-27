@@ -1,9 +1,8 @@
 import React from 'react';
 import styles from "../AdminMain.module.sass";
+import {IAdminComponentsProps} from "../../../interface/IAdminPageComponets";
 
-interface IHeaderContactsFontColorProps {
-    isLoading: boolean;
-    onChangeHandler: Function;
+interface IHeaderContactsFontColorProps extends IAdminComponentsProps{
     contactsFontSize: number | undefined
 }
 

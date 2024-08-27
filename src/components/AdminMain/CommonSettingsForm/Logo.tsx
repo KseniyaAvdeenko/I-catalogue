@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import styles from "../AdminMain.module.sass";
 import Download from '../../../assets/img/Download.png';
 
@@ -24,6 +24,7 @@ const Logo: React.FC<ILogoProps> = ({
             })
             : setLogoInput({...logoInput, imgDisplay: 'block', background: '#F2F2F2'})
     }, [logo])
+
     return (
         <div className={styles.form__items}>
             <div className={styles.form__items} style={{alignItems: 'center'}}>

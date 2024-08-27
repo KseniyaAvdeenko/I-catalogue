@@ -1,9 +1,8 @@
 import React from 'react';
 import styles from "../AdminMain.module.sass";
+import {IAdminComponentsProps} from "../../../interface/IAdminPageComponets";
 
-interface IHeaderBackgroundProps {
-    isLoading: boolean;
-    onChangeHandler: Function;
+interface IHeaderBackgroundProps extends IAdminComponentsProps{
     headerBg: string | undefined;
 }
 
