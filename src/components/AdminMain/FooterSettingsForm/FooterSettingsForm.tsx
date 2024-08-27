@@ -21,12 +21,11 @@ const FooterSettingsForm = () => {
             e.target.type === 'checkbox'
                 ? dispatch(updateFooterSettings(footerSettings.id, {[e.target.name]: e.target.checked}))
                 : dispatch(updateFooterSettings(footerSettings.id, {[e.target.name]: e.target.value}))
-
         }
     }
     console.log(footerSettings)
     return (
-        <section id={'footerSettingsSection'} className={[styles.AdminMain__container].join(' ')}>
+        <section id={'footerSettingsSection'} className={[styles.AdminMain__container, styles.AdminMain__container_margin].join(' ')}>
             <h3 className={styles.AdminMain__subheading}>Настройка “подвала” сайта</h3>
             <div className={styles.AdminMain__formContainer}>
                 <div className={styles.form__items}>

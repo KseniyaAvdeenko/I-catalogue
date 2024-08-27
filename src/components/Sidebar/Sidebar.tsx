@@ -1,13 +1,13 @@
 import React, {useState} from 'react';
 import styles from './Sidebar.module.sass';
 import ArrowDown from '../../assets/img/arrowDown.png'
-import {NavLink} from "react-router-dom";
+import {Link, NavLink} from "react-router-dom";
 
 interface ISidebarProps {
-
+    scrollToBlock: Function
 }
 
-const Sidebar: React.FC<ISidebarProps> = ({}) => {
+const Sidebar: React.FC<ISidebarProps> = ({scrollToBlock}) => {
     //states
     const [commonSettingsItems, setCommonSettingsItems] = useState<{ display: string, rotate: number, open: boolean }>({
         display: 'none', rotate: 180, open: false
@@ -25,20 +25,23 @@ const Sidebar: React.FC<ISidebarProps> = ({}) => {
         <aside className={styles.Sidebar__container}>
             <div className={styles.Sidebar__items}>
                 <div className={styles.Sidebar__itemsContainer} onClick={commonSettingsItemsVisibility}>
-                    <h6 className={styles.Sidebar__heading}>Общие настройки сайта</h6>
+                    <Link to={'common_settings/'} className={styles.Sidebar__heading}>Общие настройки сайта</Link>
                     <img src={ArrowDown} style={{transform: `rotate(${commonSettingsItems.rotate}deg)`}}
                          alt="arrowDown"/>
                 </div>
                 <div className={styles.Sidebar__itemContainer} style={{display: commonSettingsItems.display}}>
-                    <div className={[styles.Sidebar__item, styles.Sidebar__item_margin].join(' ')}>
-                        Общие настройки сайта</div>
-                    <div className={[styles.Sidebar__item, styles.Sidebar__item_margin].join(' ')}>Настройка ‘шапки
-                        сайта’
+                    <div className={[styles.Sidebar__item, styles.Sidebar__item_margin].join(' ')}
+                         onClick={() => scrollToBlock('commonSettingsSection')}>Общие настройки сайта
                     </div>
-                    <div className={[styles.Sidebar__item, styles.Sidebar__item_margin].join(' ')}>Настройка “подвала”
-                        сайта
+                    <div className={[styles.Sidebar__item, styles.Sidebar__item_margin].join(' ')}
+                         onClick={() => scrollToBlock('headerSettingsSection')}>Настройка ‘шапки’ сайта
                     </div>
-                    <div className={[styles.Sidebar__item].join(' ')}>Настройка кнопок</div>
+                    <div className={[styles.Sidebar__item, styles.Sidebar__item_margin].join(' ')}
+                         onClick={() => scrollToBlock('footerSettingsSection')}>Настройка “подвала” сайта
+                    </div>
+                    <div className={[styles.Sidebar__item].join(' ')}
+                         onClick={() => scrollToBlock('buttonSettingsSection')}>Настройка кнопок
+                    </div>
                 </div>
             </div>
         </aside>
