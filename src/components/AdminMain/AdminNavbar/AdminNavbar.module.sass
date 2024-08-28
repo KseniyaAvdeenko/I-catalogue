@@ -1,0 +1,52 @@
+@import "../../../assets/styles/Common.module"
+
+.AdminNavbar
+  @extend .flexColumn
+  flex-basis: 76%
+  width: 100%
+  @extend .p_20
+  @extend .baseFont
+
+  &__container
+    @extend .flexColumn
+    width: 100%
+
+    &_margin
+      @extend .mb_50
+
+  &__heading
+    font-size: $h2
+    text-align: center
+    @extend .mb_40
+
+  &__formContainer
+    @extend .box
+    width: 100%
+    @extend .flexColumn
+
+  &__button
+    @extend .baseAdminButton
+
+
+.savedItems
+  width: 100%
+  @extend .flexColumn
+  @extend .mb_10
+
+  &__items
+    @extend .flexRow
+    justify-content: space-between
+    padding: .5rem 0
+
+  &__item
+    @extend .flexColumn
+
+.formItems
+  @extend .mb_20
+  width: 100%
+  @extend .flexColumn
+
+  &__item
+    @extend .flexRow
+    justify-content: space-between
+    padding: .5rem 0

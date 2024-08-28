@@ -4,6 +4,7 @@ import {IFonts, IHeaderLayout, INavLinksHoverStyle} from "../../interface/IAdmin
 import FooterLayout1 from '../../assets/img/FooterLayout1.png';
 import FooterLayout2 from '../../assets/img/FooterLayout2.png';
 import FooterLayout3 from '../../assets/img/FooterLayout3.png';
+import {IContactField} from "../../interface/IFields";
 
 
 export const appFonts: IFonts[] = [
@@ -40,3 +41,18 @@ export const footerLayouts: IHeaderLayout[] = [
     {id: '2', image: FooterLayout2},
     {id: '3', image: FooterLayout3},
 ]
+
+export const contactFieldExample: IContactField = {
+    content: {label: 'Контакт', input: {type: 'text', id: 'content', name: 'content'}},
+    isLink: {label: 'Ссылка', input: {type: 'checkbox', checked: false, id: 'isLink', name: 'isLink'}},
+    linkHref: {label: 'Ссылка', input: {type: 'text', id: 'linkHref', name: 'linkHref', value: '', checked: false}},
+    linkType: {
+        label: 'Тип ссылки',
+        inputs: [
+            {type: 'radio', id: 'none', name: 'linkType', value: 'none', label: 'Не определено', checked: false},
+            {type: 'radio', id: 'tel', name: 'linkType', value: 'tel', label: 'Телефон', checked: false},
+            {type: 'radio', id: 'mailTo', name: 'linkType', value: 'mailto', label: 'Email', checked: false},
+            {type: 'radio', id: 'address', name: 'linkType', value: 'address', label: 'Адрес', checked: false},
+        ]
+    }
+}

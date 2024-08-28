@@ -12,19 +12,29 @@ const Sidebar: React.FC<ISidebarProps> = ({scrollToBlock}) => {
     const [commonSettingsItems, setCommonSettingsItems] = useState<{ display: string, rotate: number, open: boolean }>({
         display: 'none', rotate: 180, open: false
     })
+    const [navbarItems, setNavbarItems] = useState<{ display: string, rotate: number, open: boolean }>({
+        display: 'none', rotate: 180, open: false
+    })
 
     //methods
-    const commonSettingsItemsVisibility = () => {
-        commonSettingsItems.open
-            ? setCommonSettingsItems({...commonSettingsItems, open: false, rotate: 180, display: 'none'})
-            : setCommonSettingsItems({...commonSettingsItems, open: true, rotate: 0, display: 'flex'})
+    const getItemsVisibility = (block: string) => {
+        if (block === 'commonSettings') {
+            commonSettingsItems.open
+                ? setCommonSettingsItems({...commonSettingsItems, open: false, rotate: 180, display: 'none'})
+                : setCommonSettingsItems({...commonSettingsItems, open: true, rotate: 0, display: 'flex'})
+        } else if (block === 'navbar') {
+            navbarItems.open
+                ? setNavbarItems({...navbarItems, open: false, rotate: 180, display: 'none'})
+                : setNavbarItems({...navbarItems, open: true, rotate: 0, display: 'flex'})
+        }
+
     }
 
 
     return (
         <aside className={styles.Sidebar__container}>
             <div className={styles.Sidebar__items}>
-                <div className={styles.Sidebar__itemsContainer} onClick={commonSettingsItemsVisibility}>
+                <div className={styles.Sidebar__itemsContainer} onClick={()=>getItemsVisibility('commonSettings')}>
                     <Link to={'common_settings/'} className={styles.Sidebar__heading}>Общие настройки сайта</Link>
                     <img src={ArrowDown} style={{transform: `rotate(${commonSettingsItems.rotate}deg)`}}
                          alt="arrowDown"/>
@@ -41,6 +51,21 @@ const Sidebar: React.FC<ISidebarProps> = ({scrollToBlock}) => {
                     </div>
                     <div className={[styles.Sidebar__item].join(' ')}
                          onClick={() => scrollToBlock('buttonSettingsSection')}>Настройка кнопок
+                    </div>
+                </div>
+            </div>
+            <div className={styles.Sidebar__items}>
+                <div className={styles.Sidebar__itemsContainer} onClick={()=>getItemsVisibility('navbar')}>
+                    <Link to={'navbar/'} className={styles.Sidebar__heading}>Контент “шапки” и “подвала” сайта</Link>
+                    <img src={ArrowDown} style={{transform: `rotate(${navbarItems.rotate}deg)`}}
+                         alt="arrowDown"/>
+                </div>
+                <div className={styles.Sidebar__itemContainer} style={{display: navbarItems.display}}>
+                    <div className={[styles.Sidebar__item, styles.Sidebar__item_margin].join(' ')}
+                         onClick={() => scrollToBlock('contactsSection')}>Контакты
+                    </div>
+                    <div className={[styles.Sidebar__item, styles.Sidebar__item_margin].join(' ')}
+                         onClick={() => scrollToBlock('navLinksSection')}>Навигационные ссылки
                     </div>
                 </div>
             </div>

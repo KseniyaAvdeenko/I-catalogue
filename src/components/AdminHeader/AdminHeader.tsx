@@ -10,7 +10,6 @@ import {loadFooterSettings} from "../../store/actions/footerSettingsAction";
 import {loadHeaderSettings} from "../../store/actions/headerSettingsAction";
 import {loadButtonSettings} from "../../store/actions/buttonSettingsAction";
 import {decodeToken} from "../../hooks/encodeDecodeTokens";
-import {authSlice} from "../../store/reducers/authSlice";
 
 interface IAdminHeader {
     children?: React.ReactNode | null
@@ -34,7 +33,7 @@ const AdminHeader: React.FC<IAdminHeader> = ({children}) => {
             }
         }
         while ((now - Date.parse(localStorage.lastLogin)) > (3600000 * 24)) {
-            logout()
+            logOut()
         }
     }
 

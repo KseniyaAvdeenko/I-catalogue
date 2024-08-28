@@ -55,7 +55,7 @@ export const deleteNavLink = (access: string, id: number) => async (dispatch: Ap
             await axios.delete(apiUrl + `navbar/navigation_links/${id}/`, getAuthConfigApplicationJson(access))
             dispatch(navbarSlice.actions.deleteNavLinkSuccess())
         } catch (e) {
-            dispatch(navbarSlice.actions.loadNavLinksFail('Ошибка'))
+            dispatch(navbarSlice.actions.deleteNavLinkFail())
         }
     } else {
         dispatch(userSlice.actions.loadingCurrentUserFail('Вы не авторизованы'))
