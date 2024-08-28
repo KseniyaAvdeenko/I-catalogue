@@ -17,7 +17,7 @@ const FooterCopyrightsContent: React.FC<ICopyrightsContentProps> = ({
                 Copyrights контент
             </label>
             <textarea id={'copyrightsContent'} onChange={e => onChangeHandler(e)} name={'copyrightsContent'}
-                      value={copyrightsContent} className={styles.textarea} rows={7}>{isLoading && 'Loading...'}
+                      value={copyrightsContent??''} className={styles.textarea} rows={7}>
             </textarea>
         </div>
     );

@@ -18,7 +18,7 @@ const ButtonBorderWidth: React.FC<IButtonBorderWidthProps> = ({
             <label htmlFor="buttonBorderWidth">Ширина границы кнопки</label>
             {isLoading && 'Loading...'}
             <input type="number"
-                   value={buttonBorderWidth}
+                   value={buttonBorderWidth??0}
                    name={'buttonBorderWidth'}
                    id={'buttonBorderWidth'}
                    onChange={e => onChangeHandler(e)}

@@ -12,7 +12,7 @@ const FooterNavLinksFontSize: React.FC<IFooterNavLinksFontSizeProps> = ({isLoadi
             <label htmlFor="navLinksFontSize">Размер шрифта навигационных ссылок</label>
             {isLoading && 'Loading...'}
             <input type="number"
-                   value={navLinksFontSize}
+                   value={navLinksFontSize??16}
                    name={'navLinksFontSize'}
                    id={'navLinksFontSize'}
                    onChange={e => onChangeHandler(e)}

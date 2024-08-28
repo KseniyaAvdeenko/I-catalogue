@@ -12,7 +12,7 @@ const FooterBackground:React.FC<IFooterBackgroundProps> = ({isLoading, footerBg,
             <label htmlFor="footerBg">Цвет фона</label>
             {isLoading && 'Loading...'}
             <input type="color"
-                   value={footerBg}
+                   value={footerBg??'#fff'}
                    name={'background'}
                    id={'footerBg'}
                    onChange={e => onChangeHandler(e)}

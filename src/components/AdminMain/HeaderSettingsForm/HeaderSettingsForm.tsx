@@ -38,7 +38,6 @@ const HeaderSettingsForm = () => {
             })
         }
     }
-    // console.log(headerSettings)
     return (
         <section id={'headerSettingsSection'} className={[styles.AdminMain__container, styles.AdminMain__container_margin].join(' ')}>
             <h3 className={styles.AdminMain__subheading}>Настройка “шапки” сайта</h3>

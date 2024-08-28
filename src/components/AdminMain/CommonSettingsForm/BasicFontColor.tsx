@@ -12,7 +12,7 @@ const BasicFontColor: React.FC<IBasicFontColorProps> = ({isLoading, basicFontCol
             <label htmlFor="basicFontColor">Основной цвет шрифта</label>
             {isLoading && 'Loading...'}
             <input type="color"
-                   value={basicFontColor}
+                   value={basicFontColor?? '#000'}
                    name={'basicFontColor'}
                    id={'basicFontColor'}
                    onChange={e => onChangeHandler(e)}

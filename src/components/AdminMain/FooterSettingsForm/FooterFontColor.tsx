@@ -14,7 +14,7 @@ const FooterFontColor: React.FC<IFooterFontColorProps> = ({
             <label htmlFor="fontColor">Цвет текста “подвала” сайта</label>
             {isLoading && 'Loading...'}
             <input type="color"
-                   value={footerFontColor}
+                   value={footerFontColor??'#000'}
                    name={'fontColor'}
                    id={'fontColor'}
                    onChange={e => onChangeHandler(e)}

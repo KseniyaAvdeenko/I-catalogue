@@ -16,7 +16,7 @@ const HeaderBottomBorderColor: React.FC<IHeaderBottomBorderColorProps> = ({
             <label htmlFor="headerBottomBorderColor">Цвет нижней границы “шапки” сайта</label>
             {isLoading && 'Loading...'}
             <input type="color"
-                   value={headerBottomBorderColor}
+                   value={headerBottomBorderColor??'#bbb'}
                    name={'headerBottomBorderColor'}
                    id={'headerBottomBorderColor'}
                    onChange={e => onChangeHandler(e)}

@@ -12,7 +12,7 @@ const BasicFontSize: React.FC<IBasicFontSizeProps> = ({isLoading, basicFontSize,
             <label htmlFor="basicFontSize">Основной размер шрифта</label>
             {isLoading && 'Loading...'}
             <input type="number"
-                   value={basicFontSize}
+                   value={basicFontSize ?? 16}
                    name={'basicFontSize'}
                    id={'basicFontSize'}
                    onChange={e => onChangeHandler(e)}

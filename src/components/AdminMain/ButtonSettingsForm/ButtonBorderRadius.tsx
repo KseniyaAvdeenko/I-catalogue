@@ -12,7 +12,7 @@ const ButtonBorderRadius: React.FC<IButtonBorderRadiusProps> = ({isLoading, butt
             <label htmlFor="buttonBorderRadius">Скругление углов кнопки</label>
             {isLoading && 'Loading...'}
             <input type="number"
-                   value={buttonBorderRadius}
+                   value={buttonBorderRadius??0}
                    name={'buttonBorderRadius'}
                    id={'buttonBorderRadius'}
                    onChange={e => onChangeHandler(e)}

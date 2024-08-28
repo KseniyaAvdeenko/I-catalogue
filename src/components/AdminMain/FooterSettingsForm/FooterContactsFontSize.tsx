@@ -16,7 +16,7 @@ const FooterContactsFontSize: React.FC<IFooterContactsFontSizeProps> = ({
             <label htmlFor="contactsFontSize">Размер шрифта контактов</label>
             {isLoading && 'Loading...'}
             <input type="number"
-                   value={footerContactsFontSize}
+                   value={footerContactsFontSize??16}
                    name={'contactsFontSize'}
                    id={'contactsFontSize'}
                    onChange={e => onChangeHandler(e)}

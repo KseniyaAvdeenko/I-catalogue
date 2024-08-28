@@ -10,7 +10,7 @@ const ButtonBackground: React.FC<IButtonBackgroundProps> = ({isLoading, buttonBa
             <label htmlFor="buttonBackground">Цвет кнопки</label>
             {isLoading && 'Loading...'}
             <input type="color"
-                   value={buttonBackground}
+                   value={buttonBackground??'#bbb'}
                    name={'buttonBackground'}
                    id={'buttonBackground'}
                    onChange={e => onChangeHandler(e)}

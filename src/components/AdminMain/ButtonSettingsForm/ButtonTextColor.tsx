@@ -11,7 +11,7 @@ const ButtonTextColor:React.FC<IButtonTextColorProps> = ({isLoading, buttonTextC
             <label htmlFor="buttonTextColor">Цвет текста кнопки</label>
             {isLoading && 'Loading...'}
             <input type="color"
-                   value={buttonTextColor}
+                   value={buttonTextColor??'#000'}
                    name={'buttonTextColor'}
                    id={'buttonTextColor'}
                    onChange={e => onChangeHandler(e)}

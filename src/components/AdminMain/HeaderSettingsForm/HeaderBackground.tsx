@@ -15,7 +15,7 @@ const HeaderBackground: React.FC<IHeaderBackgroundProps> = ({
             <label htmlFor="headerBg">Цвет фона</label>
             {isLoading && 'Loading...'}
             <input type="color"
-                   value={headerBg}
+                   value={headerBg??'#fff'}
                    name={'background'}
                    id={'headerBg'}
                    onChange={e => onChangeHandler(e)}

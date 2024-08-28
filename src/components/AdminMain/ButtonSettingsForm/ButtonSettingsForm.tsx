@@ -23,7 +23,6 @@ const ButtonSettingsForm = () => {
                 : dispatch(updateButtonSettings(decodeToken(localStorage.access), buttonSettings.id, {[e.target.name]: e.target.value}))
         }
     }
-    console.log(buttonSettings)
     return (
         <section id={'buttonSettingsSection'}
                  className={[styles.AdminMain__container, styles.AdminMain__container_margin].join(' ')}>

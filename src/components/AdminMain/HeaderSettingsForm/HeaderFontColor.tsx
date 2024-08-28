@@ -11,7 +11,7 @@ const HeaderFontColor: React.FC<IHeaderFontColorProps> = ({isLoading, fontColor,
             <label htmlFor="headerFontColor">Цвет текста “шапки” сайта</label>
             {isLoading && 'Loading...'}
             <input type="color"
-                   value={fontColor}
+                   value={fontColor??"#000"}
                    name={'fontColor'}
                    id={'headerFontColor'}
                    onChange={e => onChangeHandler(e)}

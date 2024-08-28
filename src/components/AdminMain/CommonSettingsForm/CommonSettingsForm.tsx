@@ -51,7 +51,6 @@ const CommonSettingsForm: React.FC<ICommonSettingsFormProps> = () => {
             setFontOptionsVisibility({...fontOptionsVisibility, open: false, display: 'none'})
         }
     }
-    console.log(commonSettings)
     return (
         <section id={'commonSettingsSection'} className={[styles.AdminMain__container, styles.AdminMain__container_margin].join(' ')}>
             <h2 className={styles.AdminMain__heading}>Общие настройки сайта</h2>

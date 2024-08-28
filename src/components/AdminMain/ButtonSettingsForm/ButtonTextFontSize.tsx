@@ -11,7 +11,7 @@ const ButtonTextFontSize: React.FC<IButtonTextFontSizeProps> = ({isLoading, butt
             <label htmlFor="buttonTextFontSize">Размер шрифта кнопки</label>
             {isLoading && 'Loading...'}
             <input type="number"
-                   value={buttonTextFontSize}
+                   value={buttonTextFontSize??20}
                    name={'buttonTextFontSize'}
                    id={'buttonTextFontSize'}
                    onChange={e => onChangeHandler(e)}

@@ -16,7 +16,7 @@ const HeaderContactsFontColor: React.FC<IHeaderContactsFontColorProps> = ({
             <label htmlFor="contactsFontSize">Размер шрифта контактов</label>
             {isLoading && 'Loading...'}
             <input type="number"
-                   value={contactsFontSize}
+                   value={contactsFontSize??'#000'}
                    name={'contactsFontSize'}
                    id={'contactsFontSize'}
                    onChange={e => onChangeHandler(e)}

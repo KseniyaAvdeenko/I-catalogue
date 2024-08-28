@@ -18,7 +18,7 @@ const FooterTopBorderColor: React.FC<IFooterTopBorderColorProps> = ({
             <label htmlFor="borderTopColor">Цвет верхней границы “подвала” сайта</label>
             {isLoading && 'Loading...'}
             <input type="color"
-                   value={borderTopColor}
+                   value={borderTopColor??'#bbb'}
                    name={'borderTopColor'}
                    id={'borderTopColor'}
                    onChange={e => onChangeHandler(e)}

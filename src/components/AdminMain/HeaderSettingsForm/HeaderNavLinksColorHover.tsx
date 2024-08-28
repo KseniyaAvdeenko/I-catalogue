@@ -14,7 +14,7 @@ const HeaderNavLinksColorHover: React.FC<IHeaderNavLinksColorHoverProps> = ({isL
             <label htmlFor="navLinksFontColorHover">Цвет шрифта навигационных ссылок при наведении курсором</label>
             {isLoading && 'Loading...'}
             <input type="color"
-                   value={navLinksFontColorHover}
+                   value={navLinksFontColorHover??'darkred'}
                    name={'navLinksFontColorHover'}
                    id={'navLinksFontColorHover'}
                    onChange={e => onChangeHandler(e)}
