@@ -37,22 +37,32 @@ export const authSlice = createSlice({
             state.error = '';
             state.access = action.payload.access;
             state.refresh = action.payload.refresh;
+            state.lastLogin = new Date().toString();
+            localStorage.setItem('lastLogin', new Date().toString())
             localStorage.setItem('access', encodeToken(action.payload.access));
             localStorage.setItem('refresh', encodeToken(action.payload.refresh));
         },
         loginFail(state, action:PayloadAction<string>){
             state.error = action.payload;
             state.isAuth = false;
+            state.lastLogin = ''
+            state.access = '';
+            state.refresh = '';
+            localStorage.removeItem('lastLogin');
+            localStorage.removeItem('access');
+            localStorage.removeItem('refresh');
         },
 
         refreshSuccess(state, action:PayloadAction<IAuth>){
             state.access = action.payload.access;
             state.refresh = action.payload.refresh;
+            state.isAuth = true;
             localStorage.setItem('access', encodeToken(action.payload.access));
             localStorage.setItem('refresh', encodeToken(action.payload.refresh));
         },
         refreshFail(state){
             state.access = '';
+            state.isAuth = false;
             state.refresh = '';
             localStorage.removeItem('access');
             localStorage.removeItem('refresh');
@@ -62,6 +72,8 @@ export const authSlice = createSlice({
             state.error = '';
             state.access = '';
             state.refresh = '';
+            state.lastLogin = '';
+            localStorage.removeItem('lastLogin');
             localStorage.removeItem('access');
             localStorage.removeItem('refresh');
         }

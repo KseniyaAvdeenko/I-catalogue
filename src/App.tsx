@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {BrowserRouter, Routes, Route} from "react-router-dom";
 import Main from "./pages/Main";
 import SingIn from "./pages/Authentication/SingIn";
@@ -8,8 +8,7 @@ import {useAppSelector} from "./hooks/redux";
 
 function App() {
     //const auth = useAppSelector(state => state.authReducer)
-    const date = new Date().toISOString()
-    console.log(typeof date)
+
     return (
         <BrowserRouter>
             <Routes>

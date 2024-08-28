@@ -24,7 +24,7 @@ const AdminPage = () => {
     return (
         <>
             <AdminHeader></AdminHeader>
-            {auth.isAuth
+            {localStorage.access
                 ? <section className={styles.AdminPage}>
                     <Sidebar scrollToBlock={scrollToBlock}/>
                     <Routes>
