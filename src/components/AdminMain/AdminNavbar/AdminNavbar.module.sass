@@ -1,0 +1,97 @@
+@import "../../../assets/styles/Common.module"
+
+.AdminNavbar
+  @extend .flexColumn
+  flex-basis: 76%
+  width: 100%
+  @extend .p_20
+  @extend .baseFont
+
+  &__container
+    @extend .flexColumn
+    width: 100%
+
+    &_margin
+      @extend .mb_50
+
+  &__heading
+    font-size: $h2
+    text-align: center
+    @extend .mb_40
+
+  &__formContainer
+    @extend .box
+    width: 100%
+    @extend .flexColumn
+
+  &__button
+    @extend .baseAdminButton
+
+
+.savedItems
+  width: 100%
+  @extend .flexColumn
+  @extend .mb_10
+
+  &__items
+    @extend .flexRow
+    justify-content: space-between
+    padding: .5rem 0
+
+    & > img
+      cursor: pointer
+
+  &_inputRadio
+    display: none
+
+  &_inputRadioLabel
+    padding: .5rem
+    cursor: pointer
+    width: 100%
+    border: 1px solid $accent200
+    border-radius: 1rem
+
+  &_inputRadioLabelSelected
+    background: $bg300
+    box-shadow: 0 .4rem 1rem 0 rgba(146, 107, 106, 0.4)
+
+
+  &__item
+    @extend .flexColumn
+
+    &_labelMargin
+      margin-bottom: .5rem
+
+    & > input[type='text']
+      border: .1rem solid $accent200
+      border-radius: 1rem
+      @extend .p_10
+      width: 100%
+      background: $bg100
+
+.formItems
+  @extend .mb_20
+  width: 100%
+  @extend .flexColumn
+
+  &__items
+    @extend .flexRow
+    justify-content: space-between
+    padding: .5rem 0
+    width: 100%
+
+    & > img
+      cursor: pointer
+
+  &__item
+    @extend .flexColumn
+    justify-content: space-between
+    padding: .5rem 0
+    flex-basis: 16.5%
+
+  &__selectContainer
+    display: grid
+    grid-template-columns: repeat(2, 1fr)
+    grid-template-rows: repeat(2, 1fr)
+    column-gap: .5rem
+    row-gap: .5rem

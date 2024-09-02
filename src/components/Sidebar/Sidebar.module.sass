@@ -2,6 +2,7 @@
 
 .Sidebar
   &__container
+    @extend .baseFont
     @extend .flexColumn
     flex-basis: 24%
     @extend .p_20
@@ -11,6 +12,7 @@
   &__items
     @extend .flexColumn
     width: 100%
+    @extend .mb_20
 
   &__itemsContainer
     @extend .flexRow
@@ -19,10 +21,15 @@
     width: 100%
 
   &__heading
+    @extend .baseFont
     font-size: $h6
     font-weight: 700
     text-decoration: none
     &:hover
+      text-decoration: none
+      color: $primary100
+    &:active
+      text-decoration: none
       color: $primary100
 
   &__itemContainer

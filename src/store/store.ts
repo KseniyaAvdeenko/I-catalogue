@@ -5,6 +5,8 @@ import headerSettingsReducer from './reducers/headerSettingsSlice';
 import footerSettingsReducer from './reducers/footerSettingsSlice';
 import commonSettingsReducer from './reducers/commonSettingsSlice';
 import buttonSettingsReducer from './reducers/buttonSettingsSlice';
+import navbarReducer from './reducers/navbarSlice'
+
 
 export const rootReducer = combineReducers({
     authReducer,
@@ -13,6 +15,7 @@ export const rootReducer = combineReducers({
     headerSettingsReducer,
     buttonSettingsReducer,
     footerSettingsReducer,
+    navbarReducer,
 })
 
 export const setupStore = () => {
