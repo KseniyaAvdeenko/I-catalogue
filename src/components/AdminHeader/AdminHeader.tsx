@@ -10,6 +10,7 @@ import {loadFooterSettings} from "../../store/actions/footerSettingsAction";
 import {loadHeaderSettings} from "../../store/actions/headerSettingsAction";
 import {loadButtonSettings} from "../../store/actions/buttonSettingsAction";
 import {decodeToken} from "../../hooks/encodeDecodeTokens";
+import {loadContacts, loadNavLinks} from "../../store/actions/navbarAction";
 
 interface IAdminHeader {
     children?: React.ReactNode | null
@@ -51,6 +52,8 @@ const AdminHeader: React.FC<IAdminHeader> = ({children}) => {
             dispatch(loadHeaderSettings(decodeToken(localStorage.access)))
             dispatch(loadButtonSettings(decodeToken((localStorage.access))))
         }
+        dispatch(loadContacts())
+        dispatch(loadNavLinks())
     }, [localStorage.access])
 
     //console.log(currentUser, localStorage.access)

@@ -9,6 +9,7 @@ interface INavbarInitial{
     isLoadingNavLinks: boolean;
     errorNavLinks: string;
     navLinks: INavLinks[]|null;
+    navLink: INavLinks|null;
     deletedNavLink: boolean
 }
 
@@ -20,6 +21,7 @@ const initialState:INavbarInitial = {
     isLoadingNavLinks: false,
     errorNavLinks: '',
     navLinks: null,
+    navLink: null,
     deletedNavLink: false
 }
 
@@ -45,6 +47,18 @@ export const navbarSlice = createSlice({
         loadContactFail(state, action: PayloadAction<string>){
             state.errorContacts = action.payload
         },
+        createContactSuccess(state, action: PayloadAction<IContacts>){
+            state.contact = action.payload
+        },
+        createContactFail(state, action: PayloadAction<string>){
+            state.errorContacts = action.payload
+        },
+        updateContactSuccess(state, action: PayloadAction<IContacts>){
+            state.contact = action.payload
+        },
+        updateContactFail(state, action: PayloadAction<string>){
+            state.errorContacts = action.payload
+        },
         deleteContactsSuccess(state){
             state.contact = null
         },
@@ -61,8 +75,21 @@ export const navbarSlice = createSlice({
         loadNavLinksFail(state, action: PayloadAction<string>){
             state.errorNavLinks = action.payload
         },
+        createNavLinkSuccess(state, action: PayloadAction<INavLinks>){
+            state.navLink = action.payload
+        },
+        createNavLinkFail(state, action: PayloadAction<string>){
+            state.errorNavLinks = action.payload
+        },
+        updateNavLinkSuccess(state, action: PayloadAction<INavLinks>){
+            state.navLink = action.payload
+        },
+        updateNavLinkFail(state, action: PayloadAction<string>){
+            state.errorNavLinks = action.payload
+        },
         deleteNavLinkSuccess(state){
             state.deletedNavLink = true
+            state.navLink = null
         },
         deleteNavLinkFail(state){
             state.deletedNavLink = false

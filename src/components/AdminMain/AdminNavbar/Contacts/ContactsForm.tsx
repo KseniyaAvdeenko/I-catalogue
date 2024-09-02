@@ -1,38 +1,103 @@
-import React, {useState} from 'react';
+import React, {useRef, useState} from 'react';
 import styles from "../AdminNavbar.module.sass";
-import {useAppSelector} from "../../../../hooks/redux";
-import {IContactField} from "../../../../interface/IFields";
+import {useAppDispatch, useAppSelector} from "../../../../hooks/redux";
 import {contactFieldExample} from "../../Options";
+import SavedContacts from "./SavedContacts";
+import {createContact, deleteContact, updateContact} from "../../../../store/actions/navbarAction";
+import {decodeToken} from "../../../../hooks/encodeDecodeTokens";
+import NewContactsForm from "./NewContactsForm";
+import {IContacts, IContactsBase} from "../../../../interface/INavbar";
 
 const ContactsForm = () => {
-
-    const {isLoadingContacts, contact, errorContacts, contacts} = useAppSelector(state => state.navbarReducer)
+    const dispatch = useAppDispatch();
+    const {isLoadingContacts, errorContacts, contacts} = useAppSelector(state => state.navbarReducer)
     //---states
-    const [fields, setFields] = useState<IContactField[]>([contactFieldExample])
-    console.log(fields)
+    const [newContact, setNewContact] = useState<IContactsBase>({
+        content: '',
+        isLink: false,
+        linkHref: '',
+        linkType: 'none'
+    })
+    const [fields, setFields] = useState<IContacts[]>([contactFieldExample])
+
+    const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+        if (localStorage.access) {
+            e.target.type === 'checkbox'
+                ? dispatch(updateContact(decodeToken(localStorage.access), parseInt(e.target.id.split('*')[1]), {[e.target.name]: e.target.checked}))
+                : dispatch(updateContact(decodeToken(localStorage.access), parseInt(e.target.id.split('*')[1]), {[e.target.name]: e.target.value}))
+        }
+    }
+    const onChangeNewFieldHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+
+        if (e.target.type === 'checkbox') {
+            setNewContact({
+                ...newContact,
+                [e.target.name]: e.target.checked,
+            })
+            setFields(fields =>
+                fields.map(item =>
+                    item.id === parseInt(e.target.id.split('*')[1]) ? {
+                        ...item,
+                        [e.target.name]: e.target.checked
+                    } : item
+                )
+            );
+        } else {
+            setNewContact({
+                ...newContact,
+                [e.target.name]: e.target.value,
+            })
+
+            setFields(fields =>
+                fields.map(item =>
+                    item.id === parseInt(e.target.id.split('*')[1])
+                        ? {...item, [e.target.name]: e.target.value}
+                        : item
+                )
+            );
+        }
+    }
+    const deleteSavedContact = (id: number): void => {
+        if (localStorage.access && contacts) dispatch(deleteContact(decodeToken(localStorage.access), id))
+    }
+    const deleteField = (id: number) => {
+        setFields(fields.filter(el => el.id !== id))
+    }
+    const addNewField = () => {
+        const newField: IContacts = structuredClone(contactFieldExample)
+        newField.id = fields.length
+        setFields([...fields, newField])
+    }
+    const saveNewContact = (id: number) => {
+        if (localStorage.access) {
+            dispatch(createContact(decodeToken(localStorage.access), newContact))
+            deleteField(id)
+            setNewContact({
+                content: '',
+                isLink: false,
+                linkHref: '',
+                linkType: 'none'
+            })
+        }
+    }
     return (
         <section id={'contactsSection'}
                  className={[styles.AdminNavbar__container, styles.AdminNavbar__container_margin].join(' ')}>
             <h2 className={styles.AdminNavbar__heading}>Контакты</h2>
             <div className={styles.AdminNavbar__formContainer}>
-                {contacts &&
-                    <div className={styles.savedItems}>
-                        {isLoadingContacts && 'Loading...'}
-                        {contacts.map(contact => (
-                            <div className={styles.savedItems__items}>
-                                <div>{contact.content}</div>
-                                <div>{contact.isLink}</div>
-                                <div>{contact.linkHref}</div>
-                                <div>{contact.linkType}</div>
-                                <div>save</div>
-                                <div>delete</div>
-                            </div>
-                        ))}
-                    </div>}
-                <div className={styles.formItems}>
-
-                </div>
-                <button className={styles.AdminNavbar__button}>Добавить</button>
+                <SavedContacts
+                    contacts={contacts}
+                    isLoading={isLoadingContacts}
+                    onChangeHandler={onChangeHandler}
+                    deleteSavedContact={deleteSavedContact}
+                />
+                <NewContactsForm
+                    fields={fields}
+                    deleteField={deleteField}
+                    onChangeHandler={onChangeNewFieldHandler}
+                    saveNewContact={saveNewContact}
+                />
+                <button className={styles.AdminNavbar__button} onClick={addNewField}>Добавить</button>
             </div>
         </section>
     );
