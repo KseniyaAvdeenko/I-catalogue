@@ -41,6 +41,7 @@
     & > img
       cursor: pointer
 
+
   &_inputRadio
     display: none
 
@@ -68,6 +69,11 @@
       @extend .p_10
       width: 100%
       background: $bg100
+    & > input[type="text"]:focus,
+    & > input[type="text"]:read-only:focus
+      outline: none
+    & > input[type="text"]:read-only:focus
+      cursor: not-allowed
 
 .formItems
   @extend .mb_20

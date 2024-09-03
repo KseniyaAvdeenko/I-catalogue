@@ -7,11 +7,15 @@ import {INavLinks, INavLinksBase} from "../../../../interface/INavbar";
 import {navLinkFieldExample} from "../../Options";
 import {decodeToken} from "../../../../hooks/encodeDecodeTokens";
 import {slugify} from "transliteration";
-import {createNavLink, deleteNavLink, updateNavLink} from "../../../../store/actions/navLinksAction";
+import {
+    createPageWithNavLink,
+    deletePageWithNavLink,
+    updatePageWithNavLink
+} from "../../../../store/actions/pageSettingsAction";
 
 const NavLinksForm = () => {
     const dispatch = useAppDispatch();
-    const {isLoading, error, navLinks} = useAppSelector(state => state.navLinksReducer)
+    const {isLoading, error, pages} = useAppSelector(state => state.pageSettingsReducer)
 
     const [fields, setFields] = useState<INavLinks[]>([navLinkFieldExample])
 
@@ -27,16 +31,34 @@ const NavLinksForm = () => {
         setFields(fields.filter(el => el.id !== id))
     }
 
-    const deleteNavigationLink = (id: number) => {
+    const deleteNavigationLink = (slug: string) => {
         if (localStorage.access) {
-           dispatch(deleteNavLink(decodeToken(localStorage.access), id))
+            dispatch(deletePageWithNavLink(decodeToken(localStorage.access), slug))
         }
     }
-    const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-        if (localStorage.access) {
-            dispatch(updateNavLink(decodeToken(localStorage.access), parseInt(e.target.id.split('*')[1]), {[e.target.name]: e.target.value}))
-        }
-    }
+    // const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    //     if (pages && localStorage.access) {
+    //         let updatedNavLink = structuredClone(pages.find(el => el.slug === e.target.id.split('*')[1]))
+    //         if (updatedNavLink) {
+    //             if (e.target.name === 'navLink') {
+    //                 updatedNavLink.link.navLink = e.target.value
+    //                 updatedNavLink.headingSettings.headingContent = e.target.value
+    //                 dispatch(updatePageWithNavLink(
+    //                     decodeToken(localStorage.access),
+    //                     e.target.id.split('*')[1],
+    //                     updatedNavLink))
+    //
+    //             } else {
+    //                 updatedNavLink.link.correspondingPageName = e.target.value
+    //                 updatedNavLink.slug = e.target.value
+    //                 dispatch(updatePageWithNavLink(
+    //                     decodeToken(localStorage.access),
+    //                     e.target.id.split('*')[1],
+    //                     updatedNavLink))
+    //             }
+    //         }
+    //     }
+    // }
     const onChangeNewNavLinkHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.name === 'navLink') {
             setFields(fields =>
@@ -65,10 +87,22 @@ const NavLinksForm = () => {
             })
         }
     }
+
     const saveNavLink = (id: number) => {
+        const newPage = {
+            link: newNavLink,
+            slug: newNavLink.correspondingPageName,
+            headingSettings: {headingContent: newNavLink.navLink}
+        }
         if (localStorage.access) {
-            dispatch(createNavLink(decodeToken(localStorage.access), newNavLink))
-            deleteField(id)
+            dispatch(createPageWithNavLink(decodeToken(localStorage.access), newPage))
+            if (fields.length === 1) {
+                deleteField(id)
+                addNewField()
+            } else {
+                deleteField(id)
+            }
+            setNewNavLink({...newNavLink, navLink: '', correspondingPageName: ''})
         }
     }
 
@@ -78,10 +112,9 @@ const NavLinksForm = () => {
             <h2 className={styles.AdminNavbar__heading}>Навигационные ссылки</h2>
             <div className={styles.AdminNavbar__formContainer}>
                 <SavedNavLinks
-                    navLinks={navLinks}
+                    pages={pages}
                     deleteNavLink={deleteNavigationLink}
                     isLoading={isLoading}
-                    onChangeHandler={onChangeHandler}
                 />
                 <NewNavLinkForm
                     fields={fields}
