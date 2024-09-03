@@ -1,15 +1,9 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {IAuth} from "../../interface/IUser";
 import {encodeToken} from "../../hooks/encodeDecodeTokens";
+import {IAuthState} from "../../interface/IInitialStates";
 
-interface IAuthState {
-    isSignedUp: boolean;
-    isAuth: boolean;
-    error: string;
-    refresh: string;
-    access: string;
-    lastLogin: string;
-}
+
 const initialState: IAuthState = {
     isAuth: false,
     isSignedUp: false,

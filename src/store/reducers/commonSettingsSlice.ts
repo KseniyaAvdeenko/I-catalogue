@@ -1,12 +1,6 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {ICommonSettings} from "../../interface/ICommonSettings";
-
-interface ICommonSettingsInitial {
-    isLoading: boolean;
-    error: string;
-    commonSettings: ICommonSettings | null;
-    restored: boolean
-}
+import {ICommonSettingsInitial} from "../../interface/IInitialStates";
 
 const initialState: ICommonSettingsInitial = {
     isLoading: false,

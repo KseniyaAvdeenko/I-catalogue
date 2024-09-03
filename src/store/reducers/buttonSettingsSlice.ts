@@ -1,12 +1,6 @@
 import {IButtonSettings, IHeaderSettings} from "../../interface/ICommonSettings";
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-
-interface IButtonSettingsInitial{
-    isLoading: boolean;
-    error: string;
-    buttonSettings: IButtonSettings | null
-    restored: boolean
-}
+import {IButtonSettingsInitial} from "../../interface/IInitialStates";
 
 const initialState: IButtonSettingsInitial = {
     isLoading: false,
@@ -29,7 +23,6 @@ export const buttonSettingsSlice = createSlice({
         },
         loadButtonSettingsFail(state, action: PayloadAction<string>){
             state.isLoading = false;
-            state.buttonSettings = null;
             state.error = action.payload;
         },
         updateButtonSettingsSuccess(state, action: PayloadAction<IButtonSettings>){
@@ -39,7 +32,6 @@ export const buttonSettingsSlice = createSlice({
         },
         updateButtonSettingsFail(state, action: PayloadAction<string>){
             state.isLoading = false;
-            state.buttonSettings = null;
             state.error = action.payload;
         },
         restoreButtonSettingsSuccess(state, action: PayloadAction<boolean>){
