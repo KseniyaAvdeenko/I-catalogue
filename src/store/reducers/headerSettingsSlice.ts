@@ -1,12 +1,6 @@
 import {IHeaderSettings} from "../../interface/ICommonSettings";
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-
-interface IHeaderSettingsInitial {
-    isLoading: boolean;
-    error: string;
-    headerSettings: IHeaderSettings|null;
-    restored: boolean;
-}
+import {IHeaderSettingsInitial} from "../../interface/IInitialStates";
 
 const initialState: IHeaderSettingsInitial = {
     isLoading: false,
@@ -21,27 +15,20 @@ export const headerSettingsSlice = createSlice({
     reducers: {
         headerSettingsFetching(state){
             state.isLoading = true;
-            state.error = '';
             state.headerSettings = null;
         },
         loadHeaderSettingsSuccess(state, action: PayloadAction<IHeaderSettings>){
             state.isLoading = false;
             state.headerSettings = action.payload;
-            state.error = '';
         },
         loadHeaderSettingsFail(state, action: PayloadAction<string>){
             state.isLoading = false;
-            state.headerSettings = null;
             state.error = action.payload;
         },
         updateHeaderSettingsSuccess(state, action: PayloadAction<IHeaderSettings>){
-            state.isLoading = false;
             state.headerSettings = action.payload;
-            state.error = '';
         },
         updateHeaderSettingsFail(state, action: PayloadAction<string>){
-            state.isLoading = false;
-            state.headerSettings = null;
             state.error = action.payload;
         },
         restoreHeaderSettingsSuccess(state, action: PayloadAction<boolean>){

@@ -1,22 +1,5 @@
-import {combineReducers, configureStore} from "@reduxjs/toolkit";
-import authReducer from './reducers/authSlice';
-import userReducer from './reducers/userSlice';
-import headerSettingsReducer from './reducers/headerSettingsSlice';
-import footerSettingsReducer from './reducers/footerSettingsSlice';
-import commonSettingsReducer from './reducers/commonSettingsSlice';
-import buttonSettingsReducer from './reducers/buttonSettingsSlice';
-import navbarReducer from './reducers/navbarSlice'
-
-
-export const rootReducer = combineReducers({
-    authReducer,
-    userReducer,
-    commonSettingsReducer,
-    headerSettingsReducer,
-    buttonSettingsReducer,
-    footerSettingsReducer,
-    navbarReducer,
-})
+import {configureStore} from "@reduxjs/toolkit";
+import {rootReducer} from "./rootReducer";
 
 export const setupStore = () => {
     return configureStore({

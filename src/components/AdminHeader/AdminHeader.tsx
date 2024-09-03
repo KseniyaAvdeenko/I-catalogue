@@ -10,7 +10,9 @@ import {loadFooterSettings} from "../../store/actions/footerSettingsAction";
 import {loadHeaderSettings} from "../../store/actions/headerSettingsAction";
 import {loadButtonSettings} from "../../store/actions/buttonSettingsAction";
 import {decodeToken} from "../../hooks/encodeDecodeTokens";
-import {loadContacts, loadNavLinks} from "../../store/actions/navbarAction";
+import {loadContacts} from "../../store/actions/contactsAction";
+import {loadNavLinks} from "../../store/actions/navLinksAction";
+
 
 interface IAdminHeader {
     children?: React.ReactNode | null
@@ -18,7 +20,7 @@ interface IAdminHeader {
 
 const AdminHeader: React.FC<IAdminHeader> = ({children}) => {
     const navigate = useNavigate()
-    const auth = useAppSelector(state => state.authReducer)
+    //const auth = useAppSelector(state => state.authReducer)
     const {currentUser, errorCurrentUser} = useAppSelector(state => state.userReducer)
     const dispatch = useAppDispatch()
     const now = Date.parse(new Date().toString())

@@ -5,13 +5,13 @@ import SavedNavLinks from "./SavedNavLinks";
 import NewNavLinkForm from "./NewNavLinkForm";
 import {INavLinks, INavLinksBase} from "../../../../interface/INavbar";
 import {navLinkFieldExample} from "../../Options";
-import {createNavLink, deleteNavLink, updateNavLink} from "../../../../store/actions/navbarAction";
 import {decodeToken} from "../../../../hooks/encodeDecodeTokens";
 import {slugify} from "transliteration";
+import {createNavLink, deleteNavLink, updateNavLink} from "../../../../store/actions/navLinksAction";
 
 const NavLinksForm = () => {
     const dispatch = useAppDispatch();
-    const {isLoadingNavLinks, errorNavLinks, navLinks} = useAppSelector(state => state.navbarReducer)
+    const {isLoading, error, navLinks} = useAppSelector(state => state.navLinksReducer)
 
     const [fields, setFields] = useState<INavLinks[]>([navLinkFieldExample])
 
@@ -80,7 +80,7 @@ const NavLinksForm = () => {
                 <SavedNavLinks
                     navLinks={navLinks}
                     deleteNavLink={deleteNavigationLink}
-                    isLoading={isLoadingNavLinks}
+                    isLoading={isLoading}
                     onChangeHandler={onChangeHandler}
                 />
                 <NewNavLinkForm

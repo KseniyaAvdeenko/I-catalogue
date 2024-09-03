@@ -1,13 +1,6 @@
 import {IFooterSettings} from "../../interface/ICommonSettings";
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-
-
-interface IFooterSettingsInitial{
-    isLoading:boolean;
-    error: string;
-    footerSettings: IFooterSettings | null
-    restored: boolean
-}
+import {IFooterSettingsInitial} from "../../interface/IInitialStates";
 
 const initialState: IFooterSettingsInitial = {
     isLoading: false,
@@ -15,7 +8,6 @@ const initialState: IFooterSettingsInitial = {
     footerSettings: null,
     restored: false
 }
-
 
 export const footerSettingsSlice = createSlice({
     name: 'footerSettings',
@@ -32,18 +24,14 @@ export const footerSettingsSlice = createSlice({
             state.error = '';
         },
         loadFooterSettingsFail(state, action: PayloadAction<string>){
-            state.isLoading = false;
-            state.footerSettings = null;
             state.error = action.payload;
+            state.isLoading = false;
         },
         updateFooterSettingsSuccess(state, action: PayloadAction<IFooterSettings>){
-            state.isLoading = false;
             state.footerSettings = action.payload;
             state.error = '';
         },
         updateFooterSettingsFail(state, action: PayloadAction<string>){
-            state.isLoading = false;
-            state.footerSettings = null;
             state.error = action.payload;
         },
         restoreFooterSettingsSuccess(state, action: PayloadAction<boolean>){

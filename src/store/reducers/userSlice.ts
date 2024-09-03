@@ -1,14 +1,6 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {IUser} from "../../interface/IUser";
-
-interface IUserInitial {
-    errorCurrentUser: string;
-    errorUsers: string;
-    errorUser: string;
-    currentUser: IUser|null;
-    user: IUser|null;
-    users: IUser[]|null;
-}
+import {IUserInitial} from "../../interface/IInitialStates";
 
 export const initialState:IUserInitial = {
     errorCurrentUser: '',

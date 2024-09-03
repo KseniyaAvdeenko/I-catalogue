@@ -3,14 +3,14 @@ import styles from "../AdminNavbar.module.sass";
 import {useAppDispatch, useAppSelector} from "../../../../hooks/redux";
 import {contactFieldExample} from "../../Options";
 import SavedContacts from "./SavedContacts";
-import {createContact, deleteContact, updateContact} from "../../../../store/actions/navbarAction";
 import {decodeToken} from "../../../../hooks/encodeDecodeTokens";
 import NewContactsForm from "./NewContactsForm";
 import {IContacts, IContactsBase} from "../../../../interface/INavbar";
+import {createContact, deleteContact, updateContact} from "../../../../store/actions/contactsAction";
 
 const ContactsForm = () => {
     const dispatch = useAppDispatch();
-    const {isLoadingContacts, errorContacts, contacts} = useAppSelector(state => state.navbarReducer)
+    const {isLoading, error, contacts} = useAppSelector(state => state.contactsReducer)
     //---states
     const [newContact, setNewContact] = useState<IContactsBase>({
         content: '',
@@ -87,7 +87,7 @@ const ContactsForm = () => {
             <div className={styles.AdminNavbar__formContainer}>
                 <SavedContacts
                     contacts={contacts}
-                    isLoading={isLoadingContacts}
+                    isLoading={isLoading}
                     onChangeHandler={onChangeHandler}
                     deleteSavedContact={deleteSavedContact}
                 />
