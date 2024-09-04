@@ -116,6 +116,7 @@ const NavLinksForm = () => {
                     deleteNavLink={deleteNavigationLink}
                     isLoading={isLoading}
                 />
+                <hr className={styles.hr}/>
                 <NewNavLinkForm
                     fields={fields}
                     onChangeHandler={onChangeNewNavLinkHandler}

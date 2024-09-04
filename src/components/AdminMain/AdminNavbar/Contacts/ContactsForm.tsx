@@ -91,6 +91,7 @@ const ContactsForm = () => {
                     onChangeHandler={onChangeHandler}
                     deleteSavedContact={deleteSavedContact}
                 />
+                <hr className={styles.hr}/>
                 <NewContactsForm
                     fields={fields}
                     deleteField={deleteField}
