@@ -14,8 +14,6 @@ interface INewNavLinkFormProps {
 }
 
 const NewNavLinkForm: React.FC<INewNavLinkFormProps> = ({fields, onChangeHandler, saveNewLink, deleteField}) => {
-
-    console.log(fields)
     return (
         <div className={styles.formItems}>
             {fields.map(field => (

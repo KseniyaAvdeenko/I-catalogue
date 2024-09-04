@@ -1,3 +1,5 @@
+import {INavLinks, INavLinksBase} from "./INavbar";
+
 export type blockHeadingTypes = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
 export type FontWeight = 400 | 500 | 600 | 700 | 800 | 900
 
@@ -33,7 +35,6 @@ export interface IPageContent extends IPageContentBase {
 }
 
 export interface IPageSettingBase {
-   link: number;
    slug: string;
    background: string;
    isBlockWithProds: boolean;
@@ -43,12 +44,12 @@ export interface IPageSettingBase {
 
 export interface IPageSettingCreation extends IPageSettingBase {
     headingSettings: IHeadingBase
-    pageContent: IPageContentBase[]|[]
+    link: INavLinksBase
 }
 
 export interface IPageSetting extends IPageSettingBase {
     id: number;
+    link:INavLinks
     headingSettings: IHeading;
-    pageContent: IPageContent[]|[];
 }
 

@@ -42,7 +42,7 @@ export const createPageWithNavLink = (access: string, data: any) => async (dispa
 export const updatePageWithNavLink = (access: string, slug: string, data: any) => async (dispatch: AppDispatch) => {
     if (access) {
         try {
-            const response = await axios.patch(apiUrl + `/page_settings/page_settings/${slug}/`, JSON.stringify(data),
+            const response = await axios.patch(apiUrl + `page_settings/page_settings/${slug}/`, JSON.stringify(data),
                 getAuthConfigApplicationJson(access))
             dispatch(pageSettingsSlice.actions.updatePageSuccess(response.data))
             dispatch(loadPagesWithNavLinks())
@@ -57,7 +57,7 @@ export const updatePageWithNavLink = (access: string, slug: string, data: any) =
 export const deletePageWithNavLink = (access: string, slug: string,) => async (dispatch: AppDispatch) => {
     if (access) {
         try {
-            await axios.delete(apiUrl + `/page_settings/page_settings/${slug}/`, getAuthConfigApplicationJson(access))
+            await axios.delete(apiUrl + `page_settings/page_settings/${slug}/`, getAuthConfigApplicationJson(access))
             dispatch(pageSettingsSlice.actions.deletePageSuccess())
             dispatch(loadPagesWithNavLinks())
         } catch (e) {

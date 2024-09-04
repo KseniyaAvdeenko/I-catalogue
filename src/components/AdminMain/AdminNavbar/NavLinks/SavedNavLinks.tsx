@@ -1,40 +1,52 @@
 import React from 'react';
 import {IAdminComponentsProps} from "../../../../interface/IAdminPageComponets";
-import {INavLinks} from "../../../../interface/INavbar";
 import styles from "../AdminNavbar.module.sass";
 import NavLinkInput from "./NavLinkInput";
 import CorrespondingPageNameInput from "./CorrespondingPageNameInput";
 import DeleteIcon from "../../../../assets/img/deleteIcon.png";
+import {IPageSetting} from "../../../../interface/IPagesSettings";
+import Label from "../Label";
+import Input from "../Input";
 
-interface ISaveNavLinksProps extends IAdminComponentsProps {
-    navLinks: INavLinks[] | null
+interface ISaveNavLinksProps {
+    isLoading: boolean;
+    pages: IPageSetting[] | null
     deleteNavLink: Function
 }
 
-const SavedNavLinks: React.FC<ISaveNavLinksProps> = ({isLoading, onChangeHandler, deleteNavLink, navLinks}) => {
+const SavedNavLinks: React.FC<ISaveNavLinksProps> = ({isLoading, deleteNavLink, pages}) => {
     return (
         <div className={styles.savedItems}>
             {isLoading && 'Loading...'}
-            {navLinks && navLinks.map(navLink => (
-                <div key={navLink.id} className={styles.savedItems__items}>
-                    <NavLinkInput label={'Навигационная ссылка'}
-                                  id={'navLink*' + navLink.id}
-                                  type={'text'}
-                                  name={'navLink'}
-                                  onChangeHandler={onChangeHandler}
-                                  required={true}
-                                  value={navLink.navLink}
-                    />
-                    <CorrespondingPageNameInput
-                        label={'Соответствующая страница'}
-                        id={'correspondingPageName*' + navLink.id}
-                        type={'text'}
-                        name={'correspondingPageName'}
-                        onChangeHandler={onChangeHandler}
-                        required={false}
-                        value={navLink.correspondingPageName}
-                    />
-                    <img src={DeleteIcon} alt="delete icon" onClick={() => deleteNavLink(navLink.id)}/>
+            {pages && pages.map(page => (
+                <div key={page.id} className={styles.savedItems__items}>
+                    <div className={styles.savedItems__item}>
+                        <label htmlFor={'navLink*' + page.slug}
+                               className={[styles.savedItems__item, styles.savedItems__item_labelMargin].join(' ')}>
+                            Навигационная ссылка
+                        </label>
+                        <input
+                            type={'text'}
+                            name={'navLink'}
+                            id={'navLink*' + page.slug}
+                            value={page.link.navLink}
+                            readOnly={true}
+                        />
+                    </div>
+                    <div className={styles.savedItems__item}>
+                        <label htmlFor={'correspondingPageName*' + page.slug}
+                               className={[styles.savedItems__item, styles.savedItems__item_labelMargin].join(' ')}>
+                            Ссылка на соответствующую страницу
+                        </label>
+                        <input
+                            type={'text'}
+                            name={'correspondingPageName'}
+                            id={'navLink*' + page.slug}
+                            value={page.slug}
+                            readOnly={true}
+                        />
+                    </div>
+                    <img src={DeleteIcon} alt="delete icon" onClick={() => deleteNavLink(page.slug)}/>
                 </div>
             ))}
         </div>
