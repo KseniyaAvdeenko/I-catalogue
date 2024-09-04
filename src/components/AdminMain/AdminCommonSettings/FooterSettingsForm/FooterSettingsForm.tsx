@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import styles from "../AdminMain.module.sass";
+import styles from "../../AdminMain.module.sass";
 import FooterBackground from "./FooterBackground";
 import {useAppDispatch, useAppSelector} from "../../../../hooks/redux";
 import {updateFooterSettings} from "../../../../store/actions/footerSettingsAction";
@@ -19,13 +19,18 @@ const FooterSettingsForm = () => {
     //methods
     const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (footerSettings && localStorage.access) {
-            e.target.type === 'checkbox'
-                ? dispatch(updateFooterSettings(decodeToken(localStorage.access), footerSettings.id, {[e.target.name]: e.target.checked}))
-                : dispatch(updateFooterSettings(decodeToken(localStorage.access), footerSettings.id, {[e.target.name]: e.target.value}))
+            if(e.target.type === 'checkbox'){
+                dispatch(updateFooterSettings(decodeToken(localStorage.access), footerSettings.id, {[e.target.name]: e.target.checked}))
+            }else if(e.target.type === 'number'){
+                dispatch(updateFooterSettings(decodeToken(localStorage.access), footerSettings.id, {[e.target.name]: parseInt(e.target.value)}))
+            }else{
+                dispatch(updateFooterSettings(decodeToken(localStorage.access), footerSettings.id, {[e.target.name]: e.target.value}))
+            }
         }
     }
     return (
-        <section id={'footerSettingsSection'} className={[styles.AdminMain__container, styles.AdminMain__container_margin].join(' ')}>
+        <section id={'footerSettingsSection'}
+                 className={[styles.AdminMain__container, styles.AdminMain__container_margin].join(' ')}>
             <h3 className={styles.AdminMain__subheading}>Настройка “подвала” сайта</h3>
             <div className={styles.AdminMain__formContainer}>
                 <div className={styles.form__items}>
@@ -54,7 +59,8 @@ const FooterSettingsForm = () => {
 
                 </div>
                 <div className={styles.form__items}>
-                    <FooterContentLayout footerLayout={footerSettings?.contentLayout} onChangeHandler={onChangeHandler}/>
+                    <FooterContentLayout footerLayout={footerSettings?.contentLayout}
+                                         onChangeHandler={onChangeHandler}/>
                 </div>
             </div>
         </section>

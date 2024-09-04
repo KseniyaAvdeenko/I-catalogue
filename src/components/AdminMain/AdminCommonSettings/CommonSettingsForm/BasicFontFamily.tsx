@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import styles from "../AdminMain.module.sass";
+import styles from "../../AdminMain.module.sass";
 import {appFonts} from "../../Options";
 import {IAdminComponentsProps, IOptions} from "../../../../interface/IAdminPageComponets";
 

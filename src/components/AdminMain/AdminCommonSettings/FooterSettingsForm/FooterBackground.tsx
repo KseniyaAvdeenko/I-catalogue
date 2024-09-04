@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from "../AdminMain.module.sass";
+import styles from "../../AdminMain.module.sass";
 import {IAdminComponentsProps} from "../../../../interface/IAdminPageComponets";
 
 interface IFooterBackgroundProps extends IAdminComponentsProps {

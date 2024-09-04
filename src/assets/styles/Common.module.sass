@@ -96,3 +96,34 @@ $baseFont: 'Nunito Sans'
   height: .2rem
   border-bottom: .2rem solid $accent200
   background: $accent200
+
+.mainCommon
+  @extend .flexColumn
+  flex-basis: 76%
+  width: 100%
+  @extend .p_20
+  @extend .baseFont
+  height: 80vh
+  overflow-y: auto
+
+.inputNumber
+  width: 6rem
+  height: 4rem
+  outline: none
+  border: 1px solid $accent200
+  border-radius: 1rem
+  background: $bg100
+  @extend .p_10
+
+.inputCheckBox
+  border: 1px solid $accent200
+  border-radius: .5rem
+  width: 2rem
+  height: 2rem
+
+.adminInputText
+  border: .1rem solid $accent200
+  border-radius: 1rem
+  @extend .p_10
+  width: 100%
+  background: $bg100

@@ -3,20 +3,16 @@ import {userSlice} from "../reducers/userSlice";
 import {commonSettingsSlice} from "../reducers/commonSettingsSlice";
 import axios from "axios";
 import {ICommonSettings} from "../../interface/ICommonSettings";
-import {apiUrl, formData, getAuthConfigMultipart} from "./apiUrl";
+import {apiUrl, formData, getAuthConfigMultipart, getRequestHeaders} from "./apiUrl";
 
 
-export const loadCommonSettings = (access: string, ) => async (dispatch: AppDispatch) => {
-    if (access) {
-        try {
-            dispatch(commonSettingsSlice.actions.loadCommonSettingsFetching());
-            const response = await axios.get<ICommonSettings>(apiUrl + `common_page_settings/common_page_settings/get_common_settings/`, getAuthConfigMultipart(access));
-            dispatch(commonSettingsSlice.actions.loadCommonSettingsSuccess(response.data));
-        } catch {
-            dispatch(commonSettingsSlice.actions.loadCommonSettingsFail('Ошибка'));
-        }
-    } else {
-        dispatch(userSlice.actions.loadingCurrentUserFail('Вы не авторизованы'))
+export const loadCommonSettings = () => async (dispatch: AppDispatch) => {
+    try {
+        dispatch(commonSettingsSlice.actions.loadCommonSettingsFetching());
+        const response = await axios.get<ICommonSettings>(apiUrl + `common_page_settings/common_page_settings/get_common_settings/`, getRequestHeaders());
+        dispatch(commonSettingsSlice.actions.loadCommonSettingsSuccess(response.data));
+    } catch {
+        dispatch(commonSettingsSlice.actions.loadCommonSettingsFail('Ошибка'));
     }
 }
 
@@ -37,15 +33,17 @@ export const updateCommonSettings = (access: string, id: number, data: any) => a
 }
 
 
-export const restoreCommonSettings = (access: string, id: number) => async (dispatch: AppDispatch) => {
-    if (access) {
-        try {
-            const response = await axios.get<boolean>(apiUrl + `common_page_settings/common_page_settings/${id}/restore_common_settings/`, getAuthConfigMultipart(access));
-            dispatch(commonSettingsSlice.actions.restoreCommonSettingsSuccess(response.data));
-        } catch {
-            dispatch(commonSettingsSlice.actions.restoreCommonSettingsFail(false));
+export const restoreCommonSettings = (access: string, id: number, isAdmin: boolean) => async (dispatch: AppDispatch) => {
+    if (isAdmin) {
+        if (access) {
+            try {
+                const response = await axios.get<boolean>(apiUrl + `common_page_settings/common_page_settings/${id}/restore_common_settings/`, getAuthConfigMultipart(access));
+                dispatch(commonSettingsSlice.actions.restoreCommonSettingsSuccess(response.data));
+            } catch {
+                dispatch(commonSettingsSlice.actions.restoreCommonSettingsFail(false));
+            }
+        } else {
+            dispatch(userSlice.actions.loadingCurrentUserFail('Вы не авторизованы'))
         }
-    } else {
-        dispatch(userSlice.actions.loadingCurrentUserFail('Вы не авторизованы'))
     }
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 import {IAdminComponentsProps} from "../../../../interface/IAdminPageComponets";
-import styles from "../AdminMain.module.sass";
+import styles from "../../AdminMain.module.sass";
 
 interface IFooterNavLinksFontSizeProps extends IAdminComponentsProps {
     navLinksFontSize: number|undefined

@@ -13,6 +13,7 @@ import {decodeToken} from "../../hooks/encodeDecodeTokens";
 import {loadContacts} from "../../store/actions/contactsAction";
 import {loadNavLinks} from "../../store/actions/navLinksAction";
 import {loadPagesWithNavLinks} from "../../store/actions/pageSettingsAction";
+import {loadMainPageSettings} from "../../store/actions/mainPageSettingsAction";
 
 
 interface IAdminHeader {
@@ -50,13 +51,14 @@ const AdminHeader: React.FC<IAdminHeader> = ({children}) => {
     useEffect(() => {
         if (localStorage.access) {
             dispatch(loadCurrentUser(decodeToken(localStorage.access)))
-            dispatch(loadCommonSettings(decodeToken(localStorage.access)))
-            dispatch(loadFooterSettings(decodeToken(localStorage.access)))
-            dispatch(loadHeaderSettings(decodeToken(localStorage.access)))
-            dispatch(loadButtonSettings(decodeToken((localStorage.access))))
         }
+        dispatch(loadButtonSettings())
+        dispatch(loadCommonSettings())
         dispatch(loadContacts())
         dispatch(loadPagesWithNavLinks())
+        dispatch(loadMainPageSettings())
+        dispatch(loadFooterSettings())
+        dispatch(loadHeaderSettings())
     }, [localStorage.access])
 
     //console.log(currentUser, localStorage.access)

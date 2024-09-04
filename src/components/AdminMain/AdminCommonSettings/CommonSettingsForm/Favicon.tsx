@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import styles from "../AdminMain.module.sass";
+import styles from "../../AdminMain.module.sass";
 import Download from "../../../../assets/img/Download.png";
 import {IAdminComponentsProps} from "../../../../interface/IAdminPageComponets";
 

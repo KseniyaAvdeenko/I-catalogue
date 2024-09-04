@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import styles from "../AdminMain.module.sass";
+import styles from "../../AdminMain.module.sass";
 import {useAppDispatch, useAppSelector} from "../../../../hooks/redux";
 import {updateCommonSettings} from "../../../../store/actions/commonSettingsAction";
 import BasicFontColor from "./BasicFontColor";
@@ -44,7 +44,10 @@ const CommonSettingsForm: React.FC<ICommonSettingsFormProps> = () => {
                 }
                 dispatch(updateCommonSettings(decodeToken(localStorage.access), commonSettings.id, {[e.target.name]: file}))
             } else {
-                dispatch(updateCommonSettings(decodeToken(localStorage.access), commonSettings.id, {[e.target.name]: e.target.value}))
+                e.target.type ==='number'
+                    ? dispatch(updateCommonSettings(decodeToken(localStorage.access), commonSettings.id, {[e.target.name]: parseInt(e.target.value)}))
+                    : dispatch(updateCommonSettings(decodeToken(localStorage.access), commonSettings.id, {[e.target.name]: e.target.value}))
+
             }
         }
         if (e.target.name === 'basicFontFamily') {

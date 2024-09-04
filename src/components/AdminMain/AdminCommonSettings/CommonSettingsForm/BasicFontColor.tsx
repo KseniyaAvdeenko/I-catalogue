@@ -1,6 +1,7 @@
 import React from 'react';
-import styles from "../AdminMain.module.sass";
+import styles from "../../AdminMain.module.sass";
 import {IAdminComponentsProps} from "../../../../interface/IAdminPageComponets";
+import AdminInput from "../../../../UI/Inputs/AdminInput";
 
 interface IBasicFontColorProps extends IAdminComponentsProps{
     basicFontColor: string|undefined;
@@ -11,11 +12,16 @@ const BasicFontColor: React.FC<IBasicFontColorProps> = ({isLoading, basicFontCol
         <div className={styles.form__inputContainer}>
             <label htmlFor="basicFontColor">Основной цвет шрифта</label>
             {isLoading && 'Loading...'}
-            <input type="color"
-                   value={basicFontColor?? '#000'}
-                   name={'basicFontColor'}
-                   id={'basicFontColor'}
-                   onChange={e => onChangeHandler(e)}
+            <AdminInput
+                type={"color"}
+                name={'basicFontColor'}
+                id={'basicFontColor'}
+                value={basicFontColor?? '#000'}
+                checked={false}
+                onChangeHandler={onChangeHandler}
+                required={false}
+                readonly={false}
+                classname={''}
             />
         </div>
     );

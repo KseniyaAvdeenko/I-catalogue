@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import styles from "../AdminMain.module.sass";
+import styles from "../../AdminMain.module.sass";
 import {useAppDispatch, useAppSelector} from "../../../../hooks/redux";
 import HeaderBackground from "./HeaderBackground";
 import HeaderBorderBottom from "./HeaderBorderBottom";
@@ -24,10 +24,13 @@ const HeaderSettingsForm = () => {
     //methods
     const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (headerSettings && localStorage.access) {
-            e.target.type === 'checkbox'
-                ? dispatch(updateHeaderSettings(decodeToken(localStorage.access), headerSettings.id, {[e.target.name]: e.target.checked}))
-                : dispatch(updateHeaderSettings(decodeToken(localStorage.access), headerSettings.id, {[e.target.name]: e.target.value}))
-
+            if(e.target.type === 'checkbox'){
+                dispatch(updateHeaderSettings(decodeToken(localStorage.access), headerSettings.id, {[e.target.name]: e.target.checked}))
+            }else if(e.target.type === 'number'){
+                dispatch(updateHeaderSettings(decodeToken(localStorage.access), headerSettings.id, {[e.target.name]: parseInt(e.target.value)}))
+            }else{
+                dispatch(updateHeaderSettings(decodeToken(localStorage.access), headerSettings.id, {[e.target.name]: e.target.value}))
+            }
         }
         if (e.target.name === 'navLinksFontColorHoverStyle') {
             setHoverStyleOptionsVisibility({
