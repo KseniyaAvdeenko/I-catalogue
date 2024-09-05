@@ -12,7 +12,6 @@ import MainPageSettings from "../../components/AdminMain/AdminMainPageSettings/M
 const AdminPage = () => {
     const commonSettingsRef = useRef<HTMLElement>(null);
     const navbarContentRef = useRef<HTMLElement>(null);
-    const pagesSettingsRef = useRef<HTMLElement>(null);
 
     const scrollToBlock = (sectionId: string) => {
         if (commonSettingsRef.current && commonSettingsRef.current.childNodes) {
@@ -34,6 +33,7 @@ const AdminPage = () => {
                         <Route path={'common_settings/'} element={<AdminCommonSettings ref={commonSettingsRef}/>}/>
                         <Route path={'navbar/'} element={<AdminNavbar ref={navbarContentRef}/>}/>
                         <Route path={'main_page_settings/'} element={<MainPageSettings/>}/>
+                        <Route path={'pages_settings/:slug'} element={<PagesSettings/>}/>
                     </Routes>
                     {/*<div style={{position: 'fixed', bottom: '5%', right: '2rem'}}>Preview</div>*/}
                 </section>

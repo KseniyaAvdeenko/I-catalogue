@@ -29,3 +29,9 @@ export interface IHeadingType{
     id: blockHeadingTypes;
     heading: string;
 }
+
+export interface ISidebarItemsVisibility{
+    display: string;
+    rotate: number;
+    open: boolean;
+}

@@ -11,7 +11,6 @@ import {loadHeaderSettings} from "../../store/actions/headerSettingsAction";
 import {loadButtonSettings} from "../../store/actions/buttonSettingsAction";
 import {decodeToken} from "../../hooks/encodeDecodeTokens";
 import {loadContacts} from "../../store/actions/contactsAction";
-import {loadNavLinks} from "../../store/actions/navLinksAction";
 import {loadPagesWithNavLinks} from "../../store/actions/pageSettingsAction";
 import {loadMainPageSettings} from "../../store/actions/mainPageSettingsAction";
 
@@ -32,7 +31,7 @@ const AdminHeader: React.FC<IAdminHeader> = ({children}) => {
         navigate('/sign_in/')
     }
     async function isAuthenticated() {
-        while ((now - Date.parse(localStorage.lastLogin)) >= 360000 && (now - Date.parse(localStorage.lastLogin)) < (3600000 * 24)) {
+        while ((now - Date.parse(localStorage.lastLogin)) >= 360000 ) {
             if (await verifyToken(decodeToken(localStorage.refresh))) {
                 dispatch(refreshToken(decodeToken(localStorage.refresh)))
             }
@@ -42,6 +41,7 @@ const AdminHeader: React.FC<IAdminHeader> = ({children}) => {
         }
     }
 
+    console.log(now - Date.parse(localStorage.lastLogin))
     useEffect( () => {
         if (localStorage.access && localStorage.refresh && localStorage.laastLogin) {
             isAuthenticated()
