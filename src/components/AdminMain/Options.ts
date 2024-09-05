@@ -1,6 +1,6 @@
 import HeaderLayout1 from '../../assets/img/Layout1.png';
 import HeaderLayout2 from '../../assets/img/Layout2.png';
-import {IFonts, IHeaderLayout, INavLinksHoverStyle} from "../../interface/IAdminPageComponets";
+import {IFonts, IHeaderLayout, IHeadingType, INavLinksHoverStyle} from "../../interface/IAdminPageComponets";
 import FooterLayout1 from '../../assets/img/FooterLayout1.png';
 import FooterLayout2 from '../../assets/img/FooterLayout2.png';
 import FooterLayout3 from '../../assets/img/FooterLayout3.png';
@@ -58,3 +58,12 @@ export const linkTypes: IInputProps[] = [
 ]
 
 export const navLinkFieldExample:INavLinks = {id: 0, navLink: '', correspondingPageName: ''}
+
+export const headingTypes: IHeadingType[] = [
+    {id: "h1", heading: 'Заголовок h1'},
+    {id: "h2", heading: 'Заголовок h2'},
+    {id: "h3", heading: 'Заголовок h3'},
+    {id: "h4", heading: 'Заголовок h4'},
+    {id: "h5", heading: 'Заголовок h5'},
+    {id: "h6", heading: 'Заголовок h6'},
+]

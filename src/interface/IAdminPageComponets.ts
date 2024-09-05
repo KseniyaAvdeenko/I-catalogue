@@ -1,3 +1,5 @@
+import {blockHeadingTypes} from "./IPagesSettings";
+
 export interface IAdminComponentsProps{
     isLoading: boolean;
     onChangeHandler: Function;
@@ -21,4 +23,9 @@ export interface IOptions {
 export interface IHeaderLayout{
     id: string;
     image: string
+}
+
+export interface IHeadingType{
+    id: blockHeadingTypes;
+    heading: string;
 }

@@ -32,10 +32,21 @@
   &__items
     @extend .flexColumn
 
+    & > input[type='text']
+      @extend .adminInputText
+
+    & > input[type="text"]:focus,
+    & > input[type="text"]:read-only:focus
+      outline: none
+
+    & > input[type="text"]:read-only:focus
+      cursor: not-allowed
+
+
   &__inputContainer
     @extend .flexRow
     justify-content: space-between
-    @extend .mb_15
+    @extend .mb_20
 
     & > label
       flex-basis: 70%
@@ -46,15 +57,6 @@
     & > input[type="checkbox"]
       @extend .inputCheckBox
 
-    & > input[type='text']
-      @extend .adminInputText
-
-    & > input[type="text"]:focus,
-    & > input[type="text"]:read-only:focus
-      outline: none
-      
-    & > input[type="text"]:read-only:focus
-      cursor: not-allowed
 
     &_choose
       @extend .flexColumn

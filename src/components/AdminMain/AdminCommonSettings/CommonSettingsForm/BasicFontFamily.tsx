@@ -30,20 +30,11 @@ const BasicFontFamily: React.FC<IBasicFontFamilyProps> = ({
             <div className={styles.form__optionsContainer}
                  style={{display: fontOptionsVisibility.display, bottom: fontOptionsVisibility.bottom}}>
                 {appFonts.map(font => (
-                    font.font === basicFontFamily
-                        ? <label key={font.id} htmlFor={font.id}
-                                 className={[styles.form__option, styles.selectedOption].join(' ')}
+                        <label key={font.id} htmlFor={font.id}
+                                 className={font.font === basicFontFamily
+                                     ?[styles.form__option, styles.selectedOption].join(' ')
+                                     :[styles.form__option].join(' ')}
                                  style={{fontFamily: font.font}}>{font.font}
-                            <input type="radio"
-                                   value={font.font}
-                                   name="basicFontFamily"
-                                   id={font.id}
-                                   onChange={e => onChangeHandler(e)}
-                            />
-                        </label>
-                        :
-                        <label key={font.id} htmlFor={font.id} className={[styles.form__option,].join(' ')}
-                               style={{fontFamily: font.font}}>{font.font}
                             <input type="radio"
                                    value={font.font}
                                    name="basicFontFamily"
