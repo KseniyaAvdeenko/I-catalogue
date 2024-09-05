@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from "../AdminMain.module.sass";
+import styles from "../../AdminMain.module.sass";
 import {useAppDispatch, useAppSelector} from "../../../../hooks/redux";
 import {updateHeaderSettings} from "../../../../store/actions/headerSettingsAction";
 import ButtonBorderRadius from "./ButtonBorderRadius";
@@ -13,14 +13,18 @@ import {updateButtonSettings} from "../../../../store/actions/buttonSettingsActi
 import {decodeToken} from "../../../../hooks/encodeDecodeTokens";
 
 const ButtonSettingsForm = () => {
-    const {buttonSettings, error, isLoading, restored} = useAppSelector(state => state.buttonSettingsReducer);
+    const {buttonSettings, error, isLoading} = useAppSelector(state => state.buttonSettingsReducer);
     const dispatch = useAppDispatch();
     //methods
     const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (buttonSettings && localStorage.access) {
-            e.target.type === 'checkbox'
-                ? dispatch(updateButtonSettings(decodeToken(localStorage.access), buttonSettings.id, {[e.target.name]: e.target.checked}))
-                : dispatch(updateButtonSettings(decodeToken(localStorage.access), buttonSettings.id, {[e.target.name]: e.target.value}))
+            if(e.target.type === 'checkbox'){
+                dispatch(updateButtonSettings(decodeToken(localStorage.access), buttonSettings.id, {[e.target.name]: e.target.checked}))
+            }else if(e.target.type === 'number'){
+                dispatch(updateButtonSettings(decodeToken(localStorage.access), buttonSettings.id, {[e.target.name]: parseInt(e.target.value)}))
+            }else{
+                dispatch(updateButtonSettings(decodeToken(localStorage.access), buttonSettings.id, {[e.target.name]: e.target.value}))
+            }
         }
     }
     return (

@@ -1,6 +1,6 @@
 import React from 'react';
 import {IAdminComponentsProps} from "../../../../interface/IAdminPageComponets";
-import styles from "../AdminMain.module.sass";
+import styles from "../../AdminMain.module.sass";
 
 interface IButtonBorderColorProps extends IAdminComponentsProps{
     buttonBorderColor: string|undefined

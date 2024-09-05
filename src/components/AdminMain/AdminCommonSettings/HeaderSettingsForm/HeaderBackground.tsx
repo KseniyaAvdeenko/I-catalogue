@@ -1,6 +1,7 @@
 import React from 'react';
-import styles from "../AdminMain.module.sass";
+import styles from "../../AdminMain.module.sass";
 import {IAdminComponentsProps} from "../../../../interface/IAdminPageComponets";
+import AdminInput from "../../../../UI/Inputs/AdminInput";
 
 interface IHeaderBackgroundProps extends IAdminComponentsProps{
     headerBg: string | undefined;
@@ -14,12 +15,15 @@ const HeaderBackground: React.FC<IHeaderBackgroundProps> = ({
         <div className={styles.form__inputContainer}>
             <label htmlFor="headerBg">Цвет фона</label>
             {isLoading && 'Loading...'}
-            <input type="color"
-                   value={headerBg??'#fff'}
-                   name={'background'}
-                   id={'headerBg'}
-                   onChange={e => onChangeHandler(e)}
-            />
+            <AdminInput type={'color'}
+                        name={'background'}
+                        id={'headerBg'}
+                        value={headerBg??'#fff'}
+                        checked={false}
+                        onChangeHandler={onChangeHandler}
+                        required={false}
+                        classname={''}
+                        readonly={false}/>
         </div>
     );
 };

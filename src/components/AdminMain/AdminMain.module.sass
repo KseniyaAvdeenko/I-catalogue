@@ -1,12 +1,7 @@
-@import "../../../assets/styles/Common.module"
-
+@import "../../assets/styles/Common.module"
 
 .AdminMain
-  @extend .flexColumn
-  flex-basis: 76%
-  width: 100%
-  @extend .p_20
-  @extend .baseFont
+  @extend .mainCommon
 
   &__container
     @extend .flexColumn
@@ -37,55 +32,31 @@
   &__items
     @extend .flexColumn
 
+    & > input[type='text']
+      @extend .adminInputText
+
+    & > input[type="text"]:focus,
+    & > input[type="text"]:read-only:focus
+      outline: none
+
+    & > input[type="text"]:read-only:focus
+      cursor: not-allowed
+
+
   &__inputContainer
     @extend .flexRow
     justify-content: space-between
-    @extend .mb_15
+    @extend .mb_20
 
     & > label
       flex-basis: 70%
 
-    & > input[type='color']
-      -webkit-appearance: none
-      border: none
-      background: transparent
-      width: 6rem
-      height: 4rem
-      border-radius: 1rem
-      overflow: hidden
-      outline: none
-      cursor: inherit
-
-    & > input[type="color"]::-webkit-color-swatch
-      border: none
-      border-radius: 1rem
-      height: 3.8rem
-
-    & > input[type='color']::-moz-focus-inner
-      border: none
-      padding: 0
-      border-radius: 1rem
-      height: 3.8rem
-
-    & > input[type='color']::-moz-color-swatch
-      border: none
-      border-radius: 1rem
-      height: 3.8rem
-
     & > input[type='number']
-      width: 6rem
-      height: 4rem
-      outline: none
-      border: 1px solid $accent200
-      border-radius: 1rem
-      background: $bg100
-      @extend .p_10
+      @extend .inputNumber
 
     & > input[type="checkbox"]
-      border: 1px solid $accent200
-      border-radius: .5rem
-      width: 2rem
-      height: 2rem
+      @extend .inputCheckBox
+
 
     &_choose
       @extend .flexColumn
@@ -186,5 +157,6 @@
   border-radius: 1rem
   resize: none
   @extend .p_10
+
   &:focus
     outline: none

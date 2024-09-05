@@ -23,8 +23,7 @@ export const updateMainPageSettings = (access: string, id: number, data: any) =>
                 JSON.stringify(data),
                 getAuthConfigApplicationJson(access))
             dispatch(mainPageSettingsSlice.actions.updateMainPageSuccess(response.data))
-
-
+            dispatch(loadMainPageSettings())
         } catch (e) {
             dispatch(mainPageSettingsSlice.actions.updateMainPageFail('Ошибка'))
         }

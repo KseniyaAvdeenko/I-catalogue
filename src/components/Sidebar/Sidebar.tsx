@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import styles from './Sidebar.module.sass';
 import ArrowDown from '../../assets/img/arrowDown.png'
 import {Link, NavLink} from "react-router-dom";
+import SidebarItemPages from "./SidebarItemPages";
 
 interface ISidebarProps {
     scrollToBlock: Function
@@ -34,7 +35,7 @@ const Sidebar: React.FC<ISidebarProps> = ({scrollToBlock}) => {
     return (
         <aside className={styles.Sidebar__container}>
             <div className={styles.Sidebar__items}>
-                <div className={styles.Sidebar__itemsContainer} onClick={()=>getItemsVisibility('commonSettings')}>
+                <div className={styles.Sidebar__itemsContainer} onClick={() => getItemsVisibility('commonSettings')}>
                     <Link to={'common_settings/'} className={styles.Sidebar__heading}>Общие настройки сайта</Link>
                     <img src={ArrowDown} style={{transform: `rotate(${commonSettingsItems.rotate}deg)`}}
                          alt="arrowDown"/>
@@ -55,7 +56,7 @@ const Sidebar: React.FC<ISidebarProps> = ({scrollToBlock}) => {
                 </div>
             </div>
             <div className={styles.Sidebar__items}>
-                <div className={styles.Sidebar__itemsContainer} onClick={()=>getItemsVisibility('navbar')}>
+                <div className={styles.Sidebar__itemsContainer} onClick={() => getItemsVisibility('navbar')}>
                     <Link to={'navbar/'} className={styles.Sidebar__heading}>Контент “шапки” и “подвала” сайта</Link>
                     <img src={ArrowDown} style={{transform: `rotate(${navbarItems.rotate}deg)`}}
                          alt="arrowDown"/>
@@ -69,6 +70,12 @@ const Sidebar: React.FC<ISidebarProps> = ({scrollToBlock}) => {
                     </div>
                 </div>
             </div>
+            <div className={styles.Sidebar__items}>
+                <div className={styles.Sidebar__itemsContainer}>
+                    <Link to={'main_page_settings/'} className={styles.Sidebar__heading}>Настройка главной страницы</Link>
+                </div>
+            </div>
+            <SidebarItemPages/>
         </aside>
     );
 };

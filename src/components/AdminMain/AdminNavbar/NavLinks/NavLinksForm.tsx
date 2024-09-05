@@ -9,8 +9,7 @@ import {decodeToken} from "../../../../hooks/encodeDecodeTokens";
 import {slugify} from "transliteration";
 import {
     createPageWithNavLink,
-    deletePageWithNavLink,
-    updatePageWithNavLink
+    deletePageWithNavLink
 } from "../../../../store/actions/pageSettingsAction";
 
 const NavLinksForm = () => {

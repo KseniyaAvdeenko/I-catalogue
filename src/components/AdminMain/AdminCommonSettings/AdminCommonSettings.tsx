@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './AdminMain.module.sass';
+import styles from '../AdminMain.module.sass';
 import CommonSettingsForm from "./CommonSettingsForm/CommonSettingsForm";
 import HeaderSettingsForm from "./HeaderSettingsForm/HeaderSettingsForm";
 import FooterSettingsForm from "./FooterSettingsForm/FooterSettingsForm";

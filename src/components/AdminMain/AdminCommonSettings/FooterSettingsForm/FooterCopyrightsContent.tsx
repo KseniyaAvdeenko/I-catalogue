@@ -1,6 +1,6 @@
 import React from 'react';
 import {IAdminComponentsProps} from "../../../../interface/IAdminPageComponets";
-import styles from "../AdminMain.module.sass";
+import styles from "../../AdminMain.module.sass";
 
 interface ICopyrightsContentProps extends IAdminComponentsProps {
     copyrightsContent: string | undefined

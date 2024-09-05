@@ -1,11 +1,7 @@
 @import "../../../assets/styles/Common.module"
 
 .AdminNavbar
-  @extend .flexColumn
-  flex-basis: 76%
-  width: 100%
-  @extend .p_20
-  @extend .baseFont
+  @extend .mainCommon
 
   &__container
     @extend .flexColumn
@@ -64,11 +60,7 @@
       margin-bottom: .5rem
 
     & > input[type='text']
-      border: .1rem solid $accent200
-      border-radius: 1rem
-      @extend .p_10
-      width: 100%
-      background: $bg100
+      @extend .adminInputText
     & > input[type="text"]:focus,
     & > input[type="text"]:read-only:focus
       outline: none
