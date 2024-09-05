@@ -7,8 +7,8 @@ import buttonSettingsReducer from "./reducers/buttonSettingsSlice";
 import footerSettingsReducer from "./reducers/footerSettingsSlice";
 import contactsReducer from './reducers/contactsSlice';
 import mainPageSettingsReducer from "./reducers/mainPageSettingsSlice";
-import navLinksReducer from './reducers/navLinksSlice';
-import pageSettingsReducer from './reducers/pageSettingsSlice'
+import pageSettingsReducer from './reducers/pageSettingsSlice';
+import pageContentReducer from './reducers/pageContentSlice'
 
 export const rootReducer = combineReducers({
     authReducer,
@@ -19,6 +19,6 @@ export const rootReducer = combineReducers({
     footerSettingsReducer,
     contactsReducer,
     mainPageSettingsReducer,
-    navLinksReducer,
     pageSettingsReducer,
+    pageContentReducer,
 })

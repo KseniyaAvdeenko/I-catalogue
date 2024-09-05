@@ -2,9 +2,8 @@ import React from 'react';
 import styles from "../AdminNavbar.module.sass";
 import Label from "../Label";
 import Input from "../Input";
-import DeleteIcon from "../../../../assets/img/deleteIcon.png";
 
-interface ICorrespondingPageNameInputProps {
+interface ISlugInputProps {
     label: string;
     id: string;
     type: string;
@@ -14,7 +13,7 @@ interface ICorrespondingPageNameInputProps {
     value: string | undefined;
 }
 
-const CorrespondingPageNameInput: React.FC<ICorrespondingPageNameInputProps> = ({label, name, onChangeHandler, required, value, type, id}) => {
+const SlugInput: React.FC<ISlugInputProps> = ({label, name, onChangeHandler, required, value, type, id}) => {
     return (
         <div className={styles.savedItems__item}>
             <Label
@@ -35,4 +34,4 @@ const CorrespondingPageNameInput: React.FC<ICorrespondingPageNameInputProps> = (
     );
 };
 
-export default CorrespondingPageNameInput;
+export default SlugInput;

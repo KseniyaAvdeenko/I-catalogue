@@ -46,6 +46,7 @@ const MainPageSettings = () => {
                     mainPageSettings.id,
                     {
                         headingSettings: {
+                            id: mainPageSettings.headingSettings.id,
                             headingContent: mainPageSettings.headingSettings.headingContent,
                             [e.target.name]: parseInt(e.target.value)
                         }
@@ -55,7 +56,7 @@ const MainPageSettings = () => {
                 dispatch(updateMainPageSettings(
                     decodeToken(localStorage.access),
                     mainPageSettings.id,
-                    {headingSettings: {[e.target.name]: e.target.value}}
+                    {headingSettings: {[e.target.name]: e.target.value, id: mainPageSettings.headingSettings.id,}}
                 ))
             } else {
                 dispatch(updateMainPageSettings(
@@ -64,7 +65,8 @@ const MainPageSettings = () => {
                     {
                         headingSettings: {
                             headingContent: mainPageSettings.headingSettings.headingContent,
-                            [e.target.name]: e.target.value
+                            [e.target.name]: e.target.value,
+                            id: mainPageSettings.headingSettings.id,
                         }
                     }
                 ))

@@ -1,12 +1,3 @@
-export interface INavLinksBase{
-    navLink: string
-    correspondingPageName: string
-}
-
-export interface INavLinks extends INavLinksBase{
-    id: number;
-}
-
 export interface IContactsBase {
     content: string;
     isLink: boolean;

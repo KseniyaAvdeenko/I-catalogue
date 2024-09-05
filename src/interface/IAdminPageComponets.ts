@@ -35,3 +35,10 @@ export interface ISidebarItemsVisibility{
     rotate: number;
     open: boolean;
 }
+export interface INavLinkBase{
+    navLink: string;
+    slug: string;
+}
+export interface INavLink extends INavLinkBase{
+    id: number;
+}

@@ -1,10 +1,10 @@
 import HeaderLayout1 from '../../assets/img/Layout1.png';
 import HeaderLayout2 from '../../assets/img/Layout2.png';
-import {IFonts, IHeaderLayout, IHeadingType, INavLinksHoverStyle} from "../../interface/IAdminPageComponets";
+import {IFonts, IHeaderLayout, IHeadingType, INavLink, INavLinksHoverStyle} from "../../interface/IAdminPageComponets";
 import FooterLayout1 from '../../assets/img/FooterLayout1.png';
 import FooterLayout2 from '../../assets/img/FooterLayout2.png';
 import FooterLayout3 from '../../assets/img/FooterLayout3.png';
-import {IContacts, IInputProps, INavLinks} from "../../interface/INavbar";
+import {IContacts, IInputProps} from "../../interface/INavbar";
 
 
 export const appFonts: IFonts[] = [
@@ -57,7 +57,7 @@ export const linkTypes: IInputProps[] = [
     {type: 'radio', id: 'address', name: 'linkType', value: 'address', label: 'Адрес', checked: false},
 ]
 
-export const navLinkFieldExample:INavLinks = {id: 0, navLink: '', correspondingPageName: ''}
+export const navLinkFieldExample:INavLink = {id: 0, navLink: '', slug: ''}
 
 export const headingTypes: IHeadingType[] = [
     {id: "h1", heading: 'Заголовок h1'},

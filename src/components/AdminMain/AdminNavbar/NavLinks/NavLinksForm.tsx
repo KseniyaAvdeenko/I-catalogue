@@ -3,7 +3,6 @@ import styles from "../AdminNavbar.module.sass";
 import {useAppDispatch, useAppSelector} from "../../../../hooks/redux";
 import SavedNavLinks from "./SavedNavLinks";
 import NewNavLinkForm from "./NewNavLinkForm";
-import {INavLinks, INavLinksBase} from "../../../../interface/INavbar";
 import {navLinkFieldExample} from "../../Options";
 import {decodeToken} from "../../../../hooks/encodeDecodeTokens";
 import {slugify} from "transliteration";
@@ -11,17 +10,18 @@ import {
     createPageWithNavLink,
     deletePageWithNavLink
 } from "../../../../store/actions/pageSettingsAction";
+import {INavLink, INavLinkBase} from "../../../../interface/IAdminPageComponets";
 
 const NavLinksForm = () => {
     const dispatch = useAppDispatch();
     const {isLoading, error, pages} = useAppSelector(state => state.pageSettingsReducer)
 
-    const [fields, setFields] = useState<INavLinks[]>([navLinkFieldExample])
+    const [fields, setFields] = useState<INavLink[]>([navLinkFieldExample])
 
-    const [newNavLink, setNewNavLink] = useState<INavLinksBase>({navLink: '', correspondingPageName: ''})
+    const [newNavLink, setNewNavLink] = useState<INavLinkBase>({navLink: '', slug: ''})
 
     function addNewField() {
-        const newField: INavLinks = structuredClone(navLinkFieldExample)
+        const newField: INavLink = structuredClone(navLinkFieldExample)
         newField.id = fields.length
         setFields([...fields, newField])
     }
@@ -63,14 +63,14 @@ const NavLinksForm = () => {
             setFields(fields =>
                 fields.map(field =>
                     field.id === parseInt(e.target.id.split('*')[1])
-                        ? {...field, [e.target.name]: e.target.value, correspondingPageName: slugify(e.target.value)}
+                        ? {...field, [e.target.name]: e.target.value, slug: slugify(e.target.value)}
                         : field
                 )
             )
             setNewNavLink({
                 ...newNavLink,
                 [e.target.name]: e.target.value,
-                correspondingPageName: slugify(e.target.value)
+                slug: slugify(e.target.value)
             })
         } else {
             setFields(fields =>
@@ -89,9 +89,10 @@ const NavLinksForm = () => {
 
     const saveNavLink = (id: number) => {
         const newPage = {
-            link: newNavLink,
-            slug: newNavLink.correspondingPageName,
-            headingSettings: {headingContent: newNavLink.navLink}
+            navLink: newNavLink.navLink,
+            slug: newNavLink.slug,
+            headingSettings: {headingContent: newNavLink.navLink},
+            page: []
         }
         if (localStorage.access) {
             dispatch(createPageWithNavLink(decodeToken(localStorage.access), newPage))
@@ -101,7 +102,7 @@ const NavLinksForm = () => {
             } else {
                 deleteField(id)
             }
-            setNewNavLink({...newNavLink, navLink: '', correspondingPageName: ''})
+            setNewNavLink({...newNavLink, navLink: '', slug: ''})
         }
     }
 
@@ -115,7 +116,7 @@ const NavLinksForm = () => {
                     deleteNavLink={deleteNavigationLink}
                     isLoading={isLoading}
                 />
-                <hr className={styles.hr}/>
+                {/*{pages && pages.length && (<hr className={styles.hr}/>)}*/}
                 <NewNavLinkForm
                     fields={fields}
                     onChangeHandler={onChangeNewNavLinkHandler}

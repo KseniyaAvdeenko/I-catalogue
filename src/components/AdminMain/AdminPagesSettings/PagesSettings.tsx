@@ -1,7 +1,5 @@
 import React, {useEffect, useState} from 'react';
 import styles from '../AdminMain.module.sass'
-import Markdown from "react-markdown";
-import MarkdownEditor from '@uiw/react-markdown-editor';
 import {useParams} from "react-router-dom";
 import {useAppDispatch, useAppSelector} from "../../../hooks/redux";
 import {loadPageWithNavLink, updatePageWithNavLink} from "../../../store/actions/pageSettingsAction";
@@ -16,13 +14,13 @@ import PageHeadingType from "./PageHeadingType";
 import {IOptions} from "../../../interface/IAdminPageComponets";
 import {decodeToken} from "../../../hooks/encodeDecodeTokens";
 import PageCardQuantityInRow from "./PageCardQuantityInRow";
+import PageContent from "./PageContent";
 
 
 const PagesSettings = () => {
     const {slug} = useParams();
     const {page, error, isLoading} = useAppSelector(state => state.pageSettingsReducer);
     const dispatch = useAppDispatch()
-    console.log(page)
     const [headingTypeOptionsVisibility, setHeadingTypeOptionsVisibility] = useState<IOptions>({
         open: false, display: 'none', bottom: '-56.2rem'
     })
@@ -32,7 +30,7 @@ const PagesSettings = () => {
 
     const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (slug && page && localStorage.access) {
-            const pageRequiredFields = {headingSettings: page.headingSettings}
+            const pageRequiredFields = {headingSettings: page.headingSettings, page: []}
             if (e.target.type === 'checkbox') {
                 dispatch(updatePageWithNavLink(decodeToken(localStorage.access), slug,
                     Object.assign({[e.target.name]: e.target.checked}, pageRequiredFields)))
@@ -50,7 +48,9 @@ const PagesSettings = () => {
             if (e.target.type === 'number') {
                 dispatch(updatePageWithNavLink(decodeToken(localStorage.access), slug,
                     {
+                        page: [],
                         headingSettings: {
+                            id: page.headingSettings.id,
                             [e.target.name]: parseInt(e.target.value),
                             headingContent: page.headingSettings.headingContent
                         }
@@ -58,11 +58,19 @@ const PagesSettings = () => {
                 ))
             } else if (e.target.type === 'text') {
                 dispatch(updatePageWithNavLink(decodeToken(localStorage.access), slug,
-                    {headingSettings: {[e.target.name]: e.target.value}}))
+                    {
+                        page: [],
+                        headingSettings: {
+                            [e.target.name]: e.target.value,
+                            id: page.headingSettings.id
+                        }
+                    }))
             } else {
                 dispatch(updatePageWithNavLink(decodeToken(localStorage.access), slug,
                     {
+                        page: [],
                         headingSettings: {
+                            id: page.headingSettings.id,
                             [e.target.name]: e.target.value,
                             headingContent: page.headingSettings.headingContent
                         }
@@ -80,10 +88,11 @@ const PagesSettings = () => {
     return (
         <main className={styles.AdminMain}>
             <section className={[styles.AdminMain__container, styles.AdminMain__container_margin].join(' ')}>
-                <h2 className={styles.AdminMain__heading}>Настройка и контент страницы "{page?.link?.navLink}"</h2>
+                <h2 className={styles.AdminMain__heading}>Настройка и контент страницы</h2>
+                <h3 className={styles.AdminMain__subheading}>Настройка страницы "{page?.navLink}"</h3>
                 {page && (<div className={styles.AdminMain__formContainer}>
                     <div className={styles.form__items}>
-                        <PageBackground pageName={page.link?.navLink} background={page?.background}
+                        <PageBackground pageName={page.navLink} background={page.background}
                                         isLoading={isLoading} onChangeHandler={onChangeHandler}/>
                         <PageIsBlockWithProds isBlockWithProds={page.isBlockWithProds}
                                               isLoading={isLoading} onChangeHandler={onChangeHandler}/>
@@ -96,7 +105,7 @@ const PagesSettings = () => {
                     </div>
                     <div className={styles.form__items}>
                         <PageHeadingContent headingContent={page.headingSettings.headingContent}
-                                            pageName={page.link.navLink}
+                                            pageName={page.navLink}
                                             isLoading={isLoading} onChangeHandler={onChangeHeadingHandler}/>
                         <PageHeadingType
                             blockHeadingType={page.headingSettings.blockHeadingType}
@@ -114,13 +123,9 @@ const PagesSettings = () => {
                     </div>
                 </div>)}
             </section>
+            <PageContent pageId={page?.id} pageName={page?.navLink}/>
         </main>
     );
 }
 
 export default PagesSettings;
-// {/*<MarkdownEditor*/}
-//             {/*    value={value}*/}
-//             {/*    height="200px"*/}
-//             {/*    onChange={(value, viewUpdate) => setValue(value)}*/}
-//             {/*/>*/}
