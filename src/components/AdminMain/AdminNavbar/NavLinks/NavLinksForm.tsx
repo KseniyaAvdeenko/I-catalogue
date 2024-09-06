@@ -92,7 +92,6 @@ const NavLinksForm = () => {
             navLink: newNavLink.navLink,
             slug: newNavLink.slug,
             headingSettings: {headingContent: newNavLink.navLink},
-            page: []
         }
         if (localStorage.access) {
             dispatch(createPageWithNavLink(decodeToken(localStorage.access), newPage))

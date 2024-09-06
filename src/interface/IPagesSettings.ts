@@ -23,14 +23,6 @@ export interface IMainPageSetting {
 }
 
 
-export interface IPageContentBase {
-    content: string;
-}
-
-export interface IPageContent extends IPageContentBase {
-    id: number;
-}
-
 export interface IPageSettingBase {
     navLink: string;
     slug: string;
@@ -38,11 +30,11 @@ export interface IPageSettingBase {
     isBlockWithProds: boolean;
     prodBackground: string;
     cardQuantityInRow: number
+    content: string|null
 }
 
 export interface IPageSetting extends IPageSettingBase {
     id: number;
     headingSettings: IHeading;
-    page: IPageContent[]|[]
 }
 

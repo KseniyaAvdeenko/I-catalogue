@@ -7,6 +7,7 @@ import FooterLayout3 from '../../assets/img/FooterLayout3.png';
 import {IContacts, IInputProps} from "../../interface/INavbar";
 
 
+
 export const appFonts: IFonts[] = [
     {id: 'Raleway', font: 'Raleway'},
     {id: 'Rubik', font: 'Rubik'},
@@ -57,7 +58,7 @@ export const linkTypes: IInputProps[] = [
     {type: 'radio', id: 'address', name: 'linkType', value: 'address', label: 'Адрес', checked: false},
 ]
 
-export const navLinkFieldExample:INavLink = {id: 0, navLink: '', slug: ''}
+export const navLinkFieldExample: INavLink = {id: 0, navLink: '', slug: ''}
 
 export const headingTypes: IHeadingType[] = [
     {id: "h1", heading: 'Заголовок h1'},

@@ -17,6 +17,7 @@ import PageCardQuantityInRow from "./PageCardQuantityInRow";
 import PageContent from "./PageContent";
 
 
+
 const PagesSettings = () => {
     const {slug} = useParams();
     const {page, error, isLoading} = useAppSelector(state => state.pageSettingsReducer);
@@ -30,7 +31,7 @@ const PagesSettings = () => {
 
     const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (slug && page && localStorage.access) {
-            const pageRequiredFields = {headingSettings: page.headingSettings, page: []}
+            const pageRequiredFields = {headingSettings: page.headingSettings}
             if (e.target.type === 'checkbox') {
                 dispatch(updatePageWithNavLink(decodeToken(localStorage.access), slug,
                     Object.assign({[e.target.name]: e.target.checked}, pageRequiredFields)))
@@ -48,7 +49,6 @@ const PagesSettings = () => {
             if (e.target.type === 'number') {
                 dispatch(updatePageWithNavLink(decodeToken(localStorage.access), slug,
                     {
-                        page: [],
                         headingSettings: {
                             id: page.headingSettings.id,
                             [e.target.name]: parseInt(e.target.value),
@@ -59,7 +59,6 @@ const PagesSettings = () => {
             } else if (e.target.type === 'text') {
                 dispatch(updatePageWithNavLink(decodeToken(localStorage.access), slug,
                     {
-                        page: [],
                         headingSettings: {
                             [e.target.name]: e.target.value,
                             id: page.headingSettings.id
@@ -68,7 +67,6 @@ const PagesSettings = () => {
             } else {
                 dispatch(updatePageWithNavLink(decodeToken(localStorage.access), slug,
                     {
-                        page: [],
                         headingSettings: {
                             id: page.headingSettings.id,
                             [e.target.name]: e.target.value,
@@ -89,7 +87,7 @@ const PagesSettings = () => {
         <main className={styles.AdminMain}>
             <section className={[styles.AdminMain__container, styles.AdminMain__container_margin].join(' ')}>
                 <h2 className={styles.AdminMain__heading}>Настройка и контент страницы</h2>
-                <h3 className={styles.AdminMain__subheading}>Настройка страницы "{page?.navLink}"</h3>
+                <h3 className={styles.AdminMain__subheading}>Настройка страницы {page?.navLink}</h3>
                 {page && (<div className={styles.AdminMain__formContainer}>
                     <div className={styles.form__items}>
                         <PageBackground pageName={page.navLink} background={page.background}
@@ -123,7 +121,9 @@ const PagesSettings = () => {
                     </div>
                 </div>)}
             </section>
-            <PageContent pageId={page?.id} pageName={page?.navLink}/>
+
+            <PageContent page={page}/>
+
         </main>
     );
 }

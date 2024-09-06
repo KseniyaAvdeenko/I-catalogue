@@ -1,5 +1,5 @@
 import {IButtonSettings, ICommonSettings, IFooterSettings, IHeaderSettings} from "./ICommonSettings";
-import {IMainPageSetting, IPageContent, IPageSetting} from "./IPagesSettings";
+import {IMainPageSetting, IPageSetting} from "./IPagesSettings";
 import {IContacts} from "./INavbar";
 import {IUser} from "./IUser";
 
@@ -61,7 +61,3 @@ export interface IUserInitial {
     users: IUser[] | null;
 }
 
-export interface IPageContentInitial extends IInitialStatesBase {
-    pageContents: IPageContent[] | null
-    pageContent: IPageContent | null
-}
