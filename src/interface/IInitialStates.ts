@@ -1,6 +1,6 @@
 import {IButtonSettings, ICommonSettings, IFooterSettings, IHeaderSettings} from "./ICommonSettings";
 import {IMainPageSetting, IPageSetting} from "./IPagesSettings";
-import {IContacts, INavLinks} from "./INavbar";
+import {IContacts} from "./INavbar";
 import {IUser} from "./IUser";
 
 export interface IInitialStatesBase {
@@ -41,10 +41,6 @@ export interface IMainPageSettingsInitial extends IInitialStatesBase {
     mainPageSettings: IMainPageSetting | null
 }
 
-export interface INavLinksInitial extends IInitialStatesBase {
-    navLinks: INavLinks[] | null;
-    navLink: INavLinks | null;
-}
 
 export interface IContactsInitial extends IInitialStatesBase {
     contacts: IContacts[] | null;
@@ -64,3 +60,4 @@ export interface IUserInitial {
     user: IUser | null;
     users: IUser[] | null;
 }
+

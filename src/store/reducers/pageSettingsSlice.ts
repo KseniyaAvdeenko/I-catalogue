@@ -52,7 +52,7 @@ export const pageSettingsSlice = createSlice({
         },
         deletePageFail(state, action: PayloadAction<string>) {
             state.error = action.payload
-        },
+        }
     }
 })
 

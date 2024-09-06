@@ -15,10 +15,10 @@ export const loadPagesWithNavLinks = () => async (dispatch: AppDispatch) => {
     }
 }
 
-export const loadPageWithNavLinks = (slug: string) => async (dispatch: AppDispatch) => {
+export const loadPageWithNavLink = (slug: string) => async (dispatch: AppDispatch) => {
     try {
         dispatch(pageSettingsSlice.actions.pageFetching())
-        const response = await axios.get<IPageSetting>(apiUrl + `page_settings/page_settings/`, getRequestHeaders())
+        const response = await axios.get<IPageSetting>(apiUrl + `page_settings/page_settings/${slug}/`, getRequestHeaders())
         dispatch(pageSettingsSlice.actions.loadPageSuccess(response.data))
     } catch (e) {
         dispatch(pageSettingsSlice.actions.loadPageFail('Ошибка'))

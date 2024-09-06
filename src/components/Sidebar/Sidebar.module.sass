@@ -25,9 +25,11 @@
     font-size: $h6
     font-weight: 700
     text-decoration: none
+
     &:hover
       text-decoration: none
       color: $primary100
+
     &:active
       text-decoration: none
       color: $primary100
@@ -41,7 +43,16 @@
   &__item
     cursor: pointer
     @extend .mb_15
+    text-decoration: none
+    &:visited
+      color: $text100
     &:hover
       color: $primary100
+      text-decoration: none
+
+    &:active
+      text-decoration: none
+      color: $primary100
+
     &_margin
       @extend .mb_15

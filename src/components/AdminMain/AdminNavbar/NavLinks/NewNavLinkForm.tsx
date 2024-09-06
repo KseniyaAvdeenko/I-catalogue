@@ -1,13 +1,13 @@
 import React from 'react';
-import {INavLinks} from "../../../../interface/INavbar";
 import styles from "../AdminNavbar.module.sass";
 import NavLinkInput from "./NavLinkInput";
-import CorrespondingPageNameInput from "./CorrespondingPageNameInput";
+import SlugInput from "./SlugInput";
 import DeleteIcon from "../../../../assets/img/deleteIcon.png";
 import SaveIcon from "../../../../assets/img/saveIcon.png";
+import {INavLink} from "../../../../interface/IAdminPageComponets";
 
 interface INewNavLinkFormProps {
-    fields: INavLinks[];
+    fields: INavLink[];
     onChangeHandler: Function;
     deleteField: Function;
     saveNewLink: Function;
@@ -26,14 +26,14 @@ const NewNavLinkForm: React.FC<INewNavLinkFormProps> = ({fields, onChangeHandler
                                   required={true}
                                   value={field.navLink}
                     />
-                    <CorrespondingPageNameInput
-                        label={'Соответствующая страница'}
-                        id={'correspondingPageName*' + field.id}
+                    <SlugInput
+                        label={'Ссылка на соответствующую страницу'}
+                        id={'slug*' + field.id}
                         type={'text'}
-                        name={'correspondingPageName'}
+                        name={'slug'}
                         onChangeHandler={onChangeHandler}
                         required={false}
-                        value={field.correspondingPageName}
+                        value={field.slug}
                     />
                     <div className={styles.savedItems__items} style={{flexBasis: '10%'}}>
                         <img src={SaveIcon} alt="save icon"  onClick={() => saveNewLink(field.id)}/>

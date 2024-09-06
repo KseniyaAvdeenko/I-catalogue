@@ -19,7 +19,6 @@ const ContactsForm = () => {
         linkType: 'none'
     })
     const [fields, setFields] = useState<IContacts[]>([contactFieldExample])
-
     const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (localStorage.access) {
             e.target.type === 'checkbox'
@@ -91,7 +90,7 @@ const ContactsForm = () => {
                     onChangeHandler={onChangeHandler}
                     deleteSavedContact={deleteSavedContact}
                 />
-                <hr className={styles.hr}/>
+                {contacts && contacts.length && (<hr className={styles.hr}/>)}
                 <NewContactsForm
                     fields={fields}
                     deleteField={deleteField}

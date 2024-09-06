@@ -2,7 +2,7 @@ import React from 'react';
 import {IAdminComponentsProps} from "../../../../interface/IAdminPageComponets";
 import styles from "../AdminNavbar.module.sass";
 import NavLinkInput from "./NavLinkInput";
-import CorrespondingPageNameInput from "./CorrespondingPageNameInput";
+import SlugInput from "./SlugInput";
 import DeleteIcon from "../../../../assets/img/deleteIcon.png";
 import {IPageSetting} from "../../../../interface/IPagesSettings";
 import Label from "../Label";
@@ -29,19 +29,19 @@ const SavedNavLinks: React.FC<ISaveNavLinksProps> = ({isLoading, deleteNavLink, 
                             type={'text'}
                             name={'navLink'}
                             id={'navLink*' + page.slug}
-                            value={page.link.navLink}
+                            value={page.navLink}
                             readOnly={true}
                         />
                     </div>
                     <div className={styles.savedItems__item}>
-                        <label htmlFor={'correspondingPageName*' + page.slug}
+                        <label htmlFor={'slug*' + page.slug}
                                className={[styles.savedItems__item, styles.savedItems__item_labelMargin].join(' ')}>
                             Ссылка на соответствующую страницу
                         </label>
                         <input
                             type={'text'}
-                            name={'correspondingPageName'}
-                            id={'navLink*' + page.slug}
+                            name={'slug'}
+                            id={'slug*' + page.slug}
                             value={page.slug}
                             readOnly={true}
                         />
