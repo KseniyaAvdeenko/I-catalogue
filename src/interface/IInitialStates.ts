@@ -2,6 +2,7 @@ import {IButtonSettings, ICommonSettings, IFooterSettings, IHeaderSettings} from
 import {IMainPageSetting, IPageSetting} from "./IPagesSettings";
 import {IContacts} from "./INavbar";
 import {IUser} from "./IUser";
+import {IProd, IProdAttrs, IProductPageSettings} from "./IProduct";
 
 export interface IInitialStatesBase {
     isLoading: boolean;
@@ -61,3 +62,16 @@ export interface IUserInitial {
     users: IUser[] | null;
 }
 
+export interface IProdPageInitial extends IInitialStatesBase{
+    prodPageSettings: IProductPageSettings|null
+}
+
+export interface IProdAttrsInitial extends IInitialStatesBase{
+    prodAttrs: IProdAttrs[]|null;
+    prodAttr: IProdAttrs|null;
+}
+
+export interface IProdInitial extends IInitialStatesBase{
+    products: IProd[]|null;
+    product: IProd|null;
+}
