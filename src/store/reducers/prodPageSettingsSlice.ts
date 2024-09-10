@@ -21,16 +21,14 @@ export const prodPageSettingsSlice = createSlice({
         },
         loadProdPageSettingsFail(state, action: PayloadAction<string>){
             state.error = action.payload;
-            state.prodPageSettings = null;
             state.isLoading = false;
         },
         updateProdPageSettingsSuccess(state, action: PayloadAction<IProductPageSettings>){
             state.prodPageSettings = action.payload;
         },
         updateProdPageSettingsFail(state, action: PayloadAction<string>){
-            state.prodPageSettings = null;
             state.error = action.payload
-        },
+        }
     }
 })
 

@@ -22,8 +22,7 @@ export const prodAttributesSlice = createSlice({
             state.prodAttrs = action.payload
         },
         loadProdAttrsFail(state, action: PayloadAction<string>){
-            state.error =action.payload;
-            state.prodAttrs = null;
+            state.error = action.payload;
             state.isLoading = false;
         },
         prodAttrFetching(state){
@@ -35,7 +34,6 @@ export const prodAttributesSlice = createSlice({
         },
         loadProdAttrFail(state, action: PayloadAction<string>){
             state.error = action.payload;
-            state.prodAttr = null;
             state.isLoading = false;
         },
         createProdAttrSuccess(state, action: PayloadAction<IProdAttrs>){

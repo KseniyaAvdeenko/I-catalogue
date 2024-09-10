@@ -22,7 +22,6 @@ export const productSlice = createSlice({
         },
         loadProductsFail(state, action: PayloadAction<string>){
             state.error =action.payload;
-            state.products = null;
         },
         prodFetching(state){
             state.isLoading = true;
@@ -33,7 +32,6 @@ export const productSlice = createSlice({
         },
         loadProductFail(state, action: PayloadAction<string>){
             state.error = action.payload;
-            state.product = null;
             state.isLoading = false;
         },
         createProductSuccess(state, action: PayloadAction<IProd>){

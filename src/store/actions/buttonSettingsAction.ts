@@ -1,5 +1,4 @@
 import {AppDispatch} from "../store";
-import {userSlice} from "../reducers/userSlice";
 import axios from "axios";
 import {IButtonSettings} from "../../interface/ICommonSettings";
 import {apiUrl, getAuthConfigApplicationJson, getRequestHeaders} from "./apiUrl";
@@ -25,21 +24,19 @@ export const updateButtonSettings = (access: string, id: number, data: any) => a
             dispatch(buttonSettingsSlice.actions.updateButtonSettingsFail('Ошибка'))
         }
     } else {
-        dispatch(userSlice.actions.loadingCurrentUserFail('Вы не авторизованы'))
+        dispatch(buttonSettingsSlice.actions.updateButtonSettingsFail('Вы не авторизованы'))
     }
 }
 
-export const restoreButtonSettings = (access: string, id: number, isAdmin: boolean) => async (dispatch: AppDispatch) => {
-    if (isAdmin) {
-        if (access) {
-            try {
-                const response = await axios.patch<boolean>(apiUrl + `common_page_settings/button_settings/${id}/restore_button/`, getAuthConfigApplicationJson(access))
-                dispatch(buttonSettingsSlice.actions.restoreButtonSettingsSuccess(response.data))
-            } catch (e) {
-                dispatch(buttonSettingsSlice.actions.restoreButtonSettingsFail(false))
-            }
-        } else {
-            dispatch(userSlice.actions.loadingCurrentUserFail('Вы не авторизованы'))
+export const restoreButtonSettings = (access: string, id: number) => async (dispatch: AppDispatch) => {
+    if (access) {
+        try {
+            const response = await axios.patch<boolean>(apiUrl + `common_page_settings/button_settings/${id}/restore_button/`, getAuthConfigApplicationJson(access))
+            dispatch(buttonSettingsSlice.actions.restoreButtonSettingsSuccess(response.data))
+        } catch (e) {
+            dispatch(buttonSettingsSlice.actions.restoreButtonSettingsFail(false))
         }
+    } else {
+        dispatch(buttonSettingsSlice.actions.loadButtonSettingsFail('Вы не авторизованы'))
     }
 }

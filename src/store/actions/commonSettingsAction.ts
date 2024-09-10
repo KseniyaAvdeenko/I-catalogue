@@ -1,5 +1,4 @@
 import {AppDispatch} from "../store";
-import {userSlice} from "../reducers/userSlice";
 import {commonSettingsSlice} from "../reducers/commonSettingsSlice";
 import axios from "axios";
 import {ICommonSettings} from "../../interface/ICommonSettings";
@@ -28,22 +27,20 @@ export const updateCommonSettings = (access: string, id: number, data: any) => a
             dispatch(commonSettingsSlice.actions.updateCommonSettingsFail('Ошибка'));
         }
     } else {
-        dispatch(userSlice.actions.loadingCurrentUserFail('Вы не авторизованы'))
+        dispatch(commonSettingsSlice.actions.updateCommonSettingsFail('Вы не авторизованы'))
     }
 }
 
 
-export const restoreCommonSettings = (access: string, id: number, isAdmin: boolean) => async (dispatch: AppDispatch) => {
-    if (isAdmin) {
-        if (access) {
-            try {
-                const response = await axios.get<boolean>(apiUrl + `common_page_settings/common_page_settings/${id}/restore_common_settings/`, getAuthConfigMultipart(access));
-                dispatch(commonSettingsSlice.actions.restoreCommonSettingsSuccess(response.data));
-            } catch {
-                dispatch(commonSettingsSlice.actions.restoreCommonSettingsFail(false));
-            }
-        } else {
-            dispatch(userSlice.actions.loadingCurrentUserFail('Вы не авторизованы'))
+export const restoreCommonSettings = (access: string, id: number) => async (dispatch: AppDispatch) => {
+    if (access) {
+        try {
+            const response = await axios.get<boolean>(apiUrl + `common_page_settings/common_page_settings/${id}/restore_common_settings/`, getAuthConfigMultipart(access));
+            dispatch(commonSettingsSlice.actions.restoreCommonSettingsSuccess(response.data));
+        } catch {
+            dispatch(commonSettingsSlice.actions.restoreCommonSettingsFail(false));
         }
+    } else {
+        dispatch(commonSettingsSlice.actions.loadCommonSettingsFail('Вы не авторизованы'))
     }
 }

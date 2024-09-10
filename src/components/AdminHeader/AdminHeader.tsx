@@ -50,15 +50,15 @@ const AdminHeader: React.FC<IAdminHeader> = ({children}) => {
 
     useEffect(() => {
         if (localStorage.access) {
-            dispatch(loadCurrentUser(decodeToken(localStorage.access)))
+            dispatch(loadCurrentUser(decodeToken(localStorage.access)));
         }
-        dispatch(loadButtonSettings())
-        dispatch(loadCommonSettings())
-        dispatch(loadContacts())
-        dispatch(loadPagesWithNavLinks())
-        dispatch(loadMainPageSettings())
-        dispatch(loadFooterSettings())
-        dispatch(loadHeaderSettings())
+        dispatch(loadButtonSettings());
+        dispatch(loadCommonSettings());
+        dispatch(loadContacts());
+        dispatch(loadPagesWithNavLinks());
+        dispatch(loadMainPageSettings());
+        dispatch(loadFooterSettings());
+        dispatch(loadHeaderSettings());
     }, [localStorage.access])
 
     //console.log(currentUser, localStorage.access)

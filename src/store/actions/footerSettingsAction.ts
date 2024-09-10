@@ -1,5 +1,4 @@
 import {AppDispatch} from "../store";
-import {userSlice} from "../reducers/userSlice";
 import axios from "axios";
 import {IFooterSettings} from "../../interface/ICommonSettings";
 import {apiUrl, getAuthConfigApplicationJson, getRequestHeaders} from "./apiUrl";
@@ -26,21 +25,20 @@ export const updateFooterSettings = (access: string, id: number, data: any) => a
             dispatch(footerSettingsSlice.actions.updateFooterSettingsFail('Ошибка'))
         }
     } else {
-        dispatch(userSlice.actions.loadingCurrentUserFail('Вы не авторизованы'))
+        dispatch(footerSettingsSlice.actions.updateFooterSettingsFail('Вы не авторизованы'))
     }
 }
 
-export const restoreFooterSettings = (access: string, id: number, isAdmin: boolean) => async (dispatch: AppDispatch) => {
-    if (isAdmin) {
+export const restoreFooterSettings = (access: string, id: number) => async (dispatch: AppDispatch) => {
         if (access) {
             try {
                 const response = await axios.get<boolean>(apiUrl + `common_page_settings/footer_settings/${id}/restore_footer/`, getAuthConfigApplicationJson(access))
                 dispatch(footerSettingsSlice.actions.restoreFooterSettingsSuccess(response.data))
+                dispatch(loadFooterSettings())
             } catch (e) {
                 dispatch(footerSettingsSlice.actions.restoreFooterSettingsFail(false))
             }
         } else {
-            dispatch(userSlice.actions.loadingCurrentUserFail('Вы не авторизованы'))
+            dispatch(footerSettingsSlice.actions.loadFooterSettingsFail('Вы не авторизованы'))
         }
-    }
 }
