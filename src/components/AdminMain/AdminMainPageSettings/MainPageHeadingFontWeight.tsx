@@ -1,7 +1,7 @@
 import React from 'react';
 import {IAdminComponentsProps} from "../../../interface/IAdminPageComponets";
 import styles from "../AdminMain.module.sass";
-import AdminInput from "../../../UI/Inputs/AdminInput";
+import AdminInput from "../../UI/Inputs/AdminInput";
 
 interface IMainPageHeadingFontWeightProps extends IAdminComponentsProps{
     headingFontWeight: number|undefined

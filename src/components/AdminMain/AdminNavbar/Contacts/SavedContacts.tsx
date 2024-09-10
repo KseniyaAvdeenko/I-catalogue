@@ -6,7 +6,7 @@ import ContactContentInput from "./ContactContentInput";
 import ContactIsLinkInput from "./ContactIsLinkInput";
 import ContactLinkHref from "./ContactLinkHref";
 import ContactLinkType from "./ContactLinkType";
-import DeleteIcon from '../../../../assets/img/deleteIcon.png'
+import DeleteIcon from '../../../../assets/img/deleteIcon.svg'
 
 interface ISavedContactsProps extends IAdminComponentsProps {
     contacts: IContacts[] | null;

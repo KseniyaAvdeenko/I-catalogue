@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import styles from "../../AdminMain.module.sass";
-import Download from '../../../../assets/img/Download.png';
+import Download from '../../../../assets/img/Download.svg';
 
 interface ILogoProps {
     onChangeHandler: Function;

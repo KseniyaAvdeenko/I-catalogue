@@ -1,11 +1,19 @@
-import HeaderLayout1 from '../../assets/img/Layout1.png';
-import HeaderLayout2 from '../../assets/img/Layout2.png';
-import {IFonts, IHeaderLayout, IHeadingType, INavLink, INavLinksHoverStyle} from "../../interface/IAdminPageComponets";
-import FooterLayout1 from '../../assets/img/FooterLayout1.png';
-import FooterLayout2 from '../../assets/img/FooterLayout2.png';
-import FooterLayout3 from '../../assets/img/FooterLayout3.png';
+import HeaderLayout1 from '../../assets/img/Layout1.svg';
+import HeaderLayout2 from '../../assets/img/Layout2.svg';
+import {
+    IDetailProdPageLayout,
+    IFonts,
+    IHeaderLayout,
+    IHeadingType,
+    INavLink,
+    INavLinksHoverStyle
+} from "../../interface/IAdminPageComponets";
+import FooterLayout1 from '../../assets/img/FooterLayout1.svg';
+import FooterLayout2 from '../../assets/img/FooterLayout2.svg';
+import FooterLayout3 from '../../assets/img/FooterLayout3.svg';
 import {IContacts, IInputProps} from "../../interface/INavbar";
-
+import DetailProdPageLayout1 from '../../assets/img/detailProdPageLayout1.svg';
+import DetailProdPageLayout2 from '../../assets/img/detailProdPageLayout2.svg';
 
 
 export const appFonts: IFonts[] = [
@@ -67,4 +75,9 @@ export const headingTypes: IHeadingType[] = [
     {id: "h4", heading: 'Заголовок h4'},
     {id: "h5", heading: 'Заголовок h5'},
     {id: "h6", heading: 'Заголовок h6'},
+]
+
+export const prodPageContentLayout: IDetailProdPageLayout[]= [
+    {id: '1', image:DetailProdPageLayout1},
+    {id: '2', image:DetailProdPageLayout2}
 ]

@@ -42,3 +42,8 @@ export interface INavLinkBase{
 export interface INavLink extends INavLinkBase{
     id: number;
 }
+
+export interface IDetailProdPageLayout{
+    id: string;
+    image: string
+}

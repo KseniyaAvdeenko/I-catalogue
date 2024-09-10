@@ -12,7 +12,6 @@ import {IOptions} from "../../../interface/IAdminPageComponets";
 import MainPageHeadingType from "./MainPageHeadingType";
 import {updateMainPageSettings} from "../../../store/actions/mainPageSettingsAction";
 import {decodeToken} from "../../../hooks/encodeDecodeTokens";
-import mainPageHeadingType from "./MainPageHeadingType";
 
 
 const MainPageSettings = () => {

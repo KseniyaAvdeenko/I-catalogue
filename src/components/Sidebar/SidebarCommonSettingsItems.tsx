@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from "./Sidebar.module.sass";
 import {Link} from "react-router-dom";
-import ArrowDown from "../../assets/img/arrowDown.png";
+import ArrowDown from "../../assets/img/arrowDown.svg";
 import {ISidebarItemsVisibility} from "../../interface/IAdminPageComponets";
 
 interface ISidebarCommonSettingsItemsProps {

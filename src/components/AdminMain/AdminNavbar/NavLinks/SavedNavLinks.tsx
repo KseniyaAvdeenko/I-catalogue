@@ -3,7 +3,7 @@ import {IAdminComponentsProps} from "../../../../interface/IAdminPageComponets";
 import styles from "../AdminNavbar.module.sass";
 import NavLinkInput from "./NavLinkInput";
 import SlugInput from "./SlugInput";
-import DeleteIcon from "../../../../assets/img/deleteIcon.png";
+import DeleteIcon from "../../../../assets/img/deleteIcon.svg";
 import {IPageSetting} from "../../../../interface/IPagesSettings";
 import Label from "../Label";
 import Input from "../Input";

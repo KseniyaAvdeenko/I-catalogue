@@ -1,26 +1,26 @@
 import React from 'react';
-import styles from '../../AdminMain.module.sass'
-import {headerLayouts} from "../../Options";
 import {IAdminComponentsProps} from "../../../../interface/IAdminPageComponets";
+import styles from "../../AdminMain.module.sass";
+import {prodPageContentLayout} from "../../Options";
 
-interface IHeaderLayoutProps extends IAdminComponentsProps {
-    headerLayout: string | undefined
+interface IContentLayoutProps extends IAdminComponentsProps {
+    contentLayout: string
 }
 
-const HeaderLayout: React.FC<IHeaderLayoutProps> = ({isLoading, headerLayout, onChangeHandler}) => {
+const ContentLayout: React.FC<IContentLayoutProps> = ({contentLayout, onChangeHandler, isLoading}) => {
     return (
         <div className={styles.form__inputContainer_choose}>
-            <div className={styles.form__inputContainer_label}>Размещение элементов в “шапке” сайта</div>
+            <div className={styles.form__inputContainer_label}>Размещение контента</div>
             <div className={styles.choiceBox__container}>
-                {headerLayouts.map(layout => (
+                {prodPageContentLayout.map(layout=> (
                     <label key={layout.id} htmlFor={layout.id}
-                           className={layout.id === headerLayout
+                           className={layout.id === contentLayout
                                ? [styles.choiceBox, styles.choiceBox_selected].join(' ')
                                : [styles.choiceBox].join(' ')}>
                         <img src={layout.image} alt={layout.id}/>
                         <input
                             type="radio"
-                            name="headerLayout"
+                            name="contentLayout"
                             id={layout.id}
                             value={layout.id}
                             onChange={e => onChangeHandler(e)}
@@ -28,9 +28,8 @@ const HeaderLayout: React.FC<IHeaderLayoutProps> = ({isLoading, headerLayout, on
                     </label>
                 ))}
             </div>
-
         </div>
     );
 };
 
-export default HeaderLayout;
+export default ContentLayout;

@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from "../../AdminMain.module.sass";
 import {IAdminComponentsProps} from "../../../../interface/IAdminPageComponets";
-import AdminInput from "../../../../UI/Inputs/AdminInput";
+import AdminInput from "../../../UI/Inputs/AdminInput";
 
 interface IBasicFontColorProps extends IAdminComponentsProps{
     basicFontColor: string|undefined;
