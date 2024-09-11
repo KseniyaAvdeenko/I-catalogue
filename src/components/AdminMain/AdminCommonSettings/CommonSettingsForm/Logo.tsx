@@ -26,21 +26,19 @@ const Logo: React.FC<ILogoProps> = ({
     }, [logo])
 
     return (
-        <div className={styles.form__items}>
-            <div className={styles.form__items} style={{alignItems: 'center'}}>
-                <p style={{marginBottom: '1rem'}}>Логотип</p>
-                <label htmlFor="logo"
-                       className={[styles.fileInput, styles.fileInput_logo].join(' ')}
-                       style={{background: logoInput.background}}>
-                    <img src={Download} alt="download" style={{display: logoInput.imgDisplay}}/>
-                    <input
-                        type="file"
-                        name="logo"
-                        id="logo"
-                        onChange={e => onChangeHandler(e)}
-                    />
-                </label>
-            </div>
+        <div className={styles.form__items} style={{alignItems: 'center'}}>
+            <p style={{marginBottom: '1rem'}}>Логотип</p>
+            <label htmlFor="logo"
+                   className={[styles.fileInput, styles.fileInput_logo].join(' ')}
+                   style={{background: logoInput.background}}>
+                <img src={Download} alt="download" style={{display: logoInput.imgDisplay}}/>
+                <input
+                    type="file"
+                    name="logo"
+                    id="logo"
+                    onChange={e => onChangeHandler(e)}
+                />
+            </label>
         </div>
     );
 };

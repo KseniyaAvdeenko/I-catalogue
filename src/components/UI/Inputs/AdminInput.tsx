@@ -10,7 +10,10 @@ interface IInput {
     onChangeHandler: Function
     required: boolean
     readonly: boolean;
-    classname: string
+    classname: string;
+    step?:number;
+    min?: number;
+    max?:number;
 }
 
 const AdminInput: React.FC<IInput> = ({
@@ -22,7 +25,10 @@ const AdminInput: React.FC<IInput> = ({
                                           required,
                                           readonly,
                                           onChangeHandler,
-                                          name
+                                          name,
+                                          step,
+                                          min,
+                                          max
                                       }) => {
 
     return type === 'text'
@@ -45,6 +51,9 @@ const AdminInput: React.FC<IInput> = ({
                        required={required}
                        readOnly={readonly}
                        className={classname}
+                       step={step}
+                       min={min}
+                       max={max}
                 />
             )
             : type === 'color'

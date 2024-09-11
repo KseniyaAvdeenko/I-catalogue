@@ -1,21 +1,21 @@
 import React from 'react';
-import {IAdminComponentsProps, IOptions} from "../../../interface/IAdminPageComponets";
-import styles from "../AdminMain.module.sass";
-import {headingTypes} from "../Options";
+import {IAdminComponentsProps, IOptions} from "../../../../interface/IAdminPageComponets";
+import styles from "../../AdminMain.module.sass";
+import {headingTypes} from "../../Options";
 
-interface IPageHeadingTypeProps extends IAdminComponentsProps {
+interface IDetailPageHeadingTypeProps extends IAdminComponentsProps {
     blockHeadingType: string | undefined;
     headingTypeOptionsVisibility: IOptions;
     setHeadingTypeOptionsVisibility: Function;
 }
 
-const PageHeadingType: React.FC<IPageHeadingTypeProps> = ({
-                                                              blockHeadingType,
-                                                              setHeadingTypeOptionsVisibility,
-                                                              headingTypeOptionsVisibility,
-                                                              isLoading,
-                                                              onChangeHandler
-                                                          }) => {
+const DetailPageHeadingType: React.FC<IDetailPageHeadingTypeProps> = ({
+                                                                          isLoading,
+                                                                          setHeadingTypeOptionsVisibility,
+                                                                          blockHeadingType,
+                                                                          headingTypeOptionsVisibility,
+                                                                          onChangeHandler
+                                                                      }) => {
     const changeHeadingTypeOptionsContainerVisibility = () => {
         headingTypeOptionsVisibility.open
             ? setHeadingTypeOptionsVisibility({
@@ -58,4 +58,4 @@ const PageHeadingType: React.FC<IPageHeadingTypeProps> = ({
     );
 };
 
-export default PageHeadingType;
+export default DetailPageHeadingType;

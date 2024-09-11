@@ -1,7 +1,7 @@
 import React from 'react';
-import {IAdminComponentsProps, IOptions} from "../../../interface/IAdminPageComponets";
-import styles from "../AdminMain.module.sass";
-import {appFonts, headingTypes} from "../Options";
+import {IAdminComponentsProps, IOptions} from "../../interface/IAdminPageComponets";
+import styles from "./AdminMain.module.sass";
+import {appFonts, headingTypes} from "./Options";
 
 interface IMainPageHeadingTypeProps extends IAdminComponentsProps {
     blockHeadingType: string | undefined;
@@ -9,7 +9,7 @@ interface IMainPageHeadingTypeProps extends IAdminComponentsProps {
     setHeadingTypeOptionsVisibility: Function;
 }
 
-const MainPageHeadingType: React.FC<IMainPageHeadingTypeProps> = ({
+const HeadingType: React.FC<IMainPageHeadingTypeProps> = ({
                                                                       headingTypeOptionsVisibility,
                                                                       setHeadingTypeOptionsVisibility,
                                                                       blockHeadingType,
@@ -59,4 +59,4 @@ const MainPageHeadingType: React.FC<IMainPageHeadingTypeProps> = ({
     );
 };
 
-export default MainPageHeadingType;
+export default HeadingType;

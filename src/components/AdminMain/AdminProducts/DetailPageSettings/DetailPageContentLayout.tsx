@@ -7,13 +7,14 @@ interface IContentLayoutProps extends IAdminComponentsProps {
     contentLayout: string
 }
 
-const ContentLayout: React.FC<IContentLayoutProps> = ({contentLayout, onChangeHandler, isLoading}) => {
+const DetailPageContentLayout: React.FC<IContentLayoutProps> = ({contentLayout, onChangeHandler, isLoading}) => {
     return (
         <div className={styles.form__inputContainer_choose}>
             <div className={styles.form__inputContainer_label}>Размещение контента</div>
             <div className={styles.choiceBox__container}>
-                {prodPageContentLayout.map(layout=> (
+                {prodPageContentLayout.map(layout => (
                     <label key={layout.id} htmlFor={layout.id}
+                           style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}
                            className={layout.id === contentLayout
                                ? [styles.choiceBox, styles.choiceBox_selected].join(' ')
                                : [styles.choiceBox].join(' ')}>
@@ -32,4 +33,4 @@ const ContentLayout: React.FC<IContentLayoutProps> = ({contentLayout, onChangeHa
     );
 };
 
-export default ContentLayout;
+export default DetailPageContentLayout;

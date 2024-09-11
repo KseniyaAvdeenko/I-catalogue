@@ -1,17 +1,11 @@
 import React, {useState} from 'react';
 import styles from '../AdminMain.module.sass'
 import {useAppDispatch, useAppSelector} from "../../../hooks/redux";
-import MainPageBackground from "./MainPageBackground";
-import ProdCardBackground from "./ProdCardBackground";
-import CardQuantityInRow from "./CardQuantityInRow";
-import MainPageHeadingFontWeight from "./MainPageHeadingFontWeight";
-import MainPageHeadingFontSize from "./MainPageHeadingFontSize";
-import MainPageHeadingFontColor from "./MainPageHeadingFontColor";
-import MainPageHeadingContent from "./MainPageHeadingContent";
 import {IOptions} from "../../../interface/IAdminPageComponets";
-import MainPageHeadingType from "./MainPageHeadingType";
 import {updateMainPageSettings} from "../../../store/actions/mainPageSettingsAction";
 import {decodeToken} from "../../../hooks/encodeDecodeTokens";
+import AdminInputContainer from "../../UI/InputContainers/AdminInputContainer";
+import HeadingType from "../HeadingType";
 
 
 const MainPageSettings = () => {
@@ -82,32 +76,70 @@ const MainPageSettings = () => {
         <main className={styles.AdminMain}>
             <section className={[styles.AdminMain__container, styles.AdminMain__container_margin].join(' ')}>
                 <h2 className={styles.AdminMain__heading}>Настройка главной страницы</h2>
-                <div className={styles.AdminMain__formContainer}>
+                {mainPageSettings
+                    ?<div className={styles.AdminMain__formContainer}>
                     <div className={styles.form__items}>
-                        <MainPageBackground mainPageBg={mainPageSettings?.background}
-                                            isLoading={isLoading} onChangeHandler={onChangeHandler}/>
-                        <ProdCardBackground prodCardBg={mainPageSettings?.prodCardBg}
-                                            isLoading={isLoading} onChangeHandler={onChangeHandler}/>
-                        <CardQuantityInRow cardQuantityInRow={mainPageSettings?.cardQuantityInRow}
-                                           isLoading={isLoading} onChangeHandler={onChangeHandler}/>
+                         <AdminInputContainer
+                            type={'color'} name={'background'} inputId={'background'}
+                            value={mainPageSettings.background} checked={false} required={false}
+                            readonly={false} inputClassname={''}
+                            inputContainerClassname={styles.form__inputContainer}
+                            labelClassName={''} label={'Фон главной страницы'}
+                            isLoading={isLoading} onChangeHandler={onChangeHandler}/>
+                       <AdminInputContainer
+                            type={'color'} name={'prodCardBg'} inputId={'prodCardBg'}
+                            value={mainPageSettings.prodCardBg ?mainPageSettings.prodCardBg:'#eeeeee'}
+                            checked={false} required={false} readonly={false} inputClassname={''}
+                            inputContainerClassname={styles.form__inputContainer}
+                            labelClassName={''} label={'Фон карточки товара/услуги'}
+                            isLoading={isLoading} onChangeHandler={onChangeHandler}/>
+                       <AdminInputContainer
+                            type={'number'} name={'cardQuantityInRow'} inputId={'cardQuantityInRow'}
+                            value={mainPageSettings.cardQuantityInRow} checked={false}
+                            required={false} readonly={false} inputClassname={''}
+                            inputContainerClassname={styles.form__inputContainer}
+                            labelClassName={''} label={'Количество карточек товара/услуги в ряду'}
+                            isLoading={isLoading} onChangeHandler={onChangeHandler}/>
                     </div>
                     <div className={styles.form__items}>
-                        <MainPageHeadingContent headingContent={mainPageSettings?.headingSettings?.headingContent}
-                                                isLoading={isLoading} onChangeHandler={onChangeHeadingHandler}/>
-                        <MainPageHeadingType blockHeadingType={mainPageSettings?.headingSettings?.blockHeadingType}
-                                             headingTypeOptionsVisibility={headingTypeOptionsVisibility}
-                                             setHeadingTypeOptionsVisibility={setHeadingTypeOptionsVisibility}
-                                             isLoading={isLoading} onChangeHandler={onChangeHeadingHandler}/>
+                        <AdminInputContainer
+                            type={'text'} name={"headingContent"} inputId={"headingContent"}
+                            value={mainPageSettings.headingSettings.headingContent} checked={false}
+                            required={false} readonly={false} inputClassname={''}
+                            inputContainerClassname={styles.form__items}
+                            labelClassName={styles.form__inputContainer_label} label={'Заголовок главной страницы'}
+                            isLoading={isLoading} onChangeHandler={onChangeHeadingHandler}/>
+                        <HeadingType blockHeadingType={mainPageSettings?.headingSettings?.blockHeadingType}
+                                     headingTypeOptionsVisibility={headingTypeOptionsVisibility}
+                                     setHeadingTypeOptionsVisibility={setHeadingTypeOptionsVisibility}
+                                     isLoading={isLoading} onChangeHandler={onChangeHeadingHandler}/>
                     </div>
                     <div className={styles.form__items}>
-                        <MainPageHeadingFontColor headingFontColor={mainPageSettings?.headingSettings?.headingFontColor}
-                                                  isLoading={isLoading} onChangeHandler={onChangeHeadingHandler}/>
-                        <MainPageHeadingFontSize isLoading={isLoading} onChangeHandler={onChangeHeadingHandler}
-                                                 headingFontSize={mainPageSettings?.headingSettings?.headingFontSize}/>
-                        <MainPageHeadingFontWeight isLoading={isLoading} onChangeHandler={onChangeHeadingHandler}
-                                                   headingFontWeight={mainPageSettings?.headingSettings?.headingFontWeight}/>
+                        <AdminInputContainer
+                            type={'color'} name={'headingFontColor'} inputId={'headingFontColor'}
+                            value={mainPageSettings.headingSettings.headingFontColor}
+                            checked={false} required={false} readonly={false} inputClassname={''}
+                            inputContainerClassname={styles.form__inputContainer}
+                            labelClassName={''} label={'Цвет заголовка'}
+                            isLoading={isLoading} onChangeHandler={onChangeHeadingHandler}/>
+                        <AdminInputContainer
+                            type={'number'} name={'headingFontSize'} inputId={'headingFontSize'}
+                            value={mainPageSettings.headingSettings.headingFontSize} checked={false}
+                            required={false} readonly={false} inputClassname={''}
+                            inputContainerClassname={styles.form__inputContainer}
+                            labelClassName={''} label={'Размер шрифта заголовка'}
+                            isLoading={isLoading} onChangeHandler={onChangeHeadingHandler}/>
+                        <AdminInputContainer
+                            type={'number'} name={'headingFontWeight'} inputId={'headingFontWeight'}
+                            value={mainPageSettings.headingSettings.headingFontWeight} checked={false}
+                            required={false} readonly={false} inputClassname={''} max={900}
+                            inputContainerClassname={styles.form__inputContainer} min={400}
+                            labelClassName={''} label={'Жирность текста заголовка'} step={100}
+                            isLoading={isLoading} onChangeHandler={onChangeHeadingHandler}/>
                     </div>
                 </div>
+                    :<div className={styles.AdminMain__formContainer}></div>
+                }
             </section>
         </main>
     );

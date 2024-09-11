@@ -14,6 +14,9 @@ interface IAdminInputContainerProps extends IAdminComponentsProps {
     inputContainerClassname: string;
     labelClassName: string;
     label: string;
+    step?: number;
+    min?: number;
+    max?: number;
 }
 
 const AdminInputContainer: React.FC<IAdminInputContainerProps> = ({
@@ -29,7 +32,10 @@ const AdminInputContainer: React.FC<IAdminInputContainerProps> = ({
                                                                       readonly,
                                                                       value,
                                                                       checked,
-                                                                      label
+                                                                      label,
+                                                                      step,
+                                                                      min,
+                                                                      max
                                                                   }) => {
     return (
         <div className={inputContainerClassname}>
@@ -45,6 +51,7 @@ const AdminInputContainer: React.FC<IAdminInputContainerProps> = ({
                 required={required}
                 readonly={readonly}
                 classname={inputClassname}
+                min={min} max={max} step={step}
             />
         </div>
     );
