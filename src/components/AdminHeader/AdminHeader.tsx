@@ -33,23 +33,23 @@ const AdminHeader: React.FC<IAdminHeader> = ({children}) => {
         dispatch(logout())
         navigate('/sign_in/')
     }
-    async function isAuthenticated() {
-        while ((now - Date.parse(localStorage.lastLogin)) >= 360000 ) {
-            if (await verifyToken(decodeToken(localStorage.refresh))) {
-                dispatch(refreshToken(decodeToken(localStorage.refresh)))
-            }
-        }
-        while ((now - Date.parse(localStorage.lastLogin)) > (3600000 * 24)) {
-            logOut()
-        }
-    }
-
-    console.log(now - Date.parse(localStorage.lastLogin))
-    useEffect( () => {
-        if (localStorage.access && localStorage.refresh && localStorage.laastLogin) {
-            isAuthenticated()
-        }
-    }, [now, localStorage.access, localStorage.refresh, localStorage.lastLogin]);
+    // async function isAuthenticated() {
+    //     while ((now - Date.parse(localStorage.lastLogin)) >= 360000 ) {
+    //         if (await verifyToken(decodeToken(localStorage.refresh))) {
+    //             dispatch(refreshToken(decodeToken(localStorage.refresh)))
+    //         }
+    //     }
+    //     while ((now - Date.parse(localStorage.lastLogin)) > (3600000 * 24)) {
+    //         logOut()
+    //     }
+    // }
+    //
+    // console.log(now - Date.parse(localStorage.lastLogin))
+    // useEffect( () => {
+    //     if (localStorage.access && localStorage.refresh && localStorage.lastLogin) {
+    //         isAuthenticated()
+    //     }
+    // }, [now, localStorage.access, localStorage.refresh, localStorage.lastLogin]);
 
     useEffect(() => {
         if (localStorage.access) {

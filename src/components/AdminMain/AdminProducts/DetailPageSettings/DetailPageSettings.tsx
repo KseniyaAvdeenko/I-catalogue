@@ -33,25 +33,24 @@ const DetailPageSettings = () => {
                         prodPageSettings.id,
                         Object.assign({[e.target.name]: e.target.value}, detailedPageSettings)
                     ))
-                } else {
-                    if (e.target.name === 'headingContent') {
-                        detailedPageSettings.headingSettings.headingContent = e.target.value
-                        dispatch(updateProdPageSettings(
-                            decodeToken(localStorage.access), prodPageSettings.id, detailedPageSettings))
-                    } else {
-                        dispatch(updateProdPageSettings(
-                            decodeToken(localStorage.access),
-                            prodPageSettings.id,
-                            {
-                                headingSettings: {
-                                    id: prodPageSettings.headingSettings.id,
-                                    headingContent: prodPageSettings.headingSettings.headingContent,
-                                    [e.target.name]: e.target.value
-                                }
+                }
+                if (e.target.name === 'headingContent') {
+                    detailedPageSettings.headingSettings.headingContent = e.target.value
+                    dispatch(updateProdPageSettings(
+                        decodeToken(localStorage.access), prodPageSettings.id, detailedPageSettings))
+                }
+                if(e.target.name === ' blockHeadingType' || 'headingFontSize' || 'headingFontColor' || 'headingFontWeight') {
+                    dispatch(updateProdPageSettings(
+                        decodeToken(localStorage.access),
+                        prodPageSettings.id,
+                        {
+                            headingSettings: {
+                                id: prodPageSettings.headingSettings.id,
+                                headingContent: prodPageSettings.headingSettings.headingContent,
+                                [e.target.name]: e.target.value
                             }
-                        ))
-                    }
-                    console.log('heading')
+                        }
+                    ))
                 }
             }
 
