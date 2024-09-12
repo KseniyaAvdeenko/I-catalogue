@@ -36,9 +36,8 @@ export type otherValue = {
 
 export interface IProd extends IProdBase{
     id: number;
-    images: IProdImg[]|[]
 }
 
-export interface IProdCreation extends IProdBase{
+export interface IProdReadOnly extends IProd{
     images: IProdImgBase[]|[]
 }

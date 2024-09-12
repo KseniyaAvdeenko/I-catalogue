@@ -1,6 +1,6 @@
 export const apiUrl = 'http://127.0.0.1:8000/'
 
-export const formData = new FormData()
+export const formData: FormData = new FormData()
 export const reader = new FileReader();
 
 export function getRequestHeaders() {
