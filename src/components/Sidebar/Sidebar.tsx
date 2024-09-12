@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import styles from './Sidebar.module.sass';
 import SidebarPagesItems from "./SidebarPagesItems";
 import SidebarCommonSettingsItems from "./SidebarCommonSettingsItems";
@@ -50,7 +50,11 @@ const Sidebar: React.FC<ISidebarProps> = ({scrollToBlock}) => {
             setProdSettingsItems({...prodSettingsItems, open: false, rotate: 180, display: 'none'});
         }
     }
-
+    useEffect(()=>{
+        if(window.location.pathname === "/admin_page/common_settings/")getItemsVisibility('commonSettings')
+        if(window.location.pathname === "/admin_page/navbar/")getItemsVisibility('navbar')
+        if(window.location.pathname === "/admin_page/products_settings/")getItemsVisibility('prodSettings')
+    }, [window.location.pathname])
 
     return (
         <aside className={styles.Sidebar__container}>

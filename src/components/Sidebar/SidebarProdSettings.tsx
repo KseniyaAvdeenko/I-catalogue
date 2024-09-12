@@ -1,18 +1,27 @@
 import React from 'react';
 import {ISidebarItemsVisibility} from "../../interface/IAdminPageComponets";
 import styles from "./Sidebar.module.sass";
-import {Link} from "react-router-dom";
+import {NavLink} from "react-router-dom";
 import ArrowDown from "../../assets/img/arrowDown.svg";
-interface ISidebarProdSettingsProps{
+
+interface ISidebarProdSettingsProps {
     getItemsVisibility: Function;
     prodSettingsItems: ISidebarItemsVisibility;
     scrollToBlock: Function
 }
-const SidebarProdSettings: React.FC<ISidebarProdSettingsProps> = ({getItemsVisibility, prodSettingsItems, scrollToBlock}) => {
+
+const SidebarProdSettings: React.FC<ISidebarProdSettingsProps> = ({
+                                                                      getItemsVisibility,
+                                                                      prodSettingsItems,
+                                                                      scrollToBlock
+                                                                  }) => {
     return (
         <div className={styles.Sidebar__items}>
             <div className={styles.Sidebar__itemsContainer} onClick={() => getItemsVisibility('prodSettings')}>
-                <Link to={'products_settings/'} className={styles.Sidebar__heading}>Настройка и контент товаров\услуг</Link>
+                <NavLink to={'products_settings/'} className={({isActive}) =>
+                    [isActive
+                        ? [styles.Sidebar__heading, styles.linkActive].join(' ')
+                        : styles.Sidebar__heading].join(' ')}>Настройка и контент товаров\услуг</NavLink>
                 <img src={ArrowDown} style={{transform: `rotate(${prodSettingsItems.rotate}deg)`}}
                      alt="arrowDown"/>
             </div>

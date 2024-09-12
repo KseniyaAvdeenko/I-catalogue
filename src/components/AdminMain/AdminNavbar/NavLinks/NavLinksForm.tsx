@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import styles from "../AdminNavbar.module.sass";
+import styles from "../../AdminNavbar.module.sass";
 import {useAppDispatch, useAppSelector} from "../../../../hooks/redux";
 import SavedNavLinks from "./SavedNavLinks";
 import NewNavLinkForm from "./NewNavLinkForm";
@@ -35,29 +35,7 @@ const NavLinksForm = () => {
             dispatch(deletePageWithNavLink(decodeToken(localStorage.access), slug))
         }
     }
-    // const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    //     if (pages && localStorage.access) {
-    //         let updatedNavLink = structuredClone(pages.find(el => el.slug === e.target.id.split('*')[1]))
-    //         if (updatedNavLink) {
-    //             if (e.target.name === 'navLink') {
-    //                 updatedNavLink.link.navLink = e.target.value
-    //                 updatedNavLink.headingSettings.headingContent = e.target.value
-    //                 dispatch(updatePageWithNavLink(
-    //                     decodeToken(localStorage.access),
-    //                     e.target.id.split('*')[1],
-    //                     updatedNavLink))
-    //
-    //             } else {
-    //                 updatedNavLink.link.correspondingPageName = e.target.value
-    //                 updatedNavLink.slug = e.target.value
-    //                 dispatch(updatePageWithNavLink(
-    //                     decodeToken(localStorage.access),
-    //                     e.target.id.split('*')[1],
-    //                     updatedNavLink))
-    //             }
-    //         }
-    //     }
-    // }
+
     const onChangeNewNavLinkHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.name === 'navLink') {
             setFields(fields =>
@@ -110,11 +88,13 @@ const NavLinksForm = () => {
                  className={[styles.AdminNavbar__container, styles.AdminNavbar__container_margin].join(' ')}>
             <h2 className={styles.AdminNavbar__heading}>Навигационные ссылки</h2>
             <div className={styles.AdminNavbar__formContainer}>
-                <SavedNavLinks
-                    pages={pages}
-                    deleteNavLink={deleteNavigationLink}
-                    isLoading={isLoading}
-                />
+                {pages && (
+                    <SavedNavLinks
+                        pages={pages}
+                        deleteNavLink={deleteNavigationLink}
+                        isLoading={isLoading}
+                    />
+                )}
                 {/*{pages && pages.length && (<hr className={styles.hr}/>)}*/}
                 <NewNavLinkForm
                     fields={fields}

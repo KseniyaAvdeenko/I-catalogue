@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from "../AdminNavbar.module.sass";
+import styles from "../../AdminNavbar.module.sass";
 import NavLinkInput from "./NavLinkInput";
 import SlugInput from "./SlugInput";
 import DeleteIcon from "../../../../assets/img/deleteIcon.svg";

@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from "../AdminNavbar.module.sass";
+import styles from "../../AdminNavbar.module.sass";
 import ContactContentInput from "./ContactContentInput";
 import ContactIsLinkInput from "./ContactIsLinkInput";
 import ContactLinkHref from "./ContactLinkHref";

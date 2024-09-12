@@ -1,4 +1,4 @@
-@import "../../../assets/styles/Common.module"
+@import "../../assets/styles/Common.module"
 
 .AdminNavbar
   @extend .mainCommon
@@ -12,6 +12,11 @@
 
   &__heading
     font-size: $h2
+    text-align: center
+    @extend .mb_40
+
+  &__subheading
+    font-size: $h3
     text-align: center
     @extend .mb_40
 
@@ -32,7 +37,7 @@
   &__items
     @extend .flexRow
     justify-content: space-between
-    padding: .5rem 0
+    padding: .5rem 0 1.5rem
 
     & > img
       cursor: pointer
@@ -47,9 +52,12 @@
     width: 100%
     border: 1px solid $accent200
     border-radius: 1rem
+    transition: all .5s ease-in
 
   &_inputRadioLabelSelected
-    background: $bg300
+    border: 1px solid $primary200
+    background: $primary200
+    color: $bg100
     box-shadow: 0 .4rem 1rem 0 rgba(146, 107, 106, 0.4)
 
 
@@ -61,9 +69,13 @@
 
     & > input[type='text']
       @extend .adminInputText
+
+    & > input[type="text"]:focus
+      border: .1rem solid $primary100
     & > input[type="text"]:focus,
     & > input[type="text"]:read-only:focus
       outline: none
+
     & > input[type="text"]:read-only:focus
       cursor: not-allowed
 

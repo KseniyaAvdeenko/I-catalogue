@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from "../AdminNavbar.module.sass";
+import styles from "../../AdminNavbar.module.sass";
 import Label from "../Label";
 import Input from "../Input";
 

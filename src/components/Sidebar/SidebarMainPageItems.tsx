@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from "./Sidebar.module.sass";
-import {Link} from "react-router-dom";
+import {NavLink} from "react-router-dom";
 
 interface ISidebarMainPageItemsProps {
     getItemsVisibility: Function;
@@ -10,9 +10,12 @@ const SidebarMainPageItems: React.FC<ISidebarMainPageItemsProps> = ({getItemsVis
     return (
         <div className={styles.Sidebar__items}>
             <div className={styles.Sidebar__itemsContainer} onClick={() => getItemsVisibility('none')}>
-                <Link to={'main_page_settings/'} className={styles.Sidebar__heading}>
+                <NavLink to={'main_page_settings/'} className={({isActive}) =>
+                    [isActive
+                        ? [styles.Sidebar__heading, styles.linkActive].join(' ')
+                        : styles.Sidebar__heading].join(' ')}>
                     Настройка главной страницы
-                </Link>
+                </NavLink>
             </div>
         </div>
     );

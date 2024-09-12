@@ -45,6 +45,7 @@ export const updateProdAttribute = (access: string,id: number, data: any) => asy
             const response = await axios.patch<IProdAttrs>(apiUrl + `product/prod_attributes/${id}/`,
                 JSON.stringify(data), getAuthConfigApplicationJson(access));
             dispatch(prodAttributesSlice.actions.updateProdAttrSuccess(response.data))
+            dispatch(loadProdAttributes())
         } catch (e) {
             dispatch(prodAttributesSlice.actions.updateProdAttrFail('Ошибка'))
         }
@@ -55,7 +56,7 @@ export const updateProdAttribute = (access: string,id: number, data: any) => asy
 export const deleteProdAttribute = (access: string, id: number) => async (dispatch: AppDispatch) => {
     if (access) {
         try {
-            await axios.delete<IProdAttrs>(apiUrl + `product/prod_attributes/`,
+            await axios.delete<IProdAttrs>(apiUrl + `product/prod_attributes/${id}/`,
                 getAuthConfigApplicationJson(access));
             dispatch(prodAttributesSlice.actions.deleteProdAttrSuccess());
             dispatch(loadProdAttributes())

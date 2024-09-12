@@ -1,7 +1,7 @@
 import React from 'react';
 import {IAdminComponentsProps} from "../../../../interface/IAdminPageComponets";
 import {IContacts} from "../../../../interface/INavbar";
-import styles from "../AdminNavbar.module.sass";
+import styles from "../../AdminNavbar.module.sass";
 import ContactContentInput from "./ContactContentInput";
 import ContactIsLinkInput from "./ContactIsLinkInput";
 import ContactLinkHref from "./ContactLinkHref";
@@ -9,13 +9,13 @@ import ContactLinkType from "./ContactLinkType";
 import DeleteIcon from '../../../../assets/img/deleteIcon.svg'
 
 interface ISavedContactsProps extends IAdminComponentsProps {
-    contacts: IContacts[] | null;
+    contacts: IContacts[] | [];
     deleteSavedContact: Function
 }
 
 const SavedContacts: React.FC<ISavedContactsProps> = ({deleteSavedContact, isLoading, contacts, onChangeHandler}) => {
     return (
-        <div className={styles.savedItems}>
+        <div className={styles.savedItems} style={{borderBottom: contacts.length ?'.1rem solid #926B6A': 'none'}}>
             {isLoading && 'Loading...'}
             {contacts && contacts.map(contact => (
                 <div key={contact.id} className={styles.savedItems__items}>

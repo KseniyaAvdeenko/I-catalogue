@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from "./Sidebar.module.sass";
-import {Link} from "react-router-dom";
+import {NavLink} from "react-router-dom";
 import ArrowDown from "../../assets/img/arrowDown.svg";
 import {ISidebarItemsVisibility} from "../../interface/IAdminPageComponets";
 
@@ -10,11 +10,14 @@ interface ISidebarNavbarItemsProps {
     scrollToBlock: Function;
 }
 
-const SidebarNavbarItems: React.FC<ISidebarNavbarItemsProps> = ({scrollToBlock, getItemsVisibility,navbarItems}) => {
+const SidebarNavbarItems: React.FC<ISidebarNavbarItemsProps> = ({scrollToBlock, getItemsVisibility, navbarItems}) => {
     return (
         <div className={styles.Sidebar__items}>
             <div className={styles.Sidebar__itemsContainer} onClick={() => getItemsVisibility('navbar')}>
-                <Link to={'navbar/'} className={styles.Sidebar__heading}>Контент “шапки” и “подвала” сайта</Link>
+                <NavLink to={'navbar/'} className={({isActive}) =>
+                    [isActive
+                        ? [styles.Sidebar__heading, styles.linkActive].join(' ')
+                        : styles.Sidebar__heading].join(' ')}>Контент “шапки” и “подвала” сайта</NavLink>
                 <img src={ArrowDown} style={{transform: `rotate(${navbarItems.rotate}deg)`}}
                      alt="arrowDown"/>
             </div>
