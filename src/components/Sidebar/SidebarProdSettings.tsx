@@ -3,6 +3,7 @@ import {ISidebarItemsVisibility} from "../../interface/IAdminPageComponets";
 import styles from "./Sidebar.module.sass";
 import {NavLink} from "react-router-dom";
 import ArrowDown from "../../assets/img/arrowDown.svg";
+import {useAppSelector} from "../../hooks/redux";
 
 interface ISidebarProdSettingsProps {
     getItemsVisibility: Function;
@@ -15,6 +16,8 @@ const SidebarProdSettings: React.FC<ISidebarProdSettingsProps> = ({
                                                                       prodSettingsItems,
                                                                       scrollToBlock
                                                                   }) => {
+    const {prodAttrs} = useAppSelector(state => state.prodAttrsReducer)
+
     return (
         <div className={styles.Sidebar__items}>
             <div className={styles.Sidebar__itemsContainer} onClick={() => getItemsVisibility('prodSettings')}>
@@ -33,8 +36,14 @@ const SidebarProdSettings: React.FC<ISidebarProdSettingsProps> = ({
                      onClick={() => scrollToBlock('addingProdAttrsSection')}>Добавление характеристик товара\услуги
                 </div>
                 <div className={[styles.Sidebar__item, styles.Sidebar__item_margin].join(' ')}
+                     style={{display: prodAttrs && prodAttrs.length ? 'block' : 'none'}}
                      onClick={() => scrollToBlock('addingProdsSection')}>Добавление товара\услуги
                 </div>
+
+                <div className={[styles.Sidebar__item, styles.Sidebar__item_margin].join(' ')}
+                         onClick={() => scrollToBlock('editingProduct')}>Редактирование товара/услуги
+                </div>
+
             </div>
         </div>
     );

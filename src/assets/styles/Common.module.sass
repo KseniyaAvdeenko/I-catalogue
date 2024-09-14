@@ -78,7 +78,10 @@ $baseFont: 'Nunito Sans'
   &:active
     background: $accent200
     color: #ffffff
-
+  &:disabled
+    background: $bg300
+    color: $text100
+    cursor: not-allowed
 .box
   box-shadow: 0 4px 10px 0 rgba(51, 51, 51, 0.25)
   background: $bg200
@@ -107,7 +110,7 @@ $baseFont: 'Nunito Sans'
   overflow-y: auto
 
 .inputNumber
-  width: 6rem
+  width: 7rem
   height: 4rem
   outline: none
   border: 1px solid $accent200

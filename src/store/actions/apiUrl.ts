@@ -31,3 +31,15 @@ export function getAuthConfigMultipart(access: string): any {
         }
     };
 }
+
+export function createFormData(data: any): FormData {
+    Object.keys(data).map((key) => {
+        formData.set(key, data[key])
+    })
+    return formData
+}
+export function clearFormData(data: any): void {
+    Object.keys(data).map((key) => {
+        formData.delete(key)
+    })
+}

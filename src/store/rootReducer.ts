@@ -11,6 +11,7 @@ import pageSettingsReducer from './reducers/pageSettingsSlice';
 import prodPageSettingsReducer from "./reducers/prodPageSettingsSlice";
 import prodAttrsReducer from './reducers/prodAttributesSlice';
 import productReducer from './reducers/productSlice';
+import prodImagesReducer from './reducers/prodImageSlice'
 
 
 export const rootReducer = combineReducers({
@@ -26,4 +27,5 @@ export const rootReducer = combineReducers({
     prodPageSettingsReducer,
     prodAttrsReducer,
     productReducer,
+    prodImagesReducer,
 })

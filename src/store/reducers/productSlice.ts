@@ -1,12 +1,15 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {IProdInitial} from "../../interface/IInitialStates";
-import {IProd, IProdAttrs} from "../../interface/IProduct";
+import {IProd, IProdReadOnly} from "../../interface/IProduct";
 
 const initialState: IProdInitial ={
     isLoading: false,
     error: '',
     products: null,
-    product: null
+    product: null,
+    productsReadOnly: null,
+    productReadOnly: null,
+
 }
 
 export const productSlice = createSlice({
@@ -51,7 +54,28 @@ export const productSlice = createSlice({
         },
         deleteProductFail(state, action: PayloadAction<string>){
             state.error = action.payload
-        }
+        },
+        prodsReadOnlyFetching(state){
+            state.isLoading =true;
+        },
+        loadProductsReadOnlySuccess(state, action: PayloadAction<IProdReadOnly[]>){
+            state.isLoading = false;
+            state.products = action.payload
+        },
+        loadProductsReadOnlyFail(state, action: PayloadAction<string>){
+            state.error =action.payload;
+        },
+        prodReadOnlyFetching(state){
+            state.isLoading = true;
+        },
+        loadProductReadOnlySuccess(state, action: PayloadAction<IProdReadOnly>){
+            state.product = action.payload;
+            state.isLoading = false;
+        },
+        loadProductReadOnlyFail(state, action: PayloadAction<string>){
+            state.error = action.payload;
+            state.isLoading = false;
+        },
     }
 })
 

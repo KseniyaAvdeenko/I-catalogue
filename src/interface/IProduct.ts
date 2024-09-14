@@ -23,14 +23,20 @@ export interface IProdImg{
     id: number;
 }
 
+export interface IImageBase extends IProdImgBase{
+    prod: number
+}
+export interface IImage extends IImageBase{
+    id: number;
+}
 export interface IProdBase{
     name: string;
     price: number;
     currency: string;
     priceAttrs: string;
-    otherValues: otherValue
+    otherValues: IOtherValue|{}
 }
-export type otherValue = {
+export interface IOtherValue {
   [key: string]: string;
 }
 
@@ -39,5 +45,5 @@ export interface IProd extends IProdBase{
 }
 
 export interface IProdReadOnly extends IProd{
-    images: IProdImgBase[]|[]
+    images: IProdImg[]|[]
 }

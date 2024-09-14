@@ -72,6 +72,7 @@
 
     & > input[type="text"]:focus
       border: .1rem solid $primary100
+
     & > input[type="text"]:focus,
     & > input[type="text"]:read-only:focus
       outline: none
@@ -109,3 +110,15 @@
 .hr
   @extend .hrCommon
   margin: 1rem 0
+
+
+.selectProd
+  @extend .flexRow
+  justify-content: center
+  align-items: center
+  @extend .mb_40
+  width: 100%
+  & > h3
+    margin-right: 3rem
+    font-size: $h3
+    text-align: center

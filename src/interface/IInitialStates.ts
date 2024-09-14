@@ -2,7 +2,7 @@ import {IButtonSettings, ICommonSettings, IFooterSettings, IHeaderSettings} from
 import {IMainPageSetting, IPageSetting} from "./IPagesSettings";
 import {IContacts} from "./INavbar";
 import {IUser} from "./IUser";
-import {IProd, IProdAttrs, IProductPageSettings} from "./IProduct";
+import {IImage, IProd, IProdAttrs, IProdReadOnly, IProductPageSettings} from "./IProduct";
 
 export interface IInitialStatesBase {
     isLoading: boolean;
@@ -72,6 +72,13 @@ export interface IProdAttrsInitial extends IInitialStatesBase{
 }
 
 export interface IProdInitial extends IInitialStatesBase{
+    productsReadOnly: IProdReadOnly[]|null;
+    productReadOnly: IProdReadOnly|null;
     products: IProd[]|null;
     product: IProd|null;
+}
+
+export interface IProdImagesInitial extends IInitialStatesBase{
+    images: IImage[]|null;
+    image: IImage|null
 }

@@ -32,16 +32,18 @@ const CommonSettingsForm: React.FC<ICommonSettingsFormProps> = () => {
             if (e.target.type === 'file') {
                 const file = e.target.files?.[0];
                 if (file) {
-                    reader.readAsDataURL(file)
-                    reader.onloadend = (event: ProgressEvent<FileReader>) => {
-                        setLogoInput({
+                    e.target.name === 'logo'
+                        ? setLogoInput({
                             ...logoInput,
                             imgDisplay: 'none',
-                            background: `url(${event.target?.result}) center / cover no-repeat #F2F2F2`
+                            background: `url(${URL.createObjectURL(file)}) center / cover no-repeat #F2F2F2`
                         })
-                    }
+                        : setFaviconInput({
+                            ...faviconInput, imgDisplay: 'none',
+                            background: `url(${URL.createObjectURL(file)}) center / cover no-repeat #F2F2F2`
+                        })
+                    dispatch(updateCommonSettings(decodeToken(localStorage.access), commonSettings.id, {[e.target.name]: file}))
                 }
-                dispatch(updateCommonSettings(decodeToken(localStorage.access), commonSettings.id, {[e.target.name]: file}))
             } else {
                 e.target.type === 'number'
                     ? dispatch(updateCommonSettings(decodeToken(localStorage.access), commonSettings.id, {[e.target.name]: parseInt(e.target.value)}))

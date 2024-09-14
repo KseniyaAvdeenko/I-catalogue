@@ -1,6 +1,7 @@
 import HeaderLayout1 from '../../assets/img/Layout1.svg';
 import HeaderLayout2 from '../../assets/img/Layout2.svg';
 import {
+    ICurrency,
     IDetailProdPageLayout,
     IFonts,
     IHeaderLayout,
@@ -80,4 +81,10 @@ export const headingTypes: IHeadingType[] = [
 export const prodPageContentLayout: IDetailProdPageLayout[]= [
     {id: '1', image:DetailProdPageLayout1},
     {id: '2', image:DetailProdPageLayout2}
+]
+
+export const currencyTypes:ICurrency[] = [
+    {id: 'USD', currency:'$'},
+    {id: 'RUB', currency:'₽'},
+    {id: 'EUR', currency:'€'},
 ]
