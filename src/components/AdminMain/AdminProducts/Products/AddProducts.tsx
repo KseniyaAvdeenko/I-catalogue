@@ -34,13 +34,10 @@ const AddProducts = () => {
         dispatch(createProduct(decodeToken(localStorage.access), prod))
     }
 
-    // console.log(files)
     const onChangeNewProdHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-        if (e.target.type === 'number') {
-            setNewProd({...newProd, [e.target.name]: parseFloat(e.target.value)})
-        } else {
-            setNewProd({...newProd, [e.target.name]: e.target.value})
-        }
+        e.target.type === 'number'
+            ?setNewProd({...newProd, [e.target.name]: parseFloat(e.target.value)})
+            :setNewProd({...newProd, [e.target.name]: e.target.value})
         if (e.target.name === 'currency') setCurrencyOptionsVisibility({
             ...currencyOptionsVisibility,
             open: false,
@@ -87,6 +84,11 @@ const AddProducts = () => {
             dispatch(productSlice.actions.deleteProductSuccess())
         }
     }
+    const changeCurrencyOptionsContainerVisibility = () => {
+        currencyOptionsVisibility.open
+            ? setCurrencyOptionsVisibility({...currencyOptionsVisibility, open: false, display: 'none', bottom: '-12.9rem'})
+            : setCurrencyOptionsVisibility({...currencyOptionsVisibility, open: true, display: 'flex', bottom: '-12.9rem'})
+    }
     return (
         <section id={'addingProdsSection'} style={{display: prodAttrs && prodAttrs.length ? 'flex' : 'none'}}
                  className={[styles.AdminNavbar__container, styles.AdminNavbar__container_margin].join(' ')}>
@@ -98,11 +100,11 @@ const AddProducts = () => {
                     newProdAttrs={newProdAttrs}
                     onChangeHandler={onChangeNewProdHandler}
                     currencyOptionsVisibility={currencyOptionsVisibility}
-                    setCurrencyOptionsVisibility={setCurrencyOptionsVisibility}
                     onChangeProdAttrsHandler={onChangeProdAttrsHandler}
                     files={files} onImageChangeHandler={onImageChangeHandler}
                     makeImgMainHandler={makeImgMainHandler}
                     saveNewProd={saveNewProd} saveImages={saveImages}
+                    changeCurrencyOptionsContainerVisibility={changeCurrencyOptionsContainerVisibility}
                 />
             </div>
         </section>

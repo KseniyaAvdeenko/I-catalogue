@@ -10,6 +10,7 @@ import PagesSettings from "../../components/AdminMain/AdminPagesSettings/PagesSe
 import MainPageSettings from "../../components/AdminMain/AdminMainPageSettings/MainPageSettings";
 import ProductSettings from "../../components/AdminMain/AdminProducts/ProductSettings";
 import {scrollingToSection} from "../../hooks/scrollingToSection";
+import Product from "../../components/AdminMain/AdminProducts/Product/Product";
 
 const AdminPage = () => {
     const commonSettingsRef = useRef<HTMLElement>(null);
@@ -34,6 +35,7 @@ const AdminPage = () => {
                         <Route path={'main_page_settings/'} element={<MainPageSettings/>}/>
                         <Route path={'pages_settings/:slug'} element={<PagesSettings/>}/>
                         <Route path={'products_settings/'} element={<ProductSettings ref={productSettingsRef}/>}/>
+                        <Route path={'editing_products/'} element={<Product/>}/>
                     </Routes>
                     {/*<div style={{position: 'fixed', bottom: '5%', right: '2rem'}}>Preview</div>*/}
                 </section>

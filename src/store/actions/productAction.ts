@@ -31,7 +31,7 @@ export const createProduct = (access: string, data: any) => async (dispatch: App
                 JSON.stringify(data), getAuthConfigApplicationJson(access));
             dispatch(productSlice.actions.createProductSuccess(response.data));
             dispatch(loadProducts());
-            dispatch(loadProductsReadOnly());
+            dispatch(loadProductsRead());
         } catch (e) {
             dispatch(productSlice.actions.createProductFail('Ошибка'))
         }
@@ -45,6 +45,7 @@ export const updateProduct = (access: string, id: number, data: any) => async (d
             const response = await axios.patch<IProd>(apiUrl + `product/products/${id}/`,
                 JSON.stringify(data), getAuthConfigApplicationJson(access));
             dispatch(productSlice.actions.updateProductSuccess(response.data));
+            dispatch(loadProductRead(id))
         } catch (e) {
             dispatch(productSlice.actions.updateProductFail('Ошибка'))
         }
@@ -55,11 +56,11 @@ export const updateProduct = (access: string, id: number, data: any) => async (d
 export const deleteProduct = (access: string, id: number,) => async (dispatch: AppDispatch) => {
     if (access) {
         try {
-            await axios.delete(apiUrl + `/product/products/${id}/`,
+            await axios.delete(apiUrl + `product/products_all/${id}/`,
                 getAuthConfigApplicationJson(access));
             dispatch(productSlice.actions.deleteProductSuccess());
             dispatch(loadProducts())
-            dispatch(loadProductsReadOnly())
+            dispatch(loadProductsRead())
         } catch (e) {
             dispatch(productSlice.actions.deleteProductFail('Ошибка'))
         }
@@ -68,7 +69,7 @@ export const deleteProduct = (access: string, id: number,) => async (dispatch: A
     }
 }
 
-export const loadProductsReadOnly = () => async (dispatch: AppDispatch) => {
+export const loadProductsRead = () => async (dispatch: AppDispatch) => {
     try {
         dispatch(productSlice.actions.prodsReadOnlyFetching())
         const response = await axios.get<IProdReadOnly[] | []>(apiUrl + `product/products_all/`, getRequestHeaders())
@@ -77,7 +78,7 @@ export const loadProductsReadOnly = () => async (dispatch: AppDispatch) => {
         dispatch(productSlice.actions.loadProductsReadOnlyFail('Ошибка'))
     }
 }
-export const loadProductReadOnly = (id: number) => async (dispatch: AppDispatch) => {
+export const loadProductRead = (id: number) => async (dispatch: AppDispatch) => {
     try {
         dispatch(productSlice.actions.prodReadOnlyFetching())
         const response = await axios.get<IProdReadOnly>(apiUrl + `product/products_all/${id}/`, getRequestHeaders())

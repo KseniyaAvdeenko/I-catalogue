@@ -1,8 +1,8 @@
-import React, {useState} from 'react';
+import React from 'react';
 import styles from "../../AdminMain.module.sass";
 import {IOtherValue, IProd, IProdAttrs, IProdBase} from "../../../../interface/IProduct";
 import AdminInputContainer from "../../../UI/InputContainers/AdminInputContainer";
-import ProdCurrency from "./ProdCurrency";
+import ProdCurrency from "../ProdCurrency";
 import {IFile, IOptions} from "../../../../interface/IAdminPageComponets";
 import UploadImages from "./UploadImages";
 
@@ -11,7 +11,6 @@ interface INewProdFormProps {
     newProd: IProdBase
     onChangeHandler: Function;
     currencyOptionsVisibility: IOptions
-    setCurrencyOptionsVisibility: Function;
     newProdAttrs: IOtherValue;
     onChangeProdAttrsHandler: Function;
     files: IFile[];
@@ -19,13 +18,13 @@ interface INewProdFormProps {
     makeImgMainHandler: Function;
     saveNewProd: React.MouseEventHandler<HTMLButtonElement>
     saveImages: React.MouseEventHandler<HTMLButtonElement>
-    product: IProd|null
+    product: IProd | null;
+    changeCurrencyOptionsContainerVisibility: React.MouseEventHandler<HTMLDivElement>
 }
 
 const NewProdForm: React.FC<INewProdFormProps> = ({
                                                       newProdAttrs,
                                                       currencyOptionsVisibility,
-                                                      setCurrencyOptionsVisibility,
                                                       prodAttrs,
                                                       newProd,
                                                       onChangeHandler,
@@ -35,7 +34,8 @@ const NewProdForm: React.FC<INewProdFormProps> = ({
                                                       makeImgMainHandler,
                                                       saveNewProd,
                                                       saveImages,
-                                                      product
+                                                      product,
+                                                      changeCurrencyOptionsContainerVisibility
                                                   }) => {
 
 
@@ -57,10 +57,10 @@ const NewProdForm: React.FC<INewProdFormProps> = ({
                     labelClassName={''}
                     isLoading={false} onChangeHandler={onChangeHandler}/>
                 <ProdCurrency
-                    newProdCurrency={newProd.currency}
+                    prodCurrency={newProd.currency}
                     onChangeHandler={onChangeHandler}
+                    changeCurrencyOptionsContainerVisibility={changeCurrencyOptionsContainerVisibility}
                     currencyOptionsVisibility={currencyOptionsVisibility}
-                    setCurrencyOptionsVisibility={setCurrencyOptionsVisibility}
                 />
                 <AdminInputContainer
                     type={'text'} name={'priceAttrs'} inputId={'priceAttrs'}
@@ -80,13 +80,17 @@ const NewProdForm: React.FC<INewProdFormProps> = ({
                                          labelClassName={styles.form__items_labelMargin}
                                          isLoading={false} onChangeHandler={onChangeProdAttrsHandler}/>
                 ))}
-                <button disabled={!newProd.name && !newProd.price} className={styles.AdminMain__button} onClick={saveNewProd}>Сохранить</button>
+                <button disabled={!newProd.name && !newProd.price} className={styles.AdminMain__button}
+                        onClick={saveNewProd}>Сохранить
+                </button>
             </div>
             <div className={styles.prodForm__item}
                  style={{display: product ? 'flex' : 'none', alignItems: 'center'}}>
                 <UploadImages files={files} makeImgMainHandler={makeImgMainHandler}
                               onImageChangeHandler={onImageChangeHandler}/>
-                <button disabled={!product && !files.length} className={styles.AdminMain__button} onClick={saveImages}>Создать товар</button>
+                <button disabled={!product && !files.length} className={styles.AdminMain__button}
+                        onClick={saveImages}>Создать товар
+                </button>
             </div>
         </div>
     );

@@ -15,7 +15,8 @@ import {loadPagesWithNavLinks} from "../../store/actions/pageSettingsAction";
 import {loadMainPageSettings} from "../../store/actions/mainPageSettingsAction";
 import {loadProdPage} from "../../store/actions/prodPageSettingsAction";
 import {loadProdAttributes} from "../../store/actions/prodAttrsAction";
-import {loadProducts, loadProductsReadOnly} from "../../store/actions/productAction";
+import {loadProducts, loadProductsRead} from "../../store/actions/productAction";
+import {loadImages} from "../../store/actions/prodImagesAction";
 
 
 interface IAdminHeader {
@@ -65,7 +66,8 @@ const AdminHeader: React.FC<IAdminHeader> = ({children}) => {
         dispatch(loadProdPage());
         dispatch(loadProdAttributes());
         dispatch(loadProducts());
-        dispatch(loadProductsReadOnly())
+        dispatch(loadProductsRead())
+        dispatch(loadImages())
     }, [localStorage.access])
 
     //console.log(currentUser, localStorage.access)

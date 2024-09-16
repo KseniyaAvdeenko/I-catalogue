@@ -19,7 +19,7 @@ export interface IProdImgBase{
     mainImg: boolean;
 }
 
-export interface IProdImg{
+export interface IProdImg extends IProdImgBase{
     id: number;
 }
 

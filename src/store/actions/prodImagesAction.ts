@@ -3,7 +3,7 @@ import {prodImageSlice} from "../reducers/prodImageSlice";
 import axios from "axios";
 import {IImage} from "../../interface/IProduct";
 import {apiUrl, clearFormData, createFormData, formData, getAuthConfigMultipart, getRequestHeaders} from "./apiUrl";
-import {loadProductsReadOnly} from "./productAction";
+import {loadProductsRead} from "./productAction";
 
 
 export const loadImages = () => async (dispatch: AppDispatch) => {
@@ -22,7 +22,7 @@ export const createImage = (access: string, data: any) => async (dispatch: AppDi
             const response = await axios.post<IImage>(apiUrl + `product/prod_images/`, createFormData(data), getAuthConfigMultipart(access))
             dispatch(prodImageSlice.actions.createImageSuccess(response.data))
             dispatch(loadImages());
-            dispatch(loadProductsReadOnly())
+            dispatch(loadProductsRead())
             clearFormData(data)
         } catch (e) {
             dispatch(prodImageSlice.actions.createImageFail('Ошибка'))
@@ -34,11 +34,11 @@ export const createImage = (access: string, data: any) => async (dispatch: AppDi
 export const updateImage = (access: string, id: number, data: any) => async (dispatch: AppDispatch) => {
     if (access) {
         try {
-            dispatch(prodImageSlice.actions.imageFetching())
             const response = await axios.patch<IImage>(apiUrl + `product/prod_images/${id}/`, createFormData(data), getAuthConfigMultipart(access))
+            console.log(response.data)
             dispatch(prodImageSlice.actions.updateImageSuccess(response.data))
             dispatch(loadImages());
-            dispatch(loadProductsReadOnly())
+            dispatch(loadProductsRead())
             clearFormData(data)
         } catch (e) {
             dispatch(prodImageSlice.actions.updateImageFail('Ошибка'))
@@ -53,7 +53,7 @@ export const deleteImage = (access: string, id: number,) => async (dispatch: App
             await axios.delete(apiUrl + `product/prod_images/${id}/`, getAuthConfigMultipart(access))
             dispatch(prodImageSlice.actions.deleteImageSuccess())
             dispatch(loadImages());
-            dispatch(loadProductsReadOnly())
+            dispatch(loadProductsRead())
         } catch (e) {
             dispatch(prodImageSlice.actions.deleteImageFail('Ошибка'))
         }

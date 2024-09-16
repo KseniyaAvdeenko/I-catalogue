@@ -60,16 +60,17 @@ export const productSlice = createSlice({
         },
         loadProductsReadOnlySuccess(state, action: PayloadAction<IProdReadOnly[]>){
             state.isLoading = false;
-            state.products = action.payload
+            state.productsReadOnly = action.payload
         },
         loadProductsReadOnlyFail(state, action: PayloadAction<string>){
             state.error =action.payload;
         },
         prodReadOnlyFetching(state){
+            state.isLoading = false;
             state.isLoading = true;
         },
         loadProductReadOnlySuccess(state, action: PayloadAction<IProdReadOnly>){
-            state.product = action.payload;
+            state.productReadOnly = action.payload;
             state.isLoading = false;
         },
         loadProductReadOnlyFail(state, action: PayloadAction<string>){

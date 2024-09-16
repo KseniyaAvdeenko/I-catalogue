@@ -28,6 +28,8 @@
     column-gap: 2.4rem
   &__button
     @extend .baseAdminButton
+    @extend .flexRow
+    justify-content: center
 
 
 
@@ -120,12 +122,14 @@
     &:hover
       @extend .selectedOption
 
+
     & > input[type="radio"]
       display: none
 
 .selectedOption
   background: $accent200
   color: $bg100
+  cursor: pointer
 
 .fileInput
   @extend .flexColumn
@@ -234,8 +238,8 @@
       object-fit: cover
       border-radius: 1rem
 
-    & > input[type="radio"]
-      display: none
+    //& > input[type="radio"]
+    //  display: none
 
     & > p
       text-align: center

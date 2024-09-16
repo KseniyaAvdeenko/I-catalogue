@@ -39,11 +39,6 @@ const SidebarProdSettings: React.FC<ISidebarProdSettingsProps> = ({
                      style={{display: prodAttrs && prodAttrs.length ? 'block' : 'none'}}
                      onClick={() => scrollToBlock('addingProdsSection')}>Добавление товара\услуги
                 </div>
-
-                <div className={[styles.Sidebar__item, styles.Sidebar__item_margin].join(' ')}
-                         onClick={() => scrollToBlock('editingProduct')}>Редактирование товара/услуги
-                </div>
-
             </div>
         </div>
     );

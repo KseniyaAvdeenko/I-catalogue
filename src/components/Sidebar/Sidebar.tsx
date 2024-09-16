@@ -6,6 +6,7 @@ import {ISidebarItemsVisibility} from "../../interface/IAdminPageComponets";
 import SidebarNavbarItems from "./SidebarNavbarItems";
 import SidebarMainPageItems from "./SidebarMainPageItems";
 import SidebarProdSettings from "./SidebarProdSettings";
+import SidebarEditProdItems from "./SidebarEditProdItems";
 
 interface ISidebarProps {
     scrollToBlock: Function
@@ -50,10 +51,10 @@ const Sidebar: React.FC<ISidebarProps> = ({scrollToBlock}) => {
             setProdSettingsItems({...prodSettingsItems, open: false, rotate: 180, display: 'none'});
         }
     }
-    useEffect(()=>{
-        if(window.location.pathname === "/admin_page/common_settings/")getItemsVisibility('commonSettings')
-        if(window.location.pathname === "/admin_page/navbar/")getItemsVisibility('navbar')
-        if(window.location.pathname === "/admin_page/products_settings/")getItemsVisibility('prodSettings')
+    useEffect(() => {
+        if (window.location.pathname === "/admin_page/common_settings/") getItemsVisibility('commonSettings')
+        if (window.location.pathname === "/admin_page/navbar/") getItemsVisibility('navbar')
+        if (window.location.pathname === "/admin_page/products_settings/") getItemsVisibility('prodSettings')
     }, [window.location.pathname])
 
     return (
@@ -72,6 +73,7 @@ const Sidebar: React.FC<ISidebarProps> = ({scrollToBlock}) => {
                 getItemsVisibility={getItemsVisibility}
                 prodSettingsItems={prodSettingsItems}
                 scrollToBlock={scrollToBlock}/>
+            <SidebarEditProdItems getItemsVisibility={getItemsVisibility}/>
         </aside>
     );
 };
