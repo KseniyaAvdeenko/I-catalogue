@@ -28,7 +28,6 @@ const EditProdForm: React.FC<IEditProdFormProps> = ({
                                                         changeCurrencyOptionsContainerVisibility
                                                     }) => {
     const {prodAttrs} = useAppSelector(state => state.prodAttrsReducer)
-    console.log(selectedProd.currency)
     return (
         <div className={styles.prodForm__items}>
             <div className={styles.prodForm__item}>

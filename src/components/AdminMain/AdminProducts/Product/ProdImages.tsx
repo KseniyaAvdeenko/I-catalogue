@@ -18,19 +18,19 @@ const ProdImages: React.FC<IProdImagesProps> = ({selectedProd}) => {
     function onChangeHandler(e: React.ChangeEvent<HTMLInputElement>) {
         console.log(parseInt(e.target.id))
 
-        // dispatch(updateImage(
-        //     decodeToken(localStorage.access),
-        //     parseInt(e.target.id),
-        //     {[e.target.name]: e.target.checked})
-        // )
-        //
-        // selectedProd && selectedProd.images.filter(el => el.id !== parseInt(e.target.id)).map(image => {
-        //     dispatch(updateImage(
-        //         decodeToken(localStorage.access),
-        //         image.id,
-        //         {mainImg: false})
-        //     )
-        // })
+        dispatch(updateImage(
+            decodeToken(localStorage.access),
+            parseInt(e.target.id),
+            {[e.target.name]: e.target.checked})
+        )
+
+        selectedProd && selectedProd.images.filter(el => el.id !== parseInt(e.target.id)).map(image => {
+            dispatch(updateImage(
+                decodeToken(localStorage.access),
+                image.id,
+                {mainImg: false})
+            )
+        })
 
     }
 
