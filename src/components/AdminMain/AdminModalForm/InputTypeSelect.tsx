@@ -15,9 +15,9 @@ const InputTypeSelect: React.FC<IInputTypeSelectProps> = ({
     return (
         <div className={styles.savedItems__item}>
             <div className={styles.savedItems__item_labelMargin}>Тип поля ввода</div>
-            <div className={styles.savedItems} id={input?.id.toString()}>
+            <div className={styles.savedItems}>
                 {inputTypes.map(type => (
-                    <label key={type.type} htmlFor={type.type}
+                    <label key={type.type} htmlFor={type.type+ '*' + input.id}
                            className={type.type === input.inputType
                                ? [styles.savedItems_inputRadioLabel, styles.savedItems__item_labelMargin, styles.savedItems_inputRadioLabelSelected].join(' ')
                                : [styles.savedItems_inputRadioLabel, styles.savedItems__item_labelMargin].join(' ')}>{type.name}
@@ -25,7 +25,7 @@ const InputTypeSelect: React.FC<IInputTypeSelectProps> = ({
                                value={type.type}
                                name="inputType"
                                checked={type.type === input.inputType}
-                               id={'inputType'}
+                               id={type.type+ '*' + input.id}
                                className={styles.savedItems_inputRadio}
                                onChange={e => onChangeHandler(e)}
                         />

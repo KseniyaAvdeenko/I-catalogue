@@ -18,7 +18,12 @@ const ModalFormInputs = () => {
         console.log({[e.target.name]: e.target.value})
     }
     const onNewInputsChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-        console.log({[e.target.name]: e.target.value})
+        console.log({[e.target.name]: e.target.value}, parseInt(e.target.id.split('*')[1]))
+        setFields(fields=>fields.map(field=>
+        field.id === parseInt(e.target.id.split('*')[1])
+            ?{...field, [e.target.name]: e.target.value}
+            :field
+        ))
     }
 
     const deleteInput = (id: number) => dispatch(deleteModalFormLabel(decodeToken(localStorage.access), id))
