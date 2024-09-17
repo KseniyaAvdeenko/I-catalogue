@@ -18,9 +18,14 @@ const PagesSettings = () => {
     const {slug} = useParams();
     const {page, error, isLoading} = useAppSelector(state => state.pageSettingsReducer);
     const dispatch = useAppDispatch()
+
+    //states
     const [headingTypeOptionsVisibility, setHeadingTypeOptionsVisibility] = useState<IOptions>({
-        open: false, display: 'none', bottom: '-56.2rem'
+        open: false, display: 'none', bottom: '-20.2rem'
     })
+
+
+    //methods
     useEffect(() => {
         if (slug) dispatch(loadPageWithNavLink(slug))
     }, [slug])
@@ -75,10 +80,24 @@ const PagesSettings = () => {
             ...headingTypeOptionsVisibility,
             open: false,
             display: 'none',
-            bottom: '-25.2rem'
+            bottom: '-20.2rem'
         })
     }
-
+    const changeHeadingTypeOptionsContainerVisibility = () => {
+        headingTypeOptionsVisibility.open
+            ? setHeadingTypeOptionsVisibility({
+                ...headingTypeOptionsVisibility,
+                open: false,
+                display: 'none',
+                bottom: '-20.2rem'
+            })
+            : setHeadingTypeOptionsVisibility({
+                ...headingTypeOptionsVisibility,
+                open: true,
+                display: 'flex',
+                bottom: '-20.2rem'
+            })
+    }
     return (
         <main className={styles.AdminMain}>
             <section className={[styles.AdminMain__container, styles.AdminMain__container_margin].join(' ')}>
@@ -109,16 +128,17 @@ const PagesSettings = () => {
                         <HeadingType
                             blockHeadingType={page.headingSettings.blockHeadingType}
                             headingTypeOptionsVisibility={headingTypeOptionsVisibility}
-                            setHeadingTypeOptionsVisibility={setHeadingTypeOptionsVisibility}
-                            isLoading={isLoading} onChangeHandler={onChangeHeadingHandler}/>
+                            isLoading={isLoading} onChangeHandler={onChangeHeadingHandler}
+                            changeHeadingTypeOptionsContainerVisibility={changeHeadingTypeOptionsContainerVisibility}
+                        />
                     </div>
                     <div className={styles.form__items}><AdminInputContainer
-                            type={'color'} name={'headingFontColor'} inputId={'headingFontColor'}
-                            value={page.headingSettings.headingFontColor}
-                            checked={false} required={false} readonly={false} inputClassname={''}
-                            inputContainerClassname={styles.form__inputContainer}
-                            labelClassName={''} label={'Цвет заголовка'}
-                            isLoading={isLoading} onChangeHandler={onChangeHeadingHandler}/>
+                        type={'color'} name={'headingFontColor'} inputId={'headingFontColor'}
+                        value={page.headingSettings.headingFontColor}
+                        checked={false} required={false} readonly={false} inputClassname={''}
+                        inputContainerClassname={styles.form__inputContainer}
+                        labelClassName={''} label={'Цвет заголовка'}
+                        isLoading={isLoading} onChangeHandler={onChangeHeadingHandler}/>
                         <AdminInputContainer
                             type={'number'} name={'headingFontSize'} inputId={'headingFontSize'}
                             value={page.headingSettings.headingFontSize} checked={false}

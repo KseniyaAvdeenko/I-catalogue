@@ -11,16 +11,19 @@ import MainPageSettings from "../../components/AdminMain/AdminMainPageSettings/M
 import ProductSettings from "../../components/AdminMain/AdminProducts/ProductSettings";
 import {scrollingToSection} from "../../hooks/scrollingToSection";
 import Product from "../../components/AdminMain/AdminProducts/Product/Product";
+import ModalFormSettings from "../../components/AdminMain/AdminModalForm/ModalFormSettings";
 
 const AdminPage = () => {
     const commonSettingsRef = useRef<HTMLElement>(null);
     const navbarContentRef = useRef<HTMLElement>(null);
     const productSettingsRef = useRef<HTMLElement>(null)
+    const modalFormSettingsRef= useRef<HTMLElement>(null)
 
     const scrollToBlock = (sectionId: string) => {
         scrollingToSection(sectionId, commonSettingsRef.current);
         scrollingToSection(sectionId, navbarContentRef.current);
-        scrollingToSection(sectionId, productSettingsRef.current)
+        scrollingToSection(sectionId, productSettingsRef.current);
+        scrollingToSection(sectionId, modalFormSettingsRef.current)
     }
 
     return (
@@ -36,6 +39,7 @@ const AdminPage = () => {
                         <Route path={'pages_settings/:slug'} element={<PagesSettings/>}/>
                         <Route path={'products_settings/'} element={<ProductSettings ref={productSettingsRef}/>}/>
                         <Route path={'editing_products/'} element={<Product/>}/>
+                        <Route path={'modal_form/'} element={<ModalFormSettings ref={modalFormSettingsRef}/>}/>
                     </Routes>
                     {/*<div style={{position: 'fixed', bottom: '5%', right: '2rem'}}>Preview</div>*/}
                 </section>

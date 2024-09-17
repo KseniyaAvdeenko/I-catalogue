@@ -3,6 +3,7 @@ import {IMainPageSetting, IPageSetting} from "./IPagesSettings";
 import {IContacts} from "./INavbar";
 import {IUser} from "./IUser";
 import {IImage, IProd, IProdAttrs, IProdReadOnly, IProductPageSettings} from "./IProduct";
+import {IModalForm} from "./IModalForm";
 
 export interface IInitialStatesBase {
     isLoading: boolean;
@@ -83,3 +84,8 @@ export interface IProdImagesInitial extends IInitialStatesBase{
     images: IImage[]|null;
     image: IImage|null
 }
+
+export interface IModalFormInitial extends IInitialStatesBase{
+    modalForm: IModalForm|null
+}
+

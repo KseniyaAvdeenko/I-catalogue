@@ -5,7 +5,7 @@ import {
     IDetailProdPageLayout,
     IFonts,
     IHeaderLayout,
-    IHeadingType,
+    IHeadingType, IInputType,
     INavLink,
     INavLinksHoverStyle
 } from "../../interface/IAdminPageComponets";
@@ -78,13 +78,21 @@ export const headingTypes: IHeadingType[] = [
     {id: "h6", heading: 'Заголовок h6'},
 ]
 
-export const prodPageContentLayout: IDetailProdPageLayout[]= [
-    {id: '1', image:DetailProdPageLayout1},
-    {id: '2', image:DetailProdPageLayout2}
+export const prodPageContentLayout: IDetailProdPageLayout[] = [
+    {id: '1', image: DetailProdPageLayout1},
+    {id: '2', image: DetailProdPageLayout2}
 ]
 
-export const currencyTypes:ICurrency[] = [
-    {id: 'USD', currency:'$'},
-    {id: 'RUB', currency:'₽'},
-    {id: 'EUR', currency:'€'},
+export const currencyTypes: ICurrency[] = [
+    {id: 'USD', currency: '$'},
+    {id: 'RUB', currency: '₽'},
+    {id: 'EUR', currency: '€'},
+]
+
+export const inputTypes: IInputType[] = [
+    {type: 'text', name: 'Текст'},
+    {type: 'number', name: 'Число'},
+    {type: 'tel', name: 'Телефон'},
+    {type: 'email', name: 'Email'},
+    {type: 'datetime-local', name: 'Указание местной даты и времени.'},
 ]

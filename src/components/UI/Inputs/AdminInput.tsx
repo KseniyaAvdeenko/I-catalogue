@@ -11,9 +11,10 @@ interface IInput {
     required: boolean
     readonly: boolean;
     classname: string;
-    step?:number;
+    step?: number;
     min?: number;
-    max?:number;
+    max?: number;
+    pattern?: string
 }
 
 const AdminInput: React.FC<IInput> = ({
@@ -28,7 +29,8 @@ const AdminInput: React.FC<IInput> = ({
                                           name,
                                           step,
                                           min,
-                                          max
+                                          max,
+                                          pattern
                                       }) => {
 
     return type === 'text'
@@ -40,6 +42,7 @@ const AdminInput: React.FC<IInput> = ({
                   required={required}
                   readOnly={readonly}
                   className={classname}
+                  pattern={pattern}
         />)
         : type === 'number'
             ? (

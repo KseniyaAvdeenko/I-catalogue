@@ -17,6 +17,7 @@ import {loadProdPage} from "../../store/actions/prodPageSettingsAction";
 import {loadProdAttributes} from "../../store/actions/prodAttrsAction";
 import {loadProducts, loadProductsRead} from "../../store/actions/productAction";
 import {loadImages} from "../../store/actions/prodImagesAction";
+import {loadModalFormSettings} from "../../store/actions/modalFormAction";
 
 
 
@@ -61,6 +62,7 @@ const AdminHeader: React.FC<IAdminHeader> = ({children}) => {
         dispatch(loadProducts());
         dispatch(loadProductsRead())
         dispatch(loadImages())
+        dispatch(loadModalFormSettings())
     }, [auth.access])
 
     return (
