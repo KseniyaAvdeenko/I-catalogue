@@ -15,7 +15,8 @@ export interface IAuthState {
     error: string;
     refresh: string;
     access: string;
-    lastLogin: string;
+    accessExpires: string;
+    refreshExpires: string;
 }
 
 export interface ICommonBase {

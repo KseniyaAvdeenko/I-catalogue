@@ -31,13 +31,13 @@ export const refreshToken = (refresh: string) => async (dispatch: AppDispatch) =
     if (refresh) {
         const body = JSON.stringify({refresh: refresh})
         try {
-            const response = await axios.post<IAuth>(apiUrl + 'auth/jwt/refresh/', body, getRequestHeaders())
-            dispatch(authSlice.actions.refreshSuccess(response.data))
+            const response = await axios.post<{access: string}>(apiUrl + 'auth/jwt/refresh/', body, getRequestHeaders())
+            dispatch(authSlice.actions.refreshTokenSuccess(response.data))
         } catch (error) {
-            dispatch(authSlice.actions.refreshFail())
+            dispatch(authSlice.actions.refreshTokenFail())
         }
     } else {
-        dispatch(authSlice.actions.refreshFail())
+        dispatch(authSlice.actions.refreshTokenFail())
     }
 }
 

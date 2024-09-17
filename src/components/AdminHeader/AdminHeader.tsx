@@ -19,42 +19,35 @@ import {loadProducts, loadProductsRead} from "../../store/actions/productAction"
 import {loadImages} from "../../store/actions/prodImagesAction";
 
 
+
 interface IAdminHeader {
     children?: React.ReactNode | null
 }
 
 const AdminHeader: React.FC<IAdminHeader> = ({children}) => {
     const navigate = useNavigate()
-    //const auth = useAppSelector(state => state.authReducer)
+    const auth = useAppSelector(state=> state.authReducer)
     const {currentUser, errorCurrentUser} = useAppSelector(state => state.userReducer)
+
+    const now = Date.now()
     const dispatch = useAppDispatch()
-    const now = Date.parse(new Date().toString())
+
+    console.log(auth)
+
     //--methods
     const logOut = () => {
         dispatch(logout())
         navigate('/sign_in/')
     }
-    // async function isAuthenticated() {
-    //     while ((now - Date.parse(localStorage.lastLogin)) >= 360000 ) {
-    //         if (await verifyToken(decodeToken(localStorage.refresh))) {
-    //             dispatch(refreshToken(decodeToken(localStorage.refresh)))
-    //         }
-    //     }
-    //     while ((now - Date.parse(localStorage.lastLogin)) > (3600000 * 24)) {
-    //         logOut()
-    //     }
-    // }
-    //
-    // console.log(now - Date.parse(localStorage.lastLogin))
-    // useEffect( () => {
-    //     if (localStorage.access && localStorage.refresh && localStorage.lastLogin) {
-    //         isAuthenticated()
-    //     }
-    // }, [now, localStorage.access, localStorage.refresh, localStorage.lastLogin]);
+
+    useEffect( () => {
+        if(now >= +auth.accessExpires && now < +auth.refreshExpires) dispatch(refreshToken(decodeToken(auth.refresh)))
+        if(now >= +auth.refreshExpires) logOut()
+    }, [now, auth.accessExpires, auth.refreshExpires]);
 
     useEffect(() => {
-        if (localStorage.access) {
-            dispatch(loadCurrentUser(decodeToken(localStorage.access)));
+        if (auth.access) {
+            dispatch(loadCurrentUser(decodeToken(auth.access)));
         }
         dispatch(loadButtonSettings());
         dispatch(loadCommonSettings());
@@ -68,15 +61,14 @@ const AdminHeader: React.FC<IAdminHeader> = ({children}) => {
         dispatch(loadProducts());
         dispatch(loadProductsRead())
         dispatch(loadImages())
-    }, [localStorage.access])
+    }, [auth.access])
 
-    //console.log(currentUser, localStorage.access)
     return (
         <header className={styles.adminHeader}>
             <img src={AppLogo} alt="app logo"/>
             {children && children}
             <div className={styles.auth}>
-                {localStorage.access
+                {auth.isAuth
                     ? <>
                         <div className={styles.auth__items}
                              style={{cursor: 'default'}}>{currentUser?.username ?? ''}</div>
