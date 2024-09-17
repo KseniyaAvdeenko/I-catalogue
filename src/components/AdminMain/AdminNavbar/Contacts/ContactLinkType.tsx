@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from '../AdminNavbar.module.sass'
+import styles from '../../AdminNavbar.module.sass'
 import {linkTypes} from "../../Options";
 import Input from "../Input";
 

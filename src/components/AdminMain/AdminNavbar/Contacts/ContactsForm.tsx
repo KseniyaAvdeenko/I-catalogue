@@ -1,5 +1,5 @@
 import React, {useRef, useState} from 'react';
-import styles from "../AdminNavbar.module.sass";
+import styles from "../../AdminNavbar.module.sass";
 import {useAppDispatch, useAppSelector} from "../../../../hooks/redux";
 import {contactFieldExample} from "../../Options";
 import SavedContacts from "./SavedContacts";
@@ -84,13 +84,14 @@ const ContactsForm = () => {
                  className={[styles.AdminNavbar__container, styles.AdminNavbar__container_margin].join(' ')}>
             <h2 className={styles.AdminNavbar__heading}>Контакты</h2>
             <div className={styles.AdminNavbar__formContainer}>
-                <SavedContacts
-                    contacts={contacts}
-                    isLoading={isLoading}
-                    onChangeHandler={onChangeHandler}
-                    deleteSavedContact={deleteSavedContact}
-                />
-                {contacts && contacts.length && (<hr className={styles.hr}/>)}
+                {contacts && (
+                    <SavedContacts
+                        contacts={contacts}
+                        isLoading={isLoading}
+                        onChangeHandler={onChangeHandler}
+                        deleteSavedContact={deleteSavedContact}
+                    />
+                )}
                 <NewContactsForm
                     fields={fields}
                     deleteField={deleteField}

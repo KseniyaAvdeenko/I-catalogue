@@ -1,20 +1,29 @@
 import React from 'react';
 import styles from "./Sidebar.module.sass";
-import {Link} from "react-router-dom";
-import ArrowDown from "../../assets/img/arrowDown.png";
+import {NavLink} from "react-router-dom";
+import ArrowDown from "../../assets/img/arrowDown.svg";
 import {ISidebarItemsVisibility} from "../../interface/IAdminPageComponets";
 
 interface ISidebarCommonSettingsItemsProps {
     getItemsVisibility: Function;
+
     commonSettingsItems: ISidebarItemsVisibility;
     scrollToBlock: Function
 }
 
-const SidebarCommonSettingsItems: React.FC<ISidebarCommonSettingsItemsProps> = ({scrollToBlock, getItemsVisibility, commonSettingsItems}) => {
+const SidebarCommonSettingsItems: React.FC<ISidebarCommonSettingsItemsProps> = ({
+                                                                                    scrollToBlock,
+                                                                                    getItemsVisibility,
+                                                                                    commonSettingsItems
+                                                                                }) => {
     return (
         <div className={styles.Sidebar__items}>
             <div className={styles.Sidebar__itemsContainer} onClick={() => getItemsVisibility('commonSettings')}>
-                <Link to={'common_settings/'} className={styles.Sidebar__heading}>Общие настройки сайта</Link>
+                <NavLink to={'common_settings/'}
+                         className={({isActive}) =>
+                             [isActive
+                                 ? [styles.Sidebar__heading, styles.linkActive].join(' ')
+                                 : styles.Sidebar__heading].join(' ')}>Общие настройки сайта</NavLink>
                 <img src={ArrowDown} style={{transform: `rotate(${commonSettingsItems.rotate}deg)`}}
                      alt="arrowDown"/>
             </div>

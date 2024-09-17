@@ -2,7 +2,6 @@ import {AppDispatch} from "../store";
 import axios from "axios";
 import {IContacts} from "../../interface/INavbar";
 import {apiUrl, getAuthConfigApplicationJson, getRequestHeaders} from "./apiUrl";
-import {userSlice} from "../reducers/userSlice";
 import {contactsSlice} from "../reducers/contactsSlice";
 
 export const loadContacts = () => async (dispatch: AppDispatch) => {
@@ -36,7 +35,7 @@ export const createContact = (access: string, data: any) => async (dispatch: App
             dispatch(contactsSlice.actions.createContactFail('Ошибка'))
         }
     } else {
-        dispatch(userSlice.actions.loadingCurrentUserFail('Вы не авторизованы'))
+        dispatch(contactsSlice.actions.createContactFail('Вы не авторизованы'))
     }
 }
 export const updateContact = (access: string, id: number, data: any) => async (dispatch: AppDispatch) => {
@@ -53,7 +52,7 @@ export const updateContact = (access: string, id: number, data: any) => async (d
             dispatch(contactsSlice.actions.updateContactFail('Ошибка'))
         }
     } else {
-        dispatch(userSlice.actions.loadingCurrentUserFail('Вы не авторизованы'))
+        dispatch(contactsSlice.actions.updateContactFail('Вы не авторизованы'))
     }
 }
 
@@ -68,6 +67,6 @@ export const deleteContact = (access: string, id: number) => async (dispatch: Ap
             dispatch(contactsSlice.actions.deleteContactFail('Ошибка'))
         }
     } else {
-        dispatch(userSlice.actions.loadingCurrentUserFail('Вы не авторизованы'))
+        dispatch(contactsSlice.actions.deleteContactFail('Вы не авторизованы'))
     }
 }

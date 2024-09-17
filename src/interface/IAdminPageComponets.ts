@@ -42,3 +42,24 @@ export interface INavLinkBase{
 export interface INavLink extends INavLinkBase{
     id: number;
 }
+
+export interface IDetailProdPageLayout{
+    id: string;
+    image: string
+}
+
+export interface ICurrency{
+    id: string;
+    currency: string
+}
+
+export interface IFile{
+    id?: number;
+    prod: number;
+    prodImg: File;
+    mainImg: boolean;
+}
+
+export interface IImagePreview{
+     imgName: string, image: string, mainImg: boolean
+}

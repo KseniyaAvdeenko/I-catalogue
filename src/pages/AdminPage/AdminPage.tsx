@@ -8,19 +8,19 @@ import {Route, Routes} from "react-router-dom";
 import AdminNavbar from "../../components/AdminMain/AdminNavbar/AdminNavbar";
 import PagesSettings from "../../components/AdminMain/AdminPagesSettings/PagesSettings";
 import MainPageSettings from "../../components/AdminMain/AdminMainPageSettings/MainPageSettings";
+import ProductSettings from "../../components/AdminMain/AdminProducts/ProductSettings";
+import {scrollingToSection} from "../../hooks/scrollingToSection";
+import Product from "../../components/AdminMain/AdminProducts/Product/Product";
 
 const AdminPage = () => {
     const commonSettingsRef = useRef<HTMLElement>(null);
     const navbarContentRef = useRef<HTMLElement>(null);
+    const productSettingsRef = useRef<HTMLElement>(null)
 
     const scrollToBlock = (sectionId: string) => {
-        if (commonSettingsRef.current && commonSettingsRef.current.childNodes) {
-            commonSettingsRef.current.childNodes.forEach(child => {
-                if (child instanceof HTMLElement && child.id && child.id===sectionId) {
-                    child.scrollIntoView({behavior: "smooth"})
-                }
-            })
-        }
+        scrollingToSection(sectionId, commonSettingsRef.current);
+        scrollingToSection(sectionId, navbarContentRef.current);
+        scrollingToSection(sectionId, productSettingsRef.current)
     }
 
     return (
@@ -34,6 +34,8 @@ const AdminPage = () => {
                         <Route path={'navbar/'} element={<AdminNavbar ref={navbarContentRef}/>}/>
                         <Route path={'main_page_settings/'} element={<MainPageSettings/>}/>
                         <Route path={'pages_settings/:slug'} element={<PagesSettings/>}/>
+                        <Route path={'products_settings/'} element={<ProductSettings ref={productSettingsRef}/>}/>
+                        <Route path={'editing_products/'} element={<Product/>}/>
                     </Routes>
                     {/*<div style={{position: 'fixed', bottom: '5%', right: '2rem'}}>Preview</div>*/}
                 </section>

@@ -1,10 +1,10 @@
 import React from 'react';
-import styles from "../AdminNavbar.module.sass";
+import styles from "../../AdminNavbar.module.sass";
 import ContactContentInput from "./ContactContentInput";
 import ContactIsLinkInput from "./ContactIsLinkInput";
 import ContactLinkHref from "./ContactLinkHref";
-import DeleteIcon from "../../../../assets/img/deleteIcon.png";
-import SaveIcon from '../../../../assets/img/saveIcon.png';
+import DeleteIcon from "../../../../assets/img/deleteIcon.svg";
+import SaveIcon from '../../../../assets/img/saveIcon.svg';
 import ContactLinkType from "./ContactLinkType";
 import {IContacts} from "../../../../interface/INavbar";
 

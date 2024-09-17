@@ -1,0 +1,124 @@
+@import "../../assets/styles/Common.module"
+
+.AdminNavbar
+  @extend .mainCommon
+
+  &__container
+    @extend .flexColumn
+    width: 100%
+
+    &_margin
+      @extend .mb_50
+
+  &__heading
+    font-size: $h2
+    text-align: center
+    @extend .mb_40
+
+  &__subheading
+    font-size: $h3
+    text-align: center
+    @extend .mb_40
+
+  &__formContainer
+    @extend .box
+    width: 100%
+    @extend .flexColumn
+
+  &__button
+    @extend .baseAdminButton
+
+
+.savedItems
+  width: 100%
+  @extend .flexColumn
+  @extend .mb_10
+
+  &__items
+    @extend .flexRow
+    justify-content: space-between
+    padding: .5rem 0 1.5rem
+
+    & > img
+      cursor: pointer
+
+
+  &_inputRadio
+    display: none
+
+  &_inputRadioLabel
+    padding: .5rem
+    cursor: pointer
+    width: 100%
+    border: 1px solid $accent200
+    border-radius: 1rem
+    transition: all .5s ease-in
+
+  &_inputRadioLabelSelected
+    border: 1px solid $primary200
+    background: $primary200
+    color: $bg100
+    box-shadow: 0 .4rem 1rem 0 rgba(146, 107, 106, 0.4)
+
+
+  &__item
+    @extend .flexColumn
+
+    &_labelMargin
+      margin-bottom: .5rem
+
+    & > input[type='text']
+      @extend .adminInputText
+
+    & > input[type="text"]:focus
+      border: .1rem solid $primary100
+
+    & > input[type="text"]:focus,
+    & > input[type="text"]:read-only:focus
+      outline: none
+
+    & > input[type="text"]:read-only:focus
+      cursor: not-allowed
+
+.formItems
+  @extend .mb_20
+  width: 100%
+  @extend .flexColumn
+
+  &__items
+    @extend .flexRow
+    justify-content: space-between
+    padding: .5rem 0
+    width: 100%
+
+    & > img
+      cursor: pointer
+
+  &__item
+    @extend .flexColumn
+    justify-content: space-between
+    padding: .5rem 0
+    flex-basis: 16.5%
+
+  &__selectContainer
+    display: grid
+    grid-template-columns: repeat(2, 1fr)
+    grid-template-rows: repeat(2, 1fr)
+    column-gap: .5rem
+    row-gap: .5rem
+
+.hr
+  @extend .hrCommon
+  margin: 1rem 0
+
+
+.selectProd
+  @extend .flexRow
+  justify-content: center
+  align-items: center
+  @extend .mb_40
+  width: 100%
+  & > h2
+    margin-right: 3rem
+    font-size: $h3
+    text-align: center

@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import styles from './AdminHeader.module.sass'
-import AppLogo from '../../assets/img/I-Catalogue.png'
+import AppLogo from '../../assets/img/I-Catalogue.svg'
 import {useAppDispatch, useAppSelector} from "../../hooks/redux";
 import {Link, useNavigate} from "react-router-dom";
 import {logout, refreshToken, verifyToken} from "../../store/actions/authAction";
@@ -13,6 +13,10 @@ import {decodeToken} from "../../hooks/encodeDecodeTokens";
 import {loadContacts} from "../../store/actions/contactsAction";
 import {loadPagesWithNavLinks} from "../../store/actions/pageSettingsAction";
 import {loadMainPageSettings} from "../../store/actions/mainPageSettingsAction";
+import {loadProdPage} from "../../store/actions/prodPageSettingsAction";
+import {loadProdAttributes} from "../../store/actions/prodAttrsAction";
+import {loadProducts, loadProductsRead} from "../../store/actions/productAction";
+import {loadImages} from "../../store/actions/prodImagesAction";
 
 
 interface IAdminHeader {
@@ -30,35 +34,40 @@ const AdminHeader: React.FC<IAdminHeader> = ({children}) => {
         dispatch(logout())
         navigate('/sign_in/')
     }
-    async function isAuthenticated() {
-        while ((now - Date.parse(localStorage.lastLogin)) >= 360000 ) {
-            if (await verifyToken(decodeToken(localStorage.refresh))) {
-                dispatch(refreshToken(decodeToken(localStorage.refresh)))
-            }
-        }
-        while ((now - Date.parse(localStorage.lastLogin)) > (3600000 * 24)) {
-            logOut()
-        }
-    }
-
-    console.log(now - Date.parse(localStorage.lastLogin))
-    useEffect( () => {
-        if (localStorage.access && localStorage.refresh && localStorage.laastLogin) {
-            isAuthenticated()
-        }
-    }, [now, localStorage.access, localStorage.refresh, localStorage.lastLogin]);
+    // async function isAuthenticated() {
+    //     while ((now - Date.parse(localStorage.lastLogin)) >= 360000 ) {
+    //         if (await verifyToken(decodeToken(localStorage.refresh))) {
+    //             dispatch(refreshToken(decodeToken(localStorage.refresh)))
+    //         }
+    //     }
+    //     while ((now - Date.parse(localStorage.lastLogin)) > (3600000 * 24)) {
+    //         logOut()
+    //     }
+    // }
+    //
+    // console.log(now - Date.parse(localStorage.lastLogin))
+    // useEffect( () => {
+    //     if (localStorage.access && localStorage.refresh && localStorage.lastLogin) {
+    //         isAuthenticated()
+    //     }
+    // }, [now, localStorage.access, localStorage.refresh, localStorage.lastLogin]);
 
     useEffect(() => {
         if (localStorage.access) {
-            dispatch(loadCurrentUser(decodeToken(localStorage.access)))
+            dispatch(loadCurrentUser(decodeToken(localStorage.access)));
         }
-        dispatch(loadButtonSettings())
-        dispatch(loadCommonSettings())
-        dispatch(loadContacts())
-        dispatch(loadPagesWithNavLinks())
-        dispatch(loadMainPageSettings())
-        dispatch(loadFooterSettings())
-        dispatch(loadHeaderSettings())
+        dispatch(loadButtonSettings());
+        dispatch(loadCommonSettings());
+        dispatch(loadContacts());
+        dispatch(loadPagesWithNavLinks());
+        dispatch(loadMainPageSettings());
+        dispatch(loadFooterSettings());
+        dispatch(loadHeaderSettings());
+        dispatch(loadProdPage());
+        dispatch(loadProdAttributes());
+        dispatch(loadProducts());
+        dispatch(loadProductsRead())
+        dispatch(loadImages())
     }, [localStorage.access])
 
     //console.log(currentUser, localStorage.access)

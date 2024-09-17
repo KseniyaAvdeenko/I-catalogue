@@ -8,6 +8,10 @@ import footerSettingsReducer from "./reducers/footerSettingsSlice";
 import contactsReducer from './reducers/contactsSlice';
 import mainPageSettingsReducer from "./reducers/mainPageSettingsSlice";
 import pageSettingsReducer from './reducers/pageSettingsSlice';
+import prodPageSettingsReducer from "./reducers/prodPageSettingsSlice";
+import prodAttrsReducer from './reducers/prodAttributesSlice';
+import productReducer from './reducers/productSlice';
+import prodImagesReducer from './reducers/prodImageSlice'
 
 
 export const rootReducer = combineReducers({
@@ -20,4 +24,8 @@ export const rootReducer = combineReducers({
     contactsReducer,
     mainPageSettingsReducer,
     pageSettingsReducer,
+    prodPageSettingsReducer,
+    prodAttrsReducer,
+    productReducer,
+    prodImagesReducer,
 })
