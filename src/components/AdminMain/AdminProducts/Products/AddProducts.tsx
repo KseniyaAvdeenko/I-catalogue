@@ -89,6 +89,10 @@ const AddProducts = () => {
             ? setCurrencyOptionsVisibility({...currencyOptionsVisibility, open: false, display: 'none', bottom: '-12.9rem'})
             : setCurrencyOptionsVisibility({...currencyOptionsVisibility, open: true, display: 'flex', bottom: '-12.9rem'})
     }
+    const deleteProdImageFile=(name: string) =>{
+        setFiles(files.filter(el=> el.prodImg.name !==name))
+    }
+
     return (
         <section id={'addingProdsSection'} style={{display: prodAttrs && prodAttrs.length ? 'flex' : 'none'}}
                  className={[styles.AdminNavbar__container, styles.AdminNavbar__container_margin].join(' ')}>
@@ -104,6 +108,7 @@ const AddProducts = () => {
                     files={files} onImageChangeHandler={onImageChangeHandler}
                     makeImgMainHandler={makeImgMainHandler}
                     saveNewProd={saveNewProd} saveImages={saveImages}
+                    deleteProdImageFile={deleteProdImageFile}
                     changeCurrencyOptionsContainerVisibility={changeCurrencyOptionsContainerVisibility}
                 />
             </div>

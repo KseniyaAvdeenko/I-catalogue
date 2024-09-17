@@ -26,11 +26,11 @@
     display: grid
     grid-template-columns: repeat(3, 1fr)
     column-gap: 2.4rem
+
   &__button
     @extend .baseAdminButton
     @extend .flexRow
     justify-content: center
-
 
 
 .form
@@ -224,11 +224,28 @@
     color: $text100
     font-weight: 400
     transition: all .5s ease-in
+    position: relative
+
+    &_deleteIcon
+      position: absolute
+      top: -2.1rem
+      z-index: 3
+      right: -1.6rem
+      border-radius: .5rem
+      background: $bg100
+      padding: .4rem
+      display: none
+
+    &_deleteIconVisible
+      display: flex !important
+      align-items: center
+      justify-content: center
 
     &_selected
       color: $primary100
       font-weight: 800
-      &>img
+
+      & > img
         border: .2rem solid $primary200
         box-shadow: 0 0 1rem 0 rgba(146, 107, 106, 0.3)
 

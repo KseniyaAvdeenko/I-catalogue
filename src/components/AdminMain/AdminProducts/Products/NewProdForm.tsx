@@ -19,10 +19,12 @@ interface INewProdFormProps {
     saveNewProd: React.MouseEventHandler<HTMLButtonElement>
     saveImages: React.MouseEventHandler<HTMLButtonElement>
     product: IProd | null;
-    changeCurrencyOptionsContainerVisibility: React.MouseEventHandler<HTMLDivElement>
+    changeCurrencyOptionsContainerVisibility: React.MouseEventHandler<HTMLDivElement>;
+    deleteProdImageFile: Function
 }
 
 const NewProdForm: React.FC<INewProdFormProps> = ({
+                                                      deleteProdImageFile,
                                                       newProdAttrs,
                                                       currencyOptionsVisibility,
                                                       prodAttrs,
@@ -81,15 +83,16 @@ const NewProdForm: React.FC<INewProdFormProps> = ({
                                          isLoading={false} onChangeHandler={onChangeProdAttrsHandler}/>
                 ))}
                 <button disabled={!newProd.name && !newProd.price} className={styles.AdminMain__button}
-                        onClick={saveNewProd}>Сохранить
+                        onClick={saveNewProd}>Создать товар
                 </button>
             </div>
             <div className={styles.prodForm__item}
                  style={{display: product ? 'flex' : 'none', alignItems: 'center'}}>
                 <UploadImages files={files} makeImgMainHandler={makeImgMainHandler}
-                              onImageChangeHandler={onImageChangeHandler}/>
+                              onImageChangeHandler={onImageChangeHandler}
+                              deleteProdImageFile={deleteProdImageFile}/>
                 <button disabled={!product && !files.length} className={styles.AdminMain__button}
-                        onClick={saveImages}>Создать товар
+                        onClick={saveImages}>Сохранить картинки к товару
                 </button>
             </div>
         </div>

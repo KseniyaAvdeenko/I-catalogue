@@ -1,16 +1,35 @@
 import React, {useState} from 'react';
-import {formData} from "../../../../store/actions/apiUrl";
 import styles from "../../AdminMain.module.sass";
 import Download from "../../../../assets/img/Download.svg";
-import {IFile, IImagePreview} from "../../../../interface/IAdminPageComponets";
+import {IFile} from "../../../../interface/IAdminPageComponets";
+import DeleteIcon from '../../../../assets/img/deleteIcon.svg'
+import {deleteImage} from "../../../../store/actions/prodImagesAction";
 
 interface IUploadImagesProps {
     files: IFile[];
     onImageChangeHandler: Function;
-    makeImgMainHandler: Function
+    makeImgMainHandler: Function;
+    deleteProdImageFile: Function
 }
 
-const UploadImages: React.FC<IUploadImagesProps> = ({files, onImageChangeHandler, makeImgMainHandler}) => {
+const UploadImages: React.FC<IUploadImagesProps> = ({deleteProdImageFile, files, onImageChangeHandler, makeImgMainHandler}) => {
+
+
+    function onFocusIn(e: React.MouseEvent<HTMLLabelElement>) {
+
+        if(e.currentTarget.lastElementChild){
+            e.currentTarget.lastElementChild.classList.add(styles.upload__item_deleteIconVisible)
+        }
+    }
+
+    function onFocusOut(e: React.MouseEvent<HTMLLabelElement>) {
+        if(e.currentTarget.lastElementChild){
+            e.currentTarget.lastElementChild.classList.remove(styles.upload__item_deleteIconVisible)
+        }
+    }
+
+
+
     return (
         <div className={styles.form__items} style={{alignItems: 'center'}}>
             <p style={{marginBottom: '1rem'}}>Картинки товара</p>
@@ -28,6 +47,7 @@ const UploadImages: React.FC<IUploadImagesProps> = ({files, onImageChangeHandler
             <div className={styles.upload}>
                 {files && files.map(image => (
                     <label key={image.prodImg.name} htmlFor={image.prodImg.name}
+                           onMouseOver={e=>onFocusIn(e)} onMouseOut={e=>onFocusOut(e)}
                            className={image.mainImg ?[styles.upload__item, styles.upload__item_selected].join(' ') :styles.upload__item }
                     >
                         <input type="radio"
@@ -38,6 +58,9 @@ const UploadImages: React.FC<IUploadImagesProps> = ({files, onImageChangeHandler
                         />
                         <img src={URL.createObjectURL(image.prodImg)} alt=""/>
                         <p>Главная картинка</p>
+                        <div className={styles.upload__item_deleteIcon} onClick={()=>deleteProdImageFile(image.prodImg.name)}>
+                            <img src={DeleteIcon} width={16} height={21} alt=""/>
+                        </div>
                     </label>
                 ))}
             </div>
