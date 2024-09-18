@@ -18,7 +18,7 @@ const InputTypeSelect: React.FC<IInputTypeSelectProps> = ({
         <div className={styles.savedItems__item}>
             <div className={styles.savedItems__item_labelMargin}>Тип поля ввода</div>
             <div className={styles.savedItems}>
-                {savedLabelsTypes.includes('number')
+                {!savedLabelsTypes.includes('number')
                     ? inputTypes.map(type => (
                         <label key={type.type} htmlFor={type.type + '*' + input.id}
                                className={type.type === input.inputType
