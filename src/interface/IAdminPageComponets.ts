@@ -63,3 +63,7 @@ export interface IFile{
 export interface IImagePreview{
      imgName: string, image: string, mainImg: boolean
 }
+
+export interface IInputType{
+    type: string, name: string
+}

@@ -6,7 +6,6 @@ import {ISidebarItemsVisibility} from "../../interface/IAdminPageComponets";
 
 interface ISidebarCommonSettingsItemsProps {
     getItemsVisibility: Function;
-
     commonSettingsItems: ISidebarItemsVisibility;
     scrollToBlock: Function
 }

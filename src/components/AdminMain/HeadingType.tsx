@@ -1,36 +1,21 @@
 import React from 'react';
 import {IAdminComponentsProps, IOptions} from "../../interface/IAdminPageComponets";
 import styles from "./AdminMain.module.sass";
-import {appFonts, headingTypes} from "./Options";
+import {headingTypes} from "./Options";
 
 interface IMainPageHeadingTypeProps extends IAdminComponentsProps {
     blockHeadingType: string | undefined;
     headingTypeOptionsVisibility: IOptions;
-    setHeadingTypeOptionsVisibility: Function;
+    changeHeadingTypeOptionsContainerVisibility: React.MouseEventHandler<HTMLDivElement>
 }
 
 const HeadingType: React.FC<IMainPageHeadingTypeProps> = ({
-                                                                      headingTypeOptionsVisibility,
-                                                                      setHeadingTypeOptionsVisibility,
-                                                                      blockHeadingType,
-                                                                      onChangeHandler,
-                                                                      isLoading
-                                                                  }) => {
-    const changeHeadingTypeOptionsContainerVisibility = () => {
-        headingTypeOptionsVisibility.open
-            ? setHeadingTypeOptionsVisibility({
-                ...headingTypeOptionsVisibility,
-                open: false,
-                display: 'none',
-                bottom: '-25.2rem'
-            })
-            : setHeadingTypeOptionsVisibility({
-                ...headingTypeOptionsVisibility,
-                open: true,
-                display: 'flex',
-                bottom: '-25.2rem'
-            })
-    }
+                                                              headingTypeOptionsVisibility,
+                                                              blockHeadingType,
+                                                              onChangeHandler,
+                                                              isLoading,
+                                                              changeHeadingTypeOptionsContainerVisibility
+                                                          }) => {
 
     return (
         <div className={styles.form__inputContainer_select}>

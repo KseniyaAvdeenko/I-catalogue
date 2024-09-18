@@ -14,13 +14,8 @@ const ProductsAttributes = () => {
     const dispatch = useAppDispatch();
     //states
     const [fields, setFields] = React.useState<IProdAttrs[]>([{id: 0, attribute: ''}])
-    const [newAttr, setNewAttr] = React.useState<IProdAttrsBase>({attribute: ''})
 
-    const deleteProdAttr = (id: number) => {
-        if (localStorage.access) {
-            dispatch(deleteProdAttribute(decodeToken(localStorage.access), id))
-        }
-    }
+    const deleteProdAttr = (id: number) => dispatch(deleteProdAttribute(decodeToken(localStorage.access), id))
 
     const addNewField = () => {
         const newField: IProdAttrs = {id: 0, attribute: ''}
@@ -28,7 +23,7 @@ const ProductsAttributes = () => {
         setFields([...fields, newField])
     }
 
-    const onChangeNewAttrHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const onChangeNewAttrHandler = (e: React.ChangeEvent<HTMLInputElement>) =>
         setFields(fields =>
             fields.map(field =>
                 field.id === parseInt(e.target.id.split('*')[1])
@@ -36,21 +31,17 @@ const ProductsAttributes = () => {
                     : field
             )
         )
-        setNewAttr({...newAttr, [e.target.name]: e.target.value})
-    }
+
 
     const deleteField = (id: number) => {
         setFields(fields.filter(el => el.id != id))
     }
 
     const saveAttr = (id: number) => {
-        if (localStorage.access) {
-            dispatch(createProdAttribute(decodeToken(localStorage.access), newAttr))
-            if (!error) {
-                deleteField(id);
-                setNewAttr({...newAttr, attribute: ''})
-            }
-        }
+        const newAttr = fields.find(el => el.id === id)
+        if (newAttr && newAttr.attribute) dispatch(createProdAttribute(decodeToken(localStorage.access),
+            {attribute: newAttr.attribute}))
+        if (!error) deleteField(id);
     }
 
 
@@ -59,6 +50,14 @@ const ProductsAttributes = () => {
             let attrId = parseInt(e.target.id.split('*')[1])
             dispatch(updateProdAttribute(decodeToken(localStorage.access), attrId, {[e.target.name]: e.target.value}))
         }
+    }
+
+    function saveAllFields() {
+        fields.map(elem=>{
+            if(elem.attribute)dispatch(createProdAttribute(decodeToken(localStorage.access),
+            {attribute: elem.attribute}))
+        })
+        if (!error) setFields([{id: 0, attribute: ''}])
     }
 
     return (
@@ -76,10 +75,11 @@ const ProductsAttributes = () => {
                     deleteField={deleteField}
                     saveNewAttr={saveAttr}
                 />
-                <button className={styles.AdminNavbar__button} onClick={addNewField}> Добавить</button>
+                <button className={styles.AdminNavbar__button} onClick={addNewField}>Добавить поле</button>
+                <button className={styles.AdminNavbar__button} style={{marginTop: '2rem'}}
+                        onClick={saveAllFields}>Сохранить все контакты
+                </button>
             </div>
-
-
         </section>
     );
 };
