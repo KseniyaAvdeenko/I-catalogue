@@ -47,22 +47,7 @@ const AdminHeader: React.FC<IAdminHeader> = ({children}) => {
     }, [now, auth.accessExpires, auth.refreshExpires]);
 
     useEffect(() => {
-        if (auth.access) {
-            dispatch(loadCurrentUser(decodeToken(auth.access)));
-        }
-        dispatch(loadButtonSettings());
-        dispatch(loadCommonSettings());
-        dispatch(loadContacts());
-        dispatch(loadPagesWithNavLinks());
-        dispatch(loadMainPageSettings());
-        dispatch(loadFooterSettings());
-        dispatch(loadHeaderSettings());
-        dispatch(loadProdPage());
-        dispatch(loadProdAttributes());
-        dispatch(loadProducts());
-        dispatch(loadProductsRead())
-        dispatch(loadImages())
-        dispatch(loadModalFormSettings())
+        if (auth.access) dispatch(loadCurrentUser(decodeToken(auth.access)));
     }, [auth.access])
 
     return (
