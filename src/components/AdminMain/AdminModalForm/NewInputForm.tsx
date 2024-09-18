@@ -12,9 +12,10 @@ interface INewInputFormProps {
     onChangeHandler: Function;
     deleteField: Function;
     saveNewInput: Function;
+    savedLabelsTypes: string[]
 }
 
-const NewInputForm: React.FC<INewInputFormProps> = ({fields, saveNewInput, deleteField, onChangeHandler}) => {
+const NewInputForm: React.FC<INewInputFormProps> = ({savedLabelsTypes, fields, saveNewInput, deleteField, onChangeHandler}) => {
 
 
     return (
@@ -30,6 +31,7 @@ const NewInputForm: React.FC<INewInputFormProps> = ({fields, saveNewInput, delet
                         label={'Название поля'} isLoading={false}
                         onChangeHandler={onChangeHandler}/>
                     <InputTypeSelect
+                        savedLabelsTypes={savedLabelsTypes}
                         input={field}
                         onChangeHandler={onChangeHandler}/>
                     <AdminInputContainer

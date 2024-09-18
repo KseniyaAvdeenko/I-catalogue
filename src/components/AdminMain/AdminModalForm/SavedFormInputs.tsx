@@ -9,9 +9,10 @@ import DeleteIcon from "../../../assets/img/deleteIcon.svg";
 interface ISavedFormInputsProps extends IAdminComponentsProps {
     formInputs: IModalLabels[] | [];
     deleteInput: Function;
+    savedLabelsTypes: string[]
 }
 
-const SavedFormInputs: React.FC<ISavedFormInputsProps> = ({formInputs, isLoading, onChangeHandler, deleteInput}) => {
+const SavedFormInputs: React.FC<ISavedFormInputsProps> = ({savedLabelsTypes,formInputs, isLoading, onChangeHandler, deleteInput}) => {
     return (
         <div className={styles.savedItems} style={{borderBottom: formInputs.length ? '.1rem solid #926B6A' : 'none'}}>
             {formInputs.map(input => (
@@ -25,7 +26,7 @@ const SavedFormInputs: React.FC<ISavedFormInputsProps> = ({formInputs, isLoading
                         label={'Название поля'} isLoading={isLoading}
                         onChangeHandler={onChangeHandler}/>
                     <InputTypeSelect
-                        input={input}
+                        input={input} savedLabelsTypes={savedLabelsTypes}
                         onChangeHandler={onChangeHandler}/>
                     <AdminInputContainer
                         type={'text'} name={'inputIdName'} inputId={'inputIdName*'+ input.id}

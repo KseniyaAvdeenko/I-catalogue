@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import styles from "../AdminNavbar.module.sass";
 import {useAppDispatch, useAppSelector} from "../../../hooks/redux";
 import SavedFormInputs from "./SavedFormInputs";
@@ -16,7 +16,16 @@ const ModalFormInputs = () => {
     //--states
 
     const [fields, setFields] = useState<IModalLabels[]>([{id: 0, inputLabel: '', inputIdName: '', inputType: "text"}])
+    const [savedLabelsTypes, setSavedLabelsTypes] = useState<string[]>([])
     //--methods
+    useEffect(() => {
+        if (modalForm && modalForm.labels.length) {
+            modalForm.labels.map(el => {
+                if (!savedLabelsTypes.includes(el.inputType)) setSavedLabelsTypes([...savedLabelsTypes, el.inputType])
+            })
+        }
+    }, [modalForm])
+    console.log(savedLabelsTypes)
     const onSavedInputsChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
         dispatch(updateModalFormLabel(decodeToken(localStorage.access), parseInt(e.target.id.split('*')[1]), {[e.target.name]: e.target.value}))
     }
@@ -67,6 +76,7 @@ const ModalFormInputs = () => {
             setFields([{id: 0, inputLabel: '', inputIdName: '', inputType: "text"}])
         }
     }
+
     const addNewField = () => {
         const newField: IModalLabels = {id: fields.length, inputLabel: '', inputIdName: '', inputType: "text"}
         setFields([...fields, newField])
@@ -82,12 +92,14 @@ const ModalFormInputs = () => {
                         formInputs={modalForm.labels}
                         isLoading={isLoading}
                         onChangeHandler={onSavedInputsChangeHandler}
-                        deleteInput={deleteInput}/>
+                        deleteInput={deleteInput}
+                        savedLabelsTypes={savedLabelsTypes}/>
                 )}
                 <NewInputForm
                     onChangeHandler={onNewInputsChangeHandler}
                     saveNewInput={saveNewInput} fields={fields}
-                    deleteField={deleteField}/>
+                    deleteField={deleteField}
+                savedLabelsTypes={savedLabelsTypes}/>
                 <button className={styles.AdminNavbar__button} onClick={addNewField}>Добавить поле</button>
                 <button className={styles.AdminNavbar__button} style={{marginTop: '2rem'}}
                         onClick={saveAllFields}>Сохранить все поля ввода
