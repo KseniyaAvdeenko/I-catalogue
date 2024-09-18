@@ -26,11 +26,24 @@ export const updateModalFormSettings = (access: string, id: number, data: any) =
         }
     }
 }
-
+export const createModalFormLabel = (access: string, data: any) => async (dispatch: AppDispatch) => {
+    if (access) {
+        await axios.post(apiUrl + `modal_settings/modal_inputs/`, JSON.stringify(data),
+            getAuthConfigApplicationJson(access));
+        dispatch(loadModalFormSettings())
+    }
+}
+export const updateModalFormLabel = (access: string,id: number, data: any) => async (dispatch: AppDispatch) => {
+    if (access) {
+        await axios.patch(apiUrl + `modal_settings/modal_inputs/${id}/`, JSON.stringify(data),
+            getAuthConfigApplicationJson(access));
+        dispatch(loadModalFormSettings())
+    }
+}
 export const deleteModalFormLabel = (access: string, id: number) => async (dispatch: AppDispatch) => {
     if (access) {
-            await axios.delete(apiUrl + `modal_settings/modal_inputs/${id}/`,
-                getAuthConfigApplicationJson(access));
-            dispatch(loadModalFormSettings())
+        await axios.delete(apiUrl + `modal_settings/modal_inputs/${id}/`,
+            getAuthConfigApplicationJson(access));
+        dispatch(loadModalFormSettings())
     }
 }

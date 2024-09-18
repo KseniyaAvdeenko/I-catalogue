@@ -22,7 +22,7 @@ const NewInputForm: React.FC<INewInputFormProps> = ({fields, saveNewInput, delet
             {fields && fields.map(field => (
                 <div key={field.id} className={styles.savedItems__items}>
                     <AdminInputContainer
-                        type={'text'} name={'inputLabel'} inputId={'inputLabel*'+ field.id}
+                        type={'text'} name={'inputLabel'} inputId={'inputLabel*' + field.id}
                         value={field.inputLabel} checked={false}
                         required={true} readonly={false} inputClassname={''}
                         inputContainerClassname={styles.savedItems__item}
@@ -33,13 +33,14 @@ const NewInputForm: React.FC<INewInputFormProps> = ({fields, saveNewInput, delet
                         input={field}
                         onChangeHandler={onChangeHandler}/>
                     <AdminInputContainer
-                        type={'text'} name={'inputIdName'} inputId={'inputIdName*'+ field.id}
+                        type={'text'} name={'inputIdName'} inputId={'inputIdName*' + field.id}
                         value={field.inputIdName} checked={false}
                         required={true} readonly={false} inputClassname={''}
                         inputContainerClassname={styles.savedItems__item}
                         labelClassName={[styles.savedItems__item, styles.savedItems__item_labelMargin].join(' ')}
                         label={'ID и название поля ввода'} isLoading={false}
                         onChangeHandler={onChangeHandler} pattern={'[A-Za-z]'}/>
+
                     <img src={SaveIcon} alt="save icon" onClick={() => saveNewInput(field.id)}/>
                     <img src={DeleteIcon} alt="delete icon" onClick={() => deleteField(field.id)}/>
                 </div>

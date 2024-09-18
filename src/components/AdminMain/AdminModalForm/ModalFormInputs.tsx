@@ -2,7 +2,10 @@ import React, {useState} from 'react';
 import styles from "../AdminNavbar.module.sass";
 import {useAppDispatch, useAppSelector} from "../../../hooks/redux";
 import SavedFormInputs from "./SavedFormInputs";
-import {deleteModalFormLabel} from "../../../store/actions/modalFormAction";
+import {
+    createModalFormLabel,
+    deleteModalFormLabel, updateModalFormLabel
+} from "../../../store/actions/modalFormAction";
 import {decodeToken} from "../../../hooks/encodeDecodeTokens";
 import NewInputForm from "./NewInputForm";
 import {IModalLabelBase, IModalLabels, ModalInputTypes} from "../../../interface/IModalForm";
@@ -13,51 +16,60 @@ const ModalFormInputs = () => {
     //--states
 
     const [fields, setFields] = useState<IModalLabels[]>([{id: 0, inputLabel: '', inputIdName: '', inputType: "text"}])
-
+    //--methods
     const onSavedInputsChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-        console.log({[e.target.name]: e.target.value})
+        dispatch(updateModalFormLabel(decodeToken(localStorage.access), parseInt(e.target.id.split('*')[1]), {[e.target.name]: e.target.value}))
     }
     const onNewInputsChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
         console.log({[e.target.name]: e.target.value}, parseInt(e.target.id.split('*')[1]))
-        setFields(fields=>fields.map(field=>
-        field.id === parseInt(e.target.id.split('*')[1])
-            ?{...field, [e.target.name]: e.target.value}
-            :field
+        setFields(fields => fields.map(field =>
+            field.id === parseInt(e.target.id.split('*')[1])
+                ? {...field, [e.target.name]: e.target.value}
+                : field
         ))
     }
 
     const deleteInput = (id: number) => dispatch(deleteModalFormLabel(decodeToken(localStorage.access), id))
 
-
     const saveNewInput = (id: number) => {
         const newField = fields.find(el => el.id === id)
-        console.log('save', newField)
+        if (modalForm && newField && newField.inputLabel && newField.inputIdName) {
+            dispatch(createModalFormLabel(decodeToken(localStorage.access),
+                {
+                    form: modalForm.id,
+                    inputLabel: newField.inputLabel,
+                    inputIdName: newField.inputIdName,
+                    inputType: newField.inputType
+                })
+            )
+        }
+        deleteField(id)
     }
-
-    //--methods
 
     const deleteField = (id: number) => {
         setFields(fields.filter(el => el.id !== id))
     }
 
     const saveAllFields = () => {
-        let array: IModalLabelBase[] = []
-        fields.map(el => {
-            const field: IModalLabelBase = {
-                inputLabel: el.inputLabel,
-                inputIdName: el.inputIdName,
-                inputType: el.inputType
-            }
-            array.push(field)
-        })
-
-        setFields([{id: 0, inputLabel: '', inputIdName: '', inputType: "text"}])
-        console.log('save', array)
+        if (modalForm) {
+            let array: IModalLabelBase[] = []
+            fields.map(el => {
+                if (el.inputLabel && el.inputIdName) {
+                    const field = {
+                        form: modalForm.id,
+                        inputLabel: el.inputLabel,
+                        inputIdName: el.inputIdName,
+                        inputType: el.inputType
+                    }
+                    dispatch(createModalFormLabel(decodeToken(localStorage.access), field))
+                }
+            })
+            setFields([{id: 0, inputLabel: '', inputIdName: '', inputType: "text"}])
+        }
     }
-
     const addNewField = () => {
-        const field: IModalLabels = {id: fields.length, inputLabel: '', inputIdName: '', inputType: "text"}
-        setFields([...fields, field])
+        const newField: IModalLabels = {id: fields.length, inputLabel: '', inputIdName: '', inputType: "text"}
+        setFields([...fields, newField])
     }
 
     return (

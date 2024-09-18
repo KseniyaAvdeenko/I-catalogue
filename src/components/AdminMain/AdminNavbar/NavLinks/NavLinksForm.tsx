@@ -18,69 +18,58 @@ const NavLinksForm = () => {
 
     const [fields, setFields] = useState<INavLink[]>([navLinkFieldExample])
 
-    const [newNavLink, setNewNavLink] = useState<INavLinkBase>({navLink: '', slug: ''})
-
     function addNewField() {
         const newField: INavLink = structuredClone(navLinkFieldExample)
         newField.id = fields.length
         setFields([...fields, newField])
     }
 
-    const deleteField = (id: number) => {
-        setFields(fields.filter(el => el.id !== id))
-    }
+    const deleteField = (id: number) => setFields(fields.filter(el => el.id !== id))
 
-    const deleteNavigationLink = (slug: string) => {
-        if (localStorage.access) {
-            dispatch(deletePageWithNavLink(decodeToken(localStorage.access), slug))
-        }
-    }
+    const deleteNavigationLink = (slug: string) => dispatch(deletePageWithNavLink(decodeToken(localStorage.access), slug))
 
     const onChangeNewNavLinkHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-        if (e.target.name === 'navLink') {
-            setFields(fields =>
+        e.target.name === 'navLink'
+            ? setFields(fields =>
                 fields.map(field =>
                     field.id === parseInt(e.target.id.split('*')[1])
                         ? {...field, [e.target.name]: e.target.value, slug: slugify(e.target.value)}
                         : field
                 )
             )
-            setNewNavLink({
-                ...newNavLink,
-                [e.target.name]: e.target.value,
-                slug: slugify(e.target.value)
-            })
-        } else {
-            setFields(fields =>
+            : setFields(fields =>
                 fields.map(field =>
                     field.id === parseInt(e.target.id.split('*')[1])
                         ? {...field, [e.target.name]: e.target.value}
                         : field
                 )
             )
-            setNewNavLink({
-                ...newNavLink,
-                [e.target.name]: e.target.value,
-            })
-        }
     }
 
     const saveNavLink = (id: number) => {
-        const newPage = {
-            navLink: newNavLink.navLink,
-            slug: newNavLink.slug,
-            headingSettings: {headingContent: newNavLink.navLink},
+        const newPage = structuredClone(fields.find(el => el.id === id))
+        newPage.headingSettings.headingContent = `Заголовок страницы ${newPage.navLink}`
+        dispatch(createPageWithNavLink(decodeToken(localStorage.access), newPage))
+        if (fields.length === 1) {
+            deleteField(id)
+            addNewField()
+        } else {
+            deleteField(id)
         }
-        if (localStorage.access) {
-            dispatch(createPageWithNavLink(decodeToken(localStorage.access), newPage))
-            if (fields.length === 1) {
-                deleteField(id)
-                addNewField()
-            } else {
-                deleteField(id)
+    }
+
+    function saveAllFields() {
+        fields.map(elem => {
+            if (elem.navLink) {
+                const newPage = {
+                    navLink: elem.navLink,
+                    slug: elem.slug,
+                    headingSettings: {headingContent: `Заголовок страницы ${elem.navLink}`}
+                }
+                dispatch(createPageWithNavLink(decodeToken(localStorage.access), newPage))
             }
-            setNewNavLink({...newNavLink, navLink: '', slug: ''})
-        }
+        })
+        setFields([navLinkFieldExample])
     }
 
     return (
@@ -95,14 +84,16 @@ const NavLinksForm = () => {
                         isLoading={isLoading}
                     />
                 )}
-                {/*{pages && pages.length && (<hr className={styles.hr}/>)}*/}
                 <NewNavLinkForm
                     fields={fields}
                     onChangeHandler={onChangeNewNavLinkHandler}
                     deleteField={deleteField}
                     saveNewLink={saveNavLink}
                 />
-                <button className={styles.AdminNavbar__button} onClick={addNewField}> Добавить</button>
+                <button className={styles.AdminNavbar__button} onClick={addNewField}> Добавить поле</button>
+                <button className={styles.AdminNavbar__button} style={{marginTop: '2rem'}}
+                        onClick={saveAllFields}>Сохранить все навигационные ссылки
+                </button>
             </div>
         </section>
     )

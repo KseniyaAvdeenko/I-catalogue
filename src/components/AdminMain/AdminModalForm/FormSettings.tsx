@@ -35,7 +35,7 @@ const FormSettings = () => {
 
     function onChangeHandler(e: React.ChangeEvent<HTMLInputElement>) {
         if (modalForm) {
-            const form = {headingSettings: modalForm.headingSettings, labels: modalForm.labels}
+            const form = {headingSettings: modalForm.headingSettings}
             dispatch(updateModalFormSettings(decodeToken(localStorage.access), modalForm.id,
                 Object.assign({[e.target.name]: e.target.value}, form)))
         }
