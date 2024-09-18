@@ -1,7 +1,8 @@
 import React from 'react';
 import styles from "./Sidebar.module.sass";
 import {NavLink} from "react-router-dom";
-import {useAppSelector} from "../../hooks/redux";
+import {useAppSelector} from "../../../hooks/redux";
+
 
 interface ISidebarPagesItemsProps {
     getItemsVisibility: Function;

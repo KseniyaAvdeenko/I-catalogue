@@ -1,0 +1,43 @@
+.layout
+  display: grid
+  grid-template-rows: 15rem auto 20%
+  height: 100vh
+  width: 100%
+
+//-------------header
+
+.header
+  width: 100%
+  padding: 3rem 10%
+
+  &__container
+    display: grid
+    width: 100%
+    height: 100%
+
+  &__layout1
+    grid-template-columns: 10% 60% 1.5fr
+    column-gap: 2rem
+
+  &__layout2
+    grid-template-columns: 15% 85%
+    column-gap: 2rem
+
+.image
+  &__container
+    height: 9rem
+    width: 100%
+    & >img
+      height: 100%
+      width: 100%
+      object-fit: contain
+
+
+.nav
+  display: flex
+  align-items: center
+  justify-content: space-evenly
+
+  &__item
+    text-decoration: none
+    transition: all .5s ease-in

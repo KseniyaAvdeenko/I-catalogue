@@ -2,12 +2,12 @@ import React, {useEffect, useState} from 'react';
 import styles from './Sidebar.module.sass';
 import SidebarPagesItems from "./SidebarPagesItems";
 import SidebarCommonSettingsItems from "./SidebarCommonSettingsItems";
-import {ISidebarItemsVisibility} from "../../interface/IAdminPageComponets";
 import SidebarNavbarItems from "./SidebarNavbarItems";
 import SidebarMainPageItems from "./SidebarMainPageItems";
 import SidebarProdSettings from "./SidebarProdSettings";
 import SidebarEditProdItems from "./SidebarEditProdItems";
 import SidebarModalFormSettingsItems from "./SidebarModalFormSettingsItems";
+import {ISidebarItemsVisibility} from "../../../interface/IAdminPageComponets";
 
 interface ISidebarProps {
     scrollToBlock: Function

@@ -1,8 +1,9 @@
 import React from 'react';
 import styles from "./Sidebar.module.sass";
 import {NavLink} from "react-router-dom";
-import ArrowDown from "../../assets/img/arrowDown.svg";
-import {ISidebarItemsVisibility} from "../../interface/IAdminPageComponets";
+import ArrowDown from "../../../assets/img/arrowDown.svg";
+import {ISidebarItemsVisibility} from "../../../interface/IAdminPageComponets";
+
 
 interface ISidebarNavbarItemsProps {
     getItemsVisibility: Function;

@@ -1,9 +1,9 @@
 import React from 'react';
-import {ISidebarItemsVisibility} from "../../interface/IAdminPageComponets";
 import styles from "./Sidebar.module.sass";
 import {NavLink} from "react-router-dom";
-import ArrowDown from "../../assets/img/arrowDown.svg";
-import {useAppSelector} from "../../hooks/redux";
+import ArrowDown from "../../../assets/img/arrowDown.svg";
+import {ISidebarItemsVisibility} from "../../../interface/IAdminPageComponets";
+import {useAppSelector} from "../../../hooks/redux";
 
 interface ISidebarModalFormSettingsItemsProps {
     getItemsVisibility: Function;

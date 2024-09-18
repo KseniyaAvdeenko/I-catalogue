@@ -4,8 +4,8 @@ import {IUserBase} from "../../interface/IUser";
 import {useAppDispatch, useAppSelector} from "../../hooks/redux";
 import {loginUser} from "../../store/actions/authAction";
 import {useNavigate} from "react-router-dom";
-import AdminHeader from "../../components/AdminHeader/AdminHeader";
-import AdminFooter from "../../components/AdminFooter/AdminFooter";
+import AdminHeader from "../../components/AdminComponents/AdminHeader/AdminHeader";
+import AdminFooter from "../../components/AdminComponents/AdminFooter/AdminFooter";
 
 
 const SignIn = () => {

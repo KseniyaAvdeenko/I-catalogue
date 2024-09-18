@@ -1,8 +1,7 @@
 import React, {useRef} from 'react';
-import AdminHeader from "../../components/AdminHeader/AdminHeader";
-import AdminFooter from "../../components/AdminFooter/AdminFooter";
+import AdminHeader from "../../components/AdminComponents/AdminHeader/AdminHeader";
+import AdminFooter from "../../components/AdminComponents/AdminFooter/AdminFooter";
 import styles from './AdminPage.module.sass'
-import Sidebar from "../../components/Sidebar/Sidebar";
 import AdminCommonSettings from "../../components/AdminMain/AdminCommonSettings/AdminCommonSettings";
 import {Route, Routes} from "react-router-dom";
 import AdminNavbar from "../../components/AdminMain/AdminNavbar/AdminNavbar";
@@ -12,6 +11,7 @@ import ProductSettings from "../../components/AdminMain/AdminProducts/ProductSet
 import {scrollingToSection} from "../../hooks/scrollingToSection";
 import Product from "../../components/AdminMain/AdminProducts/Product/Product";
 import ModalFormSettings from "../../components/AdminMain/AdminModalForm/ModalFormSettings";
+import Sidebar from "../../components/AdminComponents/Sidebar/Sidebar";
 
 const AdminPage = () => {
     const commonSettingsRef = useRef<HTMLElement>(null);

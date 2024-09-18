@@ -1,24 +1,11 @@
 import React, {useEffect} from 'react';
 import styles from './AdminHeader.module.sass'
-import AppLogo from '../../assets/img/I-Catalogue.svg'
-import {useAppDispatch, useAppSelector} from "../../hooks/redux";
+import AppLogo from '../../../assets/img/I-Catalogue.svg'
+import {useAppDispatch, useAppSelector} from "../../../hooks/redux";
 import {Link, useNavigate} from "react-router-dom";
-import {logout, refreshToken, verifyToken} from "../../store/actions/authAction";
-import {loadCurrentUser} from "../../store/actions/userAction";
-import {loadCommonSettings} from "../../store/actions/commonSettingsAction";
-import {loadFooterSettings} from "../../store/actions/footerSettingsAction";
-import {loadHeaderSettings} from "../../store/actions/headerSettingsAction";
-import {loadButtonSettings} from "../../store/actions/buttonSettingsAction";
-import {decodeToken} from "../../hooks/encodeDecodeTokens";
-import {loadContacts} from "../../store/actions/contactsAction";
-import {loadPagesWithNavLinks} from "../../store/actions/pageSettingsAction";
-import {loadMainPageSettings} from "../../store/actions/mainPageSettingsAction";
-import {loadProdPage} from "../../store/actions/prodPageSettingsAction";
-import {loadProdAttributes} from "../../store/actions/prodAttrsAction";
-import {loadProducts, loadProductsRead} from "../../store/actions/productAction";
-import {loadImages} from "../../store/actions/prodImagesAction";
-import {loadModalFormSettings} from "../../store/actions/modalFormAction";
-
+import {logout, refreshToken} from "../../../store/actions/authAction";
+import {loadCurrentUser} from "../../../store/actions/userAction";
+import {decodeToken} from "../../../hooks/encodeDecodeTokens";
 
 
 interface IAdminHeader {

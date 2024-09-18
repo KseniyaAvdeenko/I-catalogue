@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
-import AdminHeader from "../../components/AdminHeader/AdminHeader";
+import AdminHeader from "../../components/AdminComponents/AdminHeader/AdminHeader";
 import styles from "./Auth.module.sass";
-import AdminFooter from "../../components/AdminFooter/AdminFooter";
+import AdminFooter from "../../components/AdminComponents/AdminFooter/AdminFooter";
 import {useNavigate} from "react-router-dom";
 import {useAppDispatch, useAppSelector} from "../../hooks/redux";
 import {INewUser} from "../../interface/IUser";
