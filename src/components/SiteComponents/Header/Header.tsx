@@ -1,7 +1,12 @@
 import React, {useEffect, useState} from 'react';
-import {useAppSelector} from "../../hooks/redux";
-import styles from './Layout.module.sass'
+import {useAppSelector} from "../../../hooks/redux";
+import styles from '../Layout.module.sass'
 import {Link, NavLink} from "react-router-dom";
+import contactLinkHref from "../../AdminMain/AdminNavbar/Contacts/ContactLinkHref";
+import HeaderNav from "./HeaderNav";
+import HeaderContacts from "./HeaderContacts";
+import HeaderLayout1 from "./HeaderLayout1";
+import HeaderLayout2 from "./HeaderLayout2";
 
 interface IHeaderProps {
     logo: string | undefined
@@ -9,9 +14,7 @@ interface IHeaderProps {
 
 const Header: React.FC<IHeaderProps> = ({logo}) => {
     const {headerSettings} = useAppSelector(state => state.headerSettingsReducer)
-    const {pages} = useAppSelector(state => state.pageSettingsReducer)
-
-    const [headerStyles, setHeaderStyles] = useState({
+    const [headerStyles, setHeaderStyles] = useState<{ background: string; fontColor: string; borderBottom: string; }>({
         background: '#fff',
         fontColor: '#000',
         borderBottom: 'none',
@@ -44,44 +47,49 @@ const Header: React.FC<IHeaderProps> = ({logo}) => {
     }, [headerSettings])
 
     const onHoverOut = (e: React.MouseEvent<HTMLAnchorElement>) => {
-        e.currentTarget.style.color = navLinksStyle.color
+        e.currentTarget.style.color = navLinksStyle.color;
+        e.currentTarget.style.color = navLinksStyle.color;
+        e.currentTarget.childNodes.forEach(el => {
+            if (el instanceof HTMLElement) {
+                el.style.width = '0'
+            }
+        })
     }
 
     const onHoverIn = (e: React.MouseEvent<HTMLAnchorElement>) => {
-
-        e.currentTarget.style.color = navLinksStyle.hoverColor
+        if (navLinksStyle.hoverStyle === 'changeColor') e.currentTarget.style.color = navLinksStyle.hoverColor
+        if (navLinksStyle.hoverStyle === 'underline') {
+            e.currentTarget.style.color = navLinksStyle.hoverColor
+            e.currentTarget.childNodes.forEach(el => {
+                if (el instanceof HTMLElement && el.classList.contains('underline')) {
+                    el.style.width = '100%'
+                    el.style.background = navLinksStyle.hoverColor
+                }
+            })
+        }
+        if (navLinksStyle.hoverStyle === 'overline&underline') {
+            e.currentTarget.style.color = navLinksStyle.hoverColor
+            e.currentTarget.childNodes.forEach(el => {
+                if (el instanceof HTMLElement) {
+                    el.style.width = '100%';
+                    el.style.background = navLinksStyle.hoverColor
+                }
+            })
+        }
     }
 
     function getHeaderLayout(layout: string, logo: string | undefined) {
-
-
         if (layout === '1') {
             return (
-                <div className={headerContainerClass}>
-                    <Link to={'/'} className={styles.image__container}>{logo && (<img src={logo} alt={'logo'}/>)}</Link>
-                    <nav className={styles.nav}>
-                        {pages && pages.map(page => (
-                            <Link
-                                onMouseEnter={e => onHoverIn(e)}
-                                onMouseLeave={e => onHoverOut(e)}
-                                key={page.id} to={'page/' + page.slug}
-                                className={styles.nav__item}
-                                style={{color: navLinksStyle.color, fontSize: navLinksStyle.fontSize}}>
-                                {/*<span>*/}
-                                    {page.navLink}
-                                {/*</span>*/}
-                            </Link>
-                        ))}
-                    </nav>
-                    <div></div>
-                </div>
+                <HeaderLayout1 headerContainerClass={headerContainerClass}
+                               logo={logo ?? ''} onHoverOut={onHoverOut} onHoverIn={onHoverIn}
+                               navLinksStyle={navLinksStyle} headerStyles={headerStyles}/>
             )
         } else if (layout === '2') {
             return (
-                <div className={headerContainerClass}>
-                    <Link to={'/'} className={styles.image__container}>{logo && (<img src={logo} alt={'logo'}/>)}</Link>
-                    <div></div>
-                </div>
+                <HeaderLayout2 headerContainerClass={headerContainerClass}
+                               logo={logo ?? ''} onHoverOut={onHoverOut} onHoverIn={onHoverIn}
+                               navLinksStyle={navLinksStyle} headerStyles={headerStyles}/>
             )
         }
     }

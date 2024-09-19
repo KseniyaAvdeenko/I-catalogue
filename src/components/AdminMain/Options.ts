@@ -63,7 +63,7 @@ export const contactFieldExample: IContacts = {
 export const linkTypes: IInputProps[] = [
     {type: 'radio', id: 'none', name: 'linkType', value: 'none', label: 'Не определено', checked: false},
     {type: 'radio', id: 'tel', name: 'linkType', value: 'tel', label: 'Телефон', checked: false},
-    {type: 'radio', id: 'mailTo', name: 'linkType', value: 'mailto', label: 'Email', checked: false},
+    {type: 'radio', id: 'mailto', name: 'linkType', value: 'mailto', label: 'Email', checked: false},
     {type: 'radio', id: 'address', name: 'linkType', value: 'address', label: 'Адрес', checked: false},
 ]
 

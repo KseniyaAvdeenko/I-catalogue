@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import styles from './Layout.module.sass'
 import {useAppSelector} from "../../hooks/redux";
-import Header from "./Header";
-import Footer from "./Footer";
+import Header from "./Header/Header";
+import Footer from "./Footer/Footer";
 
 interface ILayoutProps {
     children: React.ReactNode
