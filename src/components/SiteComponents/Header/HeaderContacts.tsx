@@ -13,7 +13,7 @@ const HeaderContacts: FC<IHeaderContactsProps> = ({containerClassName, headerSty
     const {contacts} = useAppSelector(state => state.contactsReducer)
     const {headerSettings} = useAppSelector(state => state.headerSettingsReducer)
     return (
-        <div className={containerClassName} style={{borderBottom: contacts && contacts.length ? `.1rem solid ${headerSettings?.headerBottomBorderColor ?? '#333'}` :'none'}}>
+        <div className={containerClassName} style={{borderBottom: contacts && contacts.length && headerSettings?.headerLayout === '2'  ? `.1rem solid ${headerSettings?.headerBottomBorderColor ?? '#333'}` :'none'}}>
             {contacts && contacts.map(contact => (
                 contact.isLink && contact.linkHref && contact.linkType !== 'none' && contact.linkType !== 'address'
                     ? <Link key={contact.id} target={'_blank'}

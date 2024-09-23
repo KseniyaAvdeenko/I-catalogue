@@ -6,17 +6,26 @@
   display: flex
   flex-direction: column
 
+.imgWrapper
+  height: 100%
+  width: 100%
+  object-fit: contain
+
+//-----layout
 .layout
-  display: grid
-  grid-template-rows: 15rem auto 20%
+  @extend .flexColumn
+  justify-content: space-between
   height: 100vh
   width: 100%
+
 
 //-------------header
 
 .header
+  flex-basis: 15%
   width: 100%
   padding: 3rem 10%
+  height: fit-content
 
   &__container
     display: grid
@@ -27,20 +36,20 @@
     grid-template-columns: 10% 60% 1.5fr
     column-gap: 2rem
 
+
   &__layout2
-    grid-template-columns: 15% 85%
+    grid-template-columns: 10% calc(90% - 2rem)
     column-gap: 2rem
 
 
 .image
   &__container
-    height: 9rem
+    align-self: center
+    height: 6rem
     width: 100%
 
     & > img
-      height: 100%
-      width: 100%
-      object-fit: contain
+      @extend .imgWrapper
 
 
 .navLayout1
@@ -109,6 +118,67 @@
 //----footer
 
 .footer
+  flex-basis: fit-content
   width: 100%
   padding: 3rem 10%
   @extend .flexColumn
+  height: fit-content
+
+  &__Layout1,
+  &__Layout2,
+  &__Layout3
+    @extend .flexColumn
+    width: 100%
+
+    &__container
+      width: 100%
+      @extend .flexRow
+      justify-content: space-between
+
+      & > a
+        flex-basis: 10%
+
+    &__copyrights
+      width: 100%
+      @extend .flexRow
+      justify-content: center
+      padding: 2rem
+      margin-top: 2rem
+
+  &__Layout2
+    &__container
+      width: 100%
+      @extend .flexRow
+      justify-content: center
+
+
+  &__Layout3
+    &__LogoCopyrights
+      width: 100%
+      flex-basis: 15%
+      @extend .flexColumn
+
+      &__imageContainer
+        height: 10rem
+        width: 100%
+        & > img
+          @extend .imgWrapper
+
+  &__navColumnItems,
+  &__contactsItems
+    @extend .flexColumn
+    flex-basis: calc(20% - 4rem)
+
+  &__navColumnItem,
+  &__contactsItem
+    margin: 1rem 0
+    text-decoration: none
+
+  &__navRowItems
+    @extend .flexRow
+    justify-content: center
+
+  &__navRowItem
+    margin: 0 1rem
+    text-decoration: none
+

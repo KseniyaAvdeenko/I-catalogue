@@ -42,14 +42,14 @@ export const navLinksHoverStyles: INavLinksHoverStyle[] = [
 ]
 
 export const headerLayouts: IHeaderLayout[] = [
-    {id: '1', image: HeaderLayout1},
-    {id: '2', image: HeaderLayout2}
+    {id: 'header1', image: HeaderLayout1, value: '1'},
+    {id: 'header2', image: HeaderLayout2, value: '2'}
 ]
 
 export const footerLayouts: IHeaderLayout[] = [
-    {id: '1', image: FooterLayout1},
-    {id: '2', image: FooterLayout2},
-    {id: '3', image: FooterLayout3},
+    {id: 'footer1', image: FooterLayout1, value: '1'},
+    {id: 'footer2', image: FooterLayout2, value: '2'},
+    {id: 'footer3', image: FooterLayout3, value: '3'},
 ]
 
 export const contactFieldExample: IContacts = {

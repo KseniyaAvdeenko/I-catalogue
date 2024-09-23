@@ -1,5 +1,4 @@
 import React from 'react';
-import {IAdminComponentsProps} from "../../../../interface/IAdminPageComponets";
 import styles from "../../AdminMain.module.sass";
 import {footerLayouts} from "../../Options";
 
@@ -15,7 +14,7 @@ const FooterContentLayout: React.FC<IFooterContentLayoutProps> = ({footerLayout,
             <div className={styles.form__inputContainer_label}>Размещение элементов в “шапке” сайта</div>
             <div className={styles.choiceBox__container}>
                 {footerLayouts.map(layout => (
-                    layout.id === footerLayout
+                    layout.value === footerLayout
                         ?
                         <label key={layout.id} htmlFor={layout.id} className={[styles.choiceBox, styles.choiceBox_selected].join(' ')}>
                             <img src={layout.image} alt={layout.id}/>
@@ -23,7 +22,7 @@ const FooterContentLayout: React.FC<IFooterContentLayoutProps> = ({footerLayout,
                                 type="radio"
                                 name="contentLayout"
                                 id={layout.id}
-                                value={layout.id}
+                                value={layout.value}
                                 onChange={e => onChangeHandler(e)}
                             />
                         </label>
@@ -33,7 +32,7 @@ const FooterContentLayout: React.FC<IFooterContentLayoutProps> = ({footerLayout,
                                 type="radio"
                                 name="contentLayout"
                                 id={layout.id}
-                                value={layout.id}
+                                value={layout.value}
                                 onChange={e => onChangeHandler(e)}
                             />
                         </label>

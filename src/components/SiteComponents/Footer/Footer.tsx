@@ -44,15 +44,17 @@ const Footer: React.FC<IFooterProps> = ({logo}) => {
     }, [footerSettings]);
 
     const onHoverIn = (e: React.MouseEvent<HTMLAnchorElement>) => {
+        e.currentTarget.style.color = footerStyles.navLinksFontColorHover
     }
     const onHoverOut = (e: React.MouseEvent<HTMLAnchorElement>) => {
+        e.currentTarget.style.color = footerStyles.fontColor
     }
 
     function getFooterLayout(contentLayout: string) {
         if (contentLayout === '1') {
             return (<FooterLayout1 onHoverIn={onHoverIn} onHoverOut={onHoverOut} footerStyles={footerStyles} logo={logo ?? ''}/>)
         } else if (contentLayout === '2') {
-            return (<FooterLayout2 onHoverIn={onHoverIn} onHoverOut={onHoverOut} footerStyles={footerStyles} logo={logo ?? ''}/>)
+            return (<FooterLayout2 onHoverIn={onHoverIn} onHoverOut={onHoverOut} footerStyles={footerStyles}/>)
         } else if (contentLayout === '3') {
             return (<FooterLayout3 onHoverIn={onHoverIn} onHoverOut={onHoverOut} footerStyles={footerStyles} logo={logo ?? ''}/>)
         }
