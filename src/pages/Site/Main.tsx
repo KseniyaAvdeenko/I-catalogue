@@ -3,9 +3,9 @@ import styles from './Site.module.sass'
 
 const Main = () => {
     return (
-        <div>
+        <main className={[styles.page__container].join(' ')}>
             main
-        </div>
+        </main>
     );
 };
 

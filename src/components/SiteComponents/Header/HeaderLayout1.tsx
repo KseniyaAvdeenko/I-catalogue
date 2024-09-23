@@ -22,7 +22,7 @@ const HeaderLayout1: React.FC<IHeaderLayout1Props> = ({
                                                           onHoverOut
                                                       }) => {
     return (
-        <div className={headerContainerClass}>
+        <div className={headerContainerClass} style={{color: headerStyles.fontColor}}>
             <Link to={'/'} className={styles.image__container}>{logo && (<img src={logo} alt={'logo'}/>)}</Link>
             <HeaderNav onHoverOut={onHoverOut} onHoverIn={onHoverIn}
                        navLinksStyle={navLinksStyle}/>

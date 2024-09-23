@@ -58,6 +58,7 @@
   width: 100%
 
   &__item
+    color: inherit
     text-decoration: none
     transition: all .5s ease-in
     position: relative
@@ -109,11 +110,13 @@
 
 .contactsItem
   &__Layout1
+    @extend .flexRow
     padding: .5rem 0
     text-decoration: none
     transition: all .5s ease-in
     cursor: pointer
-
+    & > svg
+      margin-right: 1rem
 
 //----footer
 
@@ -173,6 +176,7 @@
   &__contactsItem
     margin: 1rem 0
     text-decoration: none
+    cursor: pointer
 
   &__navRowItems
     @extend .flexRow
@@ -182,3 +186,12 @@
     margin: 0 1rem
     text-decoration: none
 
+  &__navRowItem,
+  &__navColumnItem
+    transition: all .5s ease-in
+
+
+  &__contactsItem
+    @extend .flexRow
+    & > svg
+      margin-right: 1rem

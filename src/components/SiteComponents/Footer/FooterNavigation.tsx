@@ -21,7 +21,7 @@ const FooterNavigation: React.FC<IFooterNavProps> = ({linkClassName, navClassNam
                       onMouseEnter={e=>onHoverIn(e)}
                       onMouseLeave={e=>onHoverOut(e)}
                       className={linkClassName}
-                      style={{fontSize: footerStyles.navLinksFontSize, color: footerStyles.fontColor}}
+                      style={{fontSize: footerStyles.navLinksFontSize, color: footerStyles.fontColor, fontWeight: 600}}
                 >{page.navLink}</Link>
             ))}
         </nav>

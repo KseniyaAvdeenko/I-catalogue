@@ -12,14 +12,14 @@ interface IHeaderNavProps {
 const HeaderNav: React.FC<IHeaderNavProps> = ({onHoverOut, onHoverIn, navLinksStyle}) => {
     const {pages} = useAppSelector(state => state.pageSettingsReducer)
     return (
-        <nav className={styles.navLayout1}>
+        <nav className={styles.navLayout1} style={{color: navLinksStyle.color}}>
             {pages && pages.map(page => (
                 <Link
                     onMouseEnter={e => onHoverIn(e)}
                     onMouseLeave={e => onHoverOut(e)}
                     key={page.id} to={'page/' + page.slug}
                     className={styles.navLayout1__item}
-                    style={{color: navLinksStyle.color, fontSize: navLinksStyle.fontSize}}>
+                    style={{color: navLinksStyle.color, fontSize: navLinksStyle.fontSize, fontWeight: 600}}>
                     <div className={styles.navLayout1__overline}></div>
                     {page.navLink}
                     <div className={[styles.navLayout1__underline, 'underline'].join(' ')}></div>

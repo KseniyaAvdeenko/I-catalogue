@@ -15,8 +15,8 @@ interface IHeaderProps {
 const Header: React.FC<IHeaderProps> = ({logo}) => {
     const {headerSettings} = useAppSelector(state => state.headerSettingsReducer)
     const [headerStyles, setHeaderStyles] = useState<{ background: string; fontColor: string; borderBottom: string; }>({
-        background: '#fff',
-        fontColor: '#000',
+        background: '',
+        fontColor: '',
         borderBottom: 'none',
     })
     const [headerContainerClass, setHeaderContainerClass] = useState<string>(styles.header__container)

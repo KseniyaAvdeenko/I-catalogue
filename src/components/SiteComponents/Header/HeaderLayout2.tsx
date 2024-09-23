@@ -24,7 +24,7 @@ const HeaderLayout2: React.FC<IHeaderLayout2Props> = ({
     return (
         <div className={headerContainerClass}>
             <Link to={'/'} className={styles.image__container}>{logo && (<img src={logo} alt={'logo'}/>)}</Link>
-            <div className={styles.navLayout2}>
+            <div className={styles.navLayout2} style={{color: headerStyles.fontColor}}>
                 <HeaderContacts containerClassName={styles.contactItems__Layout2} headerStyles={headerStyles}/>
                 <HeaderNav onHoverOut={onHoverOut} onHoverIn={onHoverIn}
                            navLinksStyle={navLinksStyle}/>
