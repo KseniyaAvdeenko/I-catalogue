@@ -7,7 +7,7 @@ import {IFile, IOptions} from "../../../../interface/IAdminPageComponets";
 import UploadImages from "./UploadImages";
 
 interface INewProdFormProps {
-    prodAttrs: IProdAttrs[] | [];
+    prodAttrs: IProdAttrs[]|null
     newProd: IProdBase
     onChangeHandler: Function;
     currencyOptionsVisibility: IOptions
@@ -24,10 +24,10 @@ interface INewProdFormProps {
 }
 
 const NewProdForm: React.FC<INewProdFormProps> = ({
+                                                      prodAttrs,
                                                       deleteProdImageFile,
                                                       newProdAttrs,
                                                       currencyOptionsVisibility,
-                                                      prodAttrs,
                                                       newProd,
                                                       onChangeHandler,
                                                       onChangeProdAttrsHandler,
@@ -75,7 +75,7 @@ const NewProdForm: React.FC<INewProdFormProps> = ({
                 {prodAttrs && prodAttrs.map(attr => (
                     <AdminInputContainer key={attr.id}
                                          type={'text'} name={attr.attribute} inputId={attr.attribute}
-                                         value={newProdAttrs[attr.attribute]} checked={false} required={false}
+                                         value={newProdAttrs[attr.attribute]} checked={false} required={true}
                                          readonly={false}
                                          inputClassname={''} label={attr.attribute}
                                          inputContainerClassname={[styles.form__items, styles.form__items_margin].join(' ')}

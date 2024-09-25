@@ -36,6 +36,7 @@ export interface IFooterSettings extends IFooterSettingsBase{
     id: number;
 }
 
+
 export interface IButtonSettings {
     id: number;
     buttonBorderRadius: number;

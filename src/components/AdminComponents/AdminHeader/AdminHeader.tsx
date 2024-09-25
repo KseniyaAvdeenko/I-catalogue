@@ -29,7 +29,7 @@ const AdminHeader: React.FC<IAdminHeader> = ({children}) => {
     }
 
     useEffect( () => {
-        if(now >= +auth.accessExpires && now < +auth.refreshExpires) dispatch(refreshToken(decodeToken(auth.refresh)))
+        if(now >= (+auth.accessExpires - 60000) && now < +auth.refreshExpires) dispatch(refreshToken(decodeToken(auth.refresh)))
         if(now >= +auth.refreshExpires) logOut()
     }, [now, auth.accessExpires, auth.refreshExpires]);
 

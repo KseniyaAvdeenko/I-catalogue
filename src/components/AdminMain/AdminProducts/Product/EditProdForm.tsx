@@ -62,7 +62,7 @@ const EditProdForm: React.FC<IEditProdFormProps> = ({
                 {prodAttrs && prodAttrs.map(attr => (
                     <AdminInputContainer key={attr.id}
                                          type={'text'} name={attr.attribute} inputId={attr.attribute}
-                                         value={selectedProdsAttrs[attr.attribute]} checked={false} required={false}
+                                         value={selectedProdsAttrs[attr.attribute]} checked={false} required={true}
                                          readonly={false} inputClassname={''} label={attr.attribute}
                                          inputContainerClassname={[styles.form__items, styles.form__items_margin].join(' ')}
                                          labelClassName={styles.form__items_labelMargin} isLoading={false}

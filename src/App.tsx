@@ -18,7 +18,7 @@ import {loadProducts, loadProductsRead} from "./store/actions/productAction";
 import {loadImages} from "./store/actions/prodImagesAction";
 import {loadModalFormSettings} from "./store/actions/modalFormAction";
 import Page from "./pages/Site/Page";
-import Product from "./pages/Site/Product";
+import ProductPage from "./pages/Site/ProductPage";
 import Layout from "./components/SiteComponents/Layout";
 
 function App() {
@@ -46,10 +46,10 @@ function App() {
         <BrowserRouter>
             <Routes>
                 {pages && pages.map(elem => (
-                    <Route key={elem.id} path={`page/:${elem.slug}`} element={<Layout><Page/></Layout>}/>
+                    <Route key={elem.id} path={`page/:pageSlug`} element={<Layout><Page/></Layout>}/>
                 ))}
                 {productsReadOnly && productsReadOnly.map(elem => (
-                    <Route key={elem.id} path={`product/:${elem.id}`} element={<Layout><Product/></Layout>}/>
+                    <Route key={elem.id} path={`product/:prodId`} element={<Layout><ProductPage/></Layout>}/>
                 ))}
                 <Route path={'/'} element={<Layout><Main/></Layout>}/>
                 <Route path={'sign_in/'} element={<SingIn/>}/>

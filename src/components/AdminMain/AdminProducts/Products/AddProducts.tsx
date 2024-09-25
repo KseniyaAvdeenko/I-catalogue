@@ -1,13 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import styles from "../../AdminNavbar.module.sass";
 import {useAppDispatch, useAppSelector} from "../../../../hooks/redux";
-import {formData} from "../../../../store/actions/apiUrl";
 import NewProdForm from "./NewProdForm";
-import {IProdBase, IOtherValue, IImageBase} from "../../../../interface/IProduct";
-import {IFile, IImagePreview, IOptions} from "../../../../interface/IAdminPageComponets";
-import {createProduct, updateProduct} from "../../../../store/actions/productAction";
+import {IOtherValue, IProdAttrs, IProdBase} from "../../../../interface/IProduct";
+import {IFile, IOptions} from "../../../../interface/IAdminPageComponets";
+import {createProduct} from "../../../../store/actions/productAction";
 import {decodeToken} from "../../../../hooks/encodeDecodeTokens";
-import {createImage, updateImage} from "../../../../store/actions/prodImagesAction";
+import {createImage} from "../../../../store/actions/prodImagesAction";
 import {productSlice} from "../../../../store/reducers/productSlice";
 
 
@@ -29,6 +28,11 @@ const AddProducts = () => {
     })
     const [files, setFiles] = useState<IFile[]>([])
 
+
+    useEffect(() => {
+        if(prodAttrs) prodAttrs.map(attr=> setNewProdsAttrs({...newProdAttrs, [attr.attribute]: ''}))
+    }, [])
+
     const saveNewProd = () => {
         const prod = structuredClone(newProd)
         dispatch(createProduct(decodeToken(localStorage.access), prod))
@@ -36,8 +40,8 @@ const AddProducts = () => {
 
     const onChangeNewProdHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
         e.target.type === 'number'
-            ?setNewProd({...newProd, [e.target.name]: parseFloat(e.target.value)})
-            :setNewProd({...newProd, [e.target.name]: e.target.value})
+            ? setNewProd({...newProd, [e.target.name]: parseFloat(e.target.value)})
+            : setNewProd({...newProd, [e.target.name]: e.target.value})
         if (e.target.name === 'currency') setCurrencyOptionsVisibility({
             ...currencyOptionsVisibility,
             open: false,
@@ -86,11 +90,21 @@ const AddProducts = () => {
     }
     const changeCurrencyOptionsContainerVisibility = () => {
         currencyOptionsVisibility.open
-            ? setCurrencyOptionsVisibility({...currencyOptionsVisibility, open: false, display: 'none', bottom: '-12.9rem'})
-            : setCurrencyOptionsVisibility({...currencyOptionsVisibility, open: true, display: 'flex', bottom: '-12.9rem'})
+            ? setCurrencyOptionsVisibility({
+                ...currencyOptionsVisibility,
+                open: false,
+                display: 'none',
+                bottom: '-12.9rem'
+            })
+            : setCurrencyOptionsVisibility({
+                ...currencyOptionsVisibility,
+                open: true,
+                display: 'flex',
+                bottom: '-12.9rem'
+            })
     }
-    const deleteProdImageFile=(name: string) =>{
-        setFiles(files.filter(el=> el.prodImg.name !==name))
+    const deleteProdImageFile = (name: string) => {
+        setFiles(files.filter(el => el.prodImg.name !== name))
     }
 
     return (
@@ -99,7 +113,7 @@ const AddProducts = () => {
             <h3 className={styles.AdminNavbar__subheading}>Добавление товара\услуги</h3>
             <div className={styles.AdminNavbar__formContainer}>
                 <NewProdForm
-                    prodAttrs={prodAttrs ?? []}
+                    prodAttrs={prodAttrs}
                     newProd={newProd} product={product}
                     newProdAttrs={newProdAttrs}
                     onChangeHandler={onChangeNewProdHandler}

@@ -1,8 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import styles from "../AdminMain.module.sass";
-import {useAppDispatch, useAppSelector} from "../../../hooks/redux";
+import {useAppDispatch} from "../../../hooks/redux";
 import MDEditor from '@uiw/react-md-editor';
-import {IAdminComponentsProps} from "../../../interface/IAdminPageComponets";
 import {IPageSetting} from "../../../interface/IPagesSettings";
 import {updatePageWithNavLink} from "../../../store/actions/pageSettingsAction";
 import {decodeToken} from "../../../hooks/encodeDecodeTokens";
@@ -13,7 +12,7 @@ interface IPageContentProps {
 }
 
 const PageContent: React.FC<IPageContentProps> = ({page}) => {
-    //console.log(pageId)
+
     const dispatch = useAppDispatch()
     const [content, setContent] = useState<string>('')
     const [markdownVisibility, setMarkdownVisibility] = useState<boolean>(false)
@@ -24,9 +23,8 @@ const PageContent: React.FC<IPageContentProps> = ({page}) => {
             setContent(page.content)
         }
     }, [page])
-    console.log(content)
+
     const saveContent = () => {
-        console.log(content)
          if (page && localStorage.access) {
             const pageRequiredFields = {headingSettings: page.headingSettings}
              dispatch(updatePageWithNavLink(decodeToken(localStorage.access), page.slug,
