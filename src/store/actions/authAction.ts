@@ -46,3 +46,4 @@ export const verifyToken = async (token: string) => {
     const response = await axios.post(apiUrl + 'auth/jwt/verify/', body, getRequestHeaders());
     return response.data.code !== 'token_not_valid';
 }
+

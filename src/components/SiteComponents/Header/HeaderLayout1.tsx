@@ -1,6 +1,6 @@
 import React from 'react';
 import {Link} from "react-router-dom";
-import styles from "../Layout.module.sass";
+import styles from "./Header.module.sass";
 import HeaderNav from "./HeaderNav";
 import HeaderContacts from "./HeaderContacts";
 

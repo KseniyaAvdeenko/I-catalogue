@@ -1,0 +1,79 @@
+@import "../Layout.module"
+
+.footer
+  flex-basis: fit-content
+  width: 100%
+  padding: 3rem 10%
+  @extend .flexColumn
+  height: fit-content
+
+  &__Layout1,
+  &__Layout2,
+  &__Layout3
+    @extend .flexColumn
+    width: 100%
+
+    &__container
+      width: 100%
+      @extend .flexRow
+      justify-content: space-between
+
+      & > a
+        flex-basis: 10%
+
+    &__copyrights
+      width: 100%
+      @extend .flexRow
+      justify-content: center
+      padding: 2rem
+      margin-top: 2rem
+
+  &__Layout2
+    &__container
+      width: 100%
+      @extend .flexRow
+      justify-content: center
+
+
+  &__Layout3
+    &__LogoCopyrights
+      width: 100%
+      flex-basis: 15%
+      @extend .flexColumn
+
+      &__imageContainer
+        height: 10rem
+        width: 100%
+
+        & > img
+          @extend .imgWrapper
+
+  &__navColumnItems,
+  &__contactsItems
+    @extend .flexColumn
+    flex-basis: calc(20% - 4rem)
+
+  &__navColumnItem,
+  &__contactsItem
+    margin: 1rem 0
+    text-decoration: none
+    cursor: pointer
+
+  &__navRowItems
+    @extend .flexRow
+    justify-content: center
+
+  &__navRowItem
+    margin: 0 1rem
+    text-decoration: none
+
+  &__navRowItem,
+  &__navColumnItem
+    transition: all .5s ease-in
+
+
+  &__contactsItem
+    @extend .flexRow
+
+    & > svg
+      margin-right: 1rem

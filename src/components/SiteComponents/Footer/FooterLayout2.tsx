@@ -1,6 +1,6 @@
 import React from 'react';
 import {IFooterSettingsBase} from "../../../interface/ICommonSettings";
-import styles from '../Layout.module.sass';
+import styles from './Footer.module.sass';
 import FooterCopyRights from "./FooterCopyRights";
 import FooterNavigation from "./FooterNavigation";
 

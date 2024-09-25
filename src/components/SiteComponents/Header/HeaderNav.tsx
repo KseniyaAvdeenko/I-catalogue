@@ -1,6 +1,6 @@
 import React from 'react';
 import {useAppSelector} from "../../../hooks/redux";
-import styles from '../Layout.module.sass'
+import styles from "./Header.module.sass";
 import {Link} from "react-router-dom";
 
 interface IHeaderNavProps {

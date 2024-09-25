@@ -1,11 +1,10 @@
 import React, {FC} from 'react';
-import styles from "../Layout.module.sass";
+import styles from "./Header.module.sass";
 import {Link} from "react-router-dom";
 import {useAppSelector} from "../../../hooks/redux";
-import {IHeaderSettings} from "../../../interface/ICommonSettings";
-import PhoneIcon from "../../UI/ContactsIcons/PhoneIcon";
-import EmailIcon from "../../UI/ContactsIcons/EmailIcon";
-import GeoIcon from "../../UI/ContactsIcons/GeoIcon";
+import PhoneIcon from "../../UI/Icons/PhoneIcon";
+import EmailIcon from "../../UI/Icons/EmailIcon";
+import GeoIcon from "../../UI/Icons/GeoIcon";
 
 interface IHeaderContactsProps {
     containerClassName: string;

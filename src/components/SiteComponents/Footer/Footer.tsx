@@ -4,7 +4,7 @@ import {IFooterSettingsBase} from "../../../interface/ICommonSettings";
 import FooterLayout1 from "./FooterLayout1";
 import FooterLayout2 from "./FooterLayout2";
 import FooterLayout3 from "./FooterLayout3";
-import styles from '../Layout.module.sass';
+import styles from './Footer.module.sass';
 
 
 interface IFooterProps {

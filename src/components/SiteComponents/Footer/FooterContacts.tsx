@@ -1,11 +1,11 @@
 import React from 'react';
 import {useAppSelector} from "../../../hooks/redux";
-import styles from '../Layout.module.sass';
+import styles from './Footer.module.sass';
 import {IFooterSettingsBase} from "../../../interface/ICommonSettings";
 import {Link} from "react-router-dom";
-import PhoneIcon from "../../UI/ContactsIcons/PhoneIcon";
-import EmailIcon from "../../UI/ContactsIcons/EmailIcon";
-import GeoIcon from "../../UI/ContactsIcons/GeoIcon";
+import PhoneIcon from "../../UI/Icons/PhoneIcon";
+import EmailIcon from "../../UI/Icons/EmailIcon";
+import GeoIcon from "../../UI/Icons/GeoIcon";
 
 const FooterContacts: React.FC<{ footerStyles: IFooterSettingsBase; }> = ({footerStyles}) => {
     const {contacts} = useAppSelector(state => state.contactsReducer)
@@ -28,7 +28,7 @@ const FooterContacts: React.FC<{ footerStyles: IFooterSettingsBase; }> = ({foote
                     : <div key={contact.id} style={{
                         color: footerStyles.fontColor,
                         fontSize: footerStyles.contactsFontSize
-                    }} className={styles.contactsItem__Layout1}>
+                    }} className={styles.footer__contactsItem}>
                         {contact.linkType === 'address' && (
                             <GeoIcon color={footerStyles.fontColor} fontSize={footerStyles.contactsFontSize}/>)}
                         {contact.content}</div>

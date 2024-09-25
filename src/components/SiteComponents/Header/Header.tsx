@@ -1,10 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {useAppSelector} from "../../../hooks/redux";
-import styles from '../Layout.module.sass'
-import {Link, NavLink} from "react-router-dom";
-import contactLinkHref from "../../AdminMain/AdminNavbar/Contacts/ContactLinkHref";
-import HeaderNav from "./HeaderNav";
-import HeaderContacts from "./HeaderContacts";
+import styles from './Header.module.sass';
 import HeaderLayout1 from "./HeaderLayout1";
 import HeaderLayout2 from "./HeaderLayout2";
 

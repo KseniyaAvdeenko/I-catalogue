@@ -23,7 +23,7 @@ const Page = () => {
     }
 
     return page ? (
-            <div className={styles.page__container} style={{background: page.background}}>
+            <main className={styles.page__container} style={{background: page.background}}>
                 {isLoading && 'Loading ...'}
                 <Heading pageHeading={page.headingSettings} headingContent={page.headingSettings.headingContent}/>
                 {page.isBlockWithProds
@@ -33,8 +33,8 @@ const Page = () => {
                         payClickHandle={payClickHandle}/>
                     : <PageContent pageContent={page.content} containerClassName={styles.page__content}/>
                 }
-            </div>)
-        : (<div className={styles.page__container}></div>);
+            </main>)
+        : (<main className={styles.page__container}></main>);
 };
 
 export default Page;
