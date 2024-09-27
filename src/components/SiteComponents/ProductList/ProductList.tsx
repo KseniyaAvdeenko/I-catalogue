@@ -1,11 +1,7 @@
-import React, {useEffect, useState} from 'react';
-import {IProdReadOnly} from "../../../interface/IProduct";
+import React from 'react';
 import styles from '../../../pages/Site/Site.module.sass';
-import {Link} from "react-router-dom";
 import {useAppSelector} from "../../../hooks/redux";
-import {IButtonSettings} from "../../../interface/ICommonSettings";
 import ProdImage from "../../UI/ProdImage/ProdImage";
-import {currencyTypes} from "../../AdminMain/Options";
 import SiteButton from "../../UI/SiteButton/SiteButton";
 import {getCurrency} from "../../../hooks/getCurrency";
 

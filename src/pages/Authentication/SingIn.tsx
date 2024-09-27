@@ -12,7 +12,9 @@ import InVisibleIcon from "../../assets/img/Invisible.svg";
 import VisibleIcon from "../../assets/img/Visible.svg";
 
 
+
 const SignIn = () => {
+    const navigate = useNavigate()
     const auth = useAppSelector(state => state.authReducer)
     const dispatch = useAppDispatch()
     //-----states
@@ -43,9 +45,7 @@ const SignIn = () => {
         }
     }
     useEffect(() => {
-        if (auth.isAuth) {
-            redirect('/admin_page/')
-        }
+        if (auth.isAuth) navigate('/admin_page/')
     }, [auth.isAuth])
 
 

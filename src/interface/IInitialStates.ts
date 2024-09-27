@@ -4,6 +4,7 @@ import {IContacts} from "./INavbar";
 import {IUser} from "./IUser";
 import {IImage, IProd, IProdAttrs, IProdReadOnly, IProductPageSettings} from "./IProduct";
 import {IModalForm} from "./IModalForm";
+import {INewOrder, IOrder, IPayment} from "./IOrder";
 
 export interface IInitialStatesBase {
     isLoading: boolean;
@@ -89,3 +90,9 @@ export interface IModalFormInitial extends IInitialStatesBase{
     modalForm: IModalForm|null
 }
 
+export interface IOrderInitial extends IInitialStatesBase{
+    orders: IOrder[]|null;
+    currentOrder: IOrder|null;
+    currentOrderError: string
+    paymentError: string
+}

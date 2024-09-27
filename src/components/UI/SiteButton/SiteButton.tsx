@@ -9,9 +9,10 @@ interface ISiteButtonProps {
     btnText: string
     clickHandler?: Function
     btnClassName: string
+    btnType?: 'button'| 'submit'|'reset'
 }
 
-const SiteButton: FC<ISiteButtonProps> = ({product, btnText, type, clickHandler, btnClassName}) => {
+const SiteButton: FC<ISiteButtonProps> = ({product,btnType, btnText, type, clickHandler, btnClassName}) => {
     const {buttonSettings} = useAppSelector(state => state.buttonSettingsReducer)
     const [btnStyles, setBtnStyles] = useState({
         borderRadius: 0,
@@ -39,12 +40,14 @@ const SiteButton: FC<ISiteButtonProps> = ({product, btnText, type, clickHandler,
                 to={'product/' + product.id}>
                 {btnText}
             </Link>)
-        : (<button
-            style={btnStyles}
-            className={btnClassName}
-            onClick={() => clickHandler &&  clickHandler(product)}>
-            {btnText}
-        </button>);
+        : type === 'button' && clickHandler
+            ? (<button
+                type={btnType ?? 'button'}
+                style={btnStyles}
+                className={btnClassName}
+                onClick={() => clickHandler(product)}>
+                {btnText}</button>)
+            : (<button type={btnType} style={btnStyles} className={btnClassName}>{btnText}</button>);
 };
 
 export default SiteButton;

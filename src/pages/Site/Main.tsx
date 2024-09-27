@@ -5,6 +5,7 @@ import {IHeading} from "../../interface/IPagesSettings";
 import Heading from "../../components/UI/Heading/Heading";
 import ProductList from "../../components/SiteComponents/ProductList/ProductList";
 import {IProdReadOnly} from "../../interface/IProduct";
+import ModalPopUp from "../../components/SiteComponents/ModalPopup/ModalPopUp";
 
 const Main = () => {
     const {mainPageSettings} = useAppSelector(state => state.mainPageSettingsReducer)
@@ -22,6 +23,10 @@ const Main = () => {
         headingFontWeight: 900,
         id: 0
     })
+
+    const [modalVisibility, setModalVisibility] = useState<boolean>(false)
+    const [modalData, setModalData] = useState<IProdReadOnly | null>(null)
+
     useEffect(() => {
         if (mainPageSettings) {
             setMainPageStyles({
@@ -37,17 +42,20 @@ const Main = () => {
     }, [mainPageSettings]);
 
     function payClickHandle(prod: IProdReadOnly) {
-        console.log(prod)
+        setModalVisibility(true);
+        setModalData(prod)
     }
 
     return (
-        <main className={[styles.page__container].join(' ')} style={{background: mainPageStyles.background}}>
+        <main className={[styles.page__container].join(' ')}
+              style={{background: mainPageStyles.background, position: 'relative'}}>
             <Heading pageHeading={mainPageHeading} headingContent={mainPageHeading.headingContent}/>
             <ProductList
                 cardQuantityInRow={mainPageStyles.cardQuantityInRow}
                 prodCardBg={mainPageStyles.prodCardBg}
                 payClickHandle={payClickHandle}
             />
+            <ModalPopUp isOpen={modalVisibility} onClose={()=>setModalVisibility(false)} data={modalData}/>
         </main>
     );
 };

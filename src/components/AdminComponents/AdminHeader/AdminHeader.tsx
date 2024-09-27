@@ -2,8 +2,8 @@ import React, {useEffect} from 'react';
 import styles from './AdminHeader.module.sass'
 import AppLogo from '../../../assets/img/I-Catalogue.svg'
 import {useAppDispatch, useAppSelector} from "../../../hooks/redux";
-import {Link, redirect, useNavigate} from "react-router-dom";
-import {logout, refreshToken} from "../../../store/actions/authAction";
+import {Link} from "react-router-dom";
+import {logout, refreshToken, verifyToken} from "../../../store/actions/authAction";
 import {loadCurrentUser} from "../../../store/actions/userAction";
 import {decodeToken} from "../../../hooks/encodeDecodeTokens";
 
@@ -13,49 +13,41 @@ interface IAdminHeader {
 }
 
 const AdminHeader: React.FC<IAdminHeader> = ({children}) => {
-    const auth = useAppSelector(state=> state.authReducer)
+    const {isAuth, access, accessExpires, refreshExpires, refresh, error} = useAppSelector(state => state.authReducer)
     const {currentUser, errorCurrentUser} = useAppSelector(state => state.userReducer)
 
     const now = Date.now()
     const dispatch = useAppDispatch()
 
-    console.log(auth)
-
     //--methods
-    const logOut = () => {
-        dispatch(logout())
-        redirect('/sign_in/')
-    }
-
-    useEffect( () => {
-        if(now >= (+auth.accessExpires - 60000) && now < +auth.refreshExpires) dispatch(refreshToken(decodeToken(auth.refresh)))
-        if(now >= +auth.refreshExpires) logOut()
-    }, [now, auth.accessExpires, auth.refreshExpires]);
+    const userLogOut = () => dispatch(logout(decodeToken(access), decodeToken(refresh)))
 
     useEffect(() => {
-        if (auth.access) dispatch(loadCurrentUser(decodeToken(auth.access)));
-    }, [auth.access])
+        if (access && refresh && now >= (+accessExpires - 60000) && now < +refreshExpires) dispatch(refreshToken(decodeToken(refresh)))
+        if (refresh && now >= +refreshExpires) userLogOut()
+    }, [now, accessExpires, refreshExpires]);
+
+    useEffect(() => {
+        if (access) dispatch(loadCurrentUser(decodeToken(access)));
+    }, [access])
 
     return (
         <header className={styles.adminHeader}>
             <img src={AppLogo} alt="app logo"/>
             {children && children}
-            <div className={styles.auth}>
-                {auth.isAuth
-                    ? <>
-                        <div className={styles.auth__items}
-                             style={{cursor: 'default'}}>{currentUser?.username ?? ''}</div>
-                        <div className={[styles.auth__items, styles.auth__link].join(' ')}
-                             onClick={logOut}>Выход
-                        </div>
-                    </>
-                    : <>
-                        <Link to={'/sign_in/'} className={[styles.auth__items, styles.auth__link].join(' ')}>Вход</Link>
-                        <Link to={'/sign_up/'}
-                              className={[styles.auth__items, styles.auth__link].join(' ')}>Регистрация</Link>
-                    </>
-                }
-            </div>
+            {isAuth
+                ? <div className={styles.auth}>
+                    {currentUser && (
+                        <div className={styles.auth__items} style={{cursor: 'default'}}>{currentUser.username}</div>)}
+                    <div className={[styles.auth__items, styles.auth__link].join(' ')} onClick={userLogOut}>Выход
+                    </div>
+                </div>
+                : <div className={styles.auth}>
+                    <Link to={'/sign_in/'} className={[styles.auth__items, styles.auth__link].join(' ')}>Вход</Link>
+                    <Link to={'/sign_up/'}
+                          className={[styles.auth__items, styles.auth__link].join(' ')}>Регистрация</Link>
+                </div>
+            }
         </header>
     );
 };

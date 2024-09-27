@@ -94,5 +94,6 @@ export const inputTypes: IInputType[] = [
     {type: 'number', name: 'Число'},
     {type: 'tel', name: 'Телефон'},
     {type: 'email', name: 'Email'},
-    {type: 'datetime-local', name: 'Указание местной даты и времени.'},
+    {type: 'date', name: 'Дата'},
+    {type: 'datetime-local', name: 'Дата и время'},
 ]

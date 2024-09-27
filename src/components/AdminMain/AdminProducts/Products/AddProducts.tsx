@@ -30,7 +30,7 @@ const AddProducts = () => {
 
 
     useEffect(() => {
-        if(prodAttrs) prodAttrs.map(attr=> setNewProdsAttrs({...newProdAttrs, [attr.attribute]: ''}))
+        if(prodAttrs) prodAttrs.map(attr=> setNewProdsAttrs(newProdAttrs=>({...newProdAttrs, [attr.attribute]: ''})))
     }, [])
 
     const saveNewProd = () => {
