@@ -1,6 +1,7 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {IOrderInitial} from "../../interface/IInitialStates";
 import {IOrder} from "../../interface/IOrder";
+import {encodeToken} from "../../hooks/encodeDecodeTokens";
 
 
 const initialState: IOrderInitial = {
@@ -51,6 +52,9 @@ export const orderSlice = createSlice({
             state.currentOrder = null
             state.currentOrderError = ''
             state.paymentError = ''
+            localStorage.removeItem('orderId')
+            localStorage.removeItem('youkassaPaymentId')
+            localStorage.removeItem('paymentId')
         }
     }
 })

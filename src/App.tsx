@@ -20,6 +20,7 @@ import {loadModalFormSettings} from "./store/actions/modalFormAction";
 import Page from "./pages/Site/Page";
 import ProductPage from "./pages/Site/ProductPage";
 import Layout from "./components/SiteComponents/Layout";
+import {loadOrders} from "./store/actions/orderAction";
 
 function App() {
     const {pages} = useAppSelector(state => state.pageSettingsReducer);
@@ -40,6 +41,7 @@ function App() {
         dispatch(loadProductsRead())
         dispatch(loadImages())
         dispatch(loadModalFormSettings())
+        dispatch(loadOrders())
     }, [])
 
     return (

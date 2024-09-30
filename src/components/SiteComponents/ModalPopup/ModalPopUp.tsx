@@ -1,47 +1,72 @@
 import React, {useEffect, useState} from 'react';
-import {IOtherValue, IProdReadOnly} from "../../../interface/IProduct";
+import {IProdReadOnly} from "../../../interface/IProduct";
 import styles from './Modal.module.sass'
-import {useAppSelector} from "../../../hooks/redux";
+import {useAppDispatch, useAppSelector} from "../../../hooks/redux";
 import Heading from "../../UI/Heading/Heading";
 import ProdImage from "../../UI/ProdImage/ProdImage";
 import {getCurrency} from "../../../hooks/getCurrency";
 import SiteButton from "../../UI/SiteButton/SiteButton";
+import {checkPayment, createOrder} from "../../../store/actions/orderAction";
+import {INewOrderBase} from "../../../interface/IOrder";
+import {decodeToken} from "../../../hooks/encodeDecodeTokens";
 
 interface IModalPopUpProps {
-    isOpen: boolean;
+    isModalOpen: boolean;
     onClose: () => void;
     data: IProdReadOnly | null
 }
 
-const ModalPopUp: React.FC<IModalPopUpProps> = ({isOpen, data, onClose}) => {
-    const [modalClass, setModalClass] = useState<string>(styles.modal)
+const ModalPopUp: React.FC<IModalPopUpProps> = ({
+                                                    isModalOpen,
+                                                    data,
+                                                    onClose
+                                                }) => {
     const {modalForm} = useAppSelector(state => state.modalFormReducer);
+    const [modalClass, setModalClass] = useState<string>(styles.modal)
     const [formData, setFormData] = useState<{ [key: string]: string | number; }>({})
     const [totalPrice, setTotalPrice] = useState<number>(0)
+    const dispatch = useAppDispatch()
+
 
     useEffect(() => {
-        isOpen
+        isModalOpen
             ? setModalClass([styles.modal, styles.modal__open].join(' '))
             : setModalClass([styles.modal].join(' '))
 
+        getFormInputs()
+        if (data) setTotalPrice(data.price)
+    }, [isModalOpen])
+
+    const getFormInputs = () => {
         if (modalForm) modalForm.labels.map(el => setFormData(formData => ({
             ...formData,
             [el.inputIdName]: el.inputType === 'number' ? 1 : ''
         })))
-        if(data) setTotalPrice(data.price)
-    }, [isOpen])
-
+    }
     //console.log(totalPrice)
     // console.log(modalForm, data, formData)
 
     const formOrder = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        console.log(formData, totalPrice, data?.price)
+        if (data) {
+            const newOrder: INewOrderBase = {
+                total_price: totalPrice,
+                form_input_values: formData,
+                prod: data.id,
+                currency: data.currency
+            }
+            dispatch(createOrder(newOrder))
+        }
+        getFormInputs()
+        onClose()
     }
 
     const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setFormData({...formData, [e.target.name]: e.target.value})
-        if (e.target.type === 'number') setTotalPrice(totalPrice * parseInt(e.target.value))
+        setFormData({
+            ...formData,
+            [e.target.name]: e.target.type === 'number' ? parseInt(e.target.value) : e.target.value
+        })
+        if (data && e.target.type === 'number') setTotalPrice(data.price * parseInt(e.target.value))
     }
 
     return (
@@ -86,6 +111,7 @@ const ModalPopUp: React.FC<IModalPopUpProps> = ({isOpen, data, onClose}) => {
                     </form>
                 </div>
             )}
+
         </div>
     );
 };

@@ -8,24 +8,27 @@ import {IProdReadOnly} from "../../interface/IProduct";
 import DetailProdLayout1 from "../../components/SiteComponents/DetaiProductPage/DetailProdLayout1";
 import DetailProdLayout2 from "../../components/SiteComponents/DetaiProductPage/DetailProdLayout2";
 import {IButtonSettings} from "../../interface/ICommonSettings";
+import ModalPopUp from "../../components/SiteComponents/ModalPopup/ModalPopUp";
 
 const ProductPage = () => {
     const {prodId} = useParams();
     const dispatch = useAppDispatch();
     const {prodPageSettings} = useAppSelector(state => state.prodPageSettingsReducer)
     const {productReadOnly, isLoading} = useAppSelector(state => state.productReducer)
-
+    const [modalVisibility, setModalVisibility] = useState<boolean>(false)
+    const [modalData, setModalData] = useState<IProdReadOnly | null>(null)
 
     useEffect(() => {
         if (prodId) dispatch(loadProductRead(parseInt(prodId)))
         if (productReadOnly) document.title = productReadOnly.name
     }, [])
 
-    console.log(prodPageSettings, productReadOnly)
 
     function payClickHandle(prod: IProdReadOnly) {
-        console.log(prod)
+        setModalVisibility(true);
+        setModalData(prod)
     }
+
     function getDetailProductByLayout(contentLayout: string, productReadOnly: IProdReadOnly) {
         if (contentLayout === '1') {
             return (<DetailProdLayout1
@@ -42,9 +45,15 @@ const ProductPage = () => {
     }
 
     return prodPageSettings && productReadOnly
-        ? (<main className={styles.page__container} style={{background: prodPageSettings.background, alignItems: 'center'}}>
+        ? (<main className={styles.page__container}
+                 style={{background: prodPageSettings.background, alignItems: 'center'}}>
             <DetailedProdHeading pageHeading={prodPageSettings.headingSettings} prodName={productReadOnly.name}/>
             {getDetailProductByLayout(prodPageSettings.contentLayout, productReadOnly)}
+            <ModalPopUp
+                isModalOpen={modalVisibility}
+                onClose={() => setModalVisibility(false)}
+                data={modalData}
+            />
         </main>)
         : (<main className={styles.page__container}></main>)
 };

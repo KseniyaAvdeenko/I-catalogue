@@ -18,7 +18,7 @@ export interface IProdForOrder {
 }
 
 export interface IPaymentBase {
-    id_pay: string
+    paymentId: string
     order: number
     amount: number
     status: string
