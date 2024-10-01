@@ -42,14 +42,14 @@ export const navLinksHoverStyles: INavLinksHoverStyle[] = [
 ]
 
 export const headerLayouts: IHeaderLayout[] = [
-    {id: '1', image: HeaderLayout1},
-    {id: '2', image: HeaderLayout2}
+    {id: 'header1', image: HeaderLayout1, value: '1'},
+    {id: 'header2', image: HeaderLayout2, value: '2'}
 ]
 
 export const footerLayouts: IHeaderLayout[] = [
-    {id: '1', image: FooterLayout1},
-    {id: '2', image: FooterLayout2},
-    {id: '3', image: FooterLayout3},
+    {id: 'footer1', image: FooterLayout1, value: '1'},
+    {id: 'footer2', image: FooterLayout2, value: '2'},
+    {id: 'footer3', image: FooterLayout3, value: '3'},
 ]
 
 export const contactFieldExample: IContacts = {
@@ -63,7 +63,7 @@ export const contactFieldExample: IContacts = {
 export const linkTypes: IInputProps[] = [
     {type: 'radio', id: 'none', name: 'linkType', value: 'none', label: 'Не определено', checked: false},
     {type: 'radio', id: 'tel', name: 'linkType', value: 'tel', label: 'Телефон', checked: false},
-    {type: 'radio', id: 'mailTo', name: 'linkType', value: 'mailto', label: 'Email', checked: false},
+    {type: 'radio', id: 'mailto', name: 'linkType', value: 'mailto', label: 'Email', checked: false},
     {type: 'radio', id: 'address', name: 'linkType', value: 'address', label: 'Адрес', checked: false},
 ]
 
@@ -94,5 +94,6 @@ export const inputTypes: IInputType[] = [
     {type: 'number', name: 'Число'},
     {type: 'tel', name: 'Телефон'},
     {type: 'email', name: 'Email'},
-    {type: 'datetime-local', name: 'Указание местной даты и времени.'},
+    {type: 'date', name: 'Дата'},
+    {type: 'datetime-local', name: 'Дата и время'},
 ]

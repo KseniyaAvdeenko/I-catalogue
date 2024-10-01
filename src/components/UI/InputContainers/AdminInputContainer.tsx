@@ -41,7 +41,7 @@ const AdminInputContainer: React.FC<IAdminInputContainerProps> = ({
                                                                   }) => {
     return (
         <div className={inputContainerClassname}>
-            <label className={labelClassName} htmlFor={inputId}>{label}</label>
+            <label className={labelClassName} htmlFor={inputId}>{label} {required ?(<sup style={{color: 'red'}}>*</sup>):''}</label>
             {isLoading && 'Loading...'}
             <AdminInput
                 type={type}

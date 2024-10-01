@@ -2,7 +2,7 @@ import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {IUser} from "../../interface/IUser";
 import {IUserInitial} from "../../interface/IInitialStates";
 
-export const initialState:IUserInitial = {
+export const initialState: IUserInitial = {
     errorCurrentUser: '',
     errorUsers: '',
     errorUser: '',
@@ -20,12 +20,13 @@ export const userSlice = createSlice({
         },
         loadingCurrentUserFail(state, action: PayloadAction<string>) {
             state.errorCurrentUser = action.payload
+            state.currentUser = null
         },
         loadingUsersSuccess(state, action: PayloadAction<IUser[]>) {
             state.users = action.payload
         },
         loadingUsersFail(state, action: PayloadAction<string>) {
-            state.errorUsers= action.payload
+            state.errorUsers = action.payload
         },
         loadingUserSuccess(state, action: PayloadAction<IUser>) {
             state.user = action.payload

@@ -1,0 +1,86 @@
+@import "../Layout.module"
+
+.Layout1
+  width: 100%
+  display: grid
+  grid-template-columns: repeat(2, 1fr)
+  column-gap: 3rem
+
+  &__prodItems
+    @extend .flexColumn
+    align-items: center
+    width: 100%
+
+    &__prodName
+      font-size: 3.9rem
+      font-family: inherit
+      color: inherit
+      margin: 3rem 0
+
+    & > p
+      width: 100%
+      padding: 1rem 0
+
+    &__button
+      padding: 1.5rem 20%
+      margin: 2rem
+
+.Layout2
+  width: 65%
+  display: grid
+  grid-template-rows: auto 1fr
+  row-gap: 3rem
+
+  &__prodItems
+    width: 70%
+    margin-bottom: 2rem
+    display: grid
+    grid-template-columns: repeat(2, 1fr)
+    row-gap: 1rem
+    column-gap: 2rem
+
+    &__button
+      padding: 1.5rem 10%
+      margin: 2rem
+//------image carousel------------
+.imageCarousel
+  position: relative
+  width: 100%
+  height: 45rem
+  @extend .flexColumn
+  align-items: center
+  justify-content: center
+
+  &__inner
+    overflow: hidden
+    width: 100%
+    height: 40rem
+    border-radius: 2rem
+
+    & > img
+      @extend .imgWrapper
+      border-radius: 2rem
+
+  &__arrows
+    position: absolute
+    top: 35%
+    z-index: 2
+    cursor: pointer
+
+    &_left
+      left: 1rem
+
+    &_right
+      right: 1rem
+
+  &__dots
+    width: fit-content
+    @extend .flexRow
+    justify-content: center
+    margin-top: 1rem
+
+  &__dot
+    margin: .5rem
+    border-radius: 50%
+    width: 1rem
+    height: 1rem

@@ -23,6 +23,7 @@ const DetailPageContentLayout: React.FC<IContentLayoutProps> = ({contentLayout, 
                             type="radio"
                             name="contentLayout"
                             id={layout.id}
+                            checked={layout.id === contentLayout}
                             value={layout.id}
                             onChange={e => onChangeHandler(e)}
                         />

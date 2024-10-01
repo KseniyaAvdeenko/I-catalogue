@@ -2,7 +2,7 @@ import {AppDispatch} from "../store";
 import {productSlice} from "../reducers/productSlice";
 import axios from "axios";
 import {apiUrl, getAuthConfigApplicationJson, getRequestHeaders} from "./apiUrl";
-import {IProd, IProdReadOnly} from "../../interface/IProduct";
+import {IProd, IProdReadOnly, IProdsByPage} from "../../interface/IProduct";
 
 export const loadProducts = () => async (dispatch: AppDispatch) => {
     try {
@@ -11,16 +11,6 @@ export const loadProducts = () => async (dispatch: AppDispatch) => {
         dispatch(productSlice.actions.loadProductsSuccess(response.data))
     } catch (e) {
         dispatch(productSlice.actions.loadProductsFail('Ошибка'))
-    }
-}
-
-export const loadProduct = (id: number) => async (dispatch: AppDispatch) => {
-    try {
-        dispatch(productSlice.actions.prodFetching())
-        const response = await axios.get<IProd>(apiUrl + `product/products/${id}/`, getRequestHeaders())
-        dispatch(productSlice.actions.loadProductSuccess(response.data))
-    } catch (e) {
-        dispatch(productSlice.actions.loadProductFail('Ошибка'))
     }
 }
 
@@ -87,3 +77,4 @@ export const loadProductRead = (id: number) => async (dispatch: AppDispatch) => 
         dispatch(productSlice.actions.loadProductReadOnlyFail('Ошибка'))
     }
 }
+

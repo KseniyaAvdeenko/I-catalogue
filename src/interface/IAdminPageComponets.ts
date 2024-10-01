@@ -22,7 +22,8 @@ export interface IOptions {
 
 export interface IHeaderLayout{
     id: string;
-    image: string
+    image: string;
+    value: string;
 }
 
 export interface IHeadingType{

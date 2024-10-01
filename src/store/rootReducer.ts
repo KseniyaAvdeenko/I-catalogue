@@ -13,7 +13,8 @@ import prodAttrsReducer from './reducers/prodAttributesSlice';
 import productReducer from './reducers/productSlice';
 import prodImagesReducer from './reducers/prodImageSlice';
 import modalFormReducer from './reducers/modalFormSlice';
-
+import orderReducer from './reducers/orderSlice';
+import paginatedProductReducer from './reducers/paginatedProductSlice';
 
 export const rootReducer = combineReducers({
     authReducer,
@@ -30,4 +31,6 @@ export const rootReducer = combineReducers({
     productReducer,
     prodImagesReducer,
     modalFormReducer,
+    orderReducer,
+    paginatedProductReducer
 })

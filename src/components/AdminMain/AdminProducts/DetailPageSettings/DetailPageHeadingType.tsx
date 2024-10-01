@@ -6,31 +6,17 @@ import {headingTypes} from "../../Options";
 interface IDetailPageHeadingTypeProps extends IAdminComponentsProps {
     blockHeadingType: string | undefined;
     headingTypeOptionsVisibility: IOptions;
-    setHeadingTypeOptionsVisibility: Function;
+    changeHeadingTypeOptionsContainerVisibility: React.MouseEventHandler;
 }
 
 const DetailPageHeadingType: React.FC<IDetailPageHeadingTypeProps> = ({
                                                                           isLoading,
-                                                                          setHeadingTypeOptionsVisibility,
+                                                                          changeHeadingTypeOptionsContainerVisibility,
                                                                           blockHeadingType,
                                                                           headingTypeOptionsVisibility,
                                                                           onChangeHandler
                                                                       }) => {
-    const changeHeadingTypeOptionsContainerVisibility = () => {
-        headingTypeOptionsVisibility.open
-            ? setHeadingTypeOptionsVisibility({
-                ...headingTypeOptionsVisibility,
-                open: false,
-                display: 'none',
-                bottom: '-25.2rem'
-            })
-            : setHeadingTypeOptionsVisibility({
-                ...headingTypeOptionsVisibility,
-                open: true,
-                display: 'flex',
-                bottom: '-25.2rem'
-            })
-    }
+
     return (
         <div className={styles.form__inputContainer_select}>
             <div className={styles.form__inputContainer_label}>Тип заголовка</div>
@@ -49,6 +35,7 @@ const DetailPageHeadingType: React.FC<IDetailPageHeadingTypeProps> = ({
                                value={type.id}
                                name="blockHeadingType"
                                id={type.id}
+                               checked={type.id === blockHeadingType}
                                onChange={e => onChangeHandler(e)}
                         />
                     </label>

@@ -20,8 +20,7 @@ export interface IHeaderSettings {
     headerBottomBorderColor: string;
 }
 
-export interface IFooterSettings {
-    id: number;
+export interface IFooterSettingsBase {
     background: string;
     fontColor: string;
     contactsFontSize: number;
@@ -32,6 +31,11 @@ export interface IFooterSettings {
     copyrightsContent: string;
     contentLayout: string;
 }
+
+export interface IFooterSettings extends IFooterSettingsBase{
+    id: number;
+}
+
 
 export interface IButtonSettings {
     id: number;
@@ -44,3 +48,13 @@ export interface IButtonSettings {
     buttonTextFontSize: number;
 }
 
+export interface IButtonStyles {
+    borderRadius: number;
+    background: string;
+    border:string;
+    borderStyle: string;
+    borderColor: string;
+    borderWidth: number;
+    color: string;
+    fontSize: number;
+}

@@ -47,3 +47,10 @@ export interface IProd extends IProdBase{
 export interface IProdReadOnly extends IProd{
     images: IProdImg[]|[]
 }
+
+export interface IProdsByPage{
+    count: number;
+    next: string;
+    previous: string;
+    results: IProdReadOnly[]
+}

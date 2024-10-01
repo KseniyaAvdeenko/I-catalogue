@@ -1,0 +1,90 @@
+@import '../../assets/styles/Common.module'
+
+.page
+  &__container
+    min-height: 100vh
+    max-height: fit-content
+    padding: 3rem 10%
+    overflow-y: auto
+    @extend .flexColumn
+    width: 100%
+  &__content
+    @extend .flexColumn
+    width: 100%
+
+
+//-----productList-----------
+.prodList
+  display: grid
+  gap: 2rem
+  width: 100%
+  padding: 2rem 0
+  grid-template-columns: repeat(4, 1fr)
+
+
+.prodItem
+  @extend .flexColumn
+  width: 100%
+  border-radius: 2rem
+  padding: 2rem
+
+  &__imageWrapper
+    height: 23rem
+    width: 100%
+    @extend .mb_30
+    & > img
+      height: 100%
+      width: 100%
+      object-fit: cover
+      border-radius: 2rem
+      object-position: top center
+
+  &__items
+    @extend .flexColumn
+    align-items: center
+    width: 100%
+
+  &__name
+    font-size: $h3
+    font-weight: 600
+    @extend .mb_10
+
+  &__price
+    @extend .mb_20
+    font-size: $h6
+
+  &__moreBtn
+    text-decoration: none
+    padding: 1.5rem 3rem
+    @extend .mb_20
+
+  &__payButton
+    padding: 1.5rem 30%
+    cursor: pointer
+//------------------------------
+
+
+.pagination
+  @extend .flexRow
+  width: fit-content
+  margin: 2rem auto
+
+  &__nav,
+  &__item
+    margin: 1rem
+    border-radius: 1rem
+    width: 4rem
+    height: 4rem
+    @extend .flexRow
+    justify-content: center
+    cursor: pointer
+    color: inherit
+    font-size: inherit
+    transition: all .5s ease-in
+    &:hover
+      transform: scale(110%)
+
+  &__nav
+    width: fit-content
+    padding: 0 1rem
+

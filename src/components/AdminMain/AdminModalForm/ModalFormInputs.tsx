@@ -25,12 +25,11 @@ const ModalFormInputs = () => {
             })
         }
     }, [modalForm])
-    console.log(savedLabelsTypes)
+
     const onSavedInputsChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
         dispatch(updateModalFormLabel(decodeToken(localStorage.access), parseInt(e.target.id.split('*')[1]), {[e.target.name]: e.target.value}))
     }
     const onNewInputsChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-        console.log({[e.target.name]: e.target.value}, parseInt(e.target.id.split('*')[1]))
         setFields(fields => fields.map(field =>
             field.id === parseInt(e.target.id.split('*')[1])
                 ? {...field, [e.target.name]: e.target.value}

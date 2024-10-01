@@ -16,7 +16,7 @@
     align-items: center
     @extend .p_30
     background: #fff
-    width: 30%
+    width: 25%
     border-radius: 2rem
 
   &__formContainer
@@ -27,7 +27,8 @@
   &__inputContainer
     position: relative
     width: 100%
-    @extend .mb_25
+    margin: 2rem 0
+
     & label
       @extend .baseFont
       position: absolute
@@ -35,20 +36,40 @@
       font-weight: 600
       left: 1rem
       top: 1rem
+
     & input
-      @extend .styledInput
-      @extend .p_10
-      width: 100%
-      &:focus
-        outline: none
-        border-bottom-color: $accent200
+        @extend .styledInput
+        @extend .p_10
+        width: 100%
+        &:focus
+          outline: none
+          border-bottom-color: $accent200
+
+    &_inner
+      @extend .flexRow
+      position: relative
+
+      & input
+        @extend .styledInput
+        @extend .p_10
+        width: 100%
+        &:focus
+          outline: none
+          border-bottom-color: $accent200
   &__heading
     @extend .baseFont
     font-size: $h4
     font-weight: 700
-    @extend .mb_10
+    @extend .mb_30
+    margin-top: 1rem
 
   &__button
     @extend .baseAdminButton
+    margin-top: 3rem
 
 
+.visibilityIcon
+  position: absolute
+  top: 1rem
+  right: 1rem
+  z-index: 2

@@ -8,7 +8,6 @@ import PageProdBackground from "./PageProdBackground";
 import PageHeadingContent from "./PageHeadingContent";
 import {IOptions} from "../../../interface/IAdminPageComponets";
 import {decodeToken} from "../../../hooks/encodeDecodeTokens";
-import PageCardQuantityInRow from "./PageCardQuantityInRow";
 import PageContent from "./PageContent";
 import AdminInputContainer from "../../UI/InputContainers/AdminInputContainer";
 import HeadingType from "../HeadingType";
@@ -117,9 +116,6 @@ const PagesSettings = () => {
                         <PageProdBackground prodBackground={page.prodBackground}
                                             isBlockWithProds={page.isBlockWithProds}
                                             isLoading={isLoading} onChangeHandler={onChangeHandler}/>
-                        <PageCardQuantityInRow isBlockWithProds={page.isBlockWithProds}
-                                               cardQuantityInRow={page.cardQuantityInRow}
-                                               isLoading={isLoading} onChangeHandler={onChangeHandler}/>
                     </div>
                     <div className={styles.form__items}>
                         <PageHeadingContent headingContent={page.headingSettings.headingContent}

@@ -11,9 +11,9 @@ export const loadCurrentUser = (access: string) => async (dispatch: AppDispatch)
         try {
             const response = await axios.get<IUser>(apiUrl + 'auth/users/me/', getAuthConfigApplicationJson(access))
             dispatch(userSlice.actions.loadingCurrentUserSuccess(response.data))
+            dispatch(authSlice.actions.loggedIn())
         } catch (error) {
             dispatch(userSlice.actions.loadingCurrentUserFail('Что-то пошло не так'))
-            dispatch(authSlice.actions.loginFail('Что-то пошло не так'))
         }
     } else {
         dispatch(userSlice.actions.loadingCurrentUserFail('Вы не авторизованы'))
