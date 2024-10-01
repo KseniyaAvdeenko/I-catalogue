@@ -73,7 +73,6 @@ export const authSlice = createSlice({
         verifyRefreshTokenFail(state, action: PayloadAction<string>) {
             state.error = action.payload;
             state.isAuth = false;
-            localStorage.setItem('isAuth', String(false))
         },
         refreshTokenSuccess(state, action: PayloadAction<{ access: string }>) {
             state.access = encodeToken(action.payload.access);

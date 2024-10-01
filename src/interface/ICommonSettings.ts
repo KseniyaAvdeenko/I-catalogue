@@ -48,3 +48,13 @@ export interface IButtonSettings {
     buttonTextFontSize: number;
 }
 
+export interface IButtonStyles {
+    borderRadius: number;
+    background: string;
+    border:string;
+    borderStyle: string;
+    borderColor: string;
+    borderWidth: number;
+    color: string;
+    fontSize: number;
+}

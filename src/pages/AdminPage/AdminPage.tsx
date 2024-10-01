@@ -12,6 +12,8 @@ import {scrollingToSection} from "../../hooks/scrollingToSection";
 import Product from "../../components/AdminMain/AdminProducts/Product/Product";
 import ModalFormSettings from "../../components/AdminMain/AdminModalForm/ModalFormSettings";
 import Sidebar from "../../components/AdminComponents/Sidebar/Sidebar";
+import {setFavicon} from "../../hooks/setFavicon";
+import Favicon from '../../assets/img/I-Catalogue.svg'
 
 const AdminPage = () => {
     const commonSettingsRef = useRef<HTMLElement>(null);
@@ -25,6 +27,7 @@ const AdminPage = () => {
         scrollingToSection(sectionId, productSettingsRef.current);
         scrollingToSection(sectionId, modalFormSettingsRef.current)
     }
+    setFavicon(Favicon)
 
     return (
         <>

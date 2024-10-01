@@ -55,7 +55,7 @@ export const startPayment = (totalSum: number, orderId: number, currency: string
         localStorage.setItem('orderId', String(orderId))
         localStorage.setItem('youkassaPaymentId', encodeToken(response.data.youkassaPaymentId))
         localStorage.setItem('paymentId', String(response.data.paymentId))
-        window.open(response.data.confirmation_url, '_blank')
+        window.location.replace(response.data.confirmation_url)
     } catch (e) {
         console.log(e)
         dispatch(orderSlice.actions.newOrderPaymentFail('payment error'))

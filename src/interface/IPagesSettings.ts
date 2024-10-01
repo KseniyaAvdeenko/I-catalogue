@@ -18,7 +18,6 @@ export interface IMainPageSetting {
     title: string;
     background: string;
     prodCardBg: string;
-    cardQuantityInRow: number;
     headingSettings: IHeading
 }
 
@@ -29,7 +28,6 @@ export interface IPageSettingBase {
     background: string;
     isBlockWithProds: boolean;
     prodBackground: string;
-    cardQuantityInRow: number
     content: string|null
 }
 

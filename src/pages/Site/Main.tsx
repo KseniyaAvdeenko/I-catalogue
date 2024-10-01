@@ -1,20 +1,17 @@
 import React, {useEffect, useState} from 'react';
 import styles from './Site.module.sass'
-import {useAppDispatch, useAppSelector} from "../../hooks/redux";
+import {useAppSelector} from "../../hooks/redux";
 import {IHeading} from "../../interface/IPagesSettings";
 import Heading from "../../components/UI/Heading/Heading";
 import ProductList from "../../components/SiteComponents/ProductList/ProductList";
 import {IProdReadOnly} from "../../interface/IProduct";
 import ModalPopUp from "../../components/SiteComponents/ModalPopup/ModalPopUp";
-import {checkPayment} from "../../store/actions/orderAction";
-import {decodeToken} from "../../hooks/encodeDecodeTokens";
+
 
 const Main = () => {
     const {mainPageSettings} = useAppSelector(state => state.mainPageSettingsReducer)
-    const dispatch = useAppDispatch()
-    const [mainPageStyles, setMainPageStyles] = useState<{ background: string; prodCardBg: string; cardQuantityInRow: number; }>({
+    const [mainPageStyles, setMainPageStyles] = useState<{ background: string; prodCardBg: string;}>({
         background: '',
-        cardQuantityInRow: 4,
         prodCardBg: ''
     })
     const [mainPageHeading, setMainPageHeading] = useState<IHeading>({
@@ -34,7 +31,6 @@ const Main = () => {
             setMainPageStyles({
                 ...mainPageStyles,
                 prodCardBg: mainPageSettings.prodCardBg,
-                cardQuantityInRow: mainPageSettings.cardQuantityInRow,
                 background: mainPageSettings.background
             })
             setMainPageHeading(mainPageSettings.headingSettings)
@@ -42,10 +38,7 @@ const Main = () => {
         }
     }, [mainPageSettings]);
 
-    useEffect(() => {
-        if (localStorage.paymentId && localStorage.orderId && localStorage.youkassaPaymentId)
-            dispatch(checkPayment(decodeToken(localStorage.youkassaPaymentId), +localStorage.orderId, +localStorage.paymentId))
-    }, [localStorage.paymentId, localStorage.orderId, localStorage.youkassaPaymentId])
+
 
     function payClickHandle(prod: IProdReadOnly) {
         setModalVisibility(true);
@@ -57,7 +50,6 @@ const Main = () => {
               style={{background: mainPageStyles.background, position: 'relative'}}>
             <Heading pageHeading={mainPageHeading} headingContent={mainPageHeading.headingContent}/>
             <ProductList
-                cardQuantityInRow={mainPageStyles.cardQuantityInRow}
                 prodCardBg={mainPageStyles.prodCardBg}
                 payClickHandle={payClickHandle}
             />

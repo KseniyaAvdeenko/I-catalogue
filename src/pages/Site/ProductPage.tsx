@@ -41,7 +41,6 @@ const ProductPage = () => {
                 payClickHandle={payClickHandle}
             />)
         }
-
     }
 
     return prodPageSettings && productReadOnly

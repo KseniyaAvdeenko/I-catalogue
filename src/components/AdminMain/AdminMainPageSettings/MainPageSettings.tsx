@@ -109,13 +109,6 @@ const MainPageSettings = () => {
                                 inputContainerClassname={styles.form__inputContainer}
                                 labelClassName={''} label={'Фон карточки товара/услуги'}
                                 isLoading={isLoading} onChangeHandler={onChangeHandler}/>
-                            <AdminInputContainer
-                                type={'number'} name={'cardQuantityInRow'} inputId={'cardQuantityInRow'}
-                                value={mainPageSettings.cardQuantityInRow} checked={false}
-                                required={false} readonly={false} inputClassname={''}
-                                inputContainerClassname={styles.form__inputContainer}
-                                labelClassName={''} label={'Количество карточек товара/услуги в ряду'}
-                                isLoading={isLoading} onChangeHandler={onChangeHandler}/>
                         </div>
                         <div className={styles.form__items}>
                             <AdminInputContainer

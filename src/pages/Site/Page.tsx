@@ -35,7 +35,6 @@ const Page = () => {
                     ? <>
                         <ProductList
                         prodCardBg={page.prodBackground}
-                        cardQuantityInRow={page.cardQuantityInRow}
                         payClickHandle={payClickHandle}/>
                         <ModalPopUp isModalOpen={modalVisibility} onClose={()=>setModalVisibility(false)} data={modalData}/>
                     </>

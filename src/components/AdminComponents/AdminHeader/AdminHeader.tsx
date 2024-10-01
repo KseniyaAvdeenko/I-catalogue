@@ -24,7 +24,6 @@ const AdminHeader: React.FC<IAdminHeader> = ({children}) => {
 
     useEffect(() => {
         if (access && refresh && now >= (+accessExpires - 60000) && now < +refreshExpires) dispatch(refreshToken(decodeToken(refresh)))
-        if (refresh && now >= +refreshExpires) userLogOut()
     }, [now, accessExpires, refreshExpires]);
 
     useEffect(() => {

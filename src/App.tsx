@@ -14,16 +14,18 @@ import {loadFooterSettings} from "./store/actions/footerSettingsAction";
 import {loadHeaderSettings} from "./store/actions/headerSettingsAction";
 import {loadProdPage} from "./store/actions/prodPageSettingsAction";
 import {loadProdAttributes} from "./store/actions/prodAttrsAction";
-import {loadProducts, loadProductsRead} from "./store/actions/productAction";
 import {loadImages} from "./store/actions/prodImagesAction";
 import {loadModalFormSettings} from "./store/actions/modalFormAction";
 import Page from "./pages/Site/Page";
 import ProductPage from "./pages/Site/ProductPage";
 import Layout from "./components/SiteComponents/Layout";
 import {loadOrders} from "./store/actions/orderAction";
+import {loadProductsRead} from "./store/actions/productAction";
+import {loadProductsByPage} from "./store/actions/paginatedProductsAction";
 
 function App() {
     const {pages} = useAppSelector(state => state.pageSettingsReducer);
+    const {currentPage, pageSize} = useAppSelector(state => state.paginatedProductReducer);
     const {productsReadOnly} = useAppSelector(state => state.productReducer);
     const dispatch = useAppDispatch()
 
@@ -37,7 +39,7 @@ function App() {
         dispatch(loadHeaderSettings());
         dispatch(loadProdPage());
         dispatch(loadProdAttributes());
-        dispatch(loadProducts());
+        dispatch(loadProductsByPage(currentPage, pageSize))
         dispatch(loadProductsRead())
         dispatch(loadImages())
         dispatch(loadModalFormSettings())

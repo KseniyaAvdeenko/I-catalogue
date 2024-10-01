@@ -2,7 +2,7 @@ import {IButtonSettings, ICommonSettings, IFooterSettings, IHeaderSettings} from
 import {IMainPageSetting, IPageSetting} from "./IPagesSettings";
 import {IContacts} from "./INavbar";
 import {IUser} from "./IUser";
-import {IImage, IProd, IProdAttrs, IProdReadOnly, IProductPageSettings} from "./IProduct";
+import {IImage, IProd, IProdAttrs, IProdReadOnly, IProdsByPage, IProductPageSettings} from "./IProduct";
 import {IModalForm} from "./IModalForm";
 import {INewOrder, IOrder, IPayment} from "./IOrder";
 
@@ -95,4 +95,13 @@ export interface IOrderInitial extends IInitialStatesBase{
     currentOrder: IOrder|null;
     currentOrderError: string
     paymentError: string
+}
+
+export interface IPaginatedProdsInitial extends IInitialStatesBase{
+    prodsPaginated:IProdReadOnly[]|[];
+    count: number;
+    pageSize: number;
+    totalPages: number;
+    pages: number[]|[],
+    currentPage: number;
 }
