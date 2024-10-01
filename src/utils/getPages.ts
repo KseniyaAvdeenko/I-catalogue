@@ -1,4 +1,3 @@
-import {useMemo} from "react";
 
 export const getPages = (totalPages: number)=>{
     let pageArray: number[] = []

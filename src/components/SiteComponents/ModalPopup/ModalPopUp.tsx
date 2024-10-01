@@ -9,6 +9,7 @@ import SiteButton from "../../UI/SiteButton/SiteButton";
 import {checkPayment, createOrder} from "../../../store/actions/orderAction";
 import {INewOrderBase} from "../../../interface/IOrder";
 import {decodeToken} from "../../../hooks/encodeDecodeTokens";
+import ModalInputContainer from "./ModalInputContainer";
 
 interface IModalPopUpProps {
     isModalOpen: boolean;
@@ -43,8 +44,6 @@ const ModalPopUp: React.FC<IModalPopUpProps> = ({
             [el.inputIdName]: el.inputType === 'number' ? 1 : ''
         })))
     }
-    //console.log(totalPrice)
-    // console.log(modalForm, data, formData)
 
     const formOrder = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
@@ -91,17 +90,7 @@ const ModalPopUp: React.FC<IModalPopUpProps> = ({
                     <form onSubmit={e => formOrder(e)} className={styles.modal__form}>
                         <div className={styles.modal__inputItems}>
                             {formData && modalForm.labels.map(el => (
-                                <div key={el.id} className={styles.modal__inputItem}>
-                                    <label htmlFor={el.inputIdName}>{el.inputLabel}</label>
-                                    <input type={el.inputType}
-                                           name={el.inputIdName}
-                                           id={el.inputIdName}
-                                           required={true}
-                                           min={1}
-                                           value={formData[el.inputIdName]}
-                                           onChange={e => changeHandler(e)}
-                                    />
-                                </div>
+                                <ModalInputContainer key={el.id} label={el} formData={formData} changeHandler={changeHandler}/>
                             ))}
                         </div>
                         {data && (<div className={styles.modal__totalPrice}>Итоговая
