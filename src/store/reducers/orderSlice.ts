@@ -1,60 +1,74 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {IOrderInitial} from "../../interface/IInitialStates";
-import {IOrder} from "../../interface/IOrder";
+import {IInitialStatesBase, IOrderInitial, IPaymentData} from "../../interface/IInitialStates";
+import {INewOrder, IOrder} from "../../interface/IOrder";
 import {encodeToken} from "../../hooks/encodeDecodeTokens";
-
+// export interface IOrderInitial extends IInitialStatesBase{
+//     orders: IOrder[]|null;
+//     newOrder: IOrder|null;
+//     newOrderError: string
+//     paymentChecked: 'checked'|'unchecked'
+//     newOrderPaymentData: {youkassaPaymentId: string, orderPaymentId: number, orderId:number}
+//     paymentError: string
+// }
 
 const initialState: IOrderInitial = {
     isLoading: false,
     error: '',
     orders: null,
-    currentOrder: null,
-    currentOrderError: '',
-    paymentError: ''
+    newOrder: null,
+    newOrderError: '',
+    paymentError: '',
+    newOrderPaymentData: {
+        confirmation_url: '',
+        youkassaPaymentId: localStorage.youkassaPaymentId ? localStorage.youkassaPaymentId : null,
+        orderPaymentId: localStorage.oderPaymentId ? localStorage.oderPaymentId : null,
+        orderId: localStorage.orderId ? localStorage.orderId : null
+    }
 }
 
 export const orderSlice = createSlice({
     name: 'order',
     initialState,
     reducers: {
-        ordersFetching(state){
+        ordersFetching(state) {
             state.isLoading = true;
         },
-        loadOrdersSuccess(state, action: PayloadAction<IOrder[]>){
+        loadOrdersSuccess(state, action: PayloadAction<IOrder[]>) {
             state.isLoading = false;
             state.orders = action.payload
         },
-        loadOrdersFail(state, action: PayloadAction<string>){
+        loadOrdersFail(state, action: PayloadAction<string>) {
             state.isLoading = false;
             state.error = action.payload
         },
-        orderFetching(state){
-            state.isLoading = true;
+        createNewOrderSuccess(state, action: PayloadAction<INewOrder>) {
+            state.newOrder = action.payload
         },
-        loadOrderSuccess(state, action: PayloadAction<IOrder>){
-            state.isLoading = false;
-            state.currentOrder = action.payload
+        createNewOrderFail(state, action: PayloadAction<string>) {
+            state.newOrderError = action.payload
         },
-        loadOrderFail(state, action: PayloadAction<string>){
-            state.isLoading = false;
-            state.currentOrderError = action.payload
+        updateNewOrderSuccess(state, action: PayloadAction<INewOrder>) {
+            state.newOrder = action.payload
         },
-        createNewOrderFail(state, action: PayloadAction<string>){
-            state.currentOrderError = action.payload
+        updateNewOrderFail(state, action: PayloadAction<string>) {
+            state.newOrderError = action.payload
         },
-        updateNewOrderFail(state, action: PayloadAction<string>){
-            state.currentOrderError = action.payload
+        newOrderPaymentSuccess(state, action: PayloadAction<IPaymentData>) {
+            state.newOrderPaymentData = action.payload
+            localStorage.setItem('orderId', String(action.payload.orderId))
+            localStorage.setItem('youkassaPaymentId', encodeToken(action.payload.youkassaPaymentId ? action.payload.youkassaPaymentId : ''))
+            localStorage.setItem('oderPaymentId', String(action.payload.orderPaymentId))
         },
-        newOrderPaymentFail(state, action: PayloadAction<string>){
-            state.currentOrderError = action.payload
+        newOrderPaymentFail(state, action: PayloadAction<string>) {
+            state.newOrderError = action.payload
         },
-        destroyNewOrderAfterSuccessfulPayment(state){
-            state.currentOrder = null
-            state.currentOrderError = ''
+        destroyNewOrderAfterSuccessfulPayment(state) {
+            state.newOrder = null
+            state.newOrderError = ''
             state.paymentError = ''
             localStorage.removeItem('orderId')
             localStorage.removeItem('youkassaPaymentId')
-            localStorage.removeItem('paymentId')
+            localStorage.removeItem('oderPaymentId')
         }
     }
 })
