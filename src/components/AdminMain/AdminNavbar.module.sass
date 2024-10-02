@@ -42,7 +42,6 @@
     & > img
       cursor: pointer
 
-
   &_inputRadio
     display: none
 
@@ -68,18 +67,20 @@
       display: inline
       margin-bottom: .5rem
 
+    & > textarea,
     & > input[type='text']
       @extend .adminInputText
+      &:focus
+        border: .1rem solid $primary100
+      &:focus,
+      &:read-only:focus
+        outline: none
+      &:read-only:focus
+        cursor: not-allowed
 
-    & > input[type="text"]:focus
-      border: .1rem solid $primary100
+    & > textarea
+      resize: none
 
-    & > input[type="text"]:focus,
-    & > input[type="text"]:read-only:focus
-      outline: none
-
-    & > input[type="text"]:read-only:focus
-      cursor: not-allowed
 
 .formItems
   @extend .mb_20
@@ -108,6 +109,12 @@
     column-gap: .5rem
     row-gap: .5rem
 
+    &_column
+      display: grid
+      grid-template-columns: 1fr
+      grid-template-rows: auto
+      column-gap: .5rem
+      row-gap: .5rem
 .hr
   @extend .hrCommon
   margin: 1rem 0

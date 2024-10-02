@@ -7,14 +7,15 @@ import {
     IHeaderLayout,
     IHeadingType, IInputType,
     INavLink,
-    INavLinksHoverStyle
+    INavLinksHoverStyle, ISeoTagType
 } from "../../interface/IAdminPageComponets";
 import FooterLayout1 from '../../assets/img/FooterLayout1.svg';
 import FooterLayout2 from '../../assets/img/FooterLayout2.svg';
 import FooterLayout3 from '../../assets/img/FooterLayout3.svg';
-import {IContacts, IInputProps} from "../../interface/INavbar";
+import {IContacts, IInputProps, ISocialLink} from "../../interface/INavbar";
 import DetailProdPageLayout1 from '../../assets/img/detailProdPageLayout1.svg';
 import DetailProdPageLayout2 from '../../assets/img/detailProdPageLayout2.svg';
+import {ISeoSettings} from "../../interface/ISeoSettings";
 
 
 export const appFonts: IFonts[] = [
@@ -97,3 +98,20 @@ export const inputTypes: IInputType[] = [
     {type: 'date', name: 'Дата'},
     {type: 'datetime-local', name: 'Дата и время'},
 ]
+
+export const seoTagTypes: ISeoTagType[] = [
+    {name: 'Мета-тег', id: 'meta_tag'},
+    {name: 'Пиксель', id: 'pixel'}
+]
+
+export const seoTagExample: ISeoSettings = {
+    id: 0, content: '', tag: "meta_tag", tagName: '', code: '', property: ''
+}
+
+export const dataListValues: string[] = [
+    'robots', 'keywords', 'author', 'description'
+]
+
+export const socialLinkExample: ISocialLink = {
+    id: 0, linkHref: '', linkIcon: 'telegram', linkIconType: 'fulfilledOriginal', socialLinkColor: ''
+}

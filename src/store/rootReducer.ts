@@ -15,6 +15,8 @@ import prodImagesReducer from './reducers/prodImageSlice';
 import modalFormReducer from './reducers/modalFormSlice';
 import orderReducer from './reducers/orderSlice';
 import paginatedProductReducer from './reducers/paginatedProductSlice';
+import seoSettingsReducer from './reducers/seoSettingsSlice';
+import socialLinkReducer from './reducers/socialLinkSlice'
 
 export const rootReducer = combineReducers({
     authReducer,
@@ -32,5 +34,7 @@ export const rootReducer = combineReducers({
     prodImagesReducer,
     modalFormReducer,
     orderReducer,
-    paginatedProductReducer
+    paginatedProductReducer,
+    seoSettingsReducer,
+    socialLinkReducer
 })

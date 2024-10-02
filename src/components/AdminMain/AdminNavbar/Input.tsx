@@ -19,10 +19,10 @@ const Input: React.FC<IInput> = ({
                                      value,
                                      id,
                                      required,
-                                     classname
+                                     classname,
                                  }) => {
 
-    const getInput = (type: string, onChangeHandler: Function, name: string, checked: boolean, value: string|undefined, id: string, required: boolean, classname: string) => {
+    const getInput = (type: string, onChangeHandler: Function, name: string, checked: boolean, value: string | undefined, id: string, required: boolean, classname: string) => {
         if (type === 'checkbox') {
             return (<input
                 type={type}

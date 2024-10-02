@@ -14,6 +14,7 @@ import ModalFormSettings from "../../components/AdminMain/AdminModalForm/ModalFo
 import Sidebar from "../../components/AdminComponents/Sidebar/Sidebar";
 import {setFavicon} from "../../hooks/setFavicon";
 import Favicon from '../../assets/img/I-Catalogue.svg'
+import SeoSettings from "../../components/AdminMain/AdminSeoSettings/SeoSettings";
 
 const AdminPage = () => {
     const commonSettingsRef = useRef<HTMLElement>(null);
@@ -38,6 +39,7 @@ const AdminPage = () => {
                     <Routes>
                         <Route path={'common_settings/'} element={<AdminCommonSettings ref={commonSettingsRef}/>}/>
                         <Route path={'navbar/'} element={<AdminNavbar ref={navbarContentRef}/>}/>
+                        <Route path={'seo_settings/'} element={<SeoSettings/>}/>
                         <Route path={'main_page_settings/'} element={<MainPageSettings/>}/>
                         <Route path={'pages_settings/:slug'} element={<PagesSettings/>}/>
                         <Route path={'products_settings/'} element={<ProductSettings ref={productSettingsRef}/>}/>

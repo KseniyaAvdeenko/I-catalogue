@@ -1,4 +1,5 @@
 import {blockHeadingTypes} from "./IPagesSettings";
+import {SeoTagType} from "./ISeoSettings";
 
 export interface IAdminComponentsProps{
     isLoading: boolean;
@@ -61,8 +62,9 @@ export interface IFile{
     mainImg: boolean;
 }
 
-export interface IImagePreview{
-     imgName: string, image: string, mainImg: boolean
+export interface ISeoTagType{
+     name: string;
+     id: SeoTagType;
 }
 
 export interface IInputType{

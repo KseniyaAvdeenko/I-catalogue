@@ -1,10 +1,11 @@
 import {IButtonSettings, ICommonSettings, IFooterSettings, IHeaderSettings} from "./ICommonSettings";
 import {IMainPageSetting, IPageSetting} from "./IPagesSettings";
-import {IContacts} from "./INavbar";
+import {IContacts, ISocialLink} from "./INavbar";
 import {IUser} from "./IUser";
 import {IImage, IProd, IProdAttrs, IProdReadOnly, IProdsByPage, IProductPageSettings} from "./IProduct";
 import {IModalForm} from "./IModalForm";
 import {INewOrder, IOrder, IPayment} from "./IOrder";
+import {ISeoSettings} from "./ISeoSettings";
 
 export interface IInitialStatesBase {
     isLoading: boolean;
@@ -112,4 +113,14 @@ export interface IPaginatedProdsInitial extends IInitialStatesBase {
     totalPages: number;
     pages: number[] | [],
     currentPage: number;
+}
+
+export interface ISeoSettingsInitial extends IInitialStatesBase {
+    seoTags: ISeoSettings[] | null;
+    seoTag: ISeoSettings | null;
+}
+
+export interface ISocialLinksInitial extends IInitialStatesBase {
+    socialLinks: ISocialLink[] | null;
+    socialLink: ISocialLink | null;
 }
