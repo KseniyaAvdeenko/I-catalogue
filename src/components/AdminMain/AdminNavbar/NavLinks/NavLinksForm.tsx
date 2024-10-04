@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import styles from "../../AdminNavbar.module.sass";
 import {useAppDispatch, useAppSelector} from "../../../../hooks/redux";
 import SavedNavLinks from "./SavedNavLinks";
@@ -10,13 +10,19 @@ import {
     createPageWithNavLink,
     deletePageWithNavLink
 } from "../../../../store/actions/pageSettingsAction";
-import {INavLink, INavLinkBase} from "../../../../interface/IAdminPageComponets";
+import {INavLink} from "../../../../interface/IAdminPageComponets";
 
 const NavLinksForm = () => {
     const dispatch = useAppDispatch();
     const {isLoading, error, pages} = useAppSelector(state => state.pageSettingsReducer)
-
+    //states
     const [fields, setFields] = useState<INavLink[]>([navLinkFieldExample])
+
+    //methods
+    useEffect(() => {
+        if (!fields.length) addNewField()
+    }, [fields.length])
+
 
     function addNewField() {
         const newField: INavLink = structuredClone(navLinkFieldExample)
@@ -48,29 +54,18 @@ const NavLinksForm = () => {
 
     const saveNavLink = (id: number) => {
         const newPage = structuredClone(fields.find(el => el.id === id))
-        newPage.headingSettings.headingContent = `Заголовок страницы ${newPage.navLink}`
-        dispatch(createPageWithNavLink(decodeToken(localStorage.access), newPage))
-        if (fields.length === 1) {
-            deleteField(id)
-            addNewField()
-        } else {
+        if (newPage.navLink) {
+            dispatch(createPageWithNavLink(decodeToken(localStorage.access),
+                {
+                    navLink: newPage.navLink,
+                    slug: newPage.slug,
+                    headingSettings: {headingContent: `Заголовок страницы ${newPage.navLink}`}
+                }))
             deleteField(id)
         }
     }
 
-    function saveAllFields() {
-        fields.map(elem => {
-            if (elem.navLink) {
-                const newPage = {
-                    navLink: elem.navLink,
-                    slug: elem.slug,
-                    headingSettings: {headingContent: `Заголовок страницы ${elem.navLink}`}
-                }
-                dispatch(createPageWithNavLink(decodeToken(localStorage.access), newPage))
-            }
-        })
-        setFields([navLinkFieldExample])
-    }
+    const saveAllFields = () => fields.map(elem => saveNavLink((elem.id)))
 
     return (
         <section id={'navLinksSection'}
@@ -96,8 +91,7 @@ const NavLinksForm = () => {
                 </button>
             </div>
         </section>
-    )
-        ;
+    );
 };
 
 export default NavLinksForm;

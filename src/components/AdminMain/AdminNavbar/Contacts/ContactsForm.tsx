@@ -1,4 +1,4 @@
-import React, {useRef, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import styles from "../../AdminNavbar.module.sass";
 import {useAppDispatch, useAppSelector} from "../../../../hooks/redux";
 import {contactFieldExample} from "../../Options";
@@ -15,6 +15,10 @@ const ContactsForm = () => {
     const [fields, setFields] = useState<IContacts[]>([contactFieldExample])
 
     //methods
+    useEffect(() => {
+        if (!fields.length) addNewField()
+    }, [fields.length])
+
     const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
         e.target.type === 'checkbox'
             ? dispatch(updateContact(decodeToken(localStorage.access), parseInt(e.target.id.split('*')[1]), {[e.target.name]: e.target.checked}))
@@ -63,12 +67,10 @@ const ContactsForm = () => {
         deleteField(id)
     }
 
-    function saveAllFields() {
-        fields.map(elem => {
-            if (elem.content) saveNewContact(elem.id)
-        })
-        addNewField()
-    }
+    const saveAllFields = () => fields.map(elem => {
+        if (elem.content) saveNewContact(elem.id)
+    })
+
 
     return (
         <section id={'contactsSection'}

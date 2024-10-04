@@ -1,11 +1,9 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import styles from '../../AdminNavbar.module.sass'
 import {useAppDispatch, useAppSelector} from "../../../../hooks/redux";
 import SavedProdAttrs from "./SavedProdAttrs";
-
-import {IProdAttrs, IProdAttrsBase} from "../../../../interface/IProduct";
+import {IProdAttrs} from "../../../../interface/IProduct";
 import NewProdAttrForm from "./NewProdAttrForm";
-import {slugify} from "transliteration";
 import {createProdAttribute, deleteProdAttribute, updateProdAttribute} from "../../../../store/actions/prodAttrsAction";
 import {decodeToken} from "../../../../hooks/encodeDecodeTokens";
 
@@ -15,6 +13,11 @@ const ProductsAttributes = () => {
     //states
     const [fields, setFields] = React.useState<IProdAttrs[]>([{id: 0, attribute: ''}])
 
+    //methods
+    useEffect(() => {
+        if (!fields.length) addNewField()
+    }, [fields.length])
+
     const deleteProdAttr = (id: number) => dispatch(deleteProdAttribute(decodeToken(localStorage.access), id))
 
     const addNewField = () => {
@@ -23,27 +26,23 @@ const ProductsAttributes = () => {
         setFields([...fields, newField])
     }
 
-    const onChangeNewAttrHandler = (e: React.ChangeEvent<HTMLInputElement>) =>
-        setFields(fields =>
-            fields.map(field =>
-                field.id === parseInt(e.target.id.split('*')[1])
-                    ? {...field, [e.target.name]: e.target.value}
-                    : field
-            )
+    const onChangeNewAttrHandler = (e: React.ChangeEvent<HTMLInputElement>) => setFields(fields =>
+        fields.map(field =>
+            field.id === parseInt(e.target.id.split('*')[1])
+                ? {...field, [e.target.name]: e.target.value}
+                : field
         )
+    )
 
-
-    const deleteField = (id: number) => {
-        setFields(fields.filter(el => el.id != id))
-    }
+    const deleteField = (id: number) => setFields(fields.filter(el => el.id != id))
 
     const saveAttr = (id: number) => {
-        const newAttr = fields.find(el => el.id === id)
-        if (newAttr && newAttr.attribute) dispatch(createProdAttribute(decodeToken(localStorage.access),
-            {attribute: newAttr.attribute}))
-        if (!error) deleteField(id);
+        const newAttr = structuredClone(fields.find(el => el.id === id))
+        if (newAttr.attribute) {
+            dispatch(createProdAttribute(decodeToken(localStorage.access), {attribute: newAttr.attribute}))
+            deleteField(id);
+        }
     }
-
 
     const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (localStorage.access) {
@@ -52,13 +51,8 @@ const ProductsAttributes = () => {
         }
     }
 
-    function saveAllFields() {
-        fields.map(elem=>{
-            if(elem.attribute)dispatch(createProdAttribute(decodeToken(localStorage.access),
-            {attribute: elem.attribute}))
-        })
-        if (!error) setFields([{id: 0, attribute: ''}])
-    }
+    const saveAllFields = () => fields.map(elem => saveAttr(elem.id))
+
 
     return (
         <section id={'addingProdAttrsSection'}
