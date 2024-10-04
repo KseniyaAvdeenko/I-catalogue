@@ -15,11 +15,9 @@
 
     &__container
       width: 100%
-      @extend .flexRow
+      display: flex
       justify-content: space-between
 
-      & > a
-        flex-basis: 10%
 
     &__copyrights
       width: 100%
@@ -51,7 +49,7 @@
   &__navColumnItems,
   &__contactsItems
     @extend .flexColumn
-    flex-basis: calc(20% - 4rem)
+    flex-basis: max-content
 
   &__navColumnItem,
   &__contactsItem
@@ -77,3 +75,17 @@
 
     & > svg
       margin-right: 1rem
+
+.socialLinks
+  &__items
+    @extend .flexRow
+
+  &__item
+    margin: .5rem
+    width: 2.5rem
+    height: 2.5rem
+
+    & > img
+      width: 100%
+      height: 100%
+      object-fit: contain

@@ -5,7 +5,7 @@ import {useAppSelector} from "../../../hooks/redux";
 import PhoneIcon from "../../UI/Icons/PhoneIcon";
 import EmailIcon from "../../UI/Icons/EmailIcon";
 import GeoIcon from "../../UI/Icons/GeoIcon";
-import HeaderSocialLinks from "./HeaderSocialLinks";
+import SocialLinks from "../SocialLinks";
 
 interface IHeaderContactsProps {
     containerClassName: string;
@@ -46,7 +46,10 @@ const HeaderContacts: FC<IHeaderContactsProps> = ({containerClassName, headerSty
                             {contact.content}</div>
                 ))}
             </nav>
-            <HeaderSocialLinks/>
+            <SocialLinks
+                socialItemsClass={styles.socialLinks__items}
+                socialItemClass={styles.socialLinks__item}
+            />
         </div>
     );
 };

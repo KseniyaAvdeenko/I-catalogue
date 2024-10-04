@@ -6,6 +6,7 @@ import {Link} from "react-router-dom";
 import PhoneIcon from "../../UI/Icons/PhoneIcon";
 import EmailIcon from "../../UI/Icons/EmailIcon";
 import GeoIcon from "../../UI/Icons/GeoIcon";
+import SocialLinks from "../SocialLinks";
 
 const FooterContacts: React.FC<{ footerStyles: IFooterSettingsBase; }> = ({footerStyles}) => {
     const {contacts} = useAppSelector(state => state.contactsReducer)
@@ -33,6 +34,10 @@ const FooterContacts: React.FC<{ footerStyles: IFooterSettingsBase; }> = ({foote
                             <GeoIcon color={footerStyles.fontColor} fontSize={footerStyles.contactsFontSize}/>)}
                         {contact.content}</div>
             ))}
+            <SocialLinks
+                socialItemsClass={styles.socialLinks__items}
+                socialItemClass={styles.socialLinks__item}
+            />
         </div>
     );
 };
