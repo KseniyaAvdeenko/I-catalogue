@@ -22,11 +22,11 @@ const SocialIconSelect: React.FC<ISocialIconSelectProps> = ({
 
     const getLinkIcon = (linkIconName: string) => {
         const linkIconObj = structuredClone(socialIcons.find(el => el.name === linkIconName))
-        return (<img src={linkIconObj.icon} alt={linkIconObj.name} style={{marginRight: '1rem'}}/>)
+        return (<img src={linkIconObj.iconFulfilled} alt={linkIconObj.name} style={{marginRight: '1rem'}}/>)
     }
 
     return (
-        <div className={styles.form__inputContainer_select}>
+        <div className={styles.form__inputContainer_select} style={{flexBasis:'25%'}}>
             <div className={styles.form__inputContainer_label}>Иконка на ссылку</div>
             <div className={styles.form__selectContainer} onClick={e=>changeIconsOptionsContainerVisibility(e)}>
                 {isLoading && 'Loading...'}
@@ -40,7 +40,7 @@ const SocialIconSelect: React.FC<ISocialIconSelectProps> = ({
                            className={icon.name === linkIcon
                                ? [styles.form__option, styles.selectedOption].join(' ')
                                : [styles.form__option].join(' ')}>
-                        <img src={icon.icon} alt={icon.name} style={{marginRight: '1rem'}}/>
+                        <img src={icon.iconFulfilled} alt={icon.name} style={{marginRight: '1rem'}}/>
                         {icon.name}
                         <input type="radio"
                                value={icon.name}

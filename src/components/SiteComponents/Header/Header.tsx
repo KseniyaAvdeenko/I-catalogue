@@ -16,6 +16,7 @@ const Header: React.FC<IHeaderProps> = ({logo}) => {
         borderBottom: 'none',
     })
     const [headerContainerClass, setHeaderContainerClass] = useState<string>(styles.header__container)
+
     const [navLinksStyle, setNavLinksStyle] = useState({
         fontSize: 16,
         color: headerStyles.fontColor,

@@ -5,7 +5,6 @@ import styles from "../AdminNavbar.module.sass";
 import DeleteIcon from "../../../assets/img/deleteIcon.svg";
 import SeoTagType from "./SeoTagType";
 import SeoTagName from "./SeoTagName";
-import SeoTagProperty from "./SeoTagProperty";
 import SeoTagContent from "./SeoTagContent";
 import SeoTagCode from "./SeoTagCode";
 
@@ -34,12 +33,6 @@ const SavedSeoTags: React.FC<ISavedSeoTagsProps> = ({isLoading, onChangeHandler,
                             required={false} value={tag.tagName}
                             listId={'name*' + tag.id}
                         />
-                        <SeoTagProperty
-                            onChangeHandler={onChangeHandler}
-                            label={'Атрибут property мета-тега(для тега Open Graph)'}
-                            id={'property*' + tag.id} type={'text'}
-                            name={'property'} required={false}
-                            value={tag.property}/>
                         <SeoTagContent
                             onChangeHandler={onChangeHandler}
                             label={'Атрибут content мета-тега'}

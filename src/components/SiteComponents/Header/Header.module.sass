@@ -9,19 +9,21 @@
   height: fit-content
 
   &__container
-    display: grid
     width: 100%
     height: 100%
 
   &__layout1
-    grid-template-columns: 10% 60% 1.5fr
+    display: grid
+    grid-template-columns: 10% 75% min-content
     column-gap: 2rem
 
 
   &__layout2
-    grid-template-columns: 10% calc(90% - 2rem)
-    column-gap: 2rem
+    @extend .flexRow
+    justify-content: space-between
 
+    & > a
+      flex-basis: fit-content
 
 .image
   &__container
@@ -74,20 +76,29 @@
 .navLayout2
   @extend .flexColumn
   width: 100%
+  flex-basis: 80%
 
 
 .contactItems
   &__Layout1
     @extend .flexColumn
     justify-content: center
-    align-items: end
     flex-wrap: wrap
+    & > nav
+      @extend .flexColumn
+      justify-content: center
 
   &__Layout2
-    @extend .navLayout1
+    @extend .flexRow
+    justify-content: space-between
+    width: 100%
     margin-bottom: 1rem
-    padding-bottom: .5rem
-
+    padding-bottom: 1rem
+    & > nav
+      @extend .flexRow
+      justify-content: space-evenly
+      width: 100%
+      flex-basis: 75%
 
 .contactsItem
   &__Layout1
@@ -96,5 +107,20 @@
     text-decoration: none
     transition: all .5s ease-in
     cursor: pointer
+
     & > svg
       margin-right: 1rem
+
+.socialLinks
+  &__items
+    @extend .flexRow
+
+  &__item
+    margin: .5rem
+    width: 2.5rem
+    height: 2.5rem
+
+    & > img
+      width: 100%
+      height: 100%
+      object-fit: contain

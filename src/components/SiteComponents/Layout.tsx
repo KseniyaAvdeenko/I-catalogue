@@ -6,6 +6,7 @@ import Footer from "./Footer/Footer";
 import {checkPayment} from "../../store/actions/orderAction";
 import {decodeToken} from "../../hooks/encodeDecodeTokens";
 import {setFavicon} from "../../hooks/setFavicon";
+import {getSeoTags} from "../../hooks/getSeoTags";
 
 interface ILayoutProps {
     children: React.ReactNode
@@ -13,6 +14,7 @@ interface ILayoutProps {
 
 const Layout: React.FC<ILayoutProps> = ({children}) => {
     const {commonSettings} = useAppSelector(state => state.commonSettingsReducer)
+    const {seoTags} = useAppSelector(state => state.seoSettingsReducer)
     const [basicStyles, setBasicStyles] = useState({color: 'black', fontSize: 16, fontFamily: 'Rubik'})
     const dispatch = useAppDispatch()
 
@@ -30,6 +32,19 @@ const Layout: React.FC<ILayoutProps> = ({children}) => {
         }
     }, [commonSettings]);
 
+    useEffect(() => {
+        if (commonSettings) {
+            setBasicStyles({
+                ...basicStyles,
+                color: commonSettings.basicFontColor,
+                fontSize: commonSettings.basicFontSize,
+                fontFamily: commonSettings.basicFontFamily
+            })
+            setFavicon(commonSettings.favicon)
+        }
+        if(seoTags) getSeoTags(seoTags)
+
+    }, [seoTags]);
     useEffect(() => {
         if (localStorage.paymentId && localStorage.orderId && localStorage.youkassaPaymentId)
             dispatch(checkPayment(decodeToken(localStorage.youkassaPaymentId), +localStorage.orderId, +localStorage.paymentId))

@@ -29,7 +29,7 @@ export type SocialLinkIcons = 'Telegram' |
     'Youtube' |
     'WhatsApp' |
     'Twitter' |
-    'Tiktok' |
+    'TikTok' |
     'Linkedin' |
     'FacebookMessenger'
 

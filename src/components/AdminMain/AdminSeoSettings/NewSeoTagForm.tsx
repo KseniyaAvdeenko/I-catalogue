@@ -5,7 +5,6 @@ import SaveIcon from "../../../assets/img/saveIcon.svg";
 import DeleteIcon from "../../../assets/img/deleteIcon.svg";
 import SeoTagType from "./SeoTagType";
 import SeoTagName from "./SeoTagName";
-import SeoTagProperty from "./SeoTagProperty";
 import SeoTagContent from "./SeoTagContent";
 import SeoTagCode from "./SeoTagCode";
 
@@ -38,11 +37,6 @@ const NewSeoTagForm: React.FC<INewSeoTagFormProps> = ({fields, saveNewSeoTag, on
                             value={field.tagName}
                             listId={'name*' + field.id}
                         />
-                        <SeoTagProperty
-                            onChangeHandler={onChangeHandler}
-                            label={'Атрибут property мета-тега(для тега Open Graph)'}
-                            id={'property*' + field.id} type={'text'}
-                            name={'property'} required={false} value={field.property}/>
                         <SeoTagContent
                             onChangeHandler={onChangeHandler}
                             label={'Атрибут content мета-тега'}
