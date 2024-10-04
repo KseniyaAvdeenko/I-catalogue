@@ -22,6 +22,8 @@ import Layout from "./components/SiteComponents/Layout";
 import {loadOrders} from "./store/actions/orderAction";
 import {loadProductsRead} from "./store/actions/productAction";
 import {loadProductsByPage} from "./store/actions/paginatedProductsAction";
+import {loadSocialLinks} from "./store/actions/socialLinksAction";
+import {loadSeoTags} from "./store/actions/seoSettingsAction";
 
 function App() {
     const {pages} = useAppSelector(state => state.pageSettingsReducer);
@@ -39,11 +41,13 @@ function App() {
         dispatch(loadHeaderSettings());
         dispatch(loadProdPage());
         dispatch(loadProdAttributes());
-        dispatch(loadProductsByPage(currentPage, pageSize))
-        dispatch(loadProductsRead())
-        dispatch(loadImages())
-        dispatch(loadModalFormSettings())
-        dispatch(loadOrders())
+        dispatch(loadProductsByPage(currentPage, pageSize));
+        dispatch(loadProductsRead());
+        dispatch(loadImages());
+        dispatch(loadModalFormSettings());
+        dispatch(loadOrders());
+        dispatch(loadSocialLinks());
+        dispatch(loadSeoTags());
     }, [])
 
     return (

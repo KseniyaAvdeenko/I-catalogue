@@ -27,6 +27,9 @@ const SidebarNavbarItems: React.FC<ISidebarNavbarItemsProps> = ({scrollToBlock, 
                      onClick={() => scrollToBlock('contactsSection')}>Контакты
                 </div>
                 <div className={[styles.Sidebar__item, styles.Sidebar__item_margin].join(' ')}
+                     onClick={() => scrollToBlock('socialLinksSection')}>Социальные ссылки-иконки
+                </div>
+                <div className={[styles.Sidebar__item, styles.Sidebar__item_margin].join(' ')}
                      onClick={() => scrollToBlock('navLinksSection')}>Навигационные ссылки
                 </div>
             </div>

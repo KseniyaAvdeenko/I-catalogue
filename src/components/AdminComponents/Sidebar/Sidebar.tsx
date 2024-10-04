@@ -8,6 +8,7 @@ import SidebarProdSettings from "./SidebarProdSettings";
 import SidebarEditProdItems from "./SidebarEditProdItems";
 import SidebarModalFormSettingsItems from "./SidebarModalFormSettingsItems";
 import {ISidebarItemsVisibility} from "../../../interface/IAdminPageComponets";
+import SidebarSeoSettings from "./SidebarSeoSettings";
 
 interface ISidebarProps {
     scrollToBlock: Function
@@ -80,6 +81,7 @@ const Sidebar: React.FC<ISidebarProps> = ({scrollToBlock}) => {
                 getItemsVisibility={getItemsVisibility}
                 commonSettingsItems={commonSettingsItems}
                 scrollToBlock={scrollToBlock}/>
+            <SidebarSeoSettings getItemsVisibility={getItemsVisibility}/>
             <SidebarNavbarItems
                 getItemsVisibility={getItemsVisibility}
                 navbarItems={navbarItems}

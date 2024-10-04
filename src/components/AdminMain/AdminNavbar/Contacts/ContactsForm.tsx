@@ -1,4 +1,4 @@
-import React, {useRef, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import styles from "../../AdminNavbar.module.sass";
 import {useAppDispatch, useAppSelector} from "../../../../hooks/redux";
 import {contactFieldExample} from "../../Options";
@@ -12,8 +12,12 @@ const ContactsForm = () => {
     const dispatch = useAppDispatch();
     const {isLoading, error, contacts} = useAppSelector(state => state.contactsReducer)
     //---states
-
     const [fields, setFields] = useState<IContacts[]>([contactFieldExample])
+
+    //methods
+    useEffect(() => {
+        if (!fields.length) addNewField()
+    }, [fields.length])
 
     const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
         e.target.type === 'checkbox'
@@ -22,7 +26,6 @@ const ContactsForm = () => {
     }
 
     const onChangeNewFieldHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-
         if (e.target.type === 'checkbox') {
             setFields(fields =>
                 fields.map(item =>
@@ -42,37 +45,32 @@ const ContactsForm = () => {
             );
         }
     }
-    const deleteSavedContact = (id: number): void => {
-        dispatch(deleteContact(decodeToken(localStorage.access), id))
-    }
-    const deleteField = (id: number) => {
-        setFields(fields.filter(el => el.id !== id))
-    }
+
+    const deleteSavedContact = (id: number) => dispatch(deleteContact(decodeToken(localStorage.access), id))
+
+    const deleteField = (id: number) => setFields(fields.filter(el => el.id !== id))
+
     const addNewField = () => {
         const newField: IContacts = structuredClone(contactFieldExample)
         newField.id = fields.length
         setFields([...fields, newField])
     }
+
     const saveNewContact = (id: number) => {
-        const newContact = fields.find(el => el.id === id)
-        dispatch(createContact(decodeToken(localStorage.access), newContact))
+        const newContact = structuredClone(fields.find(el => el.id === id))
+        dispatch(createContact(decodeToken(localStorage.access), {
+            content: newContact.content,
+            isLink: newContact.isLink,
+            linkHref: newContact.linkHref,
+            linkType: newContact.linkType
+        }))
         deleteField(id)
     }
 
-    function saveAllFields() {
-        fields.map(elem => {
-            if (elem.content) {
-                const newContact: IContactsBase = {
-                    content: elem.content,
-                    isLink: elem.isLink,
-                    linkHref: elem.linkHref,
-                    linkType: elem.linkType
-                }
-                dispatch(createContact(decodeToken(localStorage.access), newContact))
-            }
-        })
-        setFields([contactFieldExample])
-    }
+    const saveAllFields = () => fields.map(elem => {
+        if (elem.content) saveNewContact(elem.id)
+    })
+
 
     return (
         <section id={'contactsSection'}
