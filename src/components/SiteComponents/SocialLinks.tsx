@@ -10,7 +10,7 @@ const SocialLinks:React.FC<{socialItemsClass: string, socialItemClass: string}> 
         <div className={socialItemsClass}>
             {isLoading && 'Loading...'}
             {socialLinks && socialLinks.map(link => (
-                <Link className={socialItemClass} key={link.id} to={link.linkHref}>
+                <Link className={socialItemClass} key={link.id} to={link.linkHref} target={'_blank'}>
                     {link.linkIconType === 'fulfilledOriginal' || link.linkIconType === 'outlinedOriginal'
                         ? getIconOriginal(link.linkIcon, link.linkIconType)
                         : link.linkIconType === 'fulfilledMonotone'

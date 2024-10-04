@@ -127,7 +127,7 @@ export const seoTagTypes: ISeoTagType[] = [
 ]
 
 export const seoTagExample: ISeoSettings = {
-    id: 0, content: '', tag: "meta_tag", tagName: '', code: '', property: ''
+    id: 0, content: '', tag: "meta_tag", tagName: '', code: ''
 }
 
 export const dataListValues: string[] = [

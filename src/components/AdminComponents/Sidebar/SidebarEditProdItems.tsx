@@ -8,9 +8,10 @@ interface ISidebarEditProdItemsProps{
 }
 const SidebarEditProdItems: React.FC<ISidebarEditProdItemsProps> = ({getItemsVisibility}) => {
 
-    const {products} = useAppSelector(state => state.productReducer)
+    const {productsReadOnly} = useAppSelector(state => state.productReducer)
+
     return (
-        <div className={styles.Sidebar__items} style={{display: products && products.length ?'flex':'none'}}>
+        <div className={styles.Sidebar__items} style={{display: productsReadOnly && productsReadOnly.length ?'flex':'none'}}>
             <div className={styles.Sidebar__itemsContainer} onClick={() => getItemsVisibility('none')}>
                 <NavLink to={'editing_products'} className={({isActive}) =>
                     [isActive
