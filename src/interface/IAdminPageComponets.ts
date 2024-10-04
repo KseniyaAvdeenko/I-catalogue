@@ -1,5 +1,6 @@
 import {blockHeadingTypes} from "./IPagesSettings";
 import {SeoTagType} from "./ISeoSettings";
+import {SocialLinkIcons, SocialLinkIconType} from "./INavbar";
 
 export interface IAdminComponentsProps{
     isLoading: boolean;
@@ -69,4 +70,12 @@ export interface ISeoTagType{
 
 export interface IInputType{
     type: string, name: string
+}
+
+export interface ISocialIcons{
+    name: SocialLinkIcons, icon: string
+}
+
+export interface ISocialIconType{
+    id: SocialLinkIconType, icon: string, name: string
 }

@@ -23,15 +23,15 @@ export type SocialLinkIconType = 'fulfilledOriginal' |
     'fulfilledMonotone' |
     'outlinedMonotone'
 
-export type SocialLinkIcons = 'telegram' |
-    'facebook' |
-    'instagram' |
-    'youtube' |
-    'whatsApp' |
-    'twitter' |
-    'tiktok' |
-    'linkedin' |
-    'Facebook Messenger'
+export type SocialLinkIcons = 'Telegram' |
+    'Facebook' |
+    'Instagram' |
+    'Youtube' |
+    'WhatsApp' |
+    'Twitter' |
+    'Tiktok' |
+    'Linkedin' |
+    'FacebookMessenger'
 
 
 export interface ISocialLinkBase {

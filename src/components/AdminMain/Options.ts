@@ -7,7 +7,7 @@ import {
     IHeaderLayout,
     IHeadingType, IInputType,
     INavLink,
-    INavLinksHoverStyle, ISeoTagType
+    INavLinksHoverStyle, ISeoTagType, ISocialIcons, ISocialIconType
 } from "../../interface/IAdminPageComponets";
 import FooterLayout1 from '../../assets/img/FooterLayout1.svg';
 import FooterLayout2 from '../../assets/img/FooterLayout2.svg';
@@ -16,7 +16,19 @@ import {IContacts, IInputProps, ISocialLink} from "../../interface/INavbar";
 import DetailProdPageLayout1 from '../../assets/img/detailProdPageLayout1.svg';
 import DetailProdPageLayout2 from '../../assets/img/detailProdPageLayout2.svg';
 import {ISeoSettings} from "../../interface/ISeoSettings";
-
+import TelegramIcon from '../../assets/img/telegram.svg';
+import FacebookIcon from '../../assets/img/facebook.svg';
+import InstagramIcon from '../../assets/img/instagram.svg';
+import LinkedinIcon from '../../assets/img/linkedin.svg';
+import TiktokIcon from '../../assets/img/tiktok.svg';
+import TwitterIcon from '../../assets/img/twitter.svg';
+import WhatsAppIcon from '../../assets/img/whatsapp.svg';
+import YoutubeIcon from '../../assets/img/youtube.svg';
+import FacebookMessenger from '../../assets/img/FacebookMessenger.svg';
+import OutlinedOriginal from '../../assets/img/outlinedOriginal.svg';
+import OutlinedMonotone from '../../assets/img/outlinedMonotone.svg';
+import FulfilledOriginal from '../../assets/img/fulfilledOriginal.svg';
+import FulfilledMonotone from '../../assets/img/fulfilledMonotone.svg';
 
 export const appFonts: IFonts[] = [
     {id: 'Raleway', font: 'Raleway'},
@@ -113,5 +125,23 @@ export const dataListValues: string[] = [
 ]
 
 export const socialLinkExample: ISocialLink = {
-    id: 0, linkHref: '', linkIcon: 'telegram', linkIconType: 'fulfilledOriginal', socialLinkColor: ''
+    id: 0, linkHref: '', linkIcon: 'Telegram', linkIconType: 'fulfilledOriginal', socialLinkColor: 'original'
 }
+export const socialIcons: ISocialIcons[] = [
+    {name: 'Telegram', icon: TelegramIcon},
+    {name: 'Facebook', icon: FacebookIcon},
+    {name: 'Instagram', icon: InstagramIcon},
+    {name: 'Linkedin', icon: LinkedinIcon},
+    {name: 'Tiktok', icon: TiktokIcon},
+    {name: 'Twitter', icon: TwitterIcon},
+    {name: 'WhatsApp', icon: WhatsAppIcon},
+    {name: 'Youtube', icon: YoutubeIcon},
+    {name: 'FacebookMessenger', icon: FacebookMessenger},
+]
+
+export const socialIconTypes: ISocialIconType[] = [
+    {id: 'fulfilledOriginal', icon: FulfilledOriginal, name: 'Полная заливка оригинального цвета'},
+    {id: 'fulfilledMonotone', icon: FulfilledMonotone, name: 'Полная монотонная заливка'},
+    {id: 'outlinedOriginal', icon: OutlinedOriginal, name: 'Контур оригинального цвета'},
+    {id: 'outlinedMonotone', icon: OutlinedMonotone, name: 'Контур монотонный'},
+]
