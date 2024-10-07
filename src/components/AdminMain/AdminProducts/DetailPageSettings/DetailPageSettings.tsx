@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import styles from "../../AdminMain.module.sass";
 import {useAppDispatch, useAppSelector} from "../../../../hooks/redux";
 import DetailPageContentLayout from "./DetailPageContentLayout";
@@ -7,8 +7,7 @@ import {IOptions} from "../../../../interface/IAdminPageComponets";
 import DetailPageHeadingType from "./DetailPageHeadingType";
 import {updateProdPageSettings} from "../../../../store/actions/prodPageSettingsAction";
 import {decodeToken} from "../../../../hooks/encodeDecodeTokens";
-import {blockHeadingTypes, FontWeight, IHeading} from "../../../../interface/IPagesSettings";
-import {IProductPageSettings} from "../../../../interface/IProduct";
+import Loader from "../../../UI/Loader/Loader";
 
 const DetailPageSettings = () => {
 
@@ -74,9 +73,9 @@ const DetailPageSettings = () => {
                                                  readonly={false} inputClassname={''}
                                                  inputContainerClassname={styles.form__inputContainer}
                                                  labelClassName={''} label={'Фон страницы товара/услуги'}
-                                                 isLoading={isLoading} onChangeHandler={onChangeHandler}/>
+                                                 onChangeHandler={onChangeHandler}/>
                             <DetailPageContentLayout contentLayout={prodPageSettings.contentLayout}
-                                                     isLoading={isLoading} onChangeHandler={onChangeHandler}/>
+                                                     onChangeHandler={onChangeHandler}/>
                         </div>
                         <div className={styles.form__items}>
                             <AdminInputContainer type={'text'} name={'headingContent'}
@@ -86,37 +85,37 @@ const DetailPageSettings = () => {
                                                  inputContainerClassname={[styles.form__items, styles.form__items_margin].join(' ')}
                                                  labelClassName={styles.form__inputContainer_label}
                                                  label={'Заголовок страницы'}
-                                                 isLoading={isLoading} onChangeHandler={onChangeHeadingHandler}/>
+                                                 onChangeHandler={onChangeHeadingHandler}/>
                             <AdminInputContainer type={'color'} name={'headingFontColor'} inputId={'headingFontColor'}
                                                  value={prodPageSettings.headingSettings.headingFontColor}
                                                  checked={false} required={false} readonly={false}
                                                  inputClassname={''}
                                                  inputContainerClassname={styles.form__inputContainer}
                                                  labelClassName={''} label={'Цвет  заголовка'}
-                                                 isLoading={isLoading} onChangeHandler={onChangeHeadingHandler}/>
+                                                 onChangeHandler={onChangeHeadingHandler}/>
                             <AdminInputContainer type={'number'} name={'headingFontSize'}
                                                  inputId={'headingFontSize'} required={true}
                                                  value={prodPageSettings.headingSettings.headingFontSize}
                                                  checked={false} readonly={false} inputClassname={''}
                                                  inputContainerClassname={styles.form__inputContainer}
                                                  labelClassName={''} label={'Размер шрифта заголовка'}
-                                                 isLoading={isLoading} onChangeHandler={onChangeHeadingHandler}/>
+                                                 onChangeHandler={onChangeHeadingHandler}/>
                             <AdminInputContainer type={'number'} name={'headingFontWeight'} min={400} step={100}
                                                  inputId={'headingFontWeight'} required={true} max={900}
                                                  value={prodPageSettings.headingSettings.headingFontWeight}
                                                  checked={false} readonly={false} inputClassname={''}
                                                  inputContainerClassname={styles.form__inputContainer}
                                                  labelClassName={''} label={'Жирность текста заголовка'}
-                                                 isLoading={isLoading} onChangeHandler={onChangeHeadingHandler}/>
+                                                 onChangeHandler={onChangeHeadingHandler}/>
 
                             <DetailPageHeadingType
                                 changeHeadingTypeOptionsContainerVisibility={changeHeadingTypeOptionsContainerVisibility}
                                 blockHeadingType={prodPageSettings.headingSettings.blockHeadingType}
                                 headingTypeOptionsVisibility={headingTypeOptionsVisibility}
-                                isLoading={isLoading} onChangeHandler={onChangeHeadingHandler}/>
+                                onChangeHandler={onChangeHeadingHandler}/>
                         </div>
                     </div>
-                    : <div className={styles.AdminMain__formContainer}></div>}
+                    : <div className={styles.AdminMain__formContainer}>{isLoading && (<Loader/>)}</div>}
 
             </section>
         )

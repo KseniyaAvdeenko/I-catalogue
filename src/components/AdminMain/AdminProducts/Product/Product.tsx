@@ -7,6 +7,7 @@ import {IOptions} from "../../../../interface/IAdminPageComponets";
 import {deleteProduct, loadProductRead, updateProduct} from "../../../../store/actions/productAction";
 import EditProdForm from "./EditProdForm";
 import {decodeToken} from "../../../../hooks/encodeDecodeTokens";
+import Loader from "../../../UI/Loader/Loader";
 
 const Product = () => {
     const {productsReadOnly, isLoading, productReadOnly} = useAppSelector(state => state.productReducer)
@@ -29,7 +30,6 @@ const Product = () => {
 
     const onSelectHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
         e.preventDefault()
-        console.log(e.target.value)
         dispatch(loadProductRead(parseInt(e.target.value)))
         setProdsOptionsVisibility({...prodsOptionsVisibility, open: false, display: 'none', bottom: '-8.8rem'})
     }
@@ -46,7 +46,12 @@ const Product = () => {
                     selectedProd.id,
                     {[e.target.name]: e.target.value}))
         }
-        if(e.target.name === 'currency')setCurrencyOptionsVisibility({...currencyOptionsVisibility, open: false, display: 'none', bottom: '-12.9rem'})
+        if (e.target.name === 'currency') setCurrencyOptionsVisibility({
+            ...currencyOptionsVisibility,
+            open: false,
+            display: 'none',
+            bottom: '-12.9rem'
+        })
     }
 
     function onProdAttrsChangeHandler(e: React.ChangeEvent<HTMLInputElement>) {
@@ -63,8 +68,18 @@ const Product = () => {
 
     const changeCurrencyOptionsContainerVisibility = () => {
         currencyOptionsVisibility.open
-            ? setCurrencyOptionsVisibility({...currencyOptionsVisibility, open: false, display: 'none', bottom: '-12.9rem'})
-            : setCurrencyOptionsVisibility({...currencyOptionsVisibility, open: true, display: 'flex', bottom: '-12.9rem'})
+            ? setCurrencyOptionsVisibility({
+                ...currencyOptionsVisibility,
+                open: false,
+                display: 'none',
+                bottom: '-12.9rem'
+            })
+            : setCurrencyOptionsVisibility({
+                ...currencyOptionsVisibility,
+                open: true,
+                display: 'flex',
+                bottom: '-12.9rem'
+            })
     }
     return (
         <main className={styles.AdminNavbar}>
@@ -72,13 +87,15 @@ const Product = () => {
                      className={[styles.AdminNavbar__container, styles.AdminNavbar__container_margin].join(' ')}>
                 <div className={[styles.selectProd].join()}>
                     <h2>Редактирование товара/услуги</h2>
-                    {isLoading && 'Loading ...'}
-                    {productsReadOnly && (<SelectProd products={productsReadOnly}
-                                                      prodsOptionsVisibility={prodsOptionsVisibility}
-                                                      setProdsOptionsVisibility={setProdsOptionsVisibility}
-                                                      onChangeHandler={onSelectHandler} isLoading={isLoading}
-                                                      selectedProd={selectedProd}
-                    />)}
+                    {productsReadOnly
+                        ? <SelectProd products={productsReadOnly}
+                                      prodsOptionsVisibility={prodsOptionsVisibility}
+                                      setProdsOptionsVisibility={setProdsOptionsVisibility}
+                                      onChangeHandler={onSelectHandler}
+                                      selectedProd={selectedProd}
+                        /> :
+                        <div className={styles.form__inputContainer_select} style={{flexBasis: '30%'}}>{isLoading && (<Loader/>)}</div>
+                    }
                 </div>
 
                 <div className={styles.AdminNavbar__formContainer}>

@@ -13,10 +13,9 @@ interface ISavedSeoTagsProps extends IAdminComponentsProps {
     deleteSeoTag: Function
 }
 
-const SavedSeoTags: React.FC<ISavedSeoTagsProps> = ({isLoading, onChangeHandler, seoTags, deleteSeoTag}) => {
+const SavedSeoTags: React.FC<ISavedSeoTagsProps> = ({onChangeHandler, seoTags, deleteSeoTag}) => {
     return (
         <div className={styles.savedItems} style={{borderBottom: seoTags.length ? '.1rem solid #926B6A' : 'none'}}>
-            {isLoading && 'Loading...'}
             {seoTags.map(tag => (
                 <div key={tag.id} className={styles.savedItems__items}>
                     <SeoTagType

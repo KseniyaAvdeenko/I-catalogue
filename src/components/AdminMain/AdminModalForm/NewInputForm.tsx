@@ -28,7 +28,7 @@ const NewInputForm: React.FC<INewInputFormProps> = ({savedLabelsTypes, fields, s
                         required={true} readonly={false} inputClassname={''}
                         inputContainerClassname={styles.savedItems__item}
                         labelClassName={[styles.savedItems__item, styles.savedItems__item_labelMargin].join(' ')}
-                        label={'Название поля'} isLoading={false}
+                        label={'Название поля'}
                         onChangeHandler={onChangeHandler}/>
                     <InputTypeSelect
                         savedLabelsTypes={savedLabelsTypes}
@@ -40,9 +40,8 @@ const NewInputForm: React.FC<INewInputFormProps> = ({savedLabelsTypes, fields, s
                         required={true} readonly={false} inputClassname={''}
                         inputContainerClassname={styles.savedItems__item}
                         labelClassName={[styles.savedItems__item, styles.savedItems__item_labelMargin].join(' ')}
-                        label={'ID и название поля ввода'} isLoading={false}
+                        label={'ID и название поля ввода'}
                         onChangeHandler={onChangeHandler} pattern={'[A-Za-z]'}/>
-
                     <img src={SaveIcon} alt="save icon" onClick={() => saveNewInput(field.id)}/>
                     <img src={DeleteIcon} alt="delete icon" onClick={() => deleteField(field.id)}/>
                 </div>

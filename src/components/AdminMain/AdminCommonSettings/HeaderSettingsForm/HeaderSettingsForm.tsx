@@ -8,6 +8,7 @@ import HeaderLayout from "./HeaderLayout";
 import {IOptions} from "../../../../interface/IAdminPageComponets";
 import {decodeToken} from "../../../../hooks/encodeDecodeTokens";
 import AdminInputContainer from "../../../UI/InputContainers/AdminInputContainer";
+import Loader from "../../../UI/Loader/Loader";
 
 const HeaderSettingsForm = () => {
     const {headerSettings, error, isLoading, restored} = useAppSelector(state => state.headerSettingsReducer);
@@ -47,7 +48,7 @@ const HeaderSettingsForm = () => {
                                              inputId={"headerBg"} value={headerSettings.background}
                                              checked={false} required={false} readonly={false}
                                              inputContainerClassname={styles.form__inputContainer}
-                                             labelClassName={''} label={'Цвет фона'} isLoading={isLoading}
+                                             labelClassName={''} label={'Цвет фона'}
                                              onChangeHandler={onChangeHandler}/>
                         <AdminInputContainer type={"checkbox"} name={'headerBottomBorder'}
                                              inputId={'headerBottomBorder'} value={''}
@@ -55,17 +56,17 @@ const HeaderSettingsForm = () => {
                                              required={false} readonly={false}
                                              inputClassname={''} inputContainerClassname={styles.form__inputContainer}
                                              labelClassName={''} label={'Нижняя граница “шапки” сайта'}
-                                             isLoading={isLoading} onChangeHandler={onChangeHandler}/>
-                        <HeaderBottomBorderColor isLoading={isLoading}
-                                                 onChangeHandler={onChangeHandler}
-                                                 headerBottomBorderColor={headerSettings?.headerBottomBorderColor}
-                                                 headerBorderBottom={headerSettings?.headerBottomBorder ?? false}
+                                             onChangeHandler={onChangeHandler}/>
+                        <HeaderBottomBorderColor
+                            onChangeHandler={onChangeHandler}
+                            headerBottomBorderColor={headerSettings?.headerBottomBorderColor}
+                            headerBorderBottom={headerSettings?.headerBottomBorder ?? false}
                         />
                         <hr className={styles.hr}/>
                         <AdminInputContainer type={"color"} name={'fontColor'}
                                              inputId={"headerFontColor"} value={headerSettings.fontColor}
                                              checked={false} required={false} readonly={false}
-                                             inputClassname={''} labelClassName={''} isLoading={isLoading}
+                                             inputClassname={''} labelClassName={''}
                                              inputContainerClassname={styles.form__inputContainer}
                                              label={'Цвет текста “шапки” сайта'} onChangeHandler={onChangeHandler}/>
                         <hr className={styles.hr}/>
@@ -74,23 +75,24 @@ const HeaderSettingsForm = () => {
                                              required={false} readonly={false} inputClassname={''}
                                              inputContainerClassname={styles.form__inputContainer}
                                              labelClassName={''} label={'Размер шрифта навигационных ссылок'}
-                                             isLoading={isLoading} onChangeHandler={onChangeHandler}/>
-                       <AdminInputContainer type={"number"} name={'contactsFontSize'} inputId={"contactsFontSize"}
+                                             onChangeHandler={onChangeHandler}/>
+                        <AdminInputContainer type={"number"} name={'contactsFontSize'} inputId={"contactsFontSize"}
                                              value={headerSettings.contactsFontSize} checked={false}
                                              required={false} readonly={false} inputClassname={''}
                                              inputContainerClassname={styles.form__inputContainer}
                                              labelClassName={''} label={'Размер шрифта контактов'}
-                                             isLoading={isLoading} onChangeHandler={onChangeHandler}/>
+                                             onChangeHandler={onChangeHandler}/>
                     </div>
                     <div className={styles.form__items}>
-                        <AdminInputContainer type={"color"} name={'navLinksFontColorHover'} inputId={'navLinksFontColorHover'}
+                        <AdminInputContainer type={"color"} name={'navLinksFontColorHover'}
+                                             inputId={'navLinksFontColorHover'}
                                              value={headerSettings.navLinksFontColorHover} checked={false}
                                              required={false} readonly={false} inputClassname={''}
                                              inputContainerClassname={styles.form__inputContainer}
-                                             labelClassName={''} label={'Цвет шрифта навигационных ссылок при наведении курсором'}
-                                             isLoading={isLoading} onChangeHandler={onChangeHandler}/>
+                                             labelClassName={''}
+                                             label={'Цвет шрифта навигационных ссылок при наведении курсором'}
+                                             onChangeHandler={onChangeHandler}/>
                         <HeaderNavLinksFontColorHoverStyle
-                            isLoading={isLoading}
                             onChangeHandler={onChangeHandler}
                             hoverStyleOptionsVisibility={hoverStyleOptionsVisibility}
                             setHoverStyleOptionsVisibility={setHoverStyleOptionsVisibility}
@@ -99,13 +101,12 @@ const HeaderSettingsForm = () => {
                     </div>
                     <div className={styles.form__items}>
                         <HeaderLayout
-                            isLoading={isLoading}
                             onChangeHandler={onChangeHandler}
                             headerLayout={headerSettings?.headerLayout}
                         />
                     </div>
                 </div>
-                : <div className={styles.AdminMain__formContainer}></div>
+                : <div className={styles.AdminMain__formContainerUnLoaded}>{isLoading && (<Loader/>)}</div>
             }
         </section>
     );

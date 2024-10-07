@@ -9,6 +9,7 @@ import DetailProdLayout1 from "../../components/SiteComponents/DetaiProductPage/
 import DetailProdLayout2 from "../../components/SiteComponents/DetaiProductPage/DetailProdLayout2";
 import {IButtonSettings} from "../../interface/ICommonSettings";
 import ModalPopUp from "../../components/SiteComponents/ModalPopup/ModalPopUp";
+import Loader from "../../components/UI/Loader/Loader";
 
 const ProductPage = () => {
     const {prodId} = useParams();
@@ -21,7 +22,7 @@ const ProductPage = () => {
     useEffect(() => {
         if (prodId) dispatch(loadProductRead(parseInt(prodId)))
         if (productReadOnly) document.title = productReadOnly.name
-    }, [])
+    }, [prodId])
 
 
     function payClickHandle(prod: IProdReadOnly) {
@@ -54,7 +55,7 @@ const ProductPage = () => {
                 data={modalData}
             />
         </main>)
-        : (<main className={styles.page__container}></main>)
+        : (<main className={styles.page__container} style={{alignItems: 'center', justifyContent: 'center'}}>{isLoading && (<Loader/>)}</main>)
 };
 
 export default ProductPage;

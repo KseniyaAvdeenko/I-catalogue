@@ -15,8 +15,10 @@ import Sidebar from "../../components/AdminComponents/Sidebar/Sidebar";
 import {setFavicon} from "../../hooks/setFavicon";
 import Favicon from '../../assets/img/I-Catalogue.svg'
 import SeoSettings from "../../components/AdminMain/AdminSeoSettings/SeoSettings";
+import {useAppSelector} from "../../hooks/redux";
 
 const AdminPage = () => {
+    const auth = useAppSelector(state => state.authReducer)
     const commonSettingsRef = useRef<HTMLElement>(null);
     const navbarContentRef = useRef<HTMLElement>(null);
     const productSettingsRef = useRef<HTMLElement>(null)
@@ -33,7 +35,7 @@ const AdminPage = () => {
     return (
         <>
             <AdminHeader></AdminHeader>
-            {localStorage.access
+            {auth.isAuth
                 ? <section className={styles.AdminPage}>
                     <Sidebar scrollToBlock={scrollToBlock}/>
                     <Routes>

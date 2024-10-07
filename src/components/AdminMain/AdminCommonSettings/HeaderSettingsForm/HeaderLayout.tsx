@@ -3,11 +3,12 @@ import styles from '../../AdminMain.module.sass'
 import {headerLayouts} from "../../Options";
 import {IAdminComponentsProps} from "../../../../interface/IAdminPageComponets";
 
-interface IHeaderLayoutProps extends IAdminComponentsProps {
-    headerLayout: string | undefined
+
+interface IHeaderLayoutProps extends IAdminComponentsProps{
+    headerLayout: string;
 }
 
-const HeaderLayout: React.FC<IHeaderLayoutProps> = ({isLoading, headerLayout, onChangeHandler}) => {
+const HeaderLayout: React.FC<IHeaderLayoutProps> = ({headerLayout, onChangeHandler}) => {
     return (
         <div className={styles.form__inputContainer_choose}>
             <div className={styles.form__inputContainer_label}>Размещение элементов в “шапке” сайта</div>
@@ -28,7 +29,6 @@ const HeaderLayout: React.FC<IHeaderLayoutProps> = ({isLoading, headerLayout, on
                     </label>
                 ))}
             </div>
-
         </div>
     );
 };

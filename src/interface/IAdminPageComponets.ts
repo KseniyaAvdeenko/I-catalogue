@@ -3,7 +3,6 @@ import {SeoTagType} from "./ISeoSettings";
 import {SocialLinkIcons, SocialLinkIconType} from "./INavbar";
 
 export interface IAdminComponentsProps {
-    isLoading: boolean;
     onChangeHandler: Function;
 }
 

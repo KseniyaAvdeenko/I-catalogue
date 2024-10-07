@@ -11,6 +11,7 @@ import {decodeToken} from "../../../hooks/encodeDecodeTokens";
 import PageContent from "./PageContent";
 import AdminInputContainer from "../../UI/InputContainers/AdminInputContainer";
 import HeadingType from "../HeadingType";
+import Loader from "../../UI/Loader/Loader";
 
 
 const PagesSettings = () => {
@@ -45,9 +46,9 @@ const PagesSettings = () => {
         }
     }
     const onChangeHeadingHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-        if (slug && page && localStorage.access) {
-            if (e.target.type === 'number') {
-                dispatch(updatePageWithNavLink(decodeToken(localStorage.access), slug,
+        if (slug && page) {
+            e.target.type === 'number'
+                ? dispatch(updatePageWithNavLink(decodeToken(localStorage.access), slug,
                     {
                         headingSettings: {
                             id: page.headingSettings.id,
@@ -56,24 +57,22 @@ const PagesSettings = () => {
                         }
                     }
                 ))
-            } else if (e.target.type === 'text') {
-                dispatch(updatePageWithNavLink(decodeToken(localStorage.access), slug,
-                    {
-                        headingSettings: {
-                            [e.target.name]: e.target.value,
-                            id: page.headingSettings.id
-                        }
-                    }))
-            } else {
-                dispatch(updatePageWithNavLink(decodeToken(localStorage.access), slug,
-                    {
-                        headingSettings: {
-                            id: page.headingSettings.id,
-                            [e.target.name]: e.target.value,
-                            headingContent: page.headingSettings.headingContent
-                        }
-                    }))
-            }
+                : e.target.type === 'text'
+                    ? dispatch(updatePageWithNavLink(decodeToken(localStorage.access), slug,
+                        {
+                            headingSettings: {
+                                [e.target.name]: e.target.value,
+                                id: page.headingSettings.id
+                            }
+                        }))
+                    : dispatch(updatePageWithNavLink(decodeToken(localStorage.access), slug,
+                        {
+                            headingSettings: {
+                                id: page.headingSettings.id,
+                                [e.target.name]: e.target.value,
+                                headingContent: page.headingSettings.headingContent
+                            }
+                        }))
         }
         if (e.target.name === 'blockHeadingType') setHeadingTypeOptionsVisibility({
             ...headingTypeOptionsVisibility,
@@ -102,55 +101,59 @@ const PagesSettings = () => {
             <section className={[styles.AdminMain__container, styles.AdminMain__container_margin].join(' ')}>
                 <h2 className={styles.AdminMain__heading}>Настройка и контент страницы</h2>
                 <h3 className={styles.AdminMain__subheading}>Настройка страницы {page?.navLink}</h3>
-                {page && (<div className={styles.AdminMain__formContainer}>
-                    <div className={styles.form__items}>
-                        <PageBackground pageName={page.navLink} background={page.background}
-                                        isLoading={isLoading} onChangeHandler={onChangeHandler}/>
-                        <AdminInputContainer
-                            type={'checkbox'} name={'isBlockWithProds'} inputId={'isBlockWithProds'}
-                            value={''} checked={page.isBlockWithProds}
-                            required={false} readonly={false} inputClassname={''}
-                            inputContainerClassname={styles.form__inputContainer}
-                            labelClassName={''} label={'Является ли станица каталогом товаров/услуг'}
-                            isLoading={isLoading} onChangeHandler={onChangeHandler}/>
-                        <PageProdBackground prodBackground={page.prodBackground}
-                                            isBlockWithProds={page.isBlockWithProds}
-                                            isLoading={isLoading} onChangeHandler={onChangeHandler}/>
+                {page
+                    ? <div className={styles.AdminMain__formContainer}>
+                        <div className={styles.form__items}>
+                            <PageBackground pageName={page.navLink} background={page.background}
+                                            onChangeHandler={onChangeHandler}/>
+                            <AdminInputContainer
+                                type={'checkbox'} name={'isBlockWithProds'} inputId={'isBlockWithProds'}
+                                value={''} checked={page.isBlockWithProds}
+                                required={false} readonly={false} inputClassname={''}
+                                inputContainerClassname={styles.form__inputContainer}
+                                labelClassName={''} label={'Является ли станица каталогом товаров/услуг'}
+                                onChangeHandler={onChangeHandler}/>
+                            <PageProdBackground prodBackground={page.prodBackground}
+                                                isBlockWithProds={page.isBlockWithProds}
+                                                onChangeHandler={onChangeHandler}/>
+                        </div>
+                        <div className={styles.form__items}>
+                            <PageHeadingContent headingContent={page.headingSettings.headingContent}
+                                                pageName={page.navLink}
+                                                onChangeHandler={onChangeHeadingHandler}/>
+                            <HeadingType
+                                blockHeadingType={page.headingSettings.blockHeadingType}
+                                headingTypeOptionsVisibility={headingTypeOptionsVisibility}
+                                onChangeHandler={onChangeHeadingHandler}
+                                changeHeadingTypeOptionsContainerVisibility={changeHeadingTypeOptionsContainerVisibility}
+                            />
+                        </div>
+                        <div className={styles.form__items}>
+                            <AdminInputContainer
+                                type={'color'} name={'headingFontColor'} inputId={'headingFontColor'}
+                                value={page.headingSettings.headingFontColor}
+                                checked={false} required={false} readonly={false} inputClassname={''}
+                                inputContainerClassname={styles.form__inputContainer}
+                                labelClassName={''} label={'Цвет заголовка'}
+                                onChangeHandler={onChangeHeadingHandler}/>
+                            <AdminInputContainer
+                                type={'number'} name={'headingFontSize'} inputId={'headingFontSize'}
+                                value={page.headingSettings.headingFontSize} checked={false}
+                                required={false} readonly={false} inputClassname={''}
+                                inputContainerClassname={styles.form__inputContainer}
+                                labelClassName={''} label={'Размер шрифта заголовка'}
+                                onChangeHandler={onChangeHeadingHandler}/>
+                            <AdminInputContainer
+                                type={'number'} name={'headingFontWeight'} inputId={'headingFontWeight'}
+                                value={page.headingSettings.headingFontWeight} checked={false}
+                                required={false} readonly={false} inputClassname={''} max={900}
+                                inputContainerClassname={styles.form__inputContainer} min={400}
+                                labelClassName={''} label={'Жирность текста заголовка'} step={100}
+                                onChangeHandler={onChangeHeadingHandler}/>
+                        </div>
                     </div>
-                    <div className={styles.form__items}>
-                        <PageHeadingContent headingContent={page.headingSettings.headingContent}
-                                            pageName={page.navLink}
-                                            isLoading={isLoading} onChangeHandler={onChangeHeadingHandler}/>
-                        <HeadingType
-                            blockHeadingType={page.headingSettings.blockHeadingType}
-                            headingTypeOptionsVisibility={headingTypeOptionsVisibility}
-                            isLoading={isLoading} onChangeHandler={onChangeHeadingHandler}
-                            changeHeadingTypeOptionsContainerVisibility={changeHeadingTypeOptionsContainerVisibility}
-                        />
-                    </div>
-                    <div className={styles.form__items}><AdminInputContainer
-                        type={'color'} name={'headingFontColor'} inputId={'headingFontColor'}
-                        value={page.headingSettings.headingFontColor}
-                        checked={false} required={false} readonly={false} inputClassname={''}
-                        inputContainerClassname={styles.form__inputContainer}
-                        labelClassName={''} label={'Цвет заголовка'}
-                        isLoading={isLoading} onChangeHandler={onChangeHeadingHandler}/>
-                        <AdminInputContainer
-                            type={'number'} name={'headingFontSize'} inputId={'headingFontSize'}
-                            value={page.headingSettings.headingFontSize} checked={false}
-                            required={false} readonly={false} inputClassname={''}
-                            inputContainerClassname={styles.form__inputContainer}
-                            labelClassName={''} label={'Размер шрифта заголовка'}
-                            isLoading={isLoading} onChangeHandler={onChangeHeadingHandler}/>
-                        <AdminInputContainer
-                            type={'number'} name={'headingFontWeight'} inputId={'headingFontWeight'}
-                            value={page.headingSettings.headingFontWeight} checked={false}
-                            required={false} readonly={false} inputClassname={''} max={900}
-                            inputContainerClassname={styles.form__inputContainer} min={400}
-                            labelClassName={''} label={'Жирность текста заголовка'} step={100}
-                            isLoading={isLoading} onChangeHandler={onChangeHeadingHandler}/>
-                    </div>
-                </div>)}
+                    : <div className={styles.AdminMain__formContainerUnLoaded}>{isLoading && <Loader/>}</div>
+                }
             </section>
 
             <PageContent page={page}/>

@@ -23,7 +23,7 @@ const NewProdAttrForm: React.FC<INewProdAttrFormProps> = ({fields, saveNewAttr, 
                         inputClassname={''} label={'Характеристика'}
                         inputContainerClassname={styles.savedItems__item}
                         labelClassName={[styles.savedItems__item, styles.savedItems__item_labelMargin].join(' ')}
-                        isLoading={false} onChangeHandler={onChangeHandler}/>
+                        onChangeHandler={onChangeHandler}/>
                     <div className={styles.savedItems__items} style={{flexBasis: '10%'}}>
                         <img src={SaveIcon} alt="save icon" onClick={() => saveNewAttr(field.id)}/>
                         <img src={DeleteIcon} alt="delete icon" onClick={() => deleteField(field.id)}/>

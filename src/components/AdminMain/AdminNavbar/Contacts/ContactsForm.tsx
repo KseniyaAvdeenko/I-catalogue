@@ -5,8 +5,9 @@ import {contactFieldExample} from "../../Options";
 import SavedContacts from "./SavedContacts";
 import {decodeToken} from "../../../../hooks/encodeDecodeTokens";
 import NewContactsForm from "./NewContactsForm";
-import {IContacts, IContactsBase} from "../../../../interface/INavbar";
+import {IContacts} from "../../../../interface/INavbar";
 import {createContact, deleteContact, updateContact} from "../../../../store/actions/contactsAction";
+import Loader from "../../../UI/Loader/Loader";
 
 const ContactsForm = () => {
     const dispatch = useAppDispatch();
@@ -26,24 +27,14 @@ const ContactsForm = () => {
     }
 
     const onChangeNewFieldHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-        if (e.target.type === 'checkbox') {
-            setFields(fields =>
-                fields.map(item =>
-                    item.id === parseInt(e.target.id.split('*')[1]) ? {
-                        ...item,
-                        [e.target.name]: e.target.checked
-                    } : item
-                )
-            );
-        } else {
-            setFields(fields =>
-                fields.map(item =>
-                    item.id === parseInt(e.target.id.split('*')[1])
-                        ? {...item, [e.target.name]: e.target.value}
-                        : item
-                )
-            );
-        }
+        setFields(fields =>
+            fields.map(item =>
+                item.id === parseInt(e.target.id.split('*')[1]) ? {
+                    ...item,
+                    [e.target.name]: e.target.type === 'checkbox' ? e.target.checked : e.target.value
+                } : item
+            )
+        );
     }
 
     const deleteSavedContact = (id: number) => dispatch(deleteContact(decodeToken(localStorage.access), id))
@@ -77,14 +68,14 @@ const ContactsForm = () => {
                  className={[styles.AdminNavbar__container, styles.AdminNavbar__container_margin].join(' ')}>
             <h2 className={styles.AdminNavbar__heading}>Контакты</h2>
             <div className={styles.AdminNavbar__formContainer}>
-                {contacts && (
-                    <SavedContacts
+                {contacts
+                    ?<SavedContacts
                         contacts={contacts}
-                        isLoading={isLoading}
                         onChangeHandler={onChangeHandler}
                         deleteSavedContact={deleteSavedContact}
                     />
-                )}
+                    :<div className={styles.savedItems_UnLoaded}>{isLoading && (<Loader/>)}</div>
+                }
                 <NewContactsForm
                     fields={fields}
                     deleteField={deleteField}

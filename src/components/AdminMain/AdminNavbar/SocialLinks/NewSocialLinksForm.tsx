@@ -33,7 +33,6 @@ const NewSocialLinksForm: React.FC<INewSocialLinksFormProps> = ({
                         id={field.id}
                         onChangeHandler={onChangeHandler}
                         changeIconsOptionsContainerVisibility={changeIconsOptionsContainerVisibility}
-                        isLoading={false}
                         linkIcon={field.linkIcon}
                         name={'linkIcon'}/>
                     <SocialIconTypeSelect
@@ -41,12 +40,11 @@ const NewSocialLinksForm: React.FC<INewSocialLinksFormProps> = ({
                         id={field.id} name={'linkIconType'}
                         onChangeHandler={onChangeHandler}
                         changeIconsOptionsContainerVisibility={changeIconTypesOptionsContainerVisibility}
-                        isLoading={false}/>
+                    />
                     <SocialLinkColor
                         socialLinkType={field.linkIconType}
                         socialLinkColor={field.socialLinkColor}
                         id={field.id}
-                        isLoading={false}
                         onChangeHandler={onChangeHandler}/>
                     <SocialLinkHref
                         onChangeHandler={onChangeHandler}

@@ -37,14 +37,14 @@ const EditProdForm: React.FC<IEditProdFormProps> = ({
                     inputClassname={''} label={'Название товара/услуги'}
                     inputContainerClassname={[styles.form__items, styles.form__items_margin].join(' ')}
                     labelClassName={styles.form__items_labelMargin}
-                    isLoading={false} onChangeHandler={onChangeProdHandler}/>
+                    onChangeHandler={onChangeProdHandler}/>
                 <AdminInputContainer
                     type={'number'} name={'price'} inputId={'price'}
                     value={selectedProd.price} checked={false} required={true} readonly={false}
                     inputClassname={''} label={'Цена'} min={0}
                     inputContainerClassname={styles.form__inputContainer}
                     labelClassName={''}
-                    isLoading={false} onChangeHandler={onChangeProdHandler}/>
+                    onChangeHandler={onChangeProdHandler}/>
                 <ProdCurrency
                     prodCurrency={selectedProd.currency}
                     onChangeHandler={onChangeProdHandler}
@@ -57,7 +57,7 @@ const EditProdForm: React.FC<IEditProdFormProps> = ({
                     inputClassname={''} label={'Примечание к цене'}
                     inputContainerClassname={[styles.form__items, styles.form__items_margin].join(' ')}
                     labelClassName={styles.form__items_labelMargin}
-                    isLoading={false} onChangeHandler={onChangeProdHandler}/>
+                    onChangeHandler={onChangeProdHandler}/>
 
                 {prodAttrs && prodAttrs.map(attr => (
                     <AdminInputContainer key={attr.id}
@@ -65,7 +65,7 @@ const EditProdForm: React.FC<IEditProdFormProps> = ({
                                          value={selectedProdsAttrs[attr.attribute]} checked={false} required={true}
                                          readonly={false} inputClassname={''} label={attr.attribute}
                                          inputContainerClassname={[styles.form__items, styles.form__items_margin].join(' ')}
-                                         labelClassName={styles.form__items_labelMargin} isLoading={false}
+                                         labelClassName={styles.form__items_labelMargin}
                                          onChangeHandler={onProdAttrsChangeHandler}/>
                 ))}
                 <div className={styles.AdminMain__button}

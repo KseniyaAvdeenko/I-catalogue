@@ -7,6 +7,7 @@ import SocialIconTypeSelect from "./SocialIconTypeSelect";
 import SocialLinkHref from "./SocialLinkHref";
 import SocialLinkColor from "./SocialLinkColor";
 import DeleteIcon from "../../../../assets/img/deleteIcon.svg";
+import Loader from "../../../UI/Loader/Loader";
 
 interface ISavedSocialLinksProps extends IAdminComponentsProps {
     socialLinks: ISocialLink[];
@@ -20,32 +21,27 @@ const SavedSocialLinks: React.FC<ISavedSocialLinksProps> = ({
                                                                 changeIconsOptionsContainerVisibility,
                                                                 socialLinks,
                                                                 deleteSavedSocialLink,
-                                                                isLoading,
                                                                 onChangeHandler
                                                             }) => {
     return (
         <div className={styles.savedItems} style={{borderBottom: socialLinks.length ? '.1rem solid #926B6A' : 'none'}}>
-            {isLoading && 'Loading...'}
             {socialLinks && socialLinks.map(link => (
                 <div key={link.id} className={styles.savedItems__items}>
                     <SocialIconSelect
                         id={link.id}
                         onChangeHandler={onChangeHandler}
                         changeIconsOptionsContainerVisibility={changeIconsOptionsContainerVisibility}
-                        isLoading={false}
                         linkIcon={link.linkIcon}
                         name={'linkIcon'}/>
                     <SocialIconTypeSelect
                         linkIconType={link.linkIconType}
                         id={link.id} name={'linkIconType'}
                         onChangeHandler={onChangeHandler}
-                        changeIconsOptionsContainerVisibility={changeIconTypesOptionsContainerVisibility}
-                        isLoading={isLoading}/>
+                        changeIconsOptionsContainerVisibility={changeIconTypesOptionsContainerVisibility}/>
                     <SocialLinkColor
                         socialLinkType={link.linkIconType}
                         socialLinkColor={link.socialLinkColor}
                         id={link.id}
-                        isLoading={isLoading}
                         onChangeHandler={onChangeHandler}/>
                     <SocialLinkHref
                         onChangeHandler={onChangeHandler}

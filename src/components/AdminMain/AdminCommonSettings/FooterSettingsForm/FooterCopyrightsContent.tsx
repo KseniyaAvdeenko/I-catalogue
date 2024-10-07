@@ -1,13 +1,13 @@
 import React from 'react';
 import {IAdminComponentsProps} from "../../../../interface/IAdminPageComponets";
 import styles from "../../AdminMain.module.sass";
+import Loader from "../../../UI/Loader/Loader";
 
 interface ICopyrightsContentProps extends IAdminComponentsProps {
     copyrightsContent: string | undefined
 }
 
 const FooterCopyrightsContent: React.FC<ICopyrightsContentProps> = ({
-                                                                        isLoading,
                                                                         copyrightsContent,
                                                                         onChangeHandler
                                                                     }) => {

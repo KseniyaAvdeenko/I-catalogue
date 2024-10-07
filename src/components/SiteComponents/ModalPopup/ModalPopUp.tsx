@@ -10,6 +10,7 @@ import {checkPayment, createOrder} from "../../../store/actions/orderAction";
 import {INewOrderBase} from "../../../interface/IOrder";
 import {decodeToken} from "../../../hooks/encodeDecodeTokens";
 import ModalInputContainer from "./ModalInputContainer";
+import Loader from "../../UI/Loader/Loader";
 
 interface IModalPopUpProps {
     isModalOpen: boolean;
@@ -22,7 +23,7 @@ const ModalPopUp: React.FC<IModalPopUpProps> = ({
                                                     data,
                                                     onClose
                                                 }) => {
-    const {modalForm} = useAppSelector(state => state.modalFormReducer);
+    const {modalForm, isLoading} = useAppSelector(state => state.modalFormReducer);
     const [modalClass, setModalClass] = useState<string>(styles.modal)
     const [formData, setFormData] = useState<{ [key: string]: string | number; }>({})
     const [totalPrice, setTotalPrice] = useState<number>(0)
@@ -70,11 +71,10 @@ const ModalPopUp: React.FC<IModalPopUpProps> = ({
 
     return (
         <div className={modalClass} onClick={onClose}>
-            {modalForm && (
-                <div className={styles.modal__formContainer}
-                     onClick={e => e.stopPropagation()}
-                     style={{background: modalForm.background}}
-                >
+            {modalForm
+                ? <div className={styles.modal__formContainer}
+                       onClick={e => e.stopPropagation()}
+                       style={{background: modalForm.background}}>
                     <Heading pageHeading={modalForm.headingSettings}
                              headingContent={modalForm.headingSettings.headingContent}/>
                     {data && (<div className={styles.modal__prodContent}>
@@ -90,7 +90,8 @@ const ModalPopUp: React.FC<IModalPopUpProps> = ({
                     <form onSubmit={e => formOrder(e)} className={styles.modal__form}>
                         <div className={styles.modal__inputItems}>
                             {formData && modalForm.labels.map(el => (
-                                <ModalInputContainer key={el.id} label={el} formData={formData} changeHandler={changeHandler}/>
+                                <ModalInputContainer key={el.id} label={el} formData={formData}
+                                                     changeHandler={changeHandler}/>
                             ))}
                         </div>
                         {data && (<div className={styles.modal__totalPrice}>Итоговая
@@ -99,8 +100,8 @@ const ModalPopUp: React.FC<IModalPopUpProps> = ({
                                               btnClassName={styles.modal__button}/>)}
                     </form>
                 </div>
-            )}
-
+                : <div className={styles.modal__formContainer}>{isLoading && (<Loader/>)}</div>
+            }
         </div>
     );
 };

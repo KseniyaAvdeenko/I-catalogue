@@ -6,6 +6,7 @@ import ButtonBorderWidth from "./ButtonBorderWidth";
 import {updateButtonSettings} from "../../../../store/actions/buttonSettingsAction";
 import {decodeToken} from "../../../../hooks/encodeDecodeTokens";
 import AdminInputContainer from "../../../UI/InputContainers/AdminInputContainer";
+import Loader from "../../../UI/Loader/Loader";
 
 const ButtonSettingsForm = () => {
     const {buttonSettings, error, isLoading} = useAppSelector(state => state.buttonSettingsReducer);
@@ -35,14 +36,14 @@ const ButtonSettingsForm = () => {
                             required={false} readonly={false} inputClassname={''}
                             inputContainerClassname={styles.form__inputContainer}
                             labelClassName={''} label={'Скругление углов кнопки'}
-                            isLoading={isLoading} onChangeHandler={onChangeHandler}/>
+                            onChangeHandler={onChangeHandler}/>
                         <AdminInputContainer
                             type={'color'} name={'buttonBackground'} inputId={'buttonBackground'}
                             value={buttonSettings.buttonBackground} checked={false} required={false}
                             readonly={false} inputClassname={''}
                             inputContainerClassname={styles.form__inputContainer}
                             labelClassName={''} label={'Цвет кнопки'}
-                            isLoading={isLoading} onChangeHandler={onChangeHandler}/>
+                            onChangeHandler={onChangeHandler}/>
                     </div>
                     <div className={styles.form__items}>
                         <AdminInputContainer
@@ -51,11 +52,11 @@ const ButtonSettingsForm = () => {
                             required={false} readonly={false} inputClassname={''}
                             inputContainerClassname={styles.form__inputContainer}
                             labelClassName={''} label={'Границы кнопки'}
-                            isLoading={isLoading} onChangeHandler={onChangeHandler}/>
-                        <ButtonBorderColor isLoading={isLoading} onChangeHandler={onChangeHandler}
+                            onChangeHandler={onChangeHandler}/>
+                        <ButtonBorderColor onChangeHandler={onChangeHandler}
                                            buttonBorderColor={buttonSettings?.buttonBorderColor}
                                            buttonBorders={buttonSettings?.buttonBorders ? buttonSettings.buttonBorders : false}/>
-                        <ButtonBorderWidth isLoading={isLoading} onChangeHandler={onChangeHandler}
+                        <ButtonBorderWidth onChangeHandler={onChangeHandler}
                                            buttonBorderWidth={buttonSettings?.buttonBorderWidth}
                                            buttonBorders={buttonSettings?.buttonBorders ? buttonSettings.buttonBorders : false}/>
                     </div>
@@ -66,17 +67,17 @@ const ButtonSettingsForm = () => {
                             readonly={false} inputClassname={''}
                             inputContainerClassname={styles.form__inputContainer}
                             labelClassName={''} label={'Цвет текста кнопки'}
-                            isLoading={isLoading} onChangeHandler={onChangeHandler}/>
+                            onChangeHandler={onChangeHandler}/>
                         <AdminInputContainer
                             type={'number'} name={'buttonTextFontSize'} inputId={'buttonTextFontSize'}
                             value={buttonSettings.buttonTextFontSize} checked={false}
                             required={false} readonly={false} inputClassname={''}
                             inputContainerClassname={styles.form__inputContainer}
                             labelClassName={''} label={'Размер шрифта кнопки'}
-                            isLoading={isLoading} onChangeHandler={onChangeHandler}/>
+                            onChangeHandler={onChangeHandler}/>
                     </div>
                 </div>
-                : <div className={styles.AdminMain__formContainer}></div>
+                : <div className={styles.AdminMain__formContainerUnLoaded}>{isLoading && <Loader/>}</div>
             }
         </section>
     );

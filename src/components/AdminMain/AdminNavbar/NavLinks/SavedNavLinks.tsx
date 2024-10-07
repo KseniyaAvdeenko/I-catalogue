@@ -1,23 +1,16 @@
 import React from 'react';
-import {IAdminComponentsProps} from "../../../../interface/IAdminPageComponets";
 import styles from "../../AdminNavbar.module.sass";
-import NavLinkInput from "./NavLinkInput";
-import SlugInput from "./SlugInput";
 import DeleteIcon from "../../../../assets/img/deleteIcon.svg";
 import {IPageSetting} from "../../../../interface/IPagesSettings";
-import Label from "../Label";
-import Input from "../Input";
 
 interface ISaveNavLinksProps {
-    isLoading: boolean;
     pages: IPageSetting[]|[]
     deleteNavLink: Function
 }
 
-const SavedNavLinks: React.FC<ISaveNavLinksProps> = ({isLoading, deleteNavLink, pages}) => {
+const SavedNavLinks: React.FC<ISaveNavLinksProps> = ({ deleteNavLink, pages}) => {
     return (
         <div className={styles.savedItems} style={{borderBottom:  pages.length ?'.1rem solid #926B6A': 'none'}}>
-            {isLoading && 'Loading...'}
             {pages && pages.map(page => (
                 <div key={page.id} className={styles.savedItems__items}>
                     <div className={styles.savedItems__item}>

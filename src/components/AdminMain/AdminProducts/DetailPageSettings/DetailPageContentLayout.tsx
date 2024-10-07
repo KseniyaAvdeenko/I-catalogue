@@ -7,7 +7,7 @@ interface IContentLayoutProps extends IAdminComponentsProps {
     contentLayout: string
 }
 
-const DetailPageContentLayout: React.FC<IContentLayoutProps> = ({contentLayout, onChangeHandler, isLoading}) => {
+const DetailPageContentLayout: React.FC<IContentLayoutProps> = ({contentLayout, onChangeHandler}) => {
     return (
         <div className={styles.form__inputContainer_choose}>
             <div className={styles.form__inputContainer_label}>Размещение контента</div>

@@ -7,6 +7,7 @@ import FooterCopyrightsContent from "./FooterCopyrightsContent";
 import FooterContentLayout from "./FooterContentLayout";
 import {decodeToken} from "../../../../hooks/encodeDecodeTokens";
 import AdminInputContainer from "../../../UI/InputContainers/AdminInputContainer";
+import Loader from "../../../UI/Loader/Loader";
 
 const FooterSettingsForm = () => {
     const {footerSettings, error, isLoading} = useAppSelector(state => state.footerSettingsReducer);
@@ -36,15 +37,15 @@ const FooterSettingsForm = () => {
                             required={false} readonly={false} inputClassname={''}
                             inputContainerClassname={styles.form__inputContainer}
                             labelClassName={''} label={'Цвет фона'}
-                            isLoading={isLoading} onChangeHandler={onChangeHandler}/>
+                            onChangeHandler={onChangeHandler}/>
                         <AdminInputContainer
                             type={'checkbox'} name={'footerBorderTop'} inputId={'footerBorderTop'}
                             value={''} checked={footerSettings.footerBorderTop}
                             required={false} readonly={false} inputClassname={''}
                             inputContainerClassname={styles.form__inputContainer}
                             labelClassName={''} label={'Верхняя граница “подвала” сайта'}
-                            isLoading={isLoading} onChangeHandler={onChangeHandler}/>
-                        <FooterTopBorderColor isLoading={isLoading} onChangeHandler={onChangeHandler}
+                            onChangeHandler={onChangeHandler}/>
+                        <FooterTopBorderColor onChangeHandler={onChangeHandler}
                                               borderTopColor={footerSettings?.borderTopColor}
                                               footerTopBorder={footerSettings?.footerBorderTop ?? false}/>
                         <hr className={styles.hr}/>
@@ -54,7 +55,7 @@ const FooterSettingsForm = () => {
                             required={false} readonly={false} inputClassname={''}
                             inputContainerClassname={styles.form__inputContainer}
                             labelClassName={''} label={'Цвет текста “подвала” сайта'}
-                            isLoading={isLoading} onChangeHandler={onChangeHandler}/>
+                            onChangeHandler={onChangeHandler}/>
                         <hr className={styles.hr}/>
                         <AdminInputContainer
                             type={'number'} name={'navLinksFontSize'} inputId={'navLinksFontSize'}
@@ -62,14 +63,14 @@ const FooterSettingsForm = () => {
                             required={false} readonly={false} inputClassname={''}
                             inputContainerClassname={styles.form__inputContainer}
                             labelClassName={''} label={'Размер шрифта навигационных ссылок'}
-                            isLoading={isLoading} onChangeHandler={onChangeHandler}/>
+                            onChangeHandler={onChangeHandler}/>
                         <AdminInputContainer
                             type={'number'} name={'contactsFontSize'} inputId={'contactsFontSize'}
                             value={footerSettings.contactsFontSize} checked={false}
                             required={false} readonly={false} inputClassname={''}
                             inputContainerClassname={styles.form__inputContainer}
                             labelClassName={''} label={'Размер шрифта контактов'}
-                            isLoading={isLoading} onChangeHandler={onChangeHandler}/>
+                            onChangeHandler={onChangeHandler}/>
                     </div>
                     <div className={styles.form__items}>
                         <AdminInputContainer
@@ -79,18 +80,18 @@ const FooterSettingsForm = () => {
                             required={false} readonly={false} inputClassname={''}
                             inputContainerClassname={styles.form__inputContainer}
                             labelClassName={''} label={'Цвет шрифта навигационных ссылок при наведении курсором'}
-                            isLoading={isLoading} onChangeHandler={onChangeHandler}/>
+                            onChangeHandler={onChangeHandler}/>
                         <hr className={styles.hr}/>
-                        <FooterCopyrightsContent copyrightsContent={footerSettings?.copyrightsContent}
-                                                 isLoading={isLoading} onChangeHandler={onChangeHandler}/>
-
+                        <FooterCopyrightsContent
+                            copyrightsContent={footerSettings?.copyrightsContent}
+                            onChangeHandler={onChangeHandler}/>
                     </div>
                     <div className={styles.form__items}>
                         <FooterContentLayout footerLayout={footerSettings?.contentLayout}
                                              onChangeHandler={onChangeHandler}/>
                     </div>
                 </div>
-                : <div className={styles.AdminMain__formContainer}></div>
+                : <div className={styles.AdminMain__formContainerUnLoaded}>{isLoading && <Loader/>}</div>
             }
         </section>
     );

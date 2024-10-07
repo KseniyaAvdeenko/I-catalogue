@@ -11,7 +11,7 @@ interface ISocialLinkColorProps extends IAdminComponentsProps {
 const SocialLinkColor: React.FC<ISocialLinkColorProps> = ({
                                                               socialLinkType,
                                                               id,
-                                                              isLoading,
+
                                                               socialLinkColor,
                                                               onChangeHandler,
                                                           }) => {
@@ -19,7 +19,6 @@ const SocialLinkColor: React.FC<ISocialLinkColorProps> = ({
         <div className={styles.form__inputContainer}
              style={{marginBottom: 0, display: socialLinkType === 'fulfilledMonotone'||socialLinkType === 'outlinedMonotone' ? 'flex': 'none'}}>
             <label htmlFor="buttonBorderColor">Цвет иконки</label>
-            {isLoading && 'Loading...'}
             <input type="color"
                    value={socialLinkColor}
                    name={'socialLinkColor'}

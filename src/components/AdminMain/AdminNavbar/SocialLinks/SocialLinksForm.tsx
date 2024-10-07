@@ -7,6 +7,7 @@ import styles from "../../AdminNavbar.module.sass";
 import SavedSocialLinks from "./SavedSocialLinks";
 import {createSocialLink, deleteSocialLink, updateSocialLink} from "../../../../store/actions/socialLinksAction";
 import NewSocialLinksForm from "./NewSocialLinksForm";
+import Loader from "../../../UI/Loader/Loader";
 
 
 const SocialLinksForm = () => {
@@ -113,16 +114,16 @@ const SocialLinksForm = () => {
                  className={[styles.AdminNavbar__container, styles.AdminNavbar__container_margin].join(' ')}>
             <h2 className={styles.AdminNavbar__heading}>Социальные ссылки-иконки</h2>
             <div className={styles.AdminNavbar__formContainer}>
-                {socialLinks && (
-                    <SavedSocialLinks
+                {socialLinks
+                    ?<SavedSocialLinks
                         socialLinks={socialLinks}
-                        isLoading={isLoading}
                         onChangeHandler={onChangeHandler}
                         deleteSavedSocialLink={deleteSavedSocialLink}
                         changeIconTypesOptionsContainerVisibility={changeIconTypesOptionsContainerVisibility}
                         changeIconsOptionsContainerVisibility={changeIconsOptionsContainerVisibility}
                     />
-                )}
+                    :<div className={styles.savedItems_UnLoaded}>{isLoading && (<Loader/>)}</div>
+                }
                 <NewSocialLinksForm
                     fields={fields}
                     deleteField={deleteField}

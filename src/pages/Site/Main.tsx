@@ -6,10 +6,11 @@ import Heading from "../../components/UI/Heading/Heading";
 import ProductList from "../../components/SiteComponents/ProductList/ProductList";
 import {IProdReadOnly} from "../../interface/IProduct";
 import ModalPopUp from "../../components/SiteComponents/ModalPopup/ModalPopUp";
+import Loader from "../../components/UI/Loader/Loader";
 
 
 const Main = () => {
-    const {mainPageSettings} = useAppSelector(state => state.mainPageSettingsReducer)
+    const {mainPageSettings, isLoading} = useAppSelector(state => state.mainPageSettingsReducer)
     const [mainPageStyles, setMainPageStyles] = useState<{ background: string; prodCardBg: string;}>({
         background: '',
         prodCardBg: ''
@@ -38,14 +39,12 @@ const Main = () => {
         }
     }, [mainPageSettings]);
 
-
-
     function payClickHandle(prod: IProdReadOnly) {
         setModalVisibility(true);
         setModalData(prod)
     }
 
-    return (
+    return mainPageSettings ? (
         <main className={[styles.page__container].join(' ')}
               style={{background: mainPageStyles.background, position: 'relative'}}>
             <Heading pageHeading={mainPageHeading} headingContent={mainPageHeading.headingContent}/>
@@ -59,7 +58,7 @@ const Main = () => {
                 data={modalData}
             />
         </main>
-    );
+    ):(<main className={styles.page__container} style={{alignItems: 'center', justifyContent: 'center'}}>{isLoading && (<Loader/>)}</main>)
 };
 
 export default Main;

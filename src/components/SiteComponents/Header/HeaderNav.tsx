@@ -17,7 +17,7 @@ const HeaderNav: React.FC<IHeaderNavProps> = ({onHoverOut, onHoverIn, navLinksSt
                 <Link
                     onMouseEnter={e => onHoverIn(e)}
                     onMouseLeave={e => onHoverOut(e)}
-                    key={page.id} to={'page/' + page.slug}
+                    key={page.id} to={'/page/' + page.slug}
                     className={styles.navLayout1__item}
                     style={{color: navLinksStyle.color, fontSize: navLinksStyle.fontSize, fontWeight: 600}}>
                     <div className={styles.navLayout1__overline}></div>

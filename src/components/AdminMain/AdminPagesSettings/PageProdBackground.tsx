@@ -8,11 +8,14 @@ interface IPageProdBackgroundProps extends IAdminComponentsProps {
     isBlockWithProds: boolean;
 }
 
-const PageProdBackground: React.FC<IPageProdBackgroundProps> = ({prodBackground, isBlockWithProds, isLoading, onChangeHandler}) => {
+const PageProdBackground: React.FC<IPageProdBackgroundProps> = ({
+                                                                    prodBackground,
+                                                                    isBlockWithProds,
+                                                                    onChangeHandler
+                                                                }) => {
     return (
-        <div className={styles.form__inputContainer} style={{display: isBlockWithProds?'flex':'none'}}>
+        <div className={styles.form__inputContainer} style={{display: isBlockWithProds ? 'flex' : 'none'}}>
             <label htmlFor="prodBackground">Фон карточки товара\услуги</label>
-            {isLoading && 'Loading...'}
             <AdminInput type={"color"}
                         value={prodBackground ?? '#bbb'}
                         name={'prodBackground'}
