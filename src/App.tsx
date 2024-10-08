@@ -62,11 +62,10 @@ function App() {
             setErrorNtFs([]); dispatch(errorSlice.actions.clearSiteErrors())}, 7000)
     }, [errorNtfs.length, errorAdminNtfs.length, successNtfs.length, successAdminNtfs.length]);
 
-    if (localStorage.paymentId && localStorage.orderId && localStorage.youkassaPaymentId)
+    useEffect(() => {
+        if (localStorage.paymentId && localStorage.orderId && localStorage.youkassaPaymentId)
             dispatch(checkPayment(decodeToken(localStorage.youkassaPaymentId), +localStorage.orderId, +localStorage.paymentId))
-    // useEffect(() => {
-    //
-    // }, [localStorage.paymentId, localStorage.orderId, localStorage.youkassaPaymentId])
+    }, [localStorage.paymentId, localStorage.orderId, localStorage.youkassaPaymentId])
 
     useEffect(() => {
         dispatch(loadButtonSettings());
