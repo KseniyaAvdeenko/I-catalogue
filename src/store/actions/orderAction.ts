@@ -4,7 +4,7 @@ import axios from "axios";
 import {INewOrder, INewOrderBase, IOrder, IPayment} from "../../interface/IOrder";
 import {apiUrl, getRequestHeaders} from "./apiUrl";
 import {IPaymentData} from "../../interface/IInitialStates";
-import {errorSlice} from "../reducers/errorSlice";
+import {errorSlice} from '../reducers/errorSlice'
 
 export const loadOrders = () => async (dispatch: AppDispatch) => {
     try {
@@ -44,7 +44,7 @@ export const startPayment = (totalSum: number, orderId: number, currency: string
             apiUrl + `order/create_payment/${totalSum}/${orderId}/${currency}/`, getRequestHeaders());
         dispatch(loadOrders())
         dispatch(orderSlice.actions.newOrderPaymentSuccess(response.data))
-        window.location.replace(response.data.confirmation_url)
+        window.open(response.data.confirmation_url, '_blank')
     } catch (e) {
         dispatch(errorSlice.actions.orderErrors('Ошибка оплаты заказа'))
     }
@@ -65,7 +65,7 @@ export const checkPayment = (youkassaId: string, orderId: number, paymentId: num
             dispatch(editPayment(paymentId, {status: 'succeeded'}))
             dispatch(updateOrder(orderId, {paid: true}))
             dispatch(orderSlice.actions.paymentPaidSuccess())
-            dispatch(orderSlice.actions.destroyNewOrderAfterSuccessfulPayment())
+            setTimeout(()=>{dispatch(orderSlice.actions.destroyNewOrderAfterSuccessfulPayment())}, 4000)
         }
         if (response.data.status === 'canceled') dispatch(editPayment(paymentId, {status: 'canceled'}))
     }catch (e) {

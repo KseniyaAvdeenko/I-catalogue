@@ -3,11 +3,10 @@ import styles from './Layout.module.sass'
 import {useAppDispatch, useAppSelector} from "../../hooks/redux";
 import Header from "./Header/Header";
 import Footer from "./Footer/Footer";
-import {checkPayment} from "../../store/actions/orderAction";
-import {decodeToken} from "../../hooks/encodeDecodeTokens";
 import {setFavicon} from "../../hooks/setFavicon";
 import {getSeoTags} from "../../hooks/getSeoTags";
 import Notifications from "../UI/Notifications/Notifications";
+
 
 interface ILayoutProps {
     children: React.ReactNode;
@@ -48,10 +47,7 @@ const Layout: React.FC<ILayoutProps> = ({children, setErrorNtfs, setSuccessNtfs,
         if(seoTags) getSeoTags(seoTags)
 
     }, [seoTags]);
-    useEffect(() => {
-        if (localStorage.paymentId && localStorage.orderId && localStorage.youkassaPaymentId)
-            dispatch(checkPayment(decodeToken(localStorage.youkassaPaymentId), +localStorage.orderId, +localStorage.paymentId))
-    }, [localStorage.paymentId, localStorage.orderId, localStorage.youkassaPaymentId])
+
 
     return (
         <div className={styles.layout} style={basicStyles}>

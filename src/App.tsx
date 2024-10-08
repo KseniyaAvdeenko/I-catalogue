@@ -19,13 +19,14 @@ import {loadModalFormSettings} from "./store/actions/modalFormAction";
 import Page from "./pages/Site/Page";
 import ProductPage from "./pages/Site/ProductPage";
 import Layout from "./components/SiteComponents/Layout";
-import {loadOrders} from "./store/actions/orderAction";
+import {checkPayment, loadOrders} from "./store/actions/orderAction";
 import {loadProductsRead} from "./store/actions/productAction";
 import {loadProductsByPage} from "./store/actions/paginatedProductsAction";
 import {loadSocialLinks} from "./store/actions/socialLinksAction";
 import {loadSeoTags} from "./store/actions/seoSettingsAction";
 import AdminLayout from "./components/AdminComponents/AdminLayout";
 import {errorSlice} from "./store/reducers/errorSlice";
+import {decodeToken} from "./hooks/encodeDecodeTokens";
 
 function App() {
     const dispatch = useAppDispatch()
@@ -60,6 +61,12 @@ function App() {
         if (errorNtfs.length) setTimeout(() => {
             setErrorNtFs([]); dispatch(errorSlice.actions.clearSiteErrors())}, 7000)
     }, [errorNtfs.length, errorAdminNtfs.length, successNtfs.length, successAdminNtfs.length]);
+
+    if (localStorage.paymentId && localStorage.orderId && localStorage.youkassaPaymentId)
+            dispatch(checkPayment(decodeToken(localStorage.youkassaPaymentId), +localStorage.orderId, +localStorage.paymentId))
+    // useEffect(() => {
+    //
+    // }, [localStorage.paymentId, localStorage.orderId, localStorage.youkassaPaymentId])
 
     useEffect(() => {
         dispatch(loadButtonSettings());
