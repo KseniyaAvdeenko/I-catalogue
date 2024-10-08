@@ -9,7 +9,7 @@ import {decodeToken} from "../../../hooks/encodeDecodeTokens";
 import Loader from "../../UI/Loader/Loader";
 
 const FormSettings = () => {
-    const {modalForm, error, isLoading} = useAppSelector(state => state.modalFormReducer)
+    const {modalForm, isLoading} = useAppSelector(state => state.modalFormReducer)
     const dispatch = useAppDispatch()
     //--states
     const [headingTypeOptionsVisibility, setHeadingTypeOptionsVisibility] = useState<IOptions>({

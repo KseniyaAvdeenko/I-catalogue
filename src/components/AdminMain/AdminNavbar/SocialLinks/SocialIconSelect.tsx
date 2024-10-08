@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from "../../AdminMain.module.sass";
 import {socialIcons} from "../../Options";
-import {IAdminComponentsProps, IOptions} from "../../../../interface/IAdminPageComponets";
+import {IAdminComponentsProps} from "../../../../interface/IAdminPageComponets";
 
 interface ISocialIconSelectProps extends IAdminComponentsProps {
     linkIcon: string;

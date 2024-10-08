@@ -1,9 +1,8 @@
-import React, {useState} from 'react';
+import React from 'react';
 import styles from "../../AdminMain.module.sass";
 import Download from "../../../../assets/img/Download.svg";
 import {IFile} from "../../../../interface/IAdminPageComponets";
 import DeleteIcon from '../../../../assets/img/deleteIcon.svg'
-import {deleteImage} from "../../../../store/actions/prodImagesAction";
 
 interface IUploadImagesProps {
     files: IFile[];

@@ -9,6 +9,7 @@ const initialState: IProdInitial = {
     product: null,
     productsReadOnly: null,
     productReadOnly: null,
+    productError: ''
 }
 
 export const productSlice = createSlice({
@@ -29,19 +30,19 @@ export const productSlice = createSlice({
             state.product = action.payload;
         },
         createProductFail(state, action: PayloadAction<string>) {
-            state.error = action.payload;
+            state.productError = action.payload;
         },
         updateProductSuccess(state, action: PayloadAction<IProd>) {
             state.product = action.payload;
         },
         updateProductFail(state, action: PayloadAction<string>) {
-            state.error = action.payload;
+            state.productError = action.payload;
         },
         deleteProductSuccess(state) {
             state.product = null;
         },
         deleteProductFail(state, action: PayloadAction<string>) {
-            state.error = action.payload
+            state.productError = action.payload
         },
         prodsReadOnlyFetching(state) {
             state.isLoading = true;

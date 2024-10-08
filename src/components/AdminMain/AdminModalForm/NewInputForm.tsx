@@ -1,5 +1,4 @@
 import React from 'react';
-import {IContacts} from "../../../interface/INavbar";
 import {IModalLabels} from "../../../interface/IModalForm";
 import styles from "../AdminNavbar.module.sass";
 import AdminInputContainer from "../../UI/InputContainers/AdminInputContainer";

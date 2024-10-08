@@ -28,12 +28,6 @@ export const userSlice = createSlice({
         loadingUsersFail(state, action: PayloadAction<string>) {
             state.errorUsers = action.payload
         },
-        loadingUserSuccess(state, action: PayloadAction<IUser>) {
-            state.user = action.payload
-        },
-        loadingUserFail(state, action: PayloadAction<string>) {
-            state.errorUser = action.payload
-        },
     }
 })
 

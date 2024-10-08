@@ -11,7 +11,7 @@ import Loader from "../../../UI/Loader/Loader";
 
 const DetailPageSettings = () => {
 
-        const {prodPageSettings, error, isLoading} = useAppSelector(state => state.prodPageSettingsReducer)
+        const {prodPageSettings, isLoading} = useAppSelector(state => state.prodPageSettingsReducer)
         const dispatch = useAppDispatch();
 
         //states

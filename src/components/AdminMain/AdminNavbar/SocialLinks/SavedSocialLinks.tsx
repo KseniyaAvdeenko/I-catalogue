@@ -7,7 +7,6 @@ import SocialIconTypeSelect from "./SocialIconTypeSelect";
 import SocialLinkHref from "./SocialLinkHref";
 import SocialLinkColor from "./SocialLinkColor";
 import DeleteIcon from "../../../../assets/img/deleteIcon.svg";
-import Loader from "../../../UI/Loader/Loader";
 
 interface ISavedSocialLinksProps extends IAdminComponentsProps {
     socialLinks: ISocialLink[];

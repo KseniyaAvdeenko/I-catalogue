@@ -1,9 +1,6 @@
-import React, {useEffect, useRef} from 'react';
+import React from 'react';
 import styles from '../../../pages/Site/Site.module.sass';
 import {useAppDispatch, useAppSelector} from "../../../hooks/redux";
-import ProdImage from "../../UI/ProdImage/ProdImage";
-import SiteButton from "../../UI/SiteButton/SiteButton";
-import {getCurrency} from "../../../hooks/getCurrency";
 import ProdsPagination from "./ProdsPagination";
 import {changePageAction} from "../../../store/actions/paginatedProductsAction";
 import ProductItem from "./ProductItem";
@@ -18,7 +15,6 @@ interface IProductListProps {
 const ProductList: React.FC<IProductListProps> = ({payClickHandle, prodCardBg}) => {
     const {
         prodsPaginated,
-        error,
         isLoading,
         pageSize,
         pages,

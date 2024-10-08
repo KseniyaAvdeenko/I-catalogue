@@ -11,7 +11,7 @@ export const loadModalFormSettings = () => async (dispatch: AppDispatch) => {
         const response = await axios.get<IModalForm>(apiUrl + `modal_settings/modal_settings/get_order_modal_form/`);
         dispatch(modalFormSlice.actions.loadModalFormSuccess(response.data))
     } catch (e) {
-        dispatch(modalFormSlice.actions.loadModalFormFail('Ошибка'))
+        dispatch(modalFormSlice.actions.loadModalFormFail('Ошибка загрузки настроек модального окна'))
     }
 }
 
@@ -22,7 +22,7 @@ export const updateModalFormSettings = (access: string, id: number, data: any) =
                 JSON.stringify(data), getAuthConfigApplicationJson(access));
             dispatch(modalFormSlice.actions.updateModalFormSuccess(response.data))
         } catch (e) {
-            dispatch(modalFormSlice.actions.updateModalFormFail('Ошибка'))
+            dispatch(modalFormSlice.actions.updateModalFormFail('Ошибка обновления настроек модального окна'))
         }
     }
 }

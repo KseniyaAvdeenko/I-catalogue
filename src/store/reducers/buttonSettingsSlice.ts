@@ -1,4 +1,4 @@
-import {IButtonSettings, IHeaderSettings} from "../../interface/ICommonSettings";
+import {IButtonSettings} from "../../interface/ICommonSettings";
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {IButtonSettingsInitial} from "../../interface/IInitialStates";
 
@@ -6,7 +6,8 @@ const initialState: IButtonSettingsInitial = {
     isLoading: false,
     error: '',
     buttonSettings: null,
-    restored: false
+    restored: false,
+    updatingError: ''
 }
 
 export const buttonSettingsSlice = createSlice({
@@ -28,17 +29,17 @@ export const buttonSettingsSlice = createSlice({
         updateButtonSettingsSuccess(state, action: PayloadAction<IButtonSettings>){
             state.isLoading = false;
             state.buttonSettings = action.payload;
-            state.error = '';
         },
         updateButtonSettingsFail(state, action: PayloadAction<string>){
             state.isLoading = false;
-            state.error = action.payload;
+            state.updatingError = action.payload;
         },
         restoreButtonSettingsSuccess(state, action: PayloadAction<boolean>){
             state.restored = action.payload
         },
         restoreButtonSettingsFail(state, action: PayloadAction<boolean>){
-            state.restored = action.payload
+            state.restored = action.payload;
+            state.updatingError = 'Восстановление прошло неудачно'
         },
     }
 })

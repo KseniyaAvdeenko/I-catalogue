@@ -11,7 +11,7 @@ import Loader from "../../UI/Loader/Loader";
 
 const SeoSettings = () => {
     const dispatch = useAppDispatch();
-    const {isLoading, error, seoTag, seoTags} = useAppSelector(state => state.seoSettingsReducer)
+    const {isLoading, seoTags} = useAppSelector(state => state.seoSettingsReducer)
     //---states
     const [fields, setFields] = useState<ISeoSettings[]>([seoTagExample])
 

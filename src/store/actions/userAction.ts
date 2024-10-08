@@ -13,7 +13,7 @@ export const loadCurrentUser = (access: string) => async (dispatch: AppDispatch)
             dispatch(userSlice.actions.loadingCurrentUserSuccess(response.data))
             dispatch(authSlice.actions.loggedIn())
         } catch (error) {
-            dispatch(userSlice.actions.loadingCurrentUserFail('Что-то пошло не так'))
+            dispatch(userSlice.actions.loadingCurrentUserFail('Ошибка загрузки авторизованного пользователя'))
         }
     } else {
         dispatch(userSlice.actions.loadingCurrentUserFail('Вы не авторизованы'))
@@ -26,19 +26,7 @@ export const loadUsers = (access: string) => async (dispatch: AppDispatch) => {
             const response = await axios.get<IUser[]>(apiUrl + 'auth/users/', getAuthConfigApplicationJson(access))
             dispatch(userSlice.actions.loadingUsersSuccess(response.data))
         } catch (error) {
-            dispatch(userSlice.actions.loadingUsersFail('Что-то пошло не так'))
-        }
-    } else {
-        dispatch(userSlice.actions.loadingCurrentUserFail('Вы не авторизованы'))
-    }
-}
-export const loadUser = (access: string, id: number) => async (dispatch: AppDispatch) => {
-    if (access) {
-        try {
-            const response = await axios.get<IUser>(apiUrl + `auth/users/${id}/`, getAuthConfigApplicationJson(access))
-            dispatch(userSlice.actions.loadingUserSuccess(response.data))
-        } catch (error) {
-            dispatch(userSlice.actions.loadingUserFail('Что-то пошло не так'))
+            dispatch(userSlice.actions.loadingUsersFail('Ошибка загрузки пользователей'))
         }
     } else {
         dispatch(userSlice.actions.loadingCurrentUserFail('Вы не авторизованы'))

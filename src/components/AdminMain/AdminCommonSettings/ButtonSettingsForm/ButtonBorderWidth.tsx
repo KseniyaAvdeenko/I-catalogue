@@ -1,7 +1,6 @@
 import React from 'react';
 import {IAdminComponentsProps} from "../../../../interface/IAdminPageComponets";
 import styles from "../../AdminMain.module.sass";
-import Loader from "../../../UI/Loader/Loader";
 
 interface IButtonBorderWidthProps extends IAdminComponentsProps {
     buttonBorderWidth: number

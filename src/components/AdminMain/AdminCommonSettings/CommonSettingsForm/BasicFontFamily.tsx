@@ -1,8 +1,7 @@
-import React, {useState} from 'react';
+import React from 'react';
 import styles from "../../AdminMain.module.sass";
 import {appFonts} from "../../Options";
 import {IAdminComponentsProps, IOptions} from "../../../../interface/IAdminPageComponets";
-import Loader from "../../../UI/Loader/Loader";
 
 
 interface IBasicFontFamilyProps extends IAdminComponentsProps{

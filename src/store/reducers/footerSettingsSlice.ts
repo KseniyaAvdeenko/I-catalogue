@@ -6,7 +6,8 @@ const initialState: IFooterSettingsInitial = {
     isLoading: false,
     error: '',
     footerSettings: null,
-    restored: false
+    restored: false,
+    updatingError: ''
 }
 
 export const footerSettingsSlice = createSlice({
@@ -29,16 +30,16 @@ export const footerSettingsSlice = createSlice({
         },
         updateFooterSettingsSuccess(state, action: PayloadAction<IFooterSettings>){
             state.footerSettings = action.payload;
-            state.error = '';
         },
         updateFooterSettingsFail(state, action: PayloadAction<string>){
-            state.error = action.payload;
+            state.updatingError = action.payload;
         },
         restoreFooterSettingsSuccess(state, action: PayloadAction<boolean>){
             state.restored = action.payload
         },
         restoreFooterSettingsFail(state, action: PayloadAction<boolean>){
-            state.restored = action.payload
+            state.restored = action.payload;
+            state.updatingError = 'Восстановление прошло неудачно'
         },
     }
 })

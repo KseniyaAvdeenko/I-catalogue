@@ -10,7 +10,7 @@ import Loader from "../../UI/Loader/Loader";
 
 
 const MainPageSettings = () => {
-    const {error, isLoading, mainPageSettings} = useAppSelector(state => state.mainPageSettingsReducer);
+    const {isLoading, mainPageSettings} = useAppSelector(state => state.mainPageSettingsReducer);
     const dispatch = useAppDispatch()
     //--states
     const [headingTypeOptionsVisibility, setHeadingTypeOptionsVisibility] = useState<IOptions>({

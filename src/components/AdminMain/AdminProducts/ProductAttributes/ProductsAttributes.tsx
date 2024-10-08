@@ -9,7 +9,7 @@ import {decodeToken} from "../../../../hooks/encodeDecodeTokens";
 import Loader from "../../../UI/Loader/Loader";
 
 const ProductsAttributes = () => {
-    const {error, isLoading, prodAttrs} = useAppSelector(state => state.prodAttrsReducer)
+    const {isLoading, prodAttrs} = useAppSelector(state => state.prodAttrsReducer)
     const dispatch = useAppDispatch();
     //states
     const [fields, setFields] = React.useState<IProdAttrs[]>([{id: 0, attribute: ''}])

@@ -11,7 +11,7 @@ export const loadMainPageSettings = () => async (dispatch: AppDispatch) => {
         const response = await axios.get<IMainPageSetting>(apiUrl + `page_settings/main_page_settings/get_main_page/`, getRequestHeaders())
         dispatch(mainPageSettingsSlice.actions.loadMainPageSuccess(response.data))
     } catch (e) {
-        dispatch(mainPageSettingsSlice.actions.loadMainPageFail('Ошибка'))
+        dispatch(mainPageSettingsSlice.actions.loadMainPageFail('Ошибка загрузки настроек главной страницы'))
     }
 }
 
@@ -25,9 +25,9 @@ export const updateMainPageSettings = (access: string, id: number, data: any) =>
             dispatch(mainPageSettingsSlice.actions.updateMainPageSuccess(response.data))
             dispatch(loadMainPageSettings())
         } catch (e) {
-            dispatch(mainPageSettingsSlice.actions.updateMainPageFail('Ошибка'))
+            dispatch(mainPageSettingsSlice.actions.updateMainPageFail('Ошибка обновления настроек главной страницы'))
         }
     } else {
-        dispatch(userSlice.actions.loadingCurrentUserFail('Вы не авторизованы'))
+        dispatch(mainPageSettingsSlice.actions.updateMainPageFail('Вы не авторизованы'))
     }
 }

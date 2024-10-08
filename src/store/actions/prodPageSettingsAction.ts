@@ -11,7 +11,7 @@ export const loadProdPage = () => async (dispatch: AppDispatch) => {
         const response = await axios.get<IProductPageSettings>(apiUrl + `product/prod_page_settings/get_prod_page/`, getRequestHeaders());
         dispatch(prodPageSettingsSlice.actions.loadProdPageSettingsSuccess(response.data))
     } catch (e) {
-        dispatch(prodPageSettingsSlice.actions.loadProdPageSettingsFail('Ошибка'))
+        dispatch(prodPageSettingsSlice.actions.loadProdPageSettingsFail('Ошибка загрузки настроек детальной страницы товара/услуги'))
     }
 }
 
@@ -21,7 +21,7 @@ export const updateProdPageSettings = (access: string, id: number, data: any) =>
             const response = await axios.patch<IProductPageSettings>(apiUrl + `product/prod_page_settings/${id}/`,JSON.stringify(data), getAuthConfigApplicationJson(access));
             dispatch(prodPageSettingsSlice.actions.updateProdPageSettingsSuccess(response.data))
         }catch (e) {
-            dispatch(prodPageSettingsSlice.actions.updateProdPageSettingsFail('Ошибка'));
+            dispatch(prodPageSettingsSlice.actions.updateProdPageSettingsFail('Ошибка обновления настроек детальной страницы товара/услуги'));
         }
     }else{
         dispatch(prodPageSettingsSlice.actions.updateProdPageSettingsFail('Вы не авторизованы'));

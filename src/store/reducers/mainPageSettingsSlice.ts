@@ -6,6 +6,7 @@ const initialState: IMainPageSettingsInitial = {
     isLoading: false,
     error: '',
     mainPageSettings: null,
+    updatingError: ''
 }
 
 export const mainPageSettingsSlice = createSlice({
@@ -27,7 +28,7 @@ export const mainPageSettingsSlice = createSlice({
             state.mainPageSettings = action.payload;
         },
         updateMainPageFail(state, action: PayloadAction<string>) {
-            state.error = action.payload;
+            state.updatingError = action.payload;
         },
     }
 })

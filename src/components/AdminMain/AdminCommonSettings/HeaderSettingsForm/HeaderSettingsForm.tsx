@@ -11,7 +11,7 @@ import AdminInputContainer from "../../../UI/InputContainers/AdminInputContainer
 import Loader from "../../../UI/Loader/Loader";
 
 const HeaderSettingsForm = () => {
-    const {headerSettings, error, isLoading, restored} = useAppSelector(state => state.headerSettingsReducer);
+    const {headerSettings, isLoading} = useAppSelector(state => state.headerSettingsReducer);
     const dispatch = useAppDispatch();
     //--states
     const [hoverStyleOptionsVisibility, setHoverStyleOptionsVisibility] = useState<IOptions>({

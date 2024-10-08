@@ -11,7 +11,7 @@ export const loadFooterSettings = () => async (dispatch: AppDispatch) => {
         const response = await axios.get<IFooterSettings>(apiUrl + 'common_page_settings/footer_settings/get_footer/', getRequestHeaders())
         dispatch(footerSettingsSlice.actions.loadFooterSettingsSuccess(response.data))
     } catch (e) {
-        dispatch(footerSettingsSlice.actions.loadFooterSettingsFail('Ошибка'))
+        dispatch(footerSettingsSlice.actions.loadFooterSettingsFail('Ошибка загрузки настроек "подвала" сайта'))
     }
 }
 
@@ -22,7 +22,7 @@ export const updateFooterSettings = (access: string, id: number, data: any) => a
             const response = await axios.patch<IFooterSettings>(apiUrl + `common_page_settings/footer_settings/${id}/`, body, getAuthConfigApplicationJson(access))
             dispatch(footerSettingsSlice.actions.updateFooterSettingsSuccess(response.data))
         } catch (e) {
-            dispatch(footerSettingsSlice.actions.updateFooterSettingsFail('Ошибка'))
+            dispatch(footerSettingsSlice.actions.updateFooterSettingsFail('Ошибка обновления настроек "подвала" сайта'))
         }
     } else {
         dispatch(footerSettingsSlice.actions.updateFooterSettingsFail('Вы не авторизованы'))
@@ -39,6 +39,6 @@ export const restoreFooterSettings = (access: string, id: number) => async (disp
                 dispatch(footerSettingsSlice.actions.restoreFooterSettingsFail(false))
             }
         } else {
-            dispatch(footerSettingsSlice.actions.loadFooterSettingsFail('Вы не авторизованы'))
+            dispatch(footerSettingsSlice.actions.updateFooterSettingsFail('Вы не авторизованы'))
         }
 }

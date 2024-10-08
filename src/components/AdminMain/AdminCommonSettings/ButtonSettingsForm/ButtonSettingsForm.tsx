@@ -9,7 +9,7 @@ import AdminInputContainer from "../../../UI/InputContainers/AdminInputContainer
 import Loader from "../../../UI/Loader/Loader";
 
 const ButtonSettingsForm = () => {
-    const {buttonSettings, error, isLoading} = useAppSelector(state => state.buttonSettingsReducer);
+    const {buttonSettings, isLoading} = useAppSelector(state => state.buttonSettingsReducer);
     const dispatch = useAppDispatch();
     //methods
     const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {

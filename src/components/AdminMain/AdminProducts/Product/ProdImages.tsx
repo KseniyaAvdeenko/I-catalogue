@@ -9,7 +9,6 @@ import DeleteIcon from "../../../../assets/img/deleteIcon.svg";
 
 interface IProdImagesProps {
     selectedProd: IProdReadOnly;
-
 }
 
 const ProdImages: React.FC<IProdImagesProps> = ({selectedProd}) => {

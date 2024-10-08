@@ -10,7 +10,7 @@ export const loadSocialLinks = () => async (dispatch: AppDispatch)=>{
         const response = await axios.get<ISocialLink[]>(apiUrl + `navbar/social-links/`, getRequestHeaders())
         dispatch(socialLinkSlice.actions.loadSocialLinksSuccess(response.data))
     }catch (e) {
-        dispatch(socialLinkSlice.actions.loadSocialLinksFail('loading social links error'))
+        dispatch(socialLinkSlice.actions.loadSocialLinksFail('Ошибка загрузки социальных ссылок'))
     }
 }
 
@@ -21,10 +21,10 @@ export const createSocialLink = (access: string, data: any) => async (dispatch: 
             dispatch(socialLinkSlice.actions.createSocialLinkSuccess(response.data))
             dispatch(loadSocialLinks())
         } catch (e) {
-            dispatch(socialLinkSlice.actions.createSocialLinkFail('creating social link error'))
+            dispatch(socialLinkSlice.actions.createSocialLinkFail('Ошибка создания социальной ссылки'))
         }
     }else{
-        dispatch(socialLinkSlice.actions.createSocialLinkFail('you are not logged in'))
+        dispatch(socialLinkSlice.actions.createSocialLinkFail('Вы не авторизованы'))
     }
 }
 
@@ -35,10 +35,10 @@ export const updateSocialLink = (access: string, id: number, data: any) => async
             dispatch(socialLinkSlice.actions.updateSocialLinkSuccess(response.data))
             dispatch(loadSocialLinks())
         } catch (e) {
-            dispatch(socialLinkSlice.actions.updateSocialLinkFail('updating social link error'))
+            dispatch(socialLinkSlice.actions.updateSocialLinkFail('Ошибка обновления социальной ссылки'))
         }
     }else{
-        dispatch(socialLinkSlice.actions.updateSocialLinkFail('you are not logged in'))
+        dispatch(socialLinkSlice.actions.updateSocialLinkFail('Вы не авторизованы'))
     }
 }
 
@@ -49,9 +49,9 @@ export const deleteSocialLink = (id: number, access: string) => async (dispatch:
             dispatch(socialLinkSlice.actions.deleteSocialLinkSuccess())
             dispatch(loadSocialLinks())
         } catch (e) {
-            dispatch(socialLinkSlice.actions.deleteSocialLinkFail('deleting social link error'))
+            dispatch(socialLinkSlice.actions.deleteSocialLinkFail('Ошибка удаления социальной ссылки'))
         }
     }else{
-        dispatch(socialLinkSlice.actions.deleteSocialLinkFail('you are not logged in'))
+        dispatch(socialLinkSlice.actions.deleteSocialLinkFail('Вы не авторизованы'))
     }
 }

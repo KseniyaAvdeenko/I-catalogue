@@ -1,15 +1,8 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {IInitialStatesBase, IOrderInitial, IPaymentData} from "../../interface/IInitialStates";
+import {IOrderInitial, IPaymentData} from "../../interface/IInitialStates";
 import {INewOrder, IOrder} from "../../interface/IOrder";
 import {encodeToken} from "../../hooks/encodeDecodeTokens";
-// export interface IOrderInitial extends IInitialStatesBase{
-//     orders: IOrder[]|null;
-//     newOrder: IOrder|null;
-//     newOrderError: string
-//     paymentChecked: 'checked'|'unchecked'
-//     newOrderPaymentData: {youkassaPaymentId: string, orderPaymentId: number, orderId:number}
-//     paymentError: string
-// }
+
 
 const initialState: IOrderInitial = {
     isLoading: false,
@@ -18,6 +11,8 @@ const initialState: IOrderInitial = {
     newOrder: null,
     newOrderError: '',
     paymentError: '',
+    paymentPaid: false,
+    createdOrderSuccess: false,
     newOrderPaymentData: {
         confirmation_url: '',
         youkassaPaymentId: localStorage.youkassaPaymentId ? localStorage.youkassaPaymentId : null,
@@ -43,9 +38,11 @@ export const orderSlice = createSlice({
         },
         createNewOrderSuccess(state, action: PayloadAction<INewOrder>) {
             state.newOrder = action.payload
+            state.createdOrderSuccess = true
         },
         createNewOrderFail(state, action: PayloadAction<string>) {
-            state.newOrderError = action.payload
+            state.newOrderError = action.payload;
+            state.createdOrderSuccess = false;
         },
         updateNewOrderSuccess(state, action: PayloadAction<INewOrder>) {
             state.newOrder = action.payload
@@ -63,12 +60,17 @@ export const orderSlice = createSlice({
             state.newOrderError = action.payload
         },
         destroyNewOrderAfterSuccessfulPayment(state) {
-            state.newOrder = null
-            state.newOrderError = ''
-            state.paymentError = ''
+            state.newOrder = null;
+            state.createdOrderSuccess = false;
+            state.newOrderError = '';
+            state.paymentError = '';
+            state.paymentPaid = false;
             localStorage.removeItem('orderId')
             localStorage.removeItem('youkassaPaymentId')
             localStorage.removeItem('oderPaymentId')
+        },
+        paymentPaidSuccess(state){
+            state.paymentPaid = true
         }
     }
 })

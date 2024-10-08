@@ -6,7 +6,8 @@ const initialState: IHeaderSettingsInitial = {
     isLoading: false,
     error: '',
     headerSettings: null,
-    restored: false
+    restored: false,
+    updatingError: ''
 }
 
 export const headerSettingsSlice = createSlice({
@@ -29,13 +30,14 @@ export const headerSettingsSlice = createSlice({
             state.headerSettings = action.payload;
         },
         updateHeaderSettingsFail(state, action: PayloadAction<string>){
-            state.error = action.payload;
+            state.updatingError = action.payload;
         },
         restoreHeaderSettingsSuccess(state, action: PayloadAction<boolean>){
             state.restored = action.payload
         },
         restoreHeaderSettingsFail(state, action: PayloadAction<boolean>){
-            state.restored = action.payload
+            state.restored = action.payload;
+            state.updatingError = 'Восстановление прошло неудачно'
         },
     }
 })

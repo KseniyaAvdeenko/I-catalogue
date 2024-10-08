@@ -6,7 +6,8 @@ const initialState: IPageSettingsInitial = {
     isLoading: false,
     error: '',
     pages: null,
-    page: null
+    page: null,
+    pageError: ''
 }
 
 export const pageSettingsSlice = createSlice({
@@ -39,19 +40,19 @@ export const pageSettingsSlice = createSlice({
             state.page = action.payload
         },
         createPageFail(state, action: PayloadAction<string>) {
-            state.error = action.payload
+            state.pageError = action.payload
         },
         updatePageSuccess(state, action: PayloadAction<IPageSetting>) {
             state.page = action.payload
         },
         updatePageFail(state, action: PayloadAction<string>) {
-            state.error = action.payload
+            state.pageError = action.payload
         },
         deletePageSuccess(state) {
             state.page = null
         },
         deletePageFail(state, action: PayloadAction<string>) {
-            state.error = action.payload
+            state.pageError = action.payload
         }
     }
 })

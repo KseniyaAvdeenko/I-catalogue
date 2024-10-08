@@ -12,7 +12,6 @@ import InVisibleIcon from "../../assets/img/Invisible.svg";
 import VisibleIcon from "../../assets/img/Visible.svg";
 
 
-
 const SignIn = () => {
     const navigate = useNavigate()
     const auth = useAppSelector(state => state.authReducer)
@@ -64,38 +63,33 @@ const SignIn = () => {
             : setPasswordVisibility({...passwordVisibility, visible: true, image: VisibleIcon, type: 'text'})
     }
     return (
-        <>
-            <AdminHeader></AdminHeader>
-            <main className={styles.auth__container}>
-                <div className={styles.auth__form}>
-                    <h4 className={styles.auth__heading}>Вход</h4>
-                    {auth.error && (
-                        <p style={{textAlign: 'center', color: 'red', marginBottom: '2rem'}}>{auth.error}</p>)}
-                    <form onSubmit={e => submitHandler(e)} className={styles.auth__formContainer}>
-                        <AuthInputContainer inputContainerClass={styles.auth__inputContainer}
-                                            type={'text'} name={'username'} onFocusHandler={onFocusHandler}
-                                            onChangeHandler={onChangeHandler} onBlurHandler={onBlurInput}
-                                            value={user.username} required={true} labelStyle={usernameLabel}
-                                            label={'Логин'}/>
-                        <PasswordInput inputContainerClass={styles.auth__inputContainer}
-                                       type={passwordVisibility.type}
-                                       name={"password"}
-                                       onFocusHandler={onFocusHandler}
-                                       onChangeHandler={onChangeHandler}
-                                       onBlurHandler={onBlurInput}
-                                       value={user.password}
-                                       required={true}
-                                       labelStyle={passwordLabel}
-                                       label={'Пароль'}
-                                       imgClassName={styles.visibilityIcon}
-                                       image={passwordVisibility.image}
-                                       passwordVisibilityHandler={getPasswordVisibility}/>
-                        <button type={"submit"} className={styles.auth__button}>Войти</button>
-                    </form>
-                </div>
-            </main>
-            <AdminFooter/>
-        </>
+
+        <main className={styles.auth__container}>
+            <div className={styles.auth__form}>
+                <h4 className={styles.auth__heading}>Вход</h4>
+                <form onSubmit={e => submitHandler(e)} className={styles.auth__formContainer}>
+                    <AuthInputContainer inputContainerClass={styles.auth__inputContainer}
+                                        type={'text'} name={'username'} onFocusHandler={onFocusHandler}
+                                        onChangeHandler={onChangeHandler} onBlurHandler={onBlurInput}
+                                        value={user.username} required={true} labelStyle={usernameLabel}
+                                        label={'Логин'}/>
+                    <PasswordInput inputContainerClass={styles.auth__inputContainer}
+                                   type={passwordVisibility.type}
+                                   name={"password"}
+                                   onFocusHandler={onFocusHandler}
+                                   onChangeHandler={onChangeHandler}
+                                   onBlurHandler={onBlurInput}
+                                   value={user.password}
+                                   required={true}
+                                   labelStyle={passwordLabel}
+                                   label={'Пароль'}
+                                   imgClassName={styles.visibilityIcon}
+                                   image={passwordVisibility.image}
+                                   passwordVisibilityHandler={getPasswordVisibility}/>
+                    <button type={"submit"} className={styles.auth__button}>Войти</button>
+                </form>
+            </div>
+        </main>
     );
 };
 

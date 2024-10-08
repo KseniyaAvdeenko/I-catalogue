@@ -1,7 +1,6 @@
 import React from 'react';
 import {IAdminComponentsProps} from "../../../interface/IAdminPageComponets";
 import AdminInput from "../Inputs/AdminInput";
-import Loader from "../Loader/Loader";
 
 interface IAdminInputContainerProps extends IAdminComponentsProps {
     type: string;

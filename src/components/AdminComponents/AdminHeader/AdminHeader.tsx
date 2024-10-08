@@ -3,7 +3,7 @@ import styles from './AdminHeader.module.sass'
 import AppLogo from '../../../assets/img/I-Catalogue.svg'
 import {useAppDispatch, useAppSelector} from "../../../hooks/redux";
 import {Link} from "react-router-dom";
-import {logout, refreshToken, verifyToken} from "../../../store/actions/authAction";
+import {logout, refreshToken} from "../../../store/actions/authAction";
 import {loadCurrentUser} from "../../../store/actions/userAction";
 import {decodeToken} from "../../../hooks/encodeDecodeTokens";
 

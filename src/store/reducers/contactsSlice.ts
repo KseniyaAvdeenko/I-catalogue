@@ -6,7 +6,8 @@ const initialState: IContactsInitial = {
     isLoading: false,
     error: '',
     contacts: null,
-    contact: null
+    contact: null,
+    contactError: ''
 }
 
 export const contactsSlice = createSlice({
@@ -24,29 +25,23 @@ export const contactsSlice = createSlice({
             state.isLoading = false;
             state.error = action.payload
         },
-        loadContactSuccess(state, action: PayloadAction<IContacts>){
-            state.contact = action.payload
-        },
-        loadContactFail(state, action: PayloadAction<string>){
-            state.error = action.payload
-        },
         createContactSuccess(state, action: PayloadAction<IContacts>){
             state.contact = action.payload
         },
         createContactFail(state, action: PayloadAction<string>){
-            state.error = action.payload
+            state.contactError = action.payload
         },
         updateContactSuccess(state, action: PayloadAction<IContacts>){
             state.contact = action.payload
         },
         updateContactFail(state, action: PayloadAction<string>){
-            state.error = action.payload
+            state.contactError = action.payload
         },
         deleteContactsSuccess(state){
             state.contact = null
         },
         deleteContactFail(state, action: PayloadAction<string>){
-            state.error = action.payload
+            state.contactError = action.payload
         },
     }
 })

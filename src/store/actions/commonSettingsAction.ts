@@ -11,7 +11,7 @@ export const loadCommonSettings = () => async (dispatch: AppDispatch) => {
         const response = await axios.get<ICommonSettings>(apiUrl + `common_page_settings/common_page_settings/get_common_settings/`, getRequestHeaders());
         dispatch(commonSettingsSlice.actions.loadCommonSettingsSuccess(response.data));
     } catch {
-        dispatch(commonSettingsSlice.actions.loadCommonSettingsFail('Ошибка'));
+        dispatch(commonSettingsSlice.actions.loadCommonSettingsFail('Ошибка загрузки общих настроек сайта'));
     }
 }
 
@@ -22,7 +22,7 @@ export const updateCommonSettings = (access: string, id: number, data: any) => a
             dispatch(commonSettingsSlice.actions.updateCommonSettingsSuccess(response.data));
             clearFormData(data)
         } catch {
-            dispatch(commonSettingsSlice.actions.updateCommonSettingsFail('Ошибка'));
+            dispatch(commonSettingsSlice.actions.updateCommonSettingsFail('Ошибка обновления общих настроек сайта'));
         }
     } else {
         dispatch(commonSettingsSlice.actions.updateCommonSettingsFail('Вы не авторизованы'))
@@ -39,6 +39,6 @@ export const restoreCommonSettings = (access: string, id: number) => async (disp
             dispatch(commonSettingsSlice.actions.restoreCommonSettingsFail(false));
         }
     } else {
-        dispatch(commonSettingsSlice.actions.loadCommonSettingsFail('Вы не авторизованы'))
+        dispatch(commonSettingsSlice.actions.updateCommonSettingsFail('Вы не авторизованы'))
     }
 }

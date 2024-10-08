@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import styles from "../../AdminNavbar.module.sass";
 import {useAppDispatch, useAppSelector} from "../../../../hooks/redux";
 import {contactFieldExample} from "../../Options";
@@ -11,7 +11,7 @@ import Loader from "../../../UI/Loader/Loader";
 
 const ContactsForm = () => {
     const dispatch = useAppDispatch();
-    const {isLoading, error, contacts} = useAppSelector(state => state.contactsReducer)
+    const {isLoading, contacts} = useAppSelector(state => state.contactsReducer)
     //---states
     const [fields, setFields] = useState<IContacts[]>([contactFieldExample])
 

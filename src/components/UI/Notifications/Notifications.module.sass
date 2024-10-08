@@ -1,0 +1,30 @@
+.notifications
+  position: fixed
+  height: fit-content
+  width: 20rem
+  display: flex
+  flex-direction: column
+  top: 5%
+  right: 4%
+  transition: all .5s ease-in
+  z-index: 4
+
+.successNtf,
+.errorNtf
+  width: 100%
+  border-radius: 1rem
+  padding: 1rem
+  margin: .5rem 0
+  font-size: 1.6rem
+  backdrop-filter: blur(10px)
+  cursor: pointer
+
+.successNtf
+  background: rgba(0, 229, 16, 0.05)
+  border: .1rem solid #00e510
+  color: #00e510
+
+.errorNtf
+  background: rgba(255, 2, 9, 0.05)
+  border: .1rem solid #ff0209
+  color: #ff0209

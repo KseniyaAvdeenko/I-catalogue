@@ -10,7 +10,7 @@ export const loadButtonSettings = () => async (dispatch: AppDispatch) => {
         const response = await axios.get<IButtonSettings>(apiUrl + 'common_page_settings/button_settings/get_button/', getRequestHeaders())
         dispatch(buttonSettingsSlice.actions.loadButtonSettingsSuccess(response.data))
     } catch (e) {
-        dispatch(buttonSettingsSlice.actions.loadButtonSettingsFail('Ошибка'))
+        dispatch(buttonSettingsSlice.actions.loadButtonSettingsFail('Ошибка настроек кнопки'))
     }
 }
 
@@ -21,7 +21,7 @@ export const updateButtonSettings = (access: string, id: number, data: any) => a
             const response = await axios.patch<IButtonSettings>(apiUrl + `common_page_settings/button_settings/${id}/`, body, getAuthConfigApplicationJson(access))
             dispatch(buttonSettingsSlice.actions.updateButtonSettingsSuccess(response.data))
         } catch (e) {
-            dispatch(buttonSettingsSlice.actions.updateButtonSettingsFail('Ошибка'))
+            dispatch(buttonSettingsSlice.actions.updateButtonSettingsFail('Ошибка обновления настроек кнопки'))
         }
     } else {
         dispatch(buttonSettingsSlice.actions.updateButtonSettingsFail('Вы не авторизованы'))
@@ -37,6 +37,6 @@ export const restoreButtonSettings = (access: string, id: number) => async (disp
             dispatch(buttonSettingsSlice.actions.restoreButtonSettingsFail(false))
         }
     } else {
-        dispatch(buttonSettingsSlice.actions.loadButtonSettingsFail('Вы не авторизованы'))
+        dispatch(buttonSettingsSlice.actions.updateButtonSettingsFail('Вы не авторизованы'))
     }
 }

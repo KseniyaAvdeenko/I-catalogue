@@ -5,7 +5,8 @@ import {IProductPageSettings} from "../../interface/IProduct";
 const initialState: IProdPageInitial = {
     isLoading: false,
     error: '',
-    prodPageSettings: null
+    prodPageSettings: null,
+    updatingError: ''
 }
 
 export const prodPageSettingsSlice = createSlice({
@@ -27,7 +28,7 @@ export const prodPageSettingsSlice = createSlice({
             state.prodPageSettings = action.payload;
         },
         updateProdPageSettingsFail(state, action: PayloadAction<string>){
-            state.error = action.payload
+            state.updatingError = action.payload
         }
     }
 })

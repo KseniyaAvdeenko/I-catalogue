@@ -1,8 +1,6 @@
 import React from 'react';
 import styles from "../AdminNavbar.module.sass";
 import Label from "../AdminNavbar/Label";
-import Input from "../AdminNavbar/Input";
-import {SeoTagType} from "../../../interface/ISeoSettings";
 import {dataListValues} from "../Options";
 
 interface ISeoTagNameProps {

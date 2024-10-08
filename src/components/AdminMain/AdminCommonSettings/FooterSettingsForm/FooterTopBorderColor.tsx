@@ -1,7 +1,6 @@
 import React from 'react';
 import styles from "../../AdminMain.module.sass";
 import {IAdminComponentsProps} from "../../../../interface/IAdminPageComponets";
-import Loader from "../../../UI/Loader/Loader";
 
 interface IFooterTopBorderColorProps extends IAdminComponentsProps {
     borderTopColor: string | undefined;

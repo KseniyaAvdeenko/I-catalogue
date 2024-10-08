@@ -10,7 +10,7 @@ import AdminInputContainer from "../../../UI/InputContainers/AdminInputContainer
 import Loader from "../../../UI/Loader/Loader";
 
 const FooterSettingsForm = () => {
-    const {footerSettings, error, isLoading} = useAppSelector(state => state.footerSettingsReducer);
+    const {footerSettings, isLoading} = useAppSelector(state => state.footerSettingsReducer);
     const dispatch = useAppDispatch();
     //methods
     const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {

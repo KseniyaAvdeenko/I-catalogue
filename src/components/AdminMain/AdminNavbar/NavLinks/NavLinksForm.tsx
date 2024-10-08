@@ -15,7 +15,7 @@ import Loader from "../../../UI/Loader/Loader";
 
 const NavLinksForm = () => {
     const dispatch = useAppDispatch();
-    const {isLoading, error, pages} = useAppSelector(state => state.pageSettingsReducer)
+    const {isLoading, pages} = useAppSelector(state => state.pageSettingsReducer)
     //states
     const [fields, setFields] = useState<INavLink[]>([navLinkFieldExample])
 

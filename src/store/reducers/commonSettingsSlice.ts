@@ -6,7 +6,8 @@ const initialState: ICommonSettingsInitial = {
     isLoading: false,
     error: '',
     commonSettings: null,
-    restored: false
+    restored: false,
+    updatingError: ''
 }
 
 export const commonSettingsSlice = createSlice({
@@ -27,13 +28,14 @@ export const commonSettingsSlice = createSlice({
             state.commonSettings = action.payload
         },
         updateCommonSettingsFail(state, action: PayloadAction<string>) {
-            state.error = action.payload
+            state.updatingError = action.payload
         },
         restoreCommonSettingsSuccess(state, action: PayloadAction<boolean>){
             state.restored = action.payload
         },
         restoreCommonSettingsFail(state, action: PayloadAction<boolean>){
-            state.restored = action.payload
+            state.restored = action.payload;
+            state.updatingError = 'Восстановление прошло неудачно'
         },
     }
 })

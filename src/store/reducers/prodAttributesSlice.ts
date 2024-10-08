@@ -7,7 +7,8 @@ const initialState: IProdAttrsInitial = {
     isLoading: false,
     error: '',
     prodAttrs: null,
-    prodAttr: null
+    prodAttr: null,
+    prodAttrError: ''
 }
 
 export const prodAttributesSlice = createSlice({
@@ -25,34 +26,23 @@ export const prodAttributesSlice = createSlice({
             state.error = action.payload;
             state.isLoading = false;
         },
-        prodAttrFetching(state){
-            state.isLoading = true;
-        },
-        loadProdAttrSuccess(state, action: PayloadAction<IProdAttrs>){
-            state.prodAttr = action.payload;
-            state.isLoading = false;
-        },
-        loadProdAttrFail(state, action: PayloadAction<string>){
-            state.error = action.payload;
-            state.isLoading = false;
-        },
         createProdAttrSuccess(state, action: PayloadAction<IProdAttrs>){
             state.prodAttr = action.payload;
         },
         createProdAttrFail(state, action: PayloadAction<string>){
-            state.error = action.payload;
+            state.prodAttrError = action.payload;
         },
         updateProdAttrSuccess(state, action: PayloadAction<IProdAttrs>){
             state.prodAttr = action.payload;
         },
         updateProdAttrFail(state, action: PayloadAction<string>){
-            state.error = action.payload;
+            state.prodAttrError = action.payload;
         },
         deleteProdAttrSuccess(state){
             state.prodAttr = null;
         },
         deleteProdAttrFail(state, action: PayloadAction<string>){
-            state.error = action.payload
+            state.prodAttrError = action.payload
         }
     }
 })

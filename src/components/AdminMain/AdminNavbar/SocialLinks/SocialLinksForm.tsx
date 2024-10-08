@@ -12,7 +12,7 @@ import Loader from "../../../UI/Loader/Loader";
 
 const SocialLinksForm = () => {
     const dispatch = useAppDispatch();
-    const {isLoading, error, socialLinks} = useAppSelector(state => state.socialLinkReducer)
+    const {isLoading, socialLinks} = useAppSelector(state => state.socialLinkReducer)
     //---states
     const [fields, setFields] = useState<ISocialLink[]>([socialLinkExample])
 

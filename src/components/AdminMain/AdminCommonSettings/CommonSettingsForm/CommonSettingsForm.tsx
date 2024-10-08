@@ -10,13 +10,9 @@ import {decodeToken} from "../../../../hooks/encodeDecodeTokens";
 import AdminInputContainer from "../../../UI/InputContainers/AdminInputContainer";
 import Loader from "../../../UI/Loader/Loader";
 
-interface ICommonSettingsFormProps {
 
-}
-
-
-const CommonSettingsForm: React.FC<ICommonSettingsFormProps> = () => {
-    const {commonSettings, error, isLoading} = useAppSelector(state => state.commonSettingsReducer);
+const CommonSettingsForm = () => {
+    const {commonSettings, isLoading} = useAppSelector(state => state.commonSettingsReducer);
     const dispatch = useAppDispatch()
     //--states
     const [fontOptionsVisibility, setFontOptionsVisibility] = useState<IOptions>({

@@ -13,7 +13,7 @@ export const loadProductsByPage = (pageNum: number|null, pageSize: number) => as
             })
         dispatch(paginatedProductSlice.actions.loadProdsPaginatedSuccess(response.data))
     } catch (e) {
-        dispatch(paginatedProductSlice.actions.loadProdsPaginatedFail('Ошибка'))
+        dispatch(paginatedProductSlice.actions.loadProdsPaginatedFail('Ошибка загрузки товаров/услуг'))
     }
 }
 
