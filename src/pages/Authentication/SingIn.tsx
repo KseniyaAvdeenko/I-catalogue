@@ -24,9 +24,8 @@ const SignIn = () => {
     //--methods
    const onBlurInput = (e: React.ChangeEvent<HTMLInputElement>) => changeAuthLabelsAndValidationViewOnBlur(e)
 
-    const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setUser({...user, [e.target.name]: e.target.value})
-    }
+    const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => setUser({...user, [e.target.name]: e.target.value})
+
 
     const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
