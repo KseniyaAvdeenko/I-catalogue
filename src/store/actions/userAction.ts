@@ -3,6 +3,7 @@ import {AppDispatch} from "../store";
 import axios from "axios";
 import {apiUrl, getAuthConfigApplicationJson} from "./apiUrl";
 import {userSlice} from "../reducers/userSlice";
+import {errorSlice} from "../reducers/errorSlice";
 import {authSlice} from "../reducers/authSlice";
 
 
@@ -13,10 +14,11 @@ export const loadCurrentUser = (access: string) => async (dispatch: AppDispatch)
             dispatch(userSlice.actions.loadingCurrentUserSuccess(response.data))
             dispatch(authSlice.actions.loggedIn())
         } catch (error) {
-            dispatch(userSlice.actions.loadingCurrentUserFail('Ошибка загрузки авторизованного пользователя'))
+            dispatch(errorSlice.actions.usersErrors('Ошибка загрузки авторизованного пользователя'))
+            dispatch(userSlice.actions.loadingCurrentUserFail())
         }
     } else {
-        dispatch(userSlice.actions.loadingCurrentUserFail('Вы не авторизованы'))
+        dispatch(errorSlice.actions.usersErrors('Вы не авторизованы'))
     }
 }
 
@@ -26,9 +28,9 @@ export const loadUsers = (access: string) => async (dispatch: AppDispatch) => {
             const response = await axios.get<IUser[]>(apiUrl + 'auth/users/', getAuthConfigApplicationJson(access))
             dispatch(userSlice.actions.loadingUsersSuccess(response.data))
         } catch (error) {
-            dispatch(userSlice.actions.loadingUsersFail('Ошибка загрузки пользователей'))
+            dispatch(errorSlice.actions.usersErrors('Ошибка загрузки пользователей'))
         }
     } else {
-        dispatch(userSlice.actions.loadingCurrentUserFail('Вы не авторизованы'))
+        dispatch(errorSlice.actions.usersErrors('Вы не авторизованы'))
     }
 }

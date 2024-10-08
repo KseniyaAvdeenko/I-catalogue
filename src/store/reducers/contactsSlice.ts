@@ -4,44 +4,32 @@ import {IContacts} from "../../interface/INavbar";
 
 const initialState: IContactsInitial = {
     isLoading: false,
-    error: '',
     contacts: null,
     contact: null,
-    contactError: ''
 }
 
 export const contactsSlice = createSlice({
     name: 'contacts',
     initialState,
     reducers: {
-        contactsFetching(state){
+        contactsFetching(state) {
             state.isLoading = true;
         },
-        loadContactsSuccess(state, action: PayloadAction<IContacts[]>){
+        loadContactsSuccess(state, action: PayloadAction<IContacts[]>) {
             state.isLoading = false;
             state.contacts = action.payload
         },
-        loadContactsFail(state, action: PayloadAction<string>){
+        loadContactsFail(state) {
             state.isLoading = false;
-            state.error = action.payload
         },
-        createContactSuccess(state, action: PayloadAction<IContacts>){
+        createContactSuccess(state, action: PayloadAction<IContacts>) {
             state.contact = action.payload
         },
-        createContactFail(state, action: PayloadAction<string>){
-            state.contactError = action.payload
-        },
-        updateContactSuccess(state, action: PayloadAction<IContacts>){
+        updateContactSuccess(state, action: PayloadAction<IContacts>) {
             state.contact = action.payload
         },
-        updateContactFail(state, action: PayloadAction<string>){
-            state.contactError = action.payload
-        },
-        deleteContactsSuccess(state){
+        deleteContactsSuccess(state) {
             state.contact = null
-        },
-        deleteContactFail(state, action: PayloadAction<string>){
-            state.contactError = action.payload
         },
     }
 })

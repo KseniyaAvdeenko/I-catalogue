@@ -3,7 +3,7 @@ import {commonSettingsSlice} from "../reducers/commonSettingsSlice";
 import axios from "axios";
 import {ICommonSettings} from "../../interface/ICommonSettings";
 import {apiUrl, clearFormData, createFormData, formData, getAuthConfigMultipart, getRequestHeaders} from "./apiUrl";
-
+import {errorSlice} from "../reducers/errorSlice";
 
 export const loadCommonSettings = () => async (dispatch: AppDispatch) => {
     try {
@@ -11,7 +11,7 @@ export const loadCommonSettings = () => async (dispatch: AppDispatch) => {
         const response = await axios.get<ICommonSettings>(apiUrl + `common_page_settings/common_page_settings/get_common_settings/`, getRequestHeaders());
         dispatch(commonSettingsSlice.actions.loadCommonSettingsSuccess(response.data));
     } catch {
-        dispatch(commonSettingsSlice.actions.loadCommonSettingsFail('Ошибка загрузки общих настроек сайта'));
+        dispatch(errorSlice.actions.loadingDataErrors('Ошибка загрузки общих настроек сайта'));
     }
 }
 
@@ -22,13 +22,12 @@ export const updateCommonSettings = (access: string, id: number, data: any) => a
             dispatch(commonSettingsSlice.actions.updateCommonSettingsSuccess(response.data));
             clearFormData(data)
         } catch {
-            dispatch(commonSettingsSlice.actions.updateCommonSettingsFail('Ошибка обновления общих настроек сайта'));
+            dispatch(errorSlice.actions.updatingDataErrors('Ошибка обновления общих настроек сайта'));
         }
     } else {
-        dispatch(commonSettingsSlice.actions.updateCommonSettingsFail('Вы не авторизованы'))
+        dispatch(errorSlice.actions.updatingDataErrors('Вы не авторизованы'))
     }
 }
-
 
 export const restoreCommonSettings = (access: string, id: number) => async (dispatch: AppDispatch) => {
     if (access) {
@@ -36,9 +35,10 @@ export const restoreCommonSettings = (access: string, id: number) => async (disp
             const response = await axios.get<boolean>(apiUrl + `common_page_settings/common_page_settings/${id}/restore_common_settings/`, getAuthConfigMultipart(access));
             dispatch(commonSettingsSlice.actions.restoreCommonSettingsSuccess(response.data));
         } catch {
+            dispatch(errorSlice.actions.updatingDataErrors('Восстановление прошло неудачно'))
             dispatch(commonSettingsSlice.actions.restoreCommonSettingsFail(false));
         }
     } else {
-        dispatch(commonSettingsSlice.actions.updateCommonSettingsFail('Вы не авторизованы'))
+        dispatch(errorSlice.actions.updatingDataErrors('Вы не авторизованы'))
     }
 }

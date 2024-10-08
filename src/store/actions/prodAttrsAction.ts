@@ -3,6 +3,8 @@ import {prodAttributesSlice} from "../reducers/prodAttributesSlice";
 import {IProdAttrs} from "../../interface/IProduct";
 import axios from "axios";
 import {apiUrl, getAuthConfigApplicationJson, getRequestHeaders} from "./apiUrl";
+import {errorSlice} from "../reducers/errorSlice";
+
 
 export const loadProdAttributes = () => async (dispatch: AppDispatch) => {
     try {
@@ -10,7 +12,8 @@ export const loadProdAttributes = () => async (dispatch: AppDispatch) => {
         const response = await axios.get<IProdAttrs[]>(apiUrl + `product/prod_attributes/`, getRequestHeaders());
         dispatch(prodAttributesSlice.actions.loadProdAttrsSuccess(response.data))
     } catch (e) {
-        dispatch(prodAttributesSlice.actions.loadProdAttrsFail('Ошибка загрузки характеристик товара'));
+        dispatch(errorSlice.actions.prodErrors('Ошибка загрузки характеристик товара'))
+        dispatch(prodAttributesSlice.actions.loadProdAttrsFail());
     }
 }
 
@@ -22,10 +25,10 @@ export const createProdAttribute = (access: string, data: any) => async (dispatc
             dispatch(prodAttributesSlice.actions.createProdAttrSuccess(response.data))
             dispatch(loadProdAttributes())
         } catch (e) {
-            dispatch(prodAttributesSlice.actions.createProdAttrFail('Ошибка создания характеристики товара'))
+            dispatch(errorSlice.actions.prodErrors('Ошибка создания характеристики товара'))
         }
     } else {
-        dispatch(prodAttributesSlice.actions.createProdAttrFail('Вы не авторизованы'))
+        dispatch(errorSlice.actions.prodErrors('Вы не авторизованы'))
     }
 }
 
@@ -37,12 +40,13 @@ export const updateProdAttribute = (access: string,id: number, data: any) => asy
             dispatch(prodAttributesSlice.actions.updateProdAttrSuccess(response.data))
             dispatch(loadProdAttributes())
         } catch (e) {
-            dispatch(prodAttributesSlice.actions.updateProdAttrFail('Ошибка обновления характеристики товара'))
+            dispatch(errorSlice.actions.prodErrors('Ошибка обновления характеристики товара'))
         }
     } else {
-        dispatch(prodAttributesSlice.actions.updateProdAttrFail('Вы не авторизованы'))
+        dispatch(errorSlice.actions.prodErrors('Вы не авторизованы'))
     }
 }
+
 export const deleteProdAttribute = (access: string, id: number) => async (dispatch: AppDispatch) => {
     if (access) {
         try {
@@ -51,9 +55,9 @@ export const deleteProdAttribute = (access: string, id: number) => async (dispat
             dispatch(prodAttributesSlice.actions.deleteProdAttrSuccess());
             dispatch(loadProdAttributes())
         } catch (e) {
-            dispatch(prodAttributesSlice.actions.deleteProdAttrFail('Ошибка обновления характеристики товара'))
+            dispatch(errorSlice.actions.prodErrors('Ошибка обновления характеристики товара'))
         }
     } else {
-        dispatch(prodAttributesSlice.actions.deleteProdAttrFail('Вы не авторизованы'))
+        dispatch(errorSlice.actions.prodErrors('Вы не авторизованы'))
     }
 }

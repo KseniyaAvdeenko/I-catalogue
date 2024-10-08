@@ -4,43 +4,37 @@ import {IButtonSettingsInitial} from "../../interface/IInitialStates";
 
 const initialState: IButtonSettingsInitial = {
     isLoading: false,
-    error: '',
     buttonSettings: null,
     restored: false,
-    updatingError: ''
 }
 
 export const buttonSettingsSlice = createSlice({
     name: 'buttonSettings',
     initialState,
     reducers: {
-         buttonSettingsFetching(state){
+        buttonSettingsFetching(state) {
             state.isLoading = true;
         },
-        loadButtonSettingsSuccess(state, action: PayloadAction<IButtonSettings>){
-            state.isLoading = false;
-            state.buttonSettings = action.payload;
-            state.error = '';
-        },
-        loadButtonSettingsFail(state, action: PayloadAction<string>){
-            state.isLoading = false;
-            state.error = action.payload;
-        },
-        updateButtonSettingsSuccess(state, action: PayloadAction<IButtonSettings>){
+        loadButtonSettingsSuccess(state, action: PayloadAction<IButtonSettings>) {
             state.isLoading = false;
             state.buttonSettings = action.payload;
         },
-        updateButtonSettingsFail(state, action: PayloadAction<string>){
+        loadButtonSettingsFail(state) {
             state.isLoading = false;
-            state.updatingError = action.payload;
         },
-        restoreButtonSettingsSuccess(state, action: PayloadAction<boolean>){
+        updateButtonSettingsSuccess(state, action: PayloadAction<IButtonSettings>) {
+            state.isLoading = false;
+            state.buttonSettings = action.payload;
+        },
+        updateButtonSettingsFail(state) {
+            state.isLoading = false;
+        },
+        restoreButtonSettingsSuccess(state, action: PayloadAction<boolean>) {
             state.restored = action.payload
         },
-        restoreButtonSettingsFail(state, action: PayloadAction<boolean>){
+        restoreButtonSettingsFail(state, action: PayloadAction<boolean>) {
             state.restored = action.payload;
-            state.updatingError = 'Восстановление прошло неудачно'
-        },
+            },
     }
 })
 

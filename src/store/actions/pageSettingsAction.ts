@@ -3,6 +3,7 @@ import axios from "axios";
 import {apiUrl, getAuthConfigApplicationJson, getRequestHeaders} from "./apiUrl";
 import {pageSettingsSlice} from "../reducers/pageSettingsSlice";
 import {IPageSetting} from "../../interface/IPagesSettings";
+import {errorSlice} from "../reducers/errorSlice";
 
 export const loadPagesWithNavLinks = () => async (dispatch: AppDispatch) => {
     try {
@@ -10,7 +11,8 @@ export const loadPagesWithNavLinks = () => async (dispatch: AppDispatch) => {
         const response = await axios.get<IPageSetting[]>(apiUrl + `page_settings/page_settings/`, getRequestHeaders())
         dispatch(pageSettingsSlice.actions.loadPagesSuccess(response.data))
     } catch (e) {
-        dispatch(pageSettingsSlice.actions.loadPagesFail('Ошибка загрузки страниц'))
+        dispatch(errorSlice.actions.loadingDataErrors('Ошибка загрузки страниц'))
+        dispatch(pageSettingsSlice.actions.loadPagesFail())
     }
 }
 
@@ -20,9 +22,11 @@ export const loadPageWithNavLink = (slug: string) => async (dispatch: AppDispatc
         const response = await axios.get<IPageSetting>(apiUrl + `page_settings/page_settings/${slug}/`, getRequestHeaders())
         dispatch(pageSettingsSlice.actions.loadPageSuccess(response.data))
     } catch (e) {
-        dispatch(pageSettingsSlice.actions.loadPageFail('Ошибка загрузки страницы'))
+        dispatch(errorSlice.actions.loadingDataErrors('Ошибка загрузки страницы'))
+        dispatch(pageSettingsSlice.actions.loadPageFail())
     }
 }
+
 export const createPageWithNavLink = (access: string, data: any) => async (dispatch: AppDispatch) => {
     if (access) {
         try {
@@ -31,10 +35,10 @@ export const createPageWithNavLink = (access: string, data: any) => async (dispa
             dispatch(pageSettingsSlice.actions.createPageSuccess(response.data))
             dispatch(loadPagesWithNavLinks())
         } catch (e) {
-            dispatch(pageSettingsSlice.actions.createPageFail('Ошибка создания страницы'))
+            dispatch(errorSlice.actions.updatingDataErrors('Ошибка создания страницы'))
         }
     } else {
-        dispatch(pageSettingsSlice.actions.createPageFail('Вы не авторизованы'))
+        dispatch(errorSlice.actions.updatingDataErrors('Вы не авторизованы'))
     }
 }
 
@@ -46,10 +50,10 @@ export const updatePageWithNavLink = (access: string, slug: string, data: any) =
             dispatch(pageSettingsSlice.actions.updatePageSuccess(response.data))
             dispatch(loadPagesWithNavLinks())
         } catch (e) {
-            dispatch(pageSettingsSlice.actions.updatePageFail('Ошибка обновления страницы'))
+            dispatch(errorSlice.actions.updatingDataErrors('Ошибка обновления страницы'))
         }
     } else {
-        dispatch(pageSettingsSlice.actions.updatePageFail('Вы не авторизованы'))
+        dispatch(errorSlice.actions.updatingDataErrors('Вы не авторизованы'))
     }
 }
 
@@ -60,9 +64,9 @@ export const deletePageWithNavLink = (access: string, slug: string,) => async (d
             dispatch(pageSettingsSlice.actions.deletePageSuccess())
             dispatch(loadPagesWithNavLinks())
         } catch (e) {
-            dispatch(pageSettingsSlice.actions.deletePageFail('Ошибка удаления страницы'))
+            dispatch(errorSlice.actions.updatingDataErrors('Ошибка удаления страницы'))
         }
     } else {
-        dispatch(pageSettingsSlice.actions.deletePageFail('Вы не авторизованы'))
+        dispatch(errorSlice.actions.updatingDataErrors('Вы не авторизованы'))
     }
 }

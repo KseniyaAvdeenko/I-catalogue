@@ -4,7 +4,7 @@ import axios from "axios";
 import {IImage} from "../../interface/IProduct";
 import {apiUrl, clearFormData, createFormData, getAuthConfigMultipart, getRequestHeaders} from "./apiUrl";
 import {loadProductsRead} from "./productAction";
-
+import {errorSlice} from "../reducers/errorSlice";
 
 export const loadImages = () => async (dispatch: AppDispatch) => {
     try {
@@ -12,7 +12,8 @@ export const loadImages = () => async (dispatch: AppDispatch) => {
         const response = await axios.get<IImage[] | []>(apiUrl + `product/prod_images/`, getRequestHeaders())
         dispatch(prodImageSlice.actions.loadImagesSuccess(response.data))
     } catch (e) {
-        dispatch(prodImageSlice.actions.loadImagesFail('Ошибка загрузки картинок товаров'))
+        dispatch(errorSlice.actions.prodErrors('Ошибка загрузки картинок товаров'))
+        dispatch(prodImageSlice.actions.loadImagesFail())
     }
 }
 
@@ -25,26 +26,25 @@ export const createImage = (access: string, data: any) => async (dispatch: AppDi
             dispatch(loadProductsRead())
             clearFormData(data)
         } catch (e) {
-            dispatch(prodImageSlice.actions.createImageFail('Ошибка создания картинки товаров'))
+            dispatch(errorSlice.actions.prodErrors('Ошибка создания картинки товаров'))
         }
     } else {
-        dispatch(prodImageSlice.actions.createImageFail('Вы не авторизованы'))
+        dispatch(errorSlice.actions.prodErrors('Вы не авторизованы'))
     }
 }
 export const updateImage = (access: string, id: number, data: any) => async (dispatch: AppDispatch) => {
     if (access) {
         try {
             const response = await axios.patch<IImage>(apiUrl + `product/prod_images/${id}/`, createFormData(data), getAuthConfigMultipart(access))
-            console.log(response.data)
             dispatch(prodImageSlice.actions.updateImageSuccess(response.data))
             dispatch(loadImages());
             dispatch(loadProductsRead())
             clearFormData(data)
         } catch (e) {
-            dispatch(prodImageSlice.actions.updateImageFail('Ошибка обновления картинки товаров'))
+            dispatch(errorSlice.actions.prodErrors('Ошибка обновления картинки товаров'))
         }
     } else {
-        dispatch(prodImageSlice.actions.updateImageFail('Вы не авторизованы'))
+        dispatch(errorSlice.actions.prodErrors('Вы не авторизованы'))
     }
 }
 export const deleteImage = (access: string, id: number,) => async (dispatch: AppDispatch) => {
@@ -55,9 +55,9 @@ export const deleteImage = (access: string, id: number,) => async (dispatch: App
             dispatch(loadImages());
             dispatch(loadProductsRead())
         } catch (e) {
-            dispatch(prodImageSlice.actions.deleteImageFail('Ошибка удаления картинки товаров'))
+            dispatch(errorSlice.actions.prodErrors('Ошибка удаления картинки товаров'))
         }
     } else {
-        dispatch(prodImageSlice.actions.deleteImageFail('Вы не авторизованы'))
+        dispatch(errorSlice.actions.prodErrors('Вы не авторизованы'))
     }
 }

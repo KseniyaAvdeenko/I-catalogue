@@ -13,8 +13,8 @@ interface IAdminHeader {
 }
 
 const AdminHeader: React.FC<IAdminHeader> = ({children}) => {
-    const {isAuth, access, accessExpires, refreshExpires, refresh, error} = useAppSelector(state => state.authReducer)
-    const {currentUser, errorCurrentUser} = useAppSelector(state => state.userReducer)
+    const {isAuth, access, accessExpires, refreshExpires, refresh} = useAppSelector(state => state.authReducer)
+    const {currentUser} = useAppSelector(state => state.userReducer)
 
     const now = Date.now()
     const dispatch = useAppDispatch()

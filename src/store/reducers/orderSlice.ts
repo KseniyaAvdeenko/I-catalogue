@@ -6,11 +6,8 @@ import {encodeToken} from "../../hooks/encodeDecodeTokens";
 
 const initialState: IOrderInitial = {
     isLoading: false,
-    error: '',
     orders: null,
     newOrder: null,
-    newOrderError: '',
-    paymentError: '',
     paymentPaid: false,
     createdOrderSuccess: false,
     newOrderPaymentData: {
@@ -32,23 +29,18 @@ export const orderSlice = createSlice({
             state.isLoading = false;
             state.orders = action.payload
         },
-        loadOrdersFail(state, action: PayloadAction<string>) {
+        loadOrdersFail(state) {
             state.isLoading = false;
-            state.error = action.payload
         },
         createNewOrderSuccess(state, action: PayloadAction<INewOrder>) {
             state.newOrder = action.payload
             state.createdOrderSuccess = true
         },
-        createNewOrderFail(state, action: PayloadAction<string>) {
-            state.newOrderError = action.payload;
+        createNewOrderFail(state) {
             state.createdOrderSuccess = false;
         },
         updateNewOrderSuccess(state, action: PayloadAction<INewOrder>) {
             state.newOrder = action.payload
-        },
-        updateNewOrderFail(state, action: PayloadAction<string>) {
-            state.newOrderError = action.payload
         },
         newOrderPaymentSuccess(state, action: PayloadAction<IPaymentData>) {
             state.newOrderPaymentData = action.payload
@@ -56,14 +48,10 @@ export const orderSlice = createSlice({
             localStorage.setItem('youkassaPaymentId', encodeToken(action.payload.youkassaPaymentId ? action.payload.youkassaPaymentId : ''))
             localStorage.setItem('oderPaymentId', String(action.payload.orderPaymentId))
         },
-        newOrderPaymentFail(state, action: PayloadAction<string>) {
-            state.newOrderError = action.payload
-        },
+
         destroyNewOrderAfterSuccessfulPayment(state) {
             state.newOrder = null;
             state.createdOrderSuccess = false;
-            state.newOrderError = '';
-            state.paymentError = '';
             state.paymentPaid = false;
             localStorage.removeItem('orderId')
             localStorage.removeItem('youkassaPaymentId')

@@ -4,10 +4,8 @@ import {IPageSetting} from "../../interface/IPagesSettings";
 
 const initialState: IPageSettingsInitial = {
     isLoading: false,
-    error: '',
     pages: null,
     page: null,
-    pageError: ''
 }
 
 export const pageSettingsSlice = createSlice({
@@ -21,9 +19,8 @@ export const pageSettingsSlice = createSlice({
             state.isLoading = false
             state.pages = action.payload
         },
-        loadPagesFail(state, action: PayloadAction<string>) {
+        loadPagesFail(state) {
             state.isLoading = false
-            state.error = action.payload
         },
         pageFetching(state) {
             state.isLoading = true
@@ -32,28 +29,19 @@ export const pageSettingsSlice = createSlice({
             state.isLoading = false
             state.page = action.payload
         },
-        loadPageFail(state, action: PayloadAction<string>) {
+        loadPageFail(state) {
             state.isLoading = false
-            state.error = action.payload
         },
         createPageSuccess(state, action: PayloadAction<IPageSetting>) {
             state.page = action.payload
         },
-        createPageFail(state, action: PayloadAction<string>) {
-            state.pageError = action.payload
-        },
+
         updatePageSuccess(state, action: PayloadAction<IPageSetting>) {
             state.page = action.payload
-        },
-        updatePageFail(state, action: PayloadAction<string>) {
-            state.pageError = action.payload
         },
         deletePageSuccess(state) {
             state.page = null
         },
-        deletePageFail(state, action: PayloadAction<string>) {
-            state.pageError = action.payload
-        }
     }
 })
 

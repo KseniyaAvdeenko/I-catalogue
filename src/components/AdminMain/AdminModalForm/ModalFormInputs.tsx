@@ -9,7 +9,7 @@ import {IModalLabels} from "../../../interface/IModalForm";
 import Loader from "../../UI/Loader/Loader";
 
 const ModalFormInputs = () => {
-    const {modalForm, error, isLoading} = useAppSelector(state => state.modalFormReducer)
+    const {modalForm, isLoading} = useAppSelector(state => state.modalFormReducer)
     const dispatch = useAppDispatch()
     //--states
 

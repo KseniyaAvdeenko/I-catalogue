@@ -4,9 +4,7 @@ import {IModalForm} from "../../interface/IModalForm";
 
 const initialState: IModalFormInitial = {
     isLoading: false,
-    error: '',
     modalForm: null,
-    updatingError: ''
 }
 
 export const modalFormSlice = createSlice({
@@ -20,15 +18,11 @@ export const modalFormSlice = createSlice({
             state.isLoading = false;
             state.modalForm = action.payload
         },
-        loadModalFormFail(state, action: PayloadAction<string>){
+        loadModalFormFail(state){
             state.isLoading = false;
-            state.error = action.payload
         },
         updateModalFormSuccess(state, action: PayloadAction<IModalForm>){
             state.modalForm = action.payload
-        },
-        updateModalFormFail(state, action: PayloadAction<string>){
-            state.updatingError = action.payload
         },
     }
 })

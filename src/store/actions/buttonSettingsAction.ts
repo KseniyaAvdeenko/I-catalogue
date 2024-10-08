@@ -3,6 +3,7 @@ import axios from "axios";
 import {IButtonSettings} from "../../interface/ICommonSettings";
 import {apiUrl, getAuthConfigApplicationJson, getRequestHeaders} from "./apiUrl";
 import {buttonSettingsSlice} from "../reducers/buttonSettingsSlice";
+import {errorSlice} from "../reducers/errorSlice";
 
 export const loadButtonSettings = () => async (dispatch: AppDispatch) => {
     try {
@@ -10,7 +11,7 @@ export const loadButtonSettings = () => async (dispatch: AppDispatch) => {
         const response = await axios.get<IButtonSettings>(apiUrl + 'common_page_settings/button_settings/get_button/', getRequestHeaders())
         dispatch(buttonSettingsSlice.actions.loadButtonSettingsSuccess(response.data))
     } catch (e) {
-        dispatch(buttonSettingsSlice.actions.loadButtonSettingsFail('Ошибка настроек кнопки'))
+        dispatch(errorSlice.actions.loadingDataErrors('Ошибка настроек кнопки'))
     }
 }
 
@@ -21,10 +22,10 @@ export const updateButtonSettings = (access: string, id: number, data: any) => a
             const response = await axios.patch<IButtonSettings>(apiUrl + `common_page_settings/button_settings/${id}/`, body, getAuthConfigApplicationJson(access))
             dispatch(buttonSettingsSlice.actions.updateButtonSettingsSuccess(response.data))
         } catch (e) {
-            dispatch(buttonSettingsSlice.actions.updateButtonSettingsFail('Ошибка обновления настроек кнопки'))
+            dispatch(errorSlice.actions.updatingDataErrors('Ошибка обновления настроек кнопки'))
         }
     } else {
-        dispatch(buttonSettingsSlice.actions.updateButtonSettingsFail('Вы не авторизованы'))
+        dispatch(errorSlice.actions.updatingDataErrors('Вы не авторизованы'))
     }
 }
 
@@ -35,8 +36,9 @@ export const restoreButtonSettings = (access: string, id: number) => async (disp
             dispatch(buttonSettingsSlice.actions.restoreButtonSettingsSuccess(response.data))
         } catch (e) {
             dispatch(buttonSettingsSlice.actions.restoreButtonSettingsFail(false))
+            dispatch(errorSlice.actions.updatingDataErrors('Восстановление прошло неудачно'))
         }
     } else {
-        dispatch(buttonSettingsSlice.actions.updateButtonSettingsFail('Вы не авторизованы'))
+        dispatch(errorSlice.actions.updatingDataErrors('Вы не авторизованы'))
     }
 }

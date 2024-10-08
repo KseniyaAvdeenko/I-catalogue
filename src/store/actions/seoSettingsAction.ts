@@ -3,6 +3,8 @@ import {AppDispatch} from "../store";
 import axios from "axios";
 import {ISeoSettings} from "../../interface/ISeoSettings";
 import {apiUrl, getAuthConfigApplicationJson, getRequestHeaders} from "./apiUrl";
+import {errorSlice} from "../reducers/errorSlice";
+
 
 export const loadSeoTags = () => async (dispatch: AppDispatch) => {
     try {
@@ -10,7 +12,8 @@ export const loadSeoTags = () => async (dispatch: AppDispatch) => {
         const response = await axios.get<ISeoSettings[]>(apiUrl + `common_page_settings/seo_settings/`, getRequestHeaders())
         dispatch(seoSettingsSlice.actions.loadSeoTagsSuccess(response.data))
     } catch (e) {
-        dispatch(seoSettingsSlice.actions.loadSeoTagsFail('Ошибка загрузки SEO тегов'))
+        dispatch(errorSlice.actions.loadingDataErrors('Ошибка загрузки SEO тегов'))
+        dispatch(seoSettingsSlice.actions.loadSeoTagsFail())
     }
 }
 
@@ -21,10 +24,10 @@ export const createSeoTag = (access: string, data: any) => async (dispatch: AppD
             dispatch(seoSettingsSlice.actions.createSeoTagSuccess(response.data))
             dispatch(loadSeoTags())
         } catch (e) {
-            dispatch(seoSettingsSlice.actions.createSeoTagFail('Ошибка создания тега'))
+            dispatch(errorSlice.actions.updatingDataErrors('Ошибка создания тега'))
         }
     } else {
-        dispatch(seoSettingsSlice.actions.createSeoTagFail('Вы не авторизованы'))
+        dispatch(errorSlice.actions.updatingDataErrors('Вы не авторизованы'))
     }
 }
 
@@ -35,10 +38,10 @@ export const updateSeoTag = (id: number, access: string, data: any) => async (di
             dispatch(seoSettingsSlice.actions.updateSeoTagSuccess(response.data))
             dispatch(loadSeoTags())
         } catch (e) {
-            dispatch(seoSettingsSlice.actions.updateSeoTagFail('Ошибка обновления тега'))
+            dispatch(errorSlice.actions.updatingDataErrors('Ошибка обновления тега'))
         }
     } else {
-        dispatch(seoSettingsSlice.actions.updateSeoTagFail('Вы не авторизованы'))
+        dispatch(errorSlice.actions.updatingDataErrors('Вы не авторизованы'))
     }
 }
 
@@ -49,9 +52,9 @@ export const deleteSeoTag = (id: number, access: string) => async (dispatch: App
             dispatch(seoSettingsSlice.actions.deleteSeoTagSuccess())
             dispatch(loadSeoTags())
         } catch (e) {
-            dispatch(seoSettingsSlice.actions.deleteSeoTagFail('Ошибка удаления тега'))
+            dispatch(errorSlice.actions.updatingDataErrors('Ошибка удаления тега'))
         }
     } else {
-        dispatch(seoSettingsSlice.actions.deleteSeoTagFail('Вы не авторизованы'))
+        dispatch(errorSlice.actions.updatingDataErrors('Вы не авторизованы'))
     }
 }

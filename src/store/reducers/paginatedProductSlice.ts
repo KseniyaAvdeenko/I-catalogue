@@ -11,7 +11,6 @@ const initialState: IPaginatedProdsInitial = {
     totalPages: 0,
     pages: [],
     isLoading: false,
-    error: '',
     currentPage: 1
 }
 
@@ -29,8 +28,7 @@ export const paginatedProductSlice = createSlice({
             state.totalPages = getPageCount(state.count, state.pageSize)
             state.pages = getPages(state.totalPages)
         },
-        loadProdsPaginatedFail(state, action: PayloadAction<string>) {
-            state.error = action.payload;
+        loadProdsPaginatedFail(state) {
             state.isLoading = false;
         },
         changePageSizeSuccess(state, action: PayloadAction<number>){

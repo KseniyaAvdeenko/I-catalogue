@@ -3,7 +3,7 @@ import axios from "axios";
 import {IHeaderSettings} from "../../interface/ICommonSettings";
 import {apiUrl, getAuthConfigApplicationJson, getRequestHeaders} from "./apiUrl";
 import {headerSettingsSlice} from "../reducers/headerSettingsSlice";
-
+import {errorSlice} from "../reducers/errorSlice";
 
 export const loadHeaderSettings = () => async (dispatch: AppDispatch) => {
 
@@ -12,7 +12,8 @@ export const loadHeaderSettings = () => async (dispatch: AppDispatch) => {
         const response = await axios.get<IHeaderSettings>(apiUrl + 'common_page_settings/header_settings/get_header/', getRequestHeaders())
         dispatch(headerSettingsSlice.actions.loadHeaderSettingsSuccess(response.data))
     } catch (e) {
-        dispatch(headerSettingsSlice.actions.loadHeaderSettingsFail('Ошибка загрузки настроек "шапки" сайта'))
+        dispatch(headerSettingsSlice.actions.loadHeaderSettingsFail())
+        dispatch(errorSlice.actions.loadingDataErrors('Ошибка загрузки настроек "шапки" сайта'))
     }
 }
 
@@ -24,10 +25,10 @@ export const updateHeaderSettings = (access: string, id: number, data: any) => a
             dispatch(headerSettingsSlice.actions.updateHeaderSettingsSuccess(response.data))
 
         } catch (e) {
-            dispatch(headerSettingsSlice.actions.updateHeaderSettingsFail('Ошибка обновления настроек "шапки" сайта'))
+            dispatch(errorSlice.actions.updatingDataErrors('Ошибка обновления настроек "шапки" сайта'))
         }
     } else {
-        dispatch(headerSettingsSlice.actions.updateHeaderSettingsFail('Вы не авторизованы'))
+        dispatch(errorSlice.actions.updatingDataErrors('Вы не авторизованы'))
     }
 }
 
@@ -39,9 +40,10 @@ export const restoreHeaderSettings = (access: string, id: number, isAdmin: boole
             dispatch(headerSettingsSlice.actions.restoreHeaderSettingsSuccess(response.data))
         } catch (e) {
             dispatch(headerSettingsSlice.actions.restoreHeaderSettingsFail(false))
+            dispatch(errorSlice.actions.updatingDataErrors('Восстановление прошло неудачно'))
         }
     } else {
-        dispatch(headerSettingsSlice.actions.updateHeaderSettingsFail('Вы не авторизованы'))
+        dispatch(errorSlice.actions.updatingDataErrors('Вы не авторизованы'))
     }
 
 }

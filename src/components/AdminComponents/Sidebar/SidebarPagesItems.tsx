@@ -10,7 +10,7 @@ interface ISidebarPagesItemsProps {
 }
 
 const SidebarPagesItems: React.FC<ISidebarPagesItemsProps> = ({getItemsVisibility}) => {
-    const {isLoading, error, pages} = useAppSelector(state => state.pageSettingsReducer)
+    const {isLoading, pages} = useAppSelector(state => state.pageSettingsReducer)
 
     return (
         <div className={styles.Sidebar__items}>
