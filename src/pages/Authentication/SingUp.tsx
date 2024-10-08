@@ -46,9 +46,10 @@ const SignUp = () => {
     }
     const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
         setNewUser({...newUser, [e.target.name]: e.target.value})
-        e.currentTarget.name === 're_password' && e.currentTarget.value === newUser.password
-            ?isPasswordsMatching(e, true)
-            :isPasswordsMatching(e, false)
+        if (e.currentTarget.id === 're_password')
+            e.currentTarget.value === newUser.password
+                ? isPasswordsMatching(e, true)
+                : isPasswordsMatching(e, false)
     }
 
     if (auth.isSignedUp) redirect('/sign_in/')
