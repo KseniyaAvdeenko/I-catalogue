@@ -4,7 +4,7 @@ import styles from "./AdminMain.module.sass";
 import {headingTypes} from "./Options";
 
 interface IMainPageHeadingTypeProps extends IAdminComponentsProps {
-    blockHeadingType: string | undefined;
+    blockHeadingType: string;
     headingTypeOptionsVisibility: IOptions;
     changeHeadingTypeOptionsContainerVisibility: React.MouseEventHandler<HTMLDivElement>
 }
@@ -13,7 +13,6 @@ const HeadingType: React.FC<IMainPageHeadingTypeProps> = ({
                                                               headingTypeOptionsVisibility,
                                                               blockHeadingType,
                                                               onChangeHandler,
-                                                              isLoading,
                                                               changeHeadingTypeOptionsContainerVisibility
                                                           }) => {
 
@@ -21,8 +20,7 @@ const HeadingType: React.FC<IMainPageHeadingTypeProps> = ({
         <div className={styles.form__inputContainer_select}>
             <div className={styles.form__inputContainer_label}>Тип заголовка</div>
             <div className={styles.form__selectContainer}
-                 onClick={changeHeadingTypeOptionsContainerVisibility}>
-                {isLoading && 'Loading...'} Заголовок {blockHeadingType}</div>
+                 onClick={changeHeadingTypeOptionsContainerVisibility}>Заголовок {blockHeadingType}</div>
             <div className={styles.form__optionsContainer}
                  style={{display: headingTypeOptionsVisibility.display, bottom: headingTypeOptionsVisibility.bottom}}>
                 {headingTypes.map(type => (

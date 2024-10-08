@@ -3,7 +3,7 @@ import axios from "axios";
 import {apiUrl, getAuthConfigApplicationJson, getRequestHeaders} from "./apiUrl";
 import {mainPageSettingsSlice} from "../reducers/mainPageSettingsSlice";
 import {IMainPageSetting} from "../../interface/IPagesSettings";
-import {userSlice} from "../reducers/userSlice";
+import {errorSlice} from "../reducers/errorSlice";
 
 export const loadMainPageSettings = () => async (dispatch: AppDispatch) => {
     try {
@@ -11,7 +11,8 @@ export const loadMainPageSettings = () => async (dispatch: AppDispatch) => {
         const response = await axios.get<IMainPageSetting>(apiUrl + `page_settings/main_page_settings/get_main_page/`, getRequestHeaders())
         dispatch(mainPageSettingsSlice.actions.loadMainPageSuccess(response.data))
     } catch (e) {
-        dispatch(mainPageSettingsSlice.actions.loadMainPageFail('Ошибка'))
+        dispatch(errorSlice.actions.loadingDataErrors('Ошибка загрузки настроек главной страницы'))
+        dispatch(mainPageSettingsSlice.actions.loadMainPageFail())
     }
 }
 
@@ -25,9 +26,9 @@ export const updateMainPageSettings = (access: string, id: number, data: any) =>
             dispatch(mainPageSettingsSlice.actions.updateMainPageSuccess(response.data))
             dispatch(loadMainPageSettings())
         } catch (e) {
-            dispatch(mainPageSettingsSlice.actions.updateMainPageFail('Ошибка'))
+            dispatch(errorSlice.actions.updatingDataErrors('Ошибка обновления настроек главной страницы'))
         }
     } else {
-        dispatch(userSlice.actions.loadingCurrentUserFail('Вы не авторизованы'))
+        dispatch(errorSlice.actions.updatingDataErrors('Вы не авторизованы'))
     }
 }

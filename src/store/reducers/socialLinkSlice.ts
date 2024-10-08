@@ -4,7 +4,6 @@ import {ISocialLink} from "../../interface/INavbar";
 
 const initialState: ISocialLinksInitial ={
     isLoading: false,
-    error: '',
     socialLinks: null,
     socialLink: null,
 }
@@ -20,27 +19,17 @@ export const socialLinkSlice = createSlice({
             state.isLoading = false;
             state.socialLinks= action.payload
         },
-        loadSocialLinksFail(state, action:PayloadAction<string>){
+        loadSocialLinksFail(state){
             state.isLoading = false;
-            state.error = action.payload
         },
         createSocialLinkSuccess(state, action:PayloadAction<ISocialLink>){
             state.socialLink = action.payload
         },
-        createSocialLinkFail(state, action:PayloadAction<string>){
-            state.error = action.payload
-        },
         updateSocialLinkSuccess(state, action:PayloadAction<ISocialLink>){
             state.socialLink = action.payload
         },
-        updateSocialLinkFail(state, action:PayloadAction<string>){
-            state.error = action.payload
-        },
         deleteSocialLinkSuccess(state){
             state.socialLink = null
-        },
-        deleteSocialLinkFail(state, action:PayloadAction<string>){
-            state.error = action.payload
         },
     }
 })

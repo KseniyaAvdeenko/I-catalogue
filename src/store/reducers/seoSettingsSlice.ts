@@ -4,9 +4,8 @@ import {ISeoSettings} from "../../interface/ISeoSettings";
 
 const initialState:ISeoSettingsInitial = {
     isLoading: false,
-    error: '',
     seoTags: null,
-    seoTag: null
+    seoTag: null,
 }
 
 export const seoSettingsSlice = createSlice({
@@ -20,27 +19,17 @@ export const seoSettingsSlice = createSlice({
             state.isLoading = false;
             state.seoTags = action.payload
         },
-        loadSeoTagsFail(state, action:PayloadAction<string>){
+        loadSeoTagsFail(state){
             state.isLoading = false;
-            state.error = action.payload
         },
         createSeoTagSuccess(state, action:PayloadAction<ISeoSettings>){
             state.seoTag = action.payload
         },
-        createSeoTagFail(state, action:PayloadAction<string>){
-            state.error = action.payload
-        },
         updateSeoTagSuccess(state, action:PayloadAction<ISeoSettings>){
             state.seoTag = action.payload
         },
-        updateSeoTagFail(state, action:PayloadAction<string>){
-            state.error = action.payload
-        },
         deleteSeoTagSuccess(state){
             state.seoTag = null
-        },
-        deleteSeoTagFail(state, action:PayloadAction<string>){
-            state.error = action.payload
         },
     }
 })

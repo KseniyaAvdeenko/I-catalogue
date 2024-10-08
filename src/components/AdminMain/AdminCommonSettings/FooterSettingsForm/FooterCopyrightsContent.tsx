@@ -7,7 +7,6 @@ interface ICopyrightsContentProps extends IAdminComponentsProps {
 }
 
 const FooterCopyrightsContent: React.FC<ICopyrightsContentProps> = ({
-                                                                        isLoading,
                                                                         copyrightsContent,
                                                                         onChangeHandler
                                                                     }) => {

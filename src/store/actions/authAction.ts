@@ -4,7 +4,7 @@ import {apiUrl, getAuthConfigApplicationJson, getRequestHeaders} from "./apiUrl"
 import {authSlice} from "../reducers/authSlice";
 import {IAuth, INewUser, INewUserResponse, IUserBase} from "../../interface/IUser";
 import {loadCurrentUser} from "./userAction";
-import {userSlice} from "../reducers/userSlice";
+import {errorSlice} from "../reducers/errorSlice";
 
 
 export const loginUser = (user: IUserBase) => async (dispatch: AppDispatch) => {
@@ -13,7 +13,8 @@ export const loginUser = (user: IUserBase) => async (dispatch: AppDispatch) => {
         dispatch(authSlice.actions.loginSuccess(response.data))
         dispatch(loadCurrentUser(response.data.access))
     } catch (error) {
-        dispatch(authSlice.actions.loginFail('Неправильный логин или пароль'))
+        dispatch(errorSlice.actions.authErrors('Неправильный логин или пароль'))
+        dispatch(authSlice.actions.loginFail())
     }
 }
 
@@ -21,15 +22,13 @@ export const logout = (access: string, refreshToken: string) => async (dispatch:
     if (refreshToken && access) {
         try {
             const response = await axios.post<{ refresh: string }>(apiUrl + 'auth/logout/', JSON.stringify({refresh: refreshToken}), getAuthConfigApplicationJson(access))
-            console.log(response.data)
             dispatch(authSlice.actions.logoutSuccess())
-            dispatch(userSlice.actions.loadingCurrentUserFail('Вы не авторизованы'))
+            dispatch(errorSlice.actions.usersErrors('Вы не авторизованы'))
         } catch (error) {
-            console.log(error)
-            dispatch(authSlice.actions.logoutFail('Вы не вышли из системы'))
+            dispatch(errorSlice.actions.authErrors('Вы не вышли из системы'))
         }
     } else {
-        dispatch(userSlice.actions.loadingCurrentUserFail('Вы не авторизованы'))
+        dispatch(errorSlice.actions.usersErrors('Вы не авторизованы'))
     }
 }
 
@@ -38,7 +37,7 @@ export const registerUser = (user: INewUser) => async (dispatch: AppDispatch) =>
         await axios.post<INewUserResponse>(apiUrl + 'auth/users/', user)
         dispatch(authSlice.actions.registerSuccess(true))
     } catch (error) {
-        dispatch(authSlice.actions.registerFail('Ошибка'))
+        dispatch(errorSlice.actions.authErrors('Ошибка регистрации нового пользователя'))
     }
 }
 
@@ -63,14 +62,14 @@ export const verifyToken = (token: string, access: boolean, refresh: boolean) =>
         if (response.data.code !== 'token_not_valid') {
             access
                 ? dispatch(authSlice.actions.verifyAccessTokenSuccess())
-                : dispatch(authSlice.actions.verifyAccessTokenFail('token is not valid'))
+                : dispatch(errorSlice.actions.authErrors('token is not valid'))
             refresh
                 ?dispatch(authSlice.actions.verifyRefreshTokenSuccess())
-                :dispatch(authSlice.actions.verifyRefreshTokenFail('token is not valid'))
+                :dispatch(errorSlice.actions.authErrors('token is not valid'))
         }
     } catch (e) {
-        if (access) dispatch(authSlice.actions.verifyAccessTokenFail('token is not valid'))
-        if (refresh) dispatch(authSlice.actions.verifyRefreshTokenFail('token is not valid'))
+        if (access) dispatch(errorSlice.actions.authErrors('token is not valid'))
+        if (refresh) dispatch(errorSlice.actions.authErrors('token is not valid'))
     }
 }
 

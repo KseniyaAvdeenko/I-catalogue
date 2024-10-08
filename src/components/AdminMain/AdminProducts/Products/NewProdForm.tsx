@@ -50,14 +50,14 @@ const NewProdForm: React.FC<INewProdFormProps> = ({
                     inputClassname={''} label={'Название товара/услуги'}
                     inputContainerClassname={[styles.form__items, styles.form__items_margin].join(' ')}
                     labelClassName={styles.form__items_labelMargin}
-                    isLoading={false} onChangeHandler={onChangeHandler}/>
+                    onChangeHandler={onChangeHandler}/>
                 <AdminInputContainer
                     type={'number'} name={'price'} inputId={'price'}
                     value={newProd.price} checked={false} required={true} readonly={false}
                     inputClassname={''} label={'Цена'} min={0}
                     inputContainerClassname={styles.form__inputContainer}
                     labelClassName={''}
-                    isLoading={false} onChangeHandler={onChangeHandler}/>
+                    onChangeHandler={onChangeHandler}/>
                 <ProdCurrency
                     prodCurrency={newProd.currency}
                     onChangeHandler={onChangeHandler}
@@ -70,7 +70,7 @@ const NewProdForm: React.FC<INewProdFormProps> = ({
                     inputClassname={''} label={'Примечание к цене'}
                     inputContainerClassname={[styles.form__items, styles.form__items_margin].join(' ')}
                     labelClassName={styles.form__items_labelMargin}
-                    isLoading={false} onChangeHandler={onChangeHandler}/>
+                    onChangeHandler={onChangeHandler}/>
 
                 {prodAttrs && prodAttrs.map(attr => (
                     <AdminInputContainer key={attr.id}
@@ -80,7 +80,7 @@ const NewProdForm: React.FC<INewProdFormProps> = ({
                                          inputClassname={''} label={attr.attribute}
                                          inputContainerClassname={[styles.form__items, styles.form__items_margin].join(' ')}
                                          labelClassName={styles.form__items_labelMargin}
-                                         isLoading={false} onChangeHandler={onChangeProdAttrsHandler}/>
+                                         onChangeHandler={onChangeProdAttrsHandler}/>
                 ))}
                 <button disabled={!newProd.name && !newProd.price} className={styles.AdminMain__button}
                         onClick={saveNewProd}>Создать товар

@@ -1,10 +1,10 @@
 import {AppDispatch} from "../store";
 import {orderSlice} from "../reducers/orderSlice";
 import axios from "axios";
-import {INewOrder, INewOrderBase, IOrder, IPayment, IPaymentBase} from "../../interface/IOrder";
+import {INewOrder, INewOrderBase, IOrder, IPayment} from "../../interface/IOrder";
 import {apiUrl, getRequestHeaders} from "./apiUrl";
-import {encodeToken} from "../../hooks/encodeDecodeTokens";
 import {IPaymentData} from "../../interface/IInitialStates";
+import {errorSlice} from "../reducers/errorSlice";
 
 export const loadOrders = () => async (dispatch: AppDispatch) => {
     try {
@@ -12,10 +12,10 @@ export const loadOrders = () => async (dispatch: AppDispatch) => {
         const response = await axios.get<IOrder[]>(apiUrl + 'order/order/', getRequestHeaders());
         dispatch(orderSlice.actions.loadOrdersSuccess(response.data))
     } catch (e) {
-        dispatch(orderSlice.actions.loadOrdersFail('Error'))
+        dispatch(errorSlice.actions.oderLoadingError('Ошибка загрузки заказов'))
+        dispatch(orderSlice.actions.loadOrdersFail())
     }
 }
-
 
 export const createOrder = (data: INewOrderBase) => async (dispatch: AppDispatch) => {
     try {
@@ -24,18 +24,18 @@ export const createOrder = (data: INewOrderBase) => async (dispatch: AppDispatch
         dispatch(orderSlice.actions.createNewOrderSuccess(response.data))
         dispatch(startPayment(response.data.total_price, response.data.id, response.data.currency))
     } catch (e) {
-        console.log(e)
-        dispatch(orderSlice.actions.createNewOrderFail('create new order error'))
+        dispatch(errorSlice.actions.orderErrors('Ошибка создания нового заказа'))
+        dispatch(orderSlice.actions.createNewOrderFail())
     }
 }
+
 export const updateOrder = (id: number, data: any) => async (dispatch: AppDispatch) => {
     try {
         const response = await axios.patch<INewOrder>(apiUrl + `order/new_order/${id}/`, JSON.stringify(data), getRequestHeaders());
         dispatch(loadOrders())
         dispatch(orderSlice.actions.updateNewOrderSuccess(response.data))
     } catch (e) {
-        console.log(e)
-        dispatch(orderSlice.actions.updateNewOrderFail('update order error'))
+        dispatch(errorSlice.actions.orderErrors('Ошибка обновления заказа'))
     }
 }
 export const startPayment = (totalSum: number, orderId: number, currency: string) => async (dispatch: AppDispatch) => {
@@ -46,8 +46,7 @@ export const startPayment = (totalSum: number, orderId: number, currency: string
         dispatch(orderSlice.actions.newOrderPaymentSuccess(response.data))
         window.location.replace(response.data.confirmation_url)
     } catch (e) {
-        console.log(e)
-        dispatch(orderSlice.actions.newOrderPaymentFail('payment error'))
+        dispatch(errorSlice.actions.orderErrors('Ошибка оплаты заказа'))
     }
 }
 export const editPayment = (id: number, data: any) => async (dispatch: AppDispatch) => {
@@ -56,7 +55,7 @@ export const editPayment = (id: number, data: any) => async (dispatch: AppDispat
             apiUrl + `order/payment/${id}/`, JSON.stringify(data), getRequestHeaders());
         dispatch(loadOrders())
     } catch (e) {
-        dispatch(orderSlice.actions.newOrderPaymentFail('update payment error'))
+        dispatch(errorSlice.actions.orderErrors('Ошибка обновления оплаты заказа'))
     }
 }
 export const checkPayment = (youkassaId: string, orderId: number, paymentId: number ) => async (dispatch: AppDispatch) => {
@@ -65,11 +64,11 @@ export const checkPayment = (youkassaId: string, orderId: number, paymentId: num
         if (response.data.status === 'succeeded') {
             dispatch(editPayment(paymentId, {status: 'succeeded'}))
             dispatch(updateOrder(orderId, {paid: true}))
+            dispatch(orderSlice.actions.paymentPaidSuccess())
             dispatch(orderSlice.actions.destroyNewOrderAfterSuccessfulPayment())
         }
         if (response.data.status === 'canceled') dispatch(editPayment(paymentId, {status: 'canceled'}))
     }catch (e) {
-        console.log(e)
-        dispatch(orderSlice.actions.newOrderPaymentFail('payment checking error'))
+        dispatch(errorSlice.actions.orderErrors('Ошибка проверки оплаты заказа'))
     }
 }

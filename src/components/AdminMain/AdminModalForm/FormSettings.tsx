@@ -4,12 +4,12 @@ import AdminInputContainer from "../../UI/InputContainers/AdminInputContainer";
 import HeadingType from "../HeadingType";
 import {useAppDispatch, useAppSelector} from "../../../hooks/redux";
 import {IOptions} from "../../../interface/IAdminPageComponets";
-import modalFormSettings from "./ModalFormSettings";
 import {updateModalFormSettings} from "../../../store/actions/modalFormAction";
 import {decodeToken} from "../../../hooks/encodeDecodeTokens";
+import Loader from "../../UI/Loader/Loader";
 
 const FormSettings = () => {
-    const {modalForm, error, isLoading} = useAppSelector(state => state.modalFormReducer)
+    const {modalForm, isLoading} = useAppSelector(state => state.modalFormReducer)
     const dispatch = useAppDispatch()
     //--states
     const [headingTypeOptionsVisibility, setHeadingTypeOptionsVisibility] = useState<IOptions>({
@@ -80,7 +80,7 @@ const FormSettings = () => {
                             readonly={false} inputClassname={''}
                             inputContainerClassname={styles.form__inputContainer}
                             labelClassName={''} label={'Фон модального окна'}
-                            isLoading={isLoading} onChangeHandler={onChangeHandler}/>
+                            onChangeHandler={onChangeHandler}/>
                     </div>
                     <div className={styles.form__items}>
                         <AdminInputContainer
@@ -89,10 +89,10 @@ const FormSettings = () => {
                             required={false} readonly={false} inputClassname={''}
                             inputContainerClassname={[styles.form__items, styles.form__items_margin].join(' ')}
                             labelClassName={styles.form__inputContainer_label} label={'Заголовок модального окна'}
-                            isLoading={isLoading} onChangeHandler={onChangeHeadingHandler}/>
+                             onChangeHandler={onChangeHeadingHandler}/>
                         <HeadingType blockHeadingType={modalForm.headingSettings.blockHeadingType}
                                      headingTypeOptionsVisibility={headingTypeOptionsVisibility}
-                                     isLoading={isLoading} onChangeHandler={onChangeHeadingHandler}
+                                     onChangeHandler={onChangeHeadingHandler}
                                      changeHeadingTypeOptionsContainerVisibility={changeHeadingTypeOptionsContainerVisibility}
                         />
                     </div>
@@ -103,24 +103,24 @@ const FormSettings = () => {
                             checked={false} required={false} readonly={false} inputClassname={''}
                             inputContainerClassname={styles.form__inputContainer}
                             labelClassName={''} label={'Цвет заголовка'}
-                            isLoading={isLoading} onChangeHandler={onChangeHeadingHandler}/>
+                            onChangeHandler={onChangeHeadingHandler}/>
                         <AdminInputContainer
                             type={'number'} name={'headingFontSize'} inputId={'headingFontSize'}
                             value={modalForm.headingSettings.headingFontSize} checked={false}
                             required={false} readonly={false} inputClassname={''}
                             inputContainerClassname={styles.form__inputContainer}
                             labelClassName={''} label={'Размер шрифта заголовка'}
-                            isLoading={isLoading} onChangeHandler={onChangeHeadingHandler}/>
+                            onChangeHandler={onChangeHeadingHandler}/>
                         <AdminInputContainer
                             type={'number'} name={'headingFontWeight'} inputId={'headingFontWeight'}
                             value={modalForm.headingSettings.headingFontWeight} checked={false}
                             required={false} readonly={false} inputClassname={''} max={900}
                             inputContainerClassname={styles.form__inputContainer} min={400}
                             labelClassName={''} label={'Жирность текста заголовка'} step={100}
-                            isLoading={isLoading} onChangeHandler={onChangeHeadingHandler}/>
+                            onChangeHandler={onChangeHeadingHandler}/>
                     </div>
                 </div>
-                : <div className={styles.AdminMain__formContainer}></div>
+                : <div className={styles.AdminMain__formContainerUnLoaded}>{isLoading && (<Loader/>)}</div>
             }
         </section>
     );

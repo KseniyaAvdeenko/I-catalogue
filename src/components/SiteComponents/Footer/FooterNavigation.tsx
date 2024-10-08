@@ -17,7 +17,7 @@ const FooterNavigation: React.FC<IFooterNavProps> = ({linkClassName, navClassNam
     return (
         <nav className={navClassName}>
             {pages && pages.map(page => (
-                <Link to={`page/` + page.slug} key={page.id}
+                <Link to={`/page/` + page.slug} key={page.id}
                       onMouseEnter={e=>onHoverIn(e)}
                       onMouseLeave={e=>onHoverOut(e)}
                       className={linkClassName}

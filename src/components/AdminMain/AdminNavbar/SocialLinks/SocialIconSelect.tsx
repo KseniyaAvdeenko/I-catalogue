@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from "../../AdminMain.module.sass";
 import {socialIcons} from "../../Options";
-import {IAdminComponentsProps, IOptions} from "../../../../interface/IAdminPageComponets";
+import {IAdminComponentsProps} from "../../../../interface/IAdminPageComponets";
 
 interface ISocialIconSelectProps extends IAdminComponentsProps {
     linkIcon: string;
@@ -15,7 +15,6 @@ const SocialIconSelect: React.FC<ISocialIconSelectProps> = ({
                                                                 changeIconsOptionsContainerVisibility,
                                                                 linkIcon,
                                                                 onChangeHandler,
-                                                                isLoading,
                                                                 id,
                                                                 name
                                                             }) => {
@@ -29,7 +28,6 @@ const SocialIconSelect: React.FC<ISocialIconSelectProps> = ({
         <div className={styles.form__inputContainer_select} style={{flexBasis:'25%'}}>
             <div className={styles.form__inputContainer_label}>Иконка на ссылку</div>
             <div className={styles.form__selectContainer} onClick={e=>changeIconsOptionsContainerVisibility(e)}>
-                {isLoading && 'Loading...'}
                 {getLinkIcon(linkIcon)}
                 {linkIcon}
             </div>

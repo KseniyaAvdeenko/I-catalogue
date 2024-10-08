@@ -8,6 +8,7 @@ import ProductList from "../../components/SiteComponents/ProductList/ProductList
 import {IProdReadOnly} from "../../interface/IProduct";
 import PageContent from "../../components/SiteComponents/PageContent/PageContent";
 import ModalPopUp from "../../components/SiteComponents/ModalPopup/ModalPopUp";
+import Loader from "../../components/UI/Loader/Loader";
 
 const Page = () => {
     const {pageSlug} = useParams();
@@ -20,7 +21,7 @@ const Page = () => {
     useEffect(() => {
         if (pageSlug) dispatch(loadPageWithNavLink(pageSlug))
         if (page) document.title = page.navLink
-    }, [])
+    }, [pageSlug])
 
     function payClickHandle(prod: IProdReadOnly) {
         setModalVisibility(true)
@@ -29,7 +30,6 @@ const Page = () => {
 
     return page ? (
             <main className={styles.page__container} style={{background: page.background}}>
-                {isLoading && 'Loading ...'}
                 <Heading pageHeading={page.headingSettings} headingContent={page.headingSettings.headingContent}/>
                 {page.isBlockWithProds
                     ? <>
@@ -41,7 +41,7 @@ const Page = () => {
                     : <PageContent pageContent={page.content} containerClassName={styles.page__content}/>
                 }
             </main>)
-        : (<main className={styles.page__container}></main>);
+        : (<main className={styles.page__container} style={{alignItems: 'center', justifyContent: 'center'}}>{isLoading && (<Loader/>)}</main>);
 };
 
 export default Page;

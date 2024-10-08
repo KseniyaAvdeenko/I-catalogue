@@ -16,7 +16,6 @@ const SocialIconTypeSelect: React.FC<ISocialIconTypeSelectProps> = ({
                                                                 changeIconsOptionsContainerVisibility,
                                                                 linkIconType,
                                                                 onChangeHandler,
-                                                                isLoading,
                                                                 id,
                                                                 name
                                                             }) => {
@@ -30,7 +29,6 @@ const SocialIconTypeSelect: React.FC<ISocialIconTypeSelectProps> = ({
         <div className={styles.form__inputContainer_select}>
             <div className={styles.form__inputContainer_label}>Вид иконки на ссылку</div>
             <div className={styles.form__selectContainer} onClick={e=>changeIconsOptionsContainerVisibility(e)}>
-                {isLoading && 'Loading...'}
                 {getLinkIconType(linkIconType)}
             </div>
             <div className={styles.form__optionsContainer}

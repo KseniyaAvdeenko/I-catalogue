@@ -4,7 +4,6 @@ import {IMainPageSettingsInitial} from "../../interface/IInitialStates";
 
 const initialState: IMainPageSettingsInitial = {
     isLoading: false,
-    error: '',
     mainPageSettings: null,
 }
 
@@ -19,15 +18,11 @@ export const mainPageSettingsSlice = createSlice({
             state.isLoading = false;
             state.mainPageSettings = action.payload;
         },
-        loadMainPageFail(state, action: PayloadAction<string>) {
-            state.error = action.payload;
+        loadMainPageFail(state) {
             state.mainPageSettings = null;
         },
         updateMainPageSuccess(state, action: PayloadAction<IMainPageSetting>) {
             state.mainPageSettings = action.payload;
-        },
-        updateMainPageFail(state, action: PayloadAction<string>) {
-            state.error = action.payload;
         },
     }
 })

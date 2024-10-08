@@ -21,7 +21,6 @@ interface IAdminInputContainerProps extends IAdminComponentsProps {
 }
 
 const AdminInputContainer: React.FC<IAdminInputContainerProps> = ({
-                                                                      isLoading,
                                                                       onChangeHandler,
                                                                       type,
                                                                       inputClassname,
@@ -42,7 +41,6 @@ const AdminInputContainer: React.FC<IAdminInputContainerProps> = ({
     return (
         <div className={inputContainerClassname}>
             <label className={labelClassName} htmlFor={inputId}>{label} {required ?(<sup style={{color: 'red'}}>*</sup>):''}</label>
-            {isLoading && 'Loading...'}
             <AdminInput
                 type={type}
                 name={name}

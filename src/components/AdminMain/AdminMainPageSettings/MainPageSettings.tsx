@@ -6,10 +6,11 @@ import {updateMainPageSettings} from "../../../store/actions/mainPageSettingsAct
 import {decodeToken} from "../../../hooks/encodeDecodeTokens";
 import AdminInputContainer from "../../UI/InputContainers/AdminInputContainer";
 import HeadingType from "../HeadingType";
+import Loader from "../../UI/Loader/Loader";
 
 
 const MainPageSettings = () => {
-    const {error, isLoading, mainPageSettings} = useAppSelector(state => state.mainPageSettingsReducer);
+    const {isLoading, mainPageSettings} = useAppSelector(state => state.mainPageSettingsReducer);
     const dispatch = useAppDispatch()
     //--states
     const [headingTypeOptionsVisibility, setHeadingTypeOptionsVisibility] = useState<IOptions>({
@@ -101,14 +102,14 @@ const MainPageSettings = () => {
                                 readonly={false} inputClassname={''}
                                 inputContainerClassname={styles.form__inputContainer}
                                 labelClassName={''} label={'Фон главной страницы'}
-                                isLoading={isLoading} onChangeHandler={onChangeHandler}/>
+                                onChangeHandler={onChangeHandler}/>
                             <AdminInputContainer
                                 type={'color'} name={'prodCardBg'} inputId={'prodCardBg'}
                                 value={mainPageSettings.prodCardBg ? mainPageSettings.prodCardBg : '#eeeeee'}
                                 checked={false} required={false} readonly={false} inputClassname={''}
                                 inputContainerClassname={styles.form__inputContainer}
                                 labelClassName={''} label={'Фон карточки товара/услуги'}
-                                isLoading={isLoading} onChangeHandler={onChangeHandler}/>
+                                onChangeHandler={onChangeHandler}/>
                         </div>
                         <div className={styles.form__items}>
                             <AdminInputContainer
@@ -117,10 +118,10 @@ const MainPageSettings = () => {
                                 required={false} readonly={false} inputClassname={''}
                                 inputContainerClassname={[styles.form__items, styles.form__items_margin].join(' ')}
                                 labelClassName={styles.form__inputContainer_label} label={'Заголовок главной страницы'}
-                                isLoading={isLoading} onChangeHandler={onChangeHeadingHandler}/>
+                                onChangeHandler={onChangeHeadingHandler}/>
                             <HeadingType blockHeadingType={mainPageSettings.headingSettings.blockHeadingType}
                                          headingTypeOptionsVisibility={headingTypeOptionsVisibility}
-                                         isLoading={isLoading} onChangeHandler={onChangeHeadingHandler}
+                                         onChangeHandler={onChangeHeadingHandler}
                                          changeHeadingTypeOptionsContainerVisibility={changeHeadingTypeOptionsContainerVisibility}/>
                         </div>
                         <div className={styles.form__items}>
@@ -130,24 +131,24 @@ const MainPageSettings = () => {
                                 checked={false} required={false} readonly={false} inputClassname={''}
                                 inputContainerClassname={styles.form__inputContainer}
                                 labelClassName={''} label={'Цвет заголовка'}
-                                isLoading={isLoading} onChangeHandler={onChangeHeadingHandler}/>
+                                onChangeHandler={onChangeHeadingHandler}/>
                             <AdminInputContainer
                                 type={'number'} name={'headingFontSize'} inputId={'headingFontSize'}
                                 value={mainPageSettings.headingSettings.headingFontSize} checked={false}
                                 required={false} readonly={false} inputClassname={''}
                                 inputContainerClassname={styles.form__inputContainer}
                                 labelClassName={''} label={'Размер шрифта заголовка'}
-                                isLoading={isLoading} onChangeHandler={onChangeHeadingHandler}/>
+                                onChangeHandler={onChangeHeadingHandler}/>
                             <AdminInputContainer
                                 type={'number'} name={'headingFontWeight'} inputId={'headingFontWeight'}
                                 value={mainPageSettings.headingSettings.headingFontWeight} checked={false}
                                 required={false} readonly={false} inputClassname={''} max={900}
                                 inputContainerClassname={styles.form__inputContainer} min={400}
                                 labelClassName={''} label={'Жирность текста заголовка'} step={100}
-                                isLoading={isLoading} onChangeHandler={onChangeHeadingHandler}/>
+                                onChangeHandler={onChangeHeadingHandler}/>
                         </div>
                     </div>
-                    : <div className={styles.AdminMain__formContainer}></div>
+                    : <div className={styles.AdminMain__formContainerUnLoaded}>{isLoading && (<Loader/>)}</div>
                 }
             </section>
         </main>

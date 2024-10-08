@@ -14,7 +14,6 @@ const SelectProd: React.FC<ISelectProdProps> = ({
                                                     products,
                                                     setProdsOptionsVisibility,
                                                     prodsOptionsVisibility,
-                                                    isLoading,
                                                     onChangeHandler, selectedProd
                                                 }) => {
 
@@ -29,7 +28,7 @@ const SelectProd: React.FC<ISelectProdProps> = ({
         <div className={styles.form__inputContainer_select} style={{flexBasis: '30%'}}>
             <div className={styles.form__selectContainer}
                  onClick={changeProdOptionsContainerVisibility}>
-                {isLoading && 'Loading...'}{selectedProd && selectedProd.name}</div>
+                {selectedProd && selectedProd.name}</div>
             <div className={styles.form__optionsContainer}
                  style={{display: prodsOptionsVisibility.display, bottom: prodsOptionsVisibility.bottom}}>
                 {products && products.map(product => (

@@ -2,6 +2,7 @@ import React from 'react';
 import styles from "./Sidebar.module.sass";
 import {NavLink} from "react-router-dom";
 import {useAppSelector} from "../../../hooks/redux";
+import Loader from "../../UI/Loader/Loader";
 
 
 interface ISidebarPagesItemsProps {
@@ -9,11 +10,11 @@ interface ISidebarPagesItemsProps {
 }
 
 const SidebarPagesItems: React.FC<ISidebarPagesItemsProps> = ({getItemsVisibility}) => {
-    const {isLoading, error, pages} = useAppSelector(state => state.pageSettingsReducer)
+    const {isLoading, pages} = useAppSelector(state => state.pageSettingsReducer)
 
     return (
         <div className={styles.Sidebar__items}>
-            {isLoading && 'Loading...'}
+            {isLoading && (<Loader/>)}
             {pages && pages.map(page => (
                 <NavLink key={page.id} to={'pages_settings/' + page.slug} className={({isActive}) =>
                     [isActive

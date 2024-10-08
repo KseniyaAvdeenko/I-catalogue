@@ -8,11 +8,10 @@ interface IPageBackgroundProps extends IAdminComponentsProps{
     background: string|undefined
 }
 
-const PageBackground:React.FC<IPageBackgroundProps> = ({background, pageName, isLoading, onChangeHandler}) => {
+const PageBackground:React.FC<IPageBackgroundProps> = ({background, pageName,  onChangeHandler}) => {
     return (
         <div className={styles.form__inputContainer}>
             <label htmlFor="background">Фон страницы "{pageName??''}"</label>
-            {isLoading && 'Loading...'}
             <AdminInput type={"color"}
                         value={background ?? '#fff'}
                         name={'background'}

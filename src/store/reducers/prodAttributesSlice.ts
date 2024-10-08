@@ -5,9 +5,8 @@ import {IProdAttrs} from "../../interface/IProduct";
 
 const initialState: IProdAttrsInitial = {
     isLoading: false,
-    error: '',
     prodAttrs: null,
-    prodAttr: null
+    prodAttr: null,
 }
 
 export const prodAttributesSlice = createSlice({
@@ -21,39 +20,18 @@ export const prodAttributesSlice = createSlice({
             state.isLoading = false;
             state.prodAttrs = action.payload
         },
-        loadProdAttrsFail(state, action: PayloadAction<string>){
-            state.error = action.payload;
-            state.isLoading = false;
-        },
-        prodAttrFetching(state){
-            state.isLoading = true;
-        },
-        loadProdAttrSuccess(state, action: PayloadAction<IProdAttrs>){
-            state.prodAttr = action.payload;
-            state.isLoading = false;
-        },
-        loadProdAttrFail(state, action: PayloadAction<string>){
-            state.error = action.payload;
+        loadProdAttrsFail(state){
             state.isLoading = false;
         },
         createProdAttrSuccess(state, action: PayloadAction<IProdAttrs>){
             state.prodAttr = action.payload;
         },
-        createProdAttrFail(state, action: PayloadAction<string>){
-            state.error = action.payload;
-        },
         updateProdAttrSuccess(state, action: PayloadAction<IProdAttrs>){
             state.prodAttr = action.payload;
-        },
-        updateProdAttrFail(state, action: PayloadAction<string>){
-            state.error = action.payload;
         },
         deleteProdAttrSuccess(state){
             state.prodAttr = null;
         },
-        deleteProdAttrFail(state, action: PayloadAction<string>){
-            state.error = action.payload
-        }
     }
 })
 

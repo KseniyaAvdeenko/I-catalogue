@@ -3,6 +3,7 @@ import axios from "axios";
 import {IProdsByPage} from "../../interface/IProduct";
 import {apiUrl} from "./apiUrl";
 import {paginatedProductSlice} from "../reducers/paginatedProductSlice";
+import {errorSlice} from "../reducers/errorSlice";
 
 export const loadProductsByPage = (pageNum: number|null, pageSize: number) => async (dispatch: AppDispatch) => {
     try {
@@ -13,7 +14,8 @@ export const loadProductsByPage = (pageNum: number|null, pageSize: number) => as
             })
         dispatch(paginatedProductSlice.actions.loadProdsPaginatedSuccess(response.data))
     } catch (e) {
-        dispatch(paginatedProductSlice.actions.loadProdsPaginatedFail('Ошибка'))
+        dispatch(errorSlice.actions.paginatedProductsError('Ошибка загрузки товаров/услуг'))
+        dispatch(paginatedProductSlice.actions.loadProdsPaginatedFail())
     }
 }
 

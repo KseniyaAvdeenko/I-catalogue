@@ -25,6 +25,10 @@
     width: 100%
     @extend .flexColumn
 
+    &_UnLoaded
+      align-items: center
+      justify-content: center
+
   &__button
     @extend .baseAdminButton
 
@@ -33,6 +37,11 @@
   width: 100%
   @extend .flexColumn
   @extend .mb_10
+
+  &_UnLoaded
+    @extend .savedItems
+    align-items: center
+    justify-content: center
 
   &__items
     @extend .flexRow
@@ -70,11 +79,14 @@
     & > textarea,
     & > input[type='text']
       @extend .adminInputText
+
       &:focus
         border: .1rem solid $primary100
+
       &:focus,
       &:read-only:focus
         outline: none
+
       &:read-only:focus
         cursor: not-allowed
 
@@ -115,6 +127,7 @@
       grid-template-rows: auto
       column-gap: .5rem
       row-gap: .5rem
+
 .hr
   @extend .hrCommon
   margin: 1rem 0
@@ -126,6 +139,7 @@
   align-items: center
   @extend .mb_40
   width: 100%
+
   & > h2
     margin-right: 3rem
     font-size: $h3

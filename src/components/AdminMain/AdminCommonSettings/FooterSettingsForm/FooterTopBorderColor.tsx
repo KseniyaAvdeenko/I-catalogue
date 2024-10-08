@@ -8,7 +8,6 @@ interface IFooterTopBorderColorProps extends IAdminComponentsProps {
 }
 
 const FooterTopBorderColor: React.FC<IFooterTopBorderColorProps> = ({
-                                                                        isLoading,
                                                                         onChangeHandler,
                                                                         footerTopBorder,
                                                                         borderTopColor
@@ -16,7 +15,6 @@ const FooterTopBorderColor: React.FC<IFooterTopBorderColorProps> = ({
     return (
         <div className={styles.form__inputContainer} style={{display: footerTopBorder?'flex':'none'}}>
             <label htmlFor="borderTopColor">Цвет верхней границы “подвала” сайта</label>
-            {isLoading && 'Loading...'}
             <input type="color"
                    value={borderTopColor??'#bbb'}
                    name={'borderTopColor'}

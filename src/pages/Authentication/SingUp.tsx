@@ -10,10 +10,12 @@ import AuthInputContainer from "../../components/UI/InputContainers/AuthInputCon
 import VisibleIcon from '../../assets/img/Visible.svg'
 import InVisibleIcon from '../../assets/img/Invisible.svg'
 import PasswordInput from "../../components/AuthComponents/PasswordInput";
+import Notifications from "../../components/UI/Notifications/Notifications";
 
 const SignUp = () => {
     const auth = useAppSelector(state => state.authReducer)
     const dispatch = useAppDispatch()
+
     //--states
     const [newUser, setNewUser] = useState<INewUser>({username: '', email: '', password: '', re_password: ''})
     const [usernameLabel, setUsernameLabel] = useState<{ top: string, color: string }>({top: '1rem', color: '#333333'})
@@ -75,7 +77,11 @@ const SignUp = () => {
         if (e.currentTarget.id === 'username') setUsernameLabel({...usernameLabel, top: '-2rem', color: '#926B6A'})
         if (e.currentTarget.id === 'email') setEmailLabel({...emailLabel, top: '-2rem', color: '#926B6A'})
         if (e.currentTarget.id === 'password') setPasswordLabel({...passwordLabel, top: '-2rem', color: '#926B6A'})
-        if (e.currentTarget.id === 're_password') setRePasswordLabel({...rePasswordLabel, top: '-2rem', color: '#926B6A'})
+        if (e.currentTarget.id === 're_password') setRePasswordLabel({
+            ...rePasswordLabel,
+            top: '-2rem',
+            color: '#926B6A'
+        })
     }
 
     const getPasswordVisibility = () => {
@@ -90,57 +96,51 @@ const SignUp = () => {
     }
 
     return (
-        <>
-            <AdminHeader></AdminHeader>
-            <main className={styles.auth__container}>
-                <div className={styles.auth__form}>
-                    <h4 className={styles.auth__heading}>Регистрация</h4>
-                    {auth.error && (
-                        <p style={{textAlign: 'center', color: 'red', marginBottom: '2rem'}}>{auth.error}</p>)}
-                    <form onSubmit={e => submitHandler(e)} className={styles.auth__formContainer}>
-                        <AuthInputContainer inputContainerClass={styles.auth__inputContainer}
-                                            type={'text'} name={'username'} onFocusHandler={onFocusHandler}
-                                            onChangeHandler={onChangeHandler} onBlurHandler={onBlurInput}
-                                            value={newUser.username} required={true} labelStyle={usernameLabel}
-                                            label={'Логин'}/>
-                        <AuthInputContainer inputContainerClass={styles.auth__inputContainer}
-                                            type={'email'} name={'email'} onFocusHandler={onFocusHandler}
-                                            onChangeHandler={onChangeHandler} onBlurHandler={onBlurInput}
-                                            value={newUser.email} required={true} labelStyle={emailLabel}
-                                            label={'Email'}/>
-                        <PasswordInput inputContainerClass={styles.auth__inputContainer}
-                                       type={passwordVisibility.type}
-                                       name={"password"}
-                                       onFocusHandler={onFocusHandler}
-                                       onChangeHandler={onChangeHandler}
-                                       onBlurHandler={onBlurInput}
-                                       value={newUser.password}
-                                       required={true}
-                                       labelStyle={passwordLabel}
-                                       label={'Пароль'}
-                                       imgClassName={styles.visibilityIcon}
-                                       image={passwordVisibility.image}
-                                       passwordVisibilityHandler={getPasswordVisibility}/>
+        <main className={styles.auth__container}>
+            <div className={styles.auth__form}>
+                <h4 className={styles.auth__heading}>Регистрация</h4>
+                <form onSubmit={e => submitHandler(e)} className={styles.auth__formContainer}>
+                    <AuthInputContainer inputContainerClass={styles.auth__inputContainer}
+                                        type={'text'} name={'username'} onFocusHandler={onFocusHandler}
+                                        onChangeHandler={onChangeHandler} onBlurHandler={onBlurInput}
+                                        value={newUser.username} required={true} labelStyle={usernameLabel}
+                                        label={'Логин'}/>
+                    <AuthInputContainer inputContainerClass={styles.auth__inputContainer}
+                                        type={'email'} name={'email'} onFocusHandler={onFocusHandler}
+                                        onChangeHandler={onChangeHandler} onBlurHandler={onBlurInput}
+                                        value={newUser.email} required={true} labelStyle={emailLabel}
+                                        label={'Email'}/>
+                    <PasswordInput inputContainerClass={styles.auth__inputContainer}
+                                   type={passwordVisibility.type}
+                                   name={"password"}
+                                   onFocusHandler={onFocusHandler}
+                                   onChangeHandler={onChangeHandler}
+                                   onBlurHandler={onBlurInput}
+                                   value={newUser.password}
+                                   required={true}
+                                   labelStyle={passwordLabel}
+                                   label={'Пароль'}
+                                   imgClassName={styles.visibilityIcon}
+                                   image={passwordVisibility.image}
+                                   passwordVisibilityHandler={getPasswordVisibility}/>
 
-                        <PasswordInput inputContainerClass={styles.auth__inputContainer}
-                                       type={rePasswordVisibility.type}
-                                       name={"re_password"}
-                                       onFocusHandler={onFocusHandler}
-                                       onChangeHandler={onChangeHandler}
-                                       onBlurHandler={onBlurInput}
-                                       value={newUser.re_password}
-                                       required={true}
-                                       labelStyle={rePasswordLabel}
-                                       label={'Повторите пароль'}
-                                       imgClassName={styles.visibilityIcon}
-                                       image={rePasswordVisibility.image}
-                                       passwordVisibilityHandler={getRePasswordVisibility}/>
-                        <button type={"submit"} className={styles.auth__button}>Регистрироваться</button>
-                    </form>
-                </div>
-            </main>
-            <AdminFooter/>
-        </>
+                    <PasswordInput inputContainerClass={styles.auth__inputContainer}
+                                   type={rePasswordVisibility.type}
+                                   name={"re_password"}
+                                   onFocusHandler={onFocusHandler}
+                                   onChangeHandler={onChangeHandler}
+                                   onBlurHandler={onBlurInput}
+                                   value={newUser.re_password}
+                                   required={true}
+                                   labelStyle={rePasswordLabel}
+                                   label={'Повторите пароль'}
+                                   imgClassName={styles.visibilityIcon}
+                                   image={rePasswordVisibility.image}
+                                   passwordVisibilityHandler={getRePasswordVisibility}/>
+                    <button type={"submit"} className={styles.auth__button}>Регистрироваться</button>
+                </form>
+            </div>
+        </main>
     );
 };
 

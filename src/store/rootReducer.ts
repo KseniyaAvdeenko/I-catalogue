@@ -16,7 +16,8 @@ import modalFormReducer from './reducers/modalFormSlice';
 import orderReducer from './reducers/orderSlice';
 import paginatedProductReducer from './reducers/paginatedProductSlice';
 import seoSettingsReducer from './reducers/seoSettingsSlice';
-import socialLinkReducer from './reducers/socialLinkSlice'
+import socialLinkReducer from './reducers/socialLinkSlice';
+import errorReducer from './reducers/errorSlice'
 
 export const rootReducer = combineReducers({
     authReducer,
@@ -36,5 +37,6 @@ export const rootReducer = combineReducers({
     orderReducer,
     paginatedProductReducer,
     seoSettingsReducer,
-    socialLinkReducer
+    socialLinkReducer,
+    errorReducer
 })

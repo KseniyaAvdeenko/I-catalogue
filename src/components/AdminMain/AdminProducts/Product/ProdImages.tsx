@@ -1,16 +1,14 @@
-import React, {useState} from 'react';
+import React from 'react';
 import styles from "../../AdminMain.module.sass";
-import {IImage, IProdReadOnly} from "../../../../interface/IProduct";
+import {IProdReadOnly} from "../../../../interface/IProduct";
 import {createImage, deleteImage, updateImage} from "../../../../store/actions/prodImagesAction";
 import {decodeToken} from "../../../../hooks/encodeDecodeTokens";
 import {useAppDispatch} from "../../../../hooks/redux";
-import {IFile} from "../../../../interface/IAdminPageComponets";
 import Download from "../../../../assets/img/Download.svg";
 import DeleteIcon from "../../../../assets/img/deleteIcon.svg";
 
 interface IProdImagesProps {
     selectedProd: IProdReadOnly;
-
 }
 
 const ProdImages: React.FC<IProdImagesProps> = ({selectedProd}) => {

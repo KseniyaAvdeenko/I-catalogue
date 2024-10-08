@@ -7,10 +7,11 @@ import {ISeoSettings} from "../../../interface/ISeoSettings";
 import {seoTagExample} from "../Options";
 import {createSeoTag, deleteSeoTag, updateSeoTag} from "../../../store/actions/seoSettingsAction";
 import {decodeToken} from "../../../hooks/encodeDecodeTokens";
+import Loader from "../../UI/Loader/Loader";
 
 const SeoSettings = () => {
     const dispatch = useAppDispatch();
-    const {isLoading, error, seoTag, seoTags} = useAppSelector(state => state.seoSettingsReducer)
+    const {isLoading, seoTags} = useAppSelector(state => state.seoSettingsReducer)
     //---states
     const [fields, setFields] = useState<ISeoSettings[]>([seoTagExample])
 
@@ -63,14 +64,14 @@ const SeoSettings = () => {
             <section className={[styles.AdminNavbar__container, styles.AdminNavbar__container_margin].join(' ')}>
                 <h2 className={styles.AdminNavbar__heading}>Настройки SEO сайта</h2>
                 <div className={styles.AdminNavbar__formContainer}>
-                    {seoTags && (
-                        <SavedSeoTags
+                    {seoTags
+                        ?<SavedSeoTags
                             seoTags={seoTags}
-                            isLoading={isLoading}
                             onChangeHandler={onChangeSavedSeoTagsHandler}
                             deleteSeoTag={deleteSavedSeoTag}
                         />
-                    )}
+                        :<div className={styles.savedItems_UnLoaded}>{isLoading && (<Loader/>)}</div>
+                    }
                     <NewSeoTagForm onChangeHandler={onChangeHandler}
                                    saveNewSeoTag={saveNewSeoTagHandler}
                                    deleteField={deleteField}

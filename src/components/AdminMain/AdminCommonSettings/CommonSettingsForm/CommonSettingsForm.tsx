@@ -4,23 +4,19 @@ import {useAppDispatch, useAppSelector} from "../../../../hooks/redux";
 import {updateCommonSettings} from "../../../../store/actions/commonSettingsAction";
 import BasicFontFamily from "./BasicFontFamily";
 import Logo from "./Logo";
-import {reader} from "../../../../store/actions/apiUrl";
 import Favicon from "./Favicon";
 import {IOptions} from "../../../../interface/IAdminPageComponets";
 import {decodeToken} from "../../../../hooks/encodeDecodeTokens";
 import AdminInputContainer from "../../../UI/InputContainers/AdminInputContainer";
-
-interface ICommonSettingsFormProps {
-
-}
+import Loader from "../../../UI/Loader/Loader";
 
 
-const CommonSettingsForm: React.FC<ICommonSettingsFormProps> = () => {
-    const {commonSettings, error, isLoading} = useAppSelector(state => state.commonSettingsReducer);
+const CommonSettingsForm = () => {
+    const {commonSettings, isLoading} = useAppSelector(state => state.commonSettingsReducer);
     const dispatch = useAppDispatch()
     //--states
     const [fontOptionsVisibility, setFontOptionsVisibility] = useState<IOptions>({
-        open: false, display: 'none', bottom: '-56.2rem'
+        open: false, display: 'none', bottom: '-20.2rem'
     })
     const [logoInput, setLogoInput] = useState<{ imgDisplay: string, background: string }>(
         {imgDisplay: 'block', background: '#F2F2F2'})
@@ -28,7 +24,7 @@ const CommonSettingsForm: React.FC<ICommonSettingsFormProps> = () => {
         {imgDisplay: 'block', background: '#F2F2F2'})
     //methods
     const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-        if (commonSettings && localStorage.access) {
+        if (commonSettings) {
             if (e.target.type === 'file') {
                 const file = e.target.files?.[0];
                 if (file) {
@@ -68,16 +64,15 @@ const CommonSettingsForm: React.FC<ICommonSettingsFormProps> = () => {
                             readonly={false} inputClassname={''}
                             inputContainerClassname={styles.form__inputContainer}
                             labelClassName={''} label={'Основной цвет шрифта'}
-                            isLoading={isLoading} onChangeHandler={onChangeHandler}/>
+                            onChangeHandler={onChangeHandler}/>
                         <AdminInputContainer
                             type={'number'} name={'basicFontSize'} inputId={'basicFontSize'}
                             value={commonSettings.basicFontSize} checked={false}
                             required={false} readonly={false} inputClassname={''}
                             inputContainerClassname={styles.form__inputContainer}
                             labelClassName={''} label={'Основной размер шрифта'}
-                            isLoading={isLoading} onChangeHandler={onChangeHandler}/>
+                            onChangeHandler={onChangeHandler}/>
                         <BasicFontFamily
-                            isLoading={isLoading}
                             basicFontFamily={commonSettings.basicFontFamily}
                             onChangeHandler={onChangeHandler}
                             fontOptionsVisibility={fontOptionsVisibility}
@@ -101,8 +96,7 @@ const CommonSettingsForm: React.FC<ICommonSettingsFormProps> = () => {
                         />
                     </div>
                 </div>
-                : <div className={styles.AdminMain__formContainer}>
-                </div>
+                : <div className={styles.AdminMain__formContainerUnLoaded}>{isLoading && <Loader/>}</div>
             }
         </section>
     );

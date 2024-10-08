@@ -2,20 +2,18 @@ import {IButtonSettings, ICommonSettings, IFooterSettings, IHeaderSettings} from
 import {IMainPageSetting, IPageSetting} from "./IPagesSettings";
 import {IContacts, ISocialLink} from "./INavbar";
 import {IUser} from "./IUser";
-import {IImage, IProd, IProdAttrs, IProdReadOnly, IProdsByPage, IProductPageSettings} from "./IProduct";
+import {IImage, IProd, IProdAttrs, IProdReadOnly, IProductPageSettings} from "./IProduct";
 import {IModalForm} from "./IModalForm";
-import {INewOrder, IOrder, IPayment} from "./IOrder";
+import {INewOrder, IOrder} from "./IOrder";
 import {ISeoSettings} from "./ISeoSettings";
 
 export interface IInitialStatesBase {
     isLoading: boolean;
-    error: string;
 }
 
 export interface IAuthState {
     isSignedUp: boolean;
     isAuth: boolean;
-    error: string;
     refresh: string;
     access: string;
     accessExpires: string;
@@ -27,7 +25,7 @@ export interface ICommonBase {
 }
 
 export interface IButtonSettingsInitial extends IInitialStatesBase, ICommonBase {
-    buttonSettings: IButtonSettings | null
+    buttonSettings: IButtonSettings | null;
 }
 
 export interface ICommonSettingsInitial extends IInitialStatesBase, ICommonBase {
@@ -35,7 +33,7 @@ export interface ICommonSettingsInitial extends IInitialStatesBase, ICommonBase 
 }
 
 export interface IFooterSettingsInitial extends IInitialStatesBase, ICommonBase {
-    footerSettings: IFooterSettings | null
+    footerSettings: IFooterSettings | null;
 }
 
 export interface IHeaderSettingsInitial extends IInitialStatesBase, ICommonBase {
@@ -43,9 +41,12 @@ export interface IHeaderSettingsInitial extends IInitialStatesBase, ICommonBase 
 }
 
 export interface IMainPageSettingsInitial extends IInitialStatesBase {
-    mainPageSettings: IMainPageSetting | null
+    mainPageSettings: IMainPageSetting | null;
 }
 
+export interface IProdPageInitial extends IInitialStatesBase {
+    prodPageSettings: IProductPageSettings | null
+}
 
 export interface IContactsInitial extends IInitialStatesBase {
     contacts: IContacts[] | null;
@@ -54,20 +55,13 @@ export interface IContactsInitial extends IInitialStatesBase {
 
 export interface IPageSettingsInitial extends IInitialStatesBase {
     pages: IPageSetting[] | null
-    page: IPageSetting | null
+    page: IPageSetting | null;
 }
 
 export interface IUserInitial {
-    errorCurrentUser: string;
-    errorUsers: string;
-    errorUser: string;
     currentUser: IUser | null;
     user: IUser | null;
     users: IUser[] | null;
-}
-
-export interface IProdPageInitial extends IInitialStatesBase {
-    prodPageSettings: IProductPageSettings | null
 }
 
 export interface IProdAttrsInitial extends IInitialStatesBase {
@@ -88,7 +82,7 @@ export interface IProdImagesInitial extends IInitialStatesBase {
 }
 
 export interface IModalFormInitial extends IInitialStatesBase {
-    modalForm: IModalForm | null
+    modalForm: IModalForm | null;
 }
 
 export interface IPaymentData {
@@ -101,9 +95,9 @@ export interface IPaymentData {
 export interface IOrderInitial extends IInitialStatesBase {
     orders: IOrder[] | null;
     newOrder: INewOrder | null;
-    newOrderError: string;
     newOrderPaymentData: IPaymentData;
-    paymentError: string;
+    paymentPaid: boolean,
+    createdOrderSuccess: boolean
 }
 
 export interface IPaginatedProdsInitial extends IInitialStatesBase {
@@ -123,4 +117,9 @@ export interface ISeoSettingsInitial extends IInitialStatesBase {
 export interface ISocialLinksInitial extends IInitialStatesBase {
     socialLinks: ISocialLink[] | null;
     socialLink: ISocialLink | null;
+}
+
+export interface IErrorsInitial {
+    adminErrors: string[];
+    siteErrors: string[];
 }

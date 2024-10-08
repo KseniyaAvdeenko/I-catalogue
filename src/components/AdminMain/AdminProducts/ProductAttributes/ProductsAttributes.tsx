@@ -6,9 +6,10 @@ import {IProdAttrs} from "../../../../interface/IProduct";
 import NewProdAttrForm from "./NewProdAttrForm";
 import {createProdAttribute, deleteProdAttribute, updateProdAttribute} from "../../../../store/actions/prodAttrsAction";
 import {decodeToken} from "../../../../hooks/encodeDecodeTokens";
+import Loader from "../../../UI/Loader/Loader";
 
 const ProductsAttributes = () => {
-    const {error, isLoading, prodAttrs} = useAppSelector(state => state.prodAttrsReducer)
+    const {isLoading, prodAttrs} = useAppSelector(state => state.prodAttrsReducer)
     const dispatch = useAppDispatch();
     //states
     const [fields, setFields] = React.useState<IProdAttrs[]>([{id: 0, attribute: ''}])
@@ -59,10 +60,13 @@ const ProductsAttributes = () => {
                  className={[styles.AdminNavbar__container, styles.AdminNavbar__container_margin].join(' ')}>
             <h3 className={styles.AdminNavbar__subheading}>Добавление характеристик товара\услуги</h3>
             <div className={styles.AdminNavbar__formContainer}>
-                {prodAttrs && (
-                    <SavedProdAttrs deleteProdAttribute={deleteProdAttr} attrs={prodAttrs}
-                                    isLoading={isLoading} onChangeHandler={onChangeHandler}/>
-                )}
+                {prodAttrs
+                    ?<SavedProdAttrs
+                        deleteProdAttribute={deleteProdAttr}
+                        attrs={prodAttrs}
+                        onChangeHandler={onChangeHandler}/>
+                    :<div className={styles.savedItems_UnLoaded}>{isLoading && (<Loader/>)}</div>
+                }
                 <NewProdAttrForm
                     fields={fields}
                     onChangeHandler={onChangeNewAttrHandler}

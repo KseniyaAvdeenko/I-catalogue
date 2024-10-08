@@ -4,9 +4,8 @@ import {IHeaderSettingsInitial} from "../../interface/IInitialStates";
 
 const initialState: IHeaderSettingsInitial = {
     isLoading: false,
-    error: '',
     headerSettings: null,
-    restored: false
+    restored: false,
 }
 
 export const headerSettingsSlice = createSlice({
@@ -21,21 +20,17 @@ export const headerSettingsSlice = createSlice({
             state.isLoading = false;
             state.headerSettings = action.payload;
         },
-        loadHeaderSettingsFail(state, action: PayloadAction<string>){
+        loadHeaderSettingsFail(state){
             state.isLoading = false;
-            state.error = action.payload;
         },
         updateHeaderSettingsSuccess(state, action: PayloadAction<IHeaderSettings>){
             state.headerSettings = action.payload;
-        },
-        updateHeaderSettingsFail(state, action: PayloadAction<string>){
-            state.error = action.payload;
         },
         restoreHeaderSettingsSuccess(state, action: PayloadAction<boolean>){
             state.restored = action.payload
         },
         restoreHeaderSettingsFail(state, action: PayloadAction<boolean>){
-            state.restored = action.payload
+            state.restored = action.payload;
         },
     }
 })

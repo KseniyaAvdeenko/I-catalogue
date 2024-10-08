@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import styles from "../../AdminNavbar.module.sass";
 import {useAppDispatch, useAppSelector} from "../../../../hooks/redux";
 import NewProdForm from "./NewProdForm";
-import {IOtherValue, IProdAttrs, IProdBase} from "../../../../interface/IProduct";
+import {IOtherValue, IProdBase} from "../../../../interface/IProduct";
 import {IFile, IOptions} from "../../../../interface/IAdminPageComponets";
 import {createProduct} from "../../../../store/actions/productAction";
 import {decodeToken} from "../../../../hooks/encodeDecodeTokens";

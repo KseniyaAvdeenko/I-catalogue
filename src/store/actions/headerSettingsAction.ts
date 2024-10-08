@@ -1,10 +1,9 @@
 import {AppDispatch} from "../store";
 import axios from "axios";
 import {IHeaderSettings} from "../../interface/ICommonSettings";
-import {apiUrl, formData, getAuthConfigApplicationJson, getRequestHeaders} from "./apiUrl";
-import {userSlice} from "../reducers/userSlice";
+import {apiUrl, getAuthConfigApplicationJson, getRequestHeaders} from "./apiUrl";
 import {headerSettingsSlice} from "../reducers/headerSettingsSlice";
-
+import {errorSlice} from "../reducers/errorSlice";
 
 export const loadHeaderSettings = () => async (dispatch: AppDispatch) => {
 
@@ -13,7 +12,8 @@ export const loadHeaderSettings = () => async (dispatch: AppDispatch) => {
         const response = await axios.get<IHeaderSettings>(apiUrl + 'common_page_settings/header_settings/get_header/', getRequestHeaders())
         dispatch(headerSettingsSlice.actions.loadHeaderSettingsSuccess(response.data))
     } catch (e) {
-        dispatch(headerSettingsSlice.actions.loadHeaderSettingsFail('Ошибка'))
+        dispatch(headerSettingsSlice.actions.loadHeaderSettingsFail())
+        dispatch(errorSlice.actions.loadingDataErrors('Ошибка загрузки настроек "шапки" сайта'))
     }
 }
 
@@ -25,25 +25,25 @@ export const updateHeaderSettings = (access: string, id: number, data: any) => a
             dispatch(headerSettingsSlice.actions.updateHeaderSettingsSuccess(response.data))
 
         } catch (e) {
-            dispatch(headerSettingsSlice.actions.updateHeaderSettingsFail('Ошибка'))
+            dispatch(errorSlice.actions.updatingDataErrors('Ошибка обновления настроек "шапки" сайта'))
         }
     } else {
-        dispatch(userSlice.actions.loadingCurrentUserFail('Вы не авторизованы'))
+        dispatch(errorSlice.actions.updatingDataErrors('Вы не авторизованы'))
     }
 }
 
 
 export const restoreHeaderSettings = (access: string, id: number, isAdmin: boolean) => async (dispatch: AppDispatch) => {
-    if (isAdmin) {
-        if (access) {
-            try {
-                const response = await axios.get(apiUrl + `common_page_settings/header_settings/${id}/restore_header/`, getAuthConfigApplicationJson(access))
-                dispatch(headerSettingsSlice.actions.restoreHeaderSettingsSuccess(response.data))
-            } catch (e) {
-                dispatch(headerSettingsSlice.actions.restoreHeaderSettingsFail(false))
-            }
-        } else {
-            dispatch(userSlice.actions.loadingCurrentUserFail('Вы не авторизованы'))
+    if (access) {
+        try {
+            const response = await axios.get(apiUrl + `common_page_settings/header_settings/${id}/restore_header/`, getAuthConfigApplicationJson(access))
+            dispatch(headerSettingsSlice.actions.restoreHeaderSettingsSuccess(response.data))
+        } catch (e) {
+            dispatch(headerSettingsSlice.actions.restoreHeaderSettingsFail(false))
+            dispatch(errorSlice.actions.updatingDataErrors('Восстановление прошло неудачно'))
         }
+    } else {
+        dispatch(errorSlice.actions.updatingDataErrors('Вы не авторизованы'))
     }
+
 }

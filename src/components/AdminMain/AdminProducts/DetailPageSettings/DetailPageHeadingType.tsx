@@ -10,7 +10,6 @@ interface IDetailPageHeadingTypeProps extends IAdminComponentsProps {
 }
 
 const DetailPageHeadingType: React.FC<IDetailPageHeadingTypeProps> = ({
-                                                                          isLoading,
                                                                           changeHeadingTypeOptionsContainerVisibility,
                                                                           blockHeadingType,
                                                                           headingTypeOptionsVisibility,
@@ -22,7 +21,7 @@ const DetailPageHeadingType: React.FC<IDetailPageHeadingTypeProps> = ({
             <div className={styles.form__inputContainer_label}>Тип заголовка</div>
             <div className={styles.form__selectContainer}
                  onClick={changeHeadingTypeOptionsContainerVisibility}>
-                {isLoading && 'Loading...'} Заголовок {blockHeadingType}</div>
+                Заголовок {blockHeadingType}</div>
             <div className={styles.form__optionsContainer}
                  style={{display: headingTypeOptionsVisibility.display, bottom: headingTypeOptionsVisibility.bottom}}>
                 {headingTypes.map(type => (

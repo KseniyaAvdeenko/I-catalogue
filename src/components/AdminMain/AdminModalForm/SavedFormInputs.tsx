@@ -12,7 +12,7 @@ interface ISavedFormInputsProps extends IAdminComponentsProps {
     savedLabelsTypes: string[]
 }
 
-const SavedFormInputs: React.FC<ISavedFormInputsProps> = ({savedLabelsTypes,formInputs, isLoading, onChangeHandler, deleteInput}) => {
+const SavedFormInputs: React.FC<ISavedFormInputsProps> = ({savedLabelsTypes,formInputs, onChangeHandler, deleteInput}) => {
     return (
         <div className={styles.savedItems} style={{borderBottom: formInputs.length ? '.1rem solid #926B6A' : 'none'}}>
             {formInputs.map(input => (
@@ -23,7 +23,7 @@ const SavedFormInputs: React.FC<ISavedFormInputsProps> = ({savedLabelsTypes,form
                         required={false} readonly={false} inputClassname={''}
                         inputContainerClassname={styles.savedItems__item}
                         labelClassName={[styles.savedItems__item, styles.savedItems__item_labelMargin].join(' ')}
-                        label={'Название поля'} isLoading={isLoading}
+                        label={'Название поля'}
                         onChangeHandler={onChangeHandler}/>
                     <InputTypeSelect
                         input={input} savedLabelsTypes={savedLabelsTypes}
@@ -34,7 +34,7 @@ const SavedFormInputs: React.FC<ISavedFormInputsProps> = ({savedLabelsTypes,form
                         required={false} readonly={false} inputClassname={''}
                         inputContainerClassname={styles.savedItems__item}
                         labelClassName={[styles.savedItems__item, styles.savedItems__item_labelMargin].join(' ')}
-                        label={'ID и название поля ввода'} isLoading={isLoading}
+                        label={'ID и название поля ввода'}
                         onChangeHandler={onChangeHandler} pattern={'[A-Za-z]'}/>
                     <img src={DeleteIcon} alt="delete icon" onClick={() => deleteInput(input.id)}/>
                 </div>

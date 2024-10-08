@@ -4,7 +4,6 @@ import {IProd, IProdReadOnly} from "../../interface/IProduct";
 
 const initialState: IProdInitial = {
     isLoading: false,
-    error: '',
     products: null,
     product: null,
     productsReadOnly: null,
@@ -22,26 +21,17 @@ export const productSlice = createSlice({
             state.isLoading = false;
             state.products = action.payload
         },
-        loadProductsFail(state, action: PayloadAction<string>) {
-            state.error = action.payload;
+        loadProductsFail(state) {
+            state.isLoading = false;
         },
         createProductSuccess(state, action: PayloadAction<IProd>) {
             state.product = action.payload;
         },
-        createProductFail(state, action: PayloadAction<string>) {
-            state.error = action.payload;
-        },
         updateProductSuccess(state, action: PayloadAction<IProd>) {
             state.product = action.payload;
         },
-        updateProductFail(state, action: PayloadAction<string>) {
-            state.error = action.payload;
-        },
         deleteProductSuccess(state) {
             state.product = null;
-        },
-        deleteProductFail(state, action: PayloadAction<string>) {
-            state.error = action.payload
         },
         prodsReadOnlyFetching(state) {
             state.isLoading = true;
@@ -50,8 +40,8 @@ export const productSlice = createSlice({
             state.isLoading = false;
             state.productsReadOnly = action.payload
         },
-        loadProductsReadOnlyFail(state, action: PayloadAction<string>) {
-            state.error = action.payload;
+        loadProductsReadOnlyFail(state) {
+            state.isLoading = false;
         },
         prodReadOnlyFetching(state) {
             state.isLoading = false;
@@ -61,8 +51,7 @@ export const productSlice = createSlice({
             state.productReadOnly = action.payload;
             state.isLoading = false;
         },
-        loadProductReadOnlyFail(state, action: PayloadAction<string>) {
-            state.error = action.payload;
+        loadProductReadOnlyFail(state) {
             state.isLoading = false;
         },
     }

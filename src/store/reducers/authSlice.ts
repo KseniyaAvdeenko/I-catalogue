@@ -9,7 +9,6 @@ const day = hour * 24
 const initialState: IAuthState = {
     isAuth: false,
     isSignedUp: false,
-    error: '',
     access: localStorage.access ?? '',
     refresh: localStorage.refresh ?? '',
     accessExpires: localStorage.accessExpires ?? '',
@@ -24,14 +23,12 @@ export const authSlice = createSlice({
             state.isAuth = false;
             state.isSignedUp = action.payload
         },
-        registerFail(state, action: PayloadAction<string>) {
-            state.error = action.payload;
+        registerFail(state) {
             state.isAuth = false;
             state.isSignedUp = false;
         },
         loginSuccess(state, action: PayloadAction<IAuth>) {
             state.isAuth = true;
-            state.error = '';
             state.access = encodeToken(action.payload.access);
             state.refresh = encodeToken(action.payload.refresh);
             state.accessExpires = String(Date.now() + hour);
@@ -41,13 +38,11 @@ export const authSlice = createSlice({
             localStorage.setItem('access', encodeToken(action.payload.access));
             localStorage.setItem('refresh', encodeToken(action.payload.refresh));
         },
-        loginFail(state, action: PayloadAction<string>) {
-            state.error = action.payload;
+        loginFail(state) {
             state.isAuth = false;
         },
         logoutSuccess(state) {
             state.isAuth = false;
-            state.error = '';
             state.access = '';
             state.refresh = '';
             state.accessExpires = '';
@@ -57,21 +52,16 @@ export const authSlice = createSlice({
             localStorage.removeItem('accessExpires')
             localStorage.removeItem('refreshExpires')
         },
-        logoutFail(state, action: PayloadAction<string>) {
-            state.error = action.payload;
-        },
         verifyAccessTokenSuccess(state) {
             state.access = localStorage.access
         },
-        verifyAccessTokenFail(state, action: PayloadAction<string>) {
-            state.error = action.payload;
+        verifyAccessTokenFail(state) {
             state.isAuth = false;
         },
         verifyRefreshTokenSuccess(state) {
             state.refresh = localStorage.refresh
         },
-        verifyRefreshTokenFail(state, action: PayloadAction<string>) {
-            state.error = action.payload;
+        verifyRefreshTokenFail(state) {
             state.isAuth = false;
         },
         refreshTokenSuccess(state, action: PayloadAction<{ access: string }>) {

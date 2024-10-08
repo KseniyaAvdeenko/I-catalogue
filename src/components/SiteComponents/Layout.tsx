@@ -7,18 +7,21 @@ import {checkPayment} from "../../store/actions/orderAction";
 import {decodeToken} from "../../hooks/encodeDecodeTokens";
 import {setFavicon} from "../../hooks/setFavicon";
 import {getSeoTags} from "../../hooks/getSeoTags";
+import Notifications from "../UI/Notifications/Notifications";
 
 interface ILayoutProps {
-    children: React.ReactNode
+    children: React.ReactNode;
+    errorNtfs: string[];
+    successNtfs: string[];
+    setErrorNtfs: Function;
+    setSuccessNtfs: Function;
 }
 
-const Layout: React.FC<ILayoutProps> = ({children}) => {
+const Layout: React.FC<ILayoutProps> = ({children, setErrorNtfs, setSuccessNtfs, successNtfs, errorNtfs}) => {
     const {commonSettings} = useAppSelector(state => state.commonSettingsReducer)
     const {seoTags} = useAppSelector(state => state.seoSettingsReducer)
     const [basicStyles, setBasicStyles] = useState({color: 'black', fontSize: 16, fontFamily: 'Rubik'})
     const dispatch = useAppDispatch()
-
-
 
     useEffect(() => {
         if (commonSettings) {
@@ -53,6 +56,11 @@ const Layout: React.FC<ILayoutProps> = ({children}) => {
     return (
         <div className={styles.layout} style={basicStyles}>
             <Header logo={commonSettings?.logo}/>
+            <Notifications setErrorNtFs={setErrorNtfs}
+                           setSuccessNtFs={setSuccessNtfs}
+                           errorNotifications={errorNtfs}
+                           successNotifications={successNtfs}
+            />
             {children}
             <Footer logo={commonSettings?.logo}/>
         </div>

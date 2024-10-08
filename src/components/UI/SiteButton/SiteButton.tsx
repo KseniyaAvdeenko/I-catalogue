@@ -26,7 +26,7 @@ const SiteButton: FC<ISiteButtonProps> = ({product,btnType, btnText, type, click
             <Link
                 style={btnStyles}
                 className={btnClassName}
-                to={'product/' + product.id}>
+                to={'/product/' + product.id}>
                 {btnText}
             </Link>)
         : type === 'button' && clickHandler

@@ -1,45 +1,40 @@
-import {IButtonSettings, IHeaderSettings} from "../../interface/ICommonSettings";
+import {IButtonSettings} from "../../interface/ICommonSettings";
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {IButtonSettingsInitial} from "../../interface/IInitialStates";
 
 const initialState: IButtonSettingsInitial = {
     isLoading: false,
-    error: '',
     buttonSettings: null,
-    restored: false
+    restored: false,
 }
 
 export const buttonSettingsSlice = createSlice({
     name: 'buttonSettings',
     initialState,
     reducers: {
-         buttonSettingsFetching(state){
+        buttonSettingsFetching(state) {
             state.isLoading = true;
         },
-        loadButtonSettingsSuccess(state, action: PayloadAction<IButtonSettings>){
+        loadButtonSettingsSuccess(state, action: PayloadAction<IButtonSettings>) {
             state.isLoading = false;
             state.buttonSettings = action.payload;
-            state.error = '';
         },
-        loadButtonSettingsFail(state, action: PayloadAction<string>){
+        loadButtonSettingsFail(state) {
             state.isLoading = false;
-            state.error = action.payload;
         },
-        updateButtonSettingsSuccess(state, action: PayloadAction<IButtonSettings>){
+        updateButtonSettingsSuccess(state, action: PayloadAction<IButtonSettings>) {
             state.isLoading = false;
             state.buttonSettings = action.payload;
-            state.error = '';
         },
-        updateButtonSettingsFail(state, action: PayloadAction<string>){
+        updateButtonSettingsFail(state) {
             state.isLoading = false;
-            state.error = action.payload;
         },
-        restoreButtonSettingsSuccess(state, action: PayloadAction<boolean>){
+        restoreButtonSettingsSuccess(state, action: PayloadAction<boolean>) {
             state.restored = action.payload
         },
-        restoreButtonSettingsFail(state, action: PayloadAction<boolean>){
-            state.restored = action.payload
-        },
+        restoreButtonSettingsFail(state, action: PayloadAction<boolean>) {
+            state.restored = action.payload;
+            },
     }
 })
 

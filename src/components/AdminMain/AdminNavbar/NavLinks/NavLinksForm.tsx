@@ -11,10 +11,11 @@ import {
     deletePageWithNavLink
 } from "../../../../store/actions/pageSettingsAction";
 import {INavLink} from "../../../../interface/IAdminPageComponets";
+import Loader from "../../../UI/Loader/Loader";
 
 const NavLinksForm = () => {
     const dispatch = useAppDispatch();
-    const {isLoading, error, pages} = useAppSelector(state => state.pageSettingsReducer)
+    const {isLoading, pages} = useAppSelector(state => state.pageSettingsReducer)
     //states
     const [fields, setFields] = useState<INavLink[]>([navLinkFieldExample])
 
@@ -72,13 +73,13 @@ const NavLinksForm = () => {
                  className={[styles.AdminNavbar__container, styles.AdminNavbar__container_margin].join(' ')}>
             <h2 className={styles.AdminNavbar__heading}>Навигационные ссылки</h2>
             <div className={styles.AdminNavbar__formContainer}>
-                {pages && (
-                    <SavedNavLinks
+                {pages
+                    ?<SavedNavLinks
                         pages={pages}
                         deleteNavLink={deleteNavigationLink}
-                        isLoading={isLoading}
                     />
-                )}
+                    :<div className={styles.savedItems_UnLoaded}>{isLoading && (<Loader/>)}</div>
+                }
                 <NewNavLinkForm
                     fields={fields}
                     onChangeHandler={onChangeNewNavLinkHandler}

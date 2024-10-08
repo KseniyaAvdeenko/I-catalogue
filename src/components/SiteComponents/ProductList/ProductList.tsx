@@ -1,12 +1,10 @@
-import React, {useEffect, useRef} from 'react';
+import React from 'react';
 import styles from '../../../pages/Site/Site.module.sass';
 import {useAppDispatch, useAppSelector} from "../../../hooks/redux";
-import ProdImage from "../../UI/ProdImage/ProdImage";
-import SiteButton from "../../UI/SiteButton/SiteButton";
-import {getCurrency} from "../../../hooks/getCurrency";
 import ProdsPagination from "./ProdsPagination";
 import {changePageAction} from "../../../store/actions/paginatedProductsAction";
 import ProductItem from "./ProductItem";
+import Loader from "../../UI/Loader/Loader";
 
 
 interface IProductListProps {
@@ -17,7 +15,6 @@ interface IProductListProps {
 const ProductList: React.FC<IProductListProps> = ({payClickHandle, prodCardBg}) => {
     const {
         prodsPaginated,
-        error,
         isLoading,
         pageSize,
         pages,
@@ -37,17 +34,19 @@ const ProductList: React.FC<IProductListProps> = ({payClickHandle, prodCardBg}) 
 
     return (
         <div className={styles.page__content}>
-            <div className={styles.prodList}>
-                {isLoading && 'Loading...'}
-                {prodsPaginated && prodsPaginated.map(prod => (
-                    <ProductItem
-                        key={prod.id}
-                        prod={prod}
-                        prodCardBg={prodCardBg}
-                        payClickHandle={payClickHandle}
-                    />
-                ))}
-            </div>
+            {prodsPaginated
+                ? <div className={styles.prodList}>
+                    {prodsPaginated.map(prod => (
+                        <ProductItem
+                            key={prod.id}
+                            prod={prod}
+                            prodCardBg={prodCardBg}
+                            payClickHandle={payClickHandle}
+                        />
+                    ))}
+                </div>
+                : <div style={{margin: '0 auto'}}>{isLoading && (<Loader/>)}</div>
+            }
             <ProdsPagination getToPage={getToPage} onChangePage={onChangePage} pages={pages} currentPage={currentPage}/>
         </div>
     );
