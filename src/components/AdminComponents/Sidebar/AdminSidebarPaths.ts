@@ -90,7 +90,7 @@ export const SidebarContent: ISidebarContent[] = [
         subsectionsArray: prodSettingsPaths
     },
     {
-        section: 'editing_products',
+        section: 'editingProduct',
         content: 'Редактирование товаров/услуг',
         getItemsVisibilitySection: 'none',
         link: 'editing_products/',

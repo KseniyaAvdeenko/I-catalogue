@@ -13,7 +13,6 @@ interface ISidebarProps {
     setIntro: Function
 }
 
-
 const Sidebar: React.FC<ISidebarProps> = ({scrollToBlock, intro, setIntro}) => {
     //states
     const [sidebarContent, setSidebarContent] = useState<ISidebarContent[]>(SidebarContent)
@@ -95,14 +94,25 @@ const Sidebar: React.FC<ISidebarProps> = ({scrollToBlock, intro, setIntro}) => {
                                 sidebarItem={content}
                                 pagesCondition={true}
                                 isLoading={isLoading}
+                                editingProdCondition={false}
                             />
-                            : <SidebarWithoutSubsections
-                                key={content.link}
-                                getItemsVisibility={getItemsVisibility}
-                                sidebarItem={content}
-                                pagesCondition={false}
-                                isLoading={true}
-                            />
+                            : content.section === 'editingProduct'
+                                ? <SidebarWithoutSubsections
+                                    key={content.link}
+                                    getItemsVisibility={getItemsVisibility}
+                                    sidebarItem={content}
+                                    pagesCondition={false}
+                                    isLoading={true}
+                                    editingProdCondition={true}
+                                />
+                                : <SidebarWithoutSubsections
+                                    key={content.link}
+                                    getItemsVisibility={getItemsVisibility}
+                                    sidebarItem={content}
+                                    pagesCondition={false}
+                                    isLoading={true}
+                                    editingProdCondition={false}
+                                />
                 ))}
             </div>
         </aside>

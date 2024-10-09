@@ -3,20 +3,25 @@ import styles from "./Sidebar.module.sass";
 import {NavLink} from "react-router-dom";
 import {ISidebarContent} from "./AdminSidebarPaths";
 import Loader from "../../UI/Loader/Loader";
+import {useAppSelector} from "../../../hooks/redux";
 
 interface ISidebarWithoutSubsectionsProps {
     getItemsVisibility: Function;
     sidebarItem: ISidebarContent;
     pagesCondition: boolean;
-    isLoading: boolean
+    isLoading: boolean;
+    editingProdCondition: boolean
 }
 
 const SidebarWithoutSubsections: React.FC<ISidebarWithoutSubsectionsProps> = ({
+                                                                                  editingProdCondition,
                                                                                   sidebarItem,
                                                                                   getItemsVisibility,
                                                                                   pagesCondition,
                                                                                   isLoading
                                                                               }) => {
+    const {productsReadOnly} = useAppSelector(state => state.productReducer)
+
     return pagesCondition ? (
             <div className={styles.Sidebar__items}>
                 {isLoading && (<Loader/>)}
@@ -25,10 +30,21 @@ const SidebarWithoutSubsections: React.FC<ISidebarWithoutSubsectionsProps> = ({
                         ? [styles.Sidebar__heading, styles.Sidebar__item_margin, styles.linkActive].join(' ')
                         : styles.Sidebar__item, styles.Sidebar__item_margin].join(" ")}> {sidebarItem.content}
                 </NavLink>
-
             </div>)
-        : (
-            <div className={styles.Sidebar__items}>
+        : editingProdCondition
+            ? (<div className={styles.Sidebar__items}>
+                <div className={styles.Sidebar__itemsContainer}
+                     style={{display: productsReadOnly && productsReadOnly.length ? 'flex' : 'none'}}
+                     onClick={() => getItemsVisibility(sidebarItem.getItemsVisibilitySection)}>
+                    <NavLink to={sidebarItem.link} className={({isActive}) =>
+                        [isActive
+                            ? [styles.Sidebar__heading, styles.linkActive].join(' ')
+                            : styles.Sidebar__heading].join(' ')}>
+                        {sidebarItem.content}
+                    </NavLink>
+                </div>
+            </div>)
+            : (<div className={styles.Sidebar__items}>
                 <div className={styles.Sidebar__itemsContainer}
                      onClick={() => getItemsVisibility(sidebarItem.getItemsVisibilitySection)}>
                     <NavLink to={sidebarItem.link} className={({isActive}) =>
@@ -38,8 +54,7 @@ const SidebarWithoutSubsections: React.FC<ISidebarWithoutSubsectionsProps> = ({
                         {sidebarItem.content}
                     </NavLink>
                 </div>
-            </div>
-        )
+            </div>)
 };
 
 export default SidebarWithoutSubsections;
