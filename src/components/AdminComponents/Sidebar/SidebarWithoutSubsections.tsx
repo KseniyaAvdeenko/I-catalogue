@@ -9,7 +9,6 @@ interface ISidebarWithoutSubsectionsProps {
     getItemsVisibility: Function;
     sidebarItem: ISidebarContent;
     pagesCondition: boolean;
-    isLoading: boolean;
     editingProdCondition: boolean
 }
 
@@ -18,18 +17,20 @@ const SidebarWithoutSubsections: React.FC<ISidebarWithoutSubsectionsProps> = ({
                                                                                   sidebarItem,
                                                                                   getItemsVisibility,
                                                                                   pagesCondition,
-                                                                                  isLoading
                                                                               }) => {
     const {productsReadOnly} = useAppSelector(state => state.productReducer)
+    const {pages, isLoading} = useAppSelector(state => state.pageSettingsReducer)
 
     return pagesCondition ? (
             <div className={styles.Sidebar__items}>
                 {isLoading && (<Loader/>)}
-                <NavLink to={sidebarItem.link} className={({isActive}) =>
-                    [isActive
-                        ? [styles.Sidebar__heading, styles.Sidebar__item_margin, styles.linkActive].join(' ')
-                        : styles.Sidebar__item, styles.Sidebar__item_margin].join(" ")}> {sidebarItem.content}
-                </NavLink>
+                {pages && pages.map(page=>(
+                    <NavLink key={page.id} to={'pages_settings/' + page.slug} className={({isActive}) =>
+                        [isActive
+                            ? [styles.Sidebar__heading, styles.Sidebar__item_margin, styles.linkActive].join(' ')
+                            : styles.Sidebar__item, styles.Sidebar__item_margin].join(" ")}> Настройка страницы "{page.navLink}"
+                    </NavLink>
+                ))}
             </div>)
         : editingProdCondition
             ? (<div className={styles.Sidebar__items}>

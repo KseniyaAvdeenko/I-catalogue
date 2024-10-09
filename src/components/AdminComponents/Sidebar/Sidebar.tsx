@@ -16,23 +16,23 @@ interface ISidebarProps {
 const Sidebar: React.FC<ISidebarProps> = ({scrollToBlock, intro, setIntro}) => {
     //states
     const [sidebarContent, setSidebarContent] = useState<ISidebarContent[]>(SidebarContent)
-    const {pages, isLoading} = useAppSelector(state => state.pageSettingsReducer)
-
+    const {pages} = useAppSelector(state => state.pageSettingsReducer)
 
     useEffect(() => {
         if (pages) {
-            pages.map(page => {
-                const sidebarContentElem: ISidebarContent = {
+            if (!sidebarContent.find(el => el.section === 'pagesSettings'))
+                setSidebarContent(sidebarContent => [...sidebarContent, {
+                    order: 4,
                     section: 'pagesSettings',
-                    content: `Настройка и контент страницы "${page.navLink}"`,
+                    content: ``,
                     getItemsVisibilitySection: 'none',
-                    link: 'pages_settings/' + page.slug,
+                    link: 'pages_settings/',
                     subsections: false
-                }
-                setSidebarContent(sidebarContent => [...sidebarContent, sidebarContentElem])
-            })
+                }])
         }
     }, [pages])
+
+    console.log(sidebarContent)
 
     //methods
     const getItemsVisibility = (block: string) => {
@@ -59,7 +59,7 @@ const Sidebar: React.FC<ISidebarProps> = ({scrollToBlock, intro, setIntro}) => {
     return (
         <aside className={styles.Sidebar}>
             <div className={styles.Sidebar__container}>
-                {sidebarContent.map(content => (
+                {sidebarContent.sort((a, b) => a.order - b.order).map(content => (
                     content.subsections
                         ? content.section === 'prodSettings'
                             ? <SidebarItemsWithSubsections
@@ -93,7 +93,6 @@ const Sidebar: React.FC<ISidebarProps> = ({scrollToBlock, intro, setIntro}) => {
                                 getItemsVisibility={getItemsVisibility}
                                 sidebarItem={content}
                                 pagesCondition={true}
-                                isLoading={isLoading}
                                 editingProdCondition={false}
                             />
                             : content.section === 'editingProduct'
@@ -102,7 +101,6 @@ const Sidebar: React.FC<ISidebarProps> = ({scrollToBlock, intro, setIntro}) => {
                                     getItemsVisibility={getItemsVisibility}
                                     sidebarItem={content}
                                     pagesCondition={false}
-                                    isLoading={true}
                                     editingProdCondition={true}
                                 />
                                 : <SidebarWithoutSubsections
@@ -110,7 +108,6 @@ const Sidebar: React.FC<ISidebarProps> = ({scrollToBlock, intro, setIntro}) => {
                                     getItemsVisibility={getItemsVisibility}
                                     sidebarItem={content}
                                     pagesCondition={false}
-                                    isLoading={true}
                                     editingProdCondition={false}
                                 />
                 ))}

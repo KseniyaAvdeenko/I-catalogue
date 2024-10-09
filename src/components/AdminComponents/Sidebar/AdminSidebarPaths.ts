@@ -30,6 +30,7 @@ export const adminOrdersPaths: IAdminPaths[] = [
 ]
 
 export interface ISidebarContent {
+    order: number
     section: string;
     content: string;
     getItemsVisibilitySection: string
@@ -43,6 +44,7 @@ export interface ISidebarContent {
 
 export const SidebarContent: ISidebarContent[] = [
     {
+        order: 1,
         section: 'commonSettings',
         content: 'Общие настройки сайта',
         getItemsVisibilitySection: 'commonSettings',
@@ -53,14 +55,9 @@ export const SidebarContent: ISidebarContent[] = [
         arrowRotation: 180,
         subsectionsArray: commonSettingsPaths
     },
+
     {
-        section: 'seoSettings',
-        content: 'Настройки SEO сайта',
-        getItemsVisibilitySection: 'none',
-        link: 'seo_settings/',
-        subsections: false
-    },
-    {
+        order: 2,
         section: 'navbar',
         content: 'Контент “шапки” и “подвала” сайта',
         getItemsVisibilitySection: 'navbar',
@@ -72,6 +69,7 @@ export const SidebarContent: ISidebarContent[] = [
         subsectionsArray: navbarPaths
     },
     {
+        order: 3,
         section: 'mainPageSettings',
         content: 'Настройка главной страницы',
         getItemsVisibilitySection: 'none',
@@ -79,6 +77,7 @@ export const SidebarContent: ISidebarContent[] = [
         subsections: false
     },
     {
+        order: 5,
         section: 'prodSettings',
         content: 'Настройка и контент товаров/услуг',
         getItemsVisibilitySection: 'prodSettings',
@@ -90,13 +89,15 @@ export const SidebarContent: ISidebarContent[] = [
         subsectionsArray: prodSettingsPaths
     },
     {
+        order: 6,
         section: 'editingProduct',
         content: 'Редактирование товаров/услуг',
         getItemsVisibilitySection: 'none',
         link: 'editing_products/',
         subsections: false
     },
-     {
+    {
+        order: 7,
         section: 'modalFormSettings',
         content: 'Настройки модального окна',
         getItemsVisibilitySection: 'modalFormSettings',
@@ -108,6 +109,15 @@ export const SidebarContent: ISidebarContent[] = [
         subsectionsArray: modalFormSettingsPaths
     },
     {
+        order: 8,
+        section: 'seoSettings',
+        content: 'Настройки SEO сайта',
+        getItemsVisibilitySection: 'none',
+        link: 'seo_settings/',
+        subsections: false
+    },
+    {
+        order: 9,
         section: 'adminOrders',
         content: 'Заказы товаров/услуг',
         getItemsVisibilitySection: 'adminOrders',
