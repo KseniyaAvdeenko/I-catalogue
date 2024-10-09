@@ -13,7 +13,7 @@ const SidebarEditProdItems: React.FC<ISidebarEditProdItemsProps> = ({getItemsVis
     return (
         <div className={styles.Sidebar__items} style={{display: productsReadOnly && productsReadOnly.length ?'flex':'none'}}>
             <div className={styles.Sidebar__itemsContainer} onClick={() => getItemsVisibility('none')}>
-                <NavLink to={'editing_products'} className={({isActive}) =>
+                <NavLink to={'editing_products/'} className={({isActive}) =>
                     [isActive
                         ? [styles.Sidebar__heading, styles.linkActive].join(' ')
                         : styles.Sidebar__heading].join(' ')}>
