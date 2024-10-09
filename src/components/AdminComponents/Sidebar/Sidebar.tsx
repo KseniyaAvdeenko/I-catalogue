@@ -7,15 +7,17 @@ import SidebarMainPageItems from "./SidebarMainPageItems";
 import SidebarProdSettings from "./SidebarProdSettings";
 import SidebarEditProdItems from "./SidebarEditProdItems";
 import SidebarModalFormSettingsItems from "./SidebarModalFormSettingsItems";
-import {ISidebarItemsVisibility} from "../../../interface/IAdminPageComponets";
+import {IIntro, ISidebarItemsVisibility} from "../../../interface/IAdminPageComponets";
 import SidebarSeoSettings from "./SidebarSeoSettings";
 
 interface ISidebarProps {
-    scrollToBlock: Function
+    scrollToBlock: Function;
+    intro: IIntro;
+    setIntro: Function
 }
 
 
-const Sidebar: React.FC<ISidebarProps> = ({scrollToBlock}) => {
+const Sidebar: React.FC<ISidebarProps> = ({scrollToBlock, intro, setIntro}) => {
     //states
     const [commonSettingsItems, setCommonSettingsItems] = useState<ISidebarItemsVisibility>({
         display: 'none', rotate: 180, open: false
@@ -69,6 +71,9 @@ const Sidebar: React.FC<ISidebarProps> = ({scrollToBlock}) => {
     }
 
     useEffect(() => {
+        window.location.pathname === '/admin_page/'
+            ? setIntro({...intro, display: 'block', justifyContent: 'center'})
+            : setIntro({...intro, display: 'none', justifyContent: 'start'})
         if (window.location.pathname === "/admin_page/common_settings/") getItemsVisibility('commonSettings')
         if (window.location.pathname === "/admin_page/navbar/") getItemsVisibility('navbar')
         if (window.location.pathname === "/admin_page/products_settings/") getItemsVisibility('prodSettings')
@@ -76,27 +81,29 @@ const Sidebar: React.FC<ISidebarProps> = ({scrollToBlock}) => {
     }, [window.location.pathname])
 
     return (
-        <aside className={styles.Sidebar__container}>
-            <SidebarCommonSettingsItems
-                getItemsVisibility={getItemsVisibility}
-                commonSettingsItems={commonSettingsItems}
-                scrollToBlock={scrollToBlock}/>
-            <SidebarSeoSettings getItemsVisibility={getItemsVisibility}/>
-            <SidebarNavbarItems
-                getItemsVisibility={getItemsVisibility}
-                navbarItems={navbarItems}
-                scrollToBlock={scrollToBlock}/>
-            <SidebarMainPageItems getItemsVisibility={getItemsVisibility}/>
-            <SidebarPagesItems getItemsVisibility={getItemsVisibility}/>
-            <SidebarProdSettings
-                getItemsVisibility={getItemsVisibility}
-                prodSettingsItems={prodSettingsItems}
-                scrollToBlock={scrollToBlock}/>
-            <SidebarEditProdItems getItemsVisibility={getItemsVisibility}/>
-            <SidebarModalFormSettingsItems
-                getItemsVisibility={getItemsVisibility}
-                modalFormSettingsItems={modalFormSettingsItems}
-                scrollToBlock={scrollToBlock}/>
+        <aside className={styles.Sidebar}>
+            <div className={styles.Sidebar__container}>
+                <SidebarCommonSettingsItems
+                    getItemsVisibility={getItemsVisibility}
+                    commonSettingsItems={commonSettingsItems}
+                    scrollToBlock={scrollToBlock}/>
+                <SidebarSeoSettings getItemsVisibility={getItemsVisibility}/>
+                <SidebarNavbarItems
+                    getItemsVisibility={getItemsVisibility}
+                    navbarItems={navbarItems}
+                    scrollToBlock={scrollToBlock}/>
+                <SidebarMainPageItems getItemsVisibility={getItemsVisibility}/>
+                <SidebarPagesItems getItemsVisibility={getItemsVisibility}/>
+                <SidebarProdSettings
+                    getItemsVisibility={getItemsVisibility}
+                    prodSettingsItems={prodSettingsItems}
+                    scrollToBlock={scrollToBlock}/>
+                <SidebarEditProdItems getItemsVisibility={getItemsVisibility}/>
+                <SidebarModalFormSettingsItems
+                    getItemsVisibility={getItemsVisibility}
+                    modalFormSettingsItems={modalFormSettingsItems}
+                    scrollToBlock={scrollToBlock}/>
+            </div>
         </aside>
     );
 };

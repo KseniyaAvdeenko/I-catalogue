@@ -32,7 +32,7 @@ const AdminHeader: React.FC<IAdminHeader> = ({children}) => {
 
     return (
         <header className={styles.adminHeader}>
-            <img src={AppLogo} alt="app logo"/>
+            <Link to={'/admin_page/'} className={styles.adminHeader__logo}><img src={AppLogo} alt="app logo"/></Link>
             {children && children}
             {isAuth
                 ? <div className={styles.auth}>

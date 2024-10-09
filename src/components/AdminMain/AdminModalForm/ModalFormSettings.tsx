@@ -3,12 +3,12 @@ import styles from "../AdminMain.module.sass";
 import FormSettings from "./FormSettings";
 import ModalFormInputs from "./ModalFormInputs";
 
-const ModalFormSettings = React.forwardRef<HTMLElement, {}>(({}, ref) => {
+const ModalFormSettings = React.forwardRef<HTMLDivElement, {}>(({}, ref) => {
     return (
-        <main ref={ref} className={styles.AdminMain}>
+        <div ref={ref} className={styles.AdminMain}>
             <FormSettings/>
             <ModalFormInputs/>
-        </main>
+        </div>
     );
 });
 

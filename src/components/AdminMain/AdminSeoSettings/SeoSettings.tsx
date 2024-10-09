@@ -60,7 +60,7 @@ const SeoSettings = () => {
     const deleteField = (id: number) => setFields(fields.filter(el => el.id !== id))
 
     return (
-        <main className={styles.AdminNavbar}>
+        <div className={styles.AdminNavbar}>
             <section className={[styles.AdminNavbar__container, styles.AdminNavbar__container_margin].join(' ')}>
                 <h2 className={styles.AdminNavbar__heading}>Настройки SEO сайта</h2>
                 <div className={styles.AdminNavbar__formContainer}>
@@ -82,7 +82,7 @@ const SeoSettings = () => {
                     </button>
                 </div>
             </section>
-        </main>
+        </div>
     );
 };
 

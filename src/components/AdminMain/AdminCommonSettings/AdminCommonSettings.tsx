@@ -5,14 +5,14 @@ import HeaderSettingsForm from "./HeaderSettingsForm/HeaderSettingsForm";
 import FooterSettingsForm from "./FooterSettingsForm/FooterSettingsForm";
 import ButtonSettingsForm from "./ButtonSettingsForm/ButtonSettingsForm";
 
-const AdminCommonSettings = React.forwardRef<HTMLElement, {}>((props, ref) => {
+const AdminCommonSettings = React.forwardRef<HTMLDivElement, {}>((props, ref) => {
     return (
-        <main ref={ref} className={styles.AdminMain}>
+        <div ref={ref} className={styles.AdminMain}>
             <CommonSettingsForm/>
             <HeaderSettingsForm/>
             <FooterSettingsForm/>
             <ButtonSettingsForm/>
-        </main>
+        </div>
     );
 })
 

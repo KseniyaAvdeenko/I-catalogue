@@ -97,7 +97,7 @@ const PagesSettings = () => {
             })
     }
     return (
-        <main className={styles.AdminMain}>
+        <div className={styles.AdminMain}>
             <section className={[styles.AdminMain__container, styles.AdminMain__container_margin].join(' ')}>
                 <h2 className={styles.AdminMain__heading}>Настройка и контент страницы</h2>
                 <h3 className={styles.AdminMain__subheading}>Настройка страницы {page?.navLink}</h3>
@@ -158,7 +158,7 @@ const PagesSettings = () => {
 
             <PageContent page={page}/>
 
-        </main>
+        </div>
     );
 }
 

@@ -90,7 +90,7 @@ const MainPageSettings = () => {
             })
     }
     return (
-        <main className={styles.AdminMain}>
+        <div className={styles.AdminMain}>
             <section className={[styles.AdminMain__container, styles.AdminMain__container_margin].join(' ')}>
                 <h2 className={styles.AdminMain__heading}>Настройка главной страницы</h2>
                 {mainPageSettings
@@ -151,7 +151,7 @@ const MainPageSettings = () => {
                     : <div className={styles.AdminMain__formContainerUnLoaded}>{isLoading && (<Loader/>)}</div>
                 }
             </section>
-        </main>
+        </div>
     );
 };
 

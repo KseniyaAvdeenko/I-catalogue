@@ -1,4 +1,4 @@
-import React, {useRef} from 'react';
+import React, {useRef, useState} from 'react';
 import styles from './AdminPage.module.sass'
 import AdminCommonSettings from "../../components/AdminMain/AdminCommonSettings/AdminCommonSettings";
 import {Route, Routes} from "react-router-dom";
@@ -14,13 +14,16 @@ import {setFavicon} from "../../hooks/setFavicon";
 import Favicon from '../../assets/img/I-Catalogue.svg'
 import SeoSettings from "../../components/AdminMain/AdminSeoSettings/SeoSettings";
 import {useAppSelector} from "../../hooks/redux";
+import {IIntro} from "../../interface/IAdminPageComponets";
 
 const AdminPage = () => {
     const auth = useAppSelector(state => state.authReducer)
-    const commonSettingsRef = useRef<HTMLElement>(null);
-    const navbarContentRef = useRef<HTMLElement>(null);
-    const productSettingsRef = useRef<HTMLElement>(null)
-    const modalFormSettingsRef = useRef<HTMLElement>(null)
+    const commonSettingsRef = useRef<HTMLDivElement>(null);
+    const navbarContentRef = useRef<HTMLDivElement>(null);
+    const productSettingsRef = useRef<HTMLDivElement>(null)
+    const modalFormSettingsRef = useRef<HTMLDivElement>(null)
+
+    const [intro, setIntro] = useState<IIntro>({display: "block", justifyContent: "center"})
 
     const scrollToBlock = (sectionId: string) => {
         scrollingToSection(sectionId, commonSettingsRef.current);
@@ -32,17 +35,20 @@ const AdminPage = () => {
 
     return auth.isAuth ? (
             <section className={styles.AdminPage}>
-                <Sidebar scrollToBlock={scrollToBlock}/>
-                <Routes>
-                    <Route path={'common_settings/'} element={<AdminCommonSettings ref={commonSettingsRef}/>}/>
-                    <Route path={'navbar/'} element={<AdminNavbar ref={navbarContentRef}/>}/>
-                    <Route path={'seo_settings/'} element={<SeoSettings/>}/>
-                    <Route path={'main_page_settings/'} element={<MainPageSettings/>}/>
-                    <Route path={'pages_settings/:slug'} element={<PagesSettings/>}/>
-                    <Route path={'products_settings/'} element={<ProductSettings ref={productSettingsRef}/>}/>
-                    <Route path={'editing_products/'} element={<Product/>}/>
-                    <Route path={'modal_form/'} element={<ModalFormSettings ref={modalFormSettingsRef}/>}/>
-                </Routes>
+                <Sidebar scrollToBlock={scrollToBlock} intro={intro} setIntro={setIntro}/>
+                <main className={styles.AdminPage__container} style={{justifyContent: intro.justifyContent}}>
+                    <div style={{display: intro.display}} className={styles.AdminPage__intro}>Здесь Вы сможете настроить свой интернет-каталог</div>
+                    <Routes>
+                        <Route path={'common_settings/'} element={<AdminCommonSettings ref={commonSettingsRef}/>}/>
+                        <Route path={'navbar/'} element={<AdminNavbar ref={navbarContentRef}/>}/>
+                        <Route path={'seo_settings/'} element={<SeoSettings/>}/>
+                        <Route path={'main_page_settings/'} element={<MainPageSettings/>}/>
+                        <Route path={'pages_settings/:slug'} element={<PagesSettings/>}/>
+                        <Route path={'products_settings/'} element={<ProductSettings ref={productSettingsRef}/>}/>
+                        <Route path={'editing_products/'} element={<Product/>}/>
+                        <Route path={'modal_form/'} element={<ModalFormSettings ref={modalFormSettingsRef}/>}/>
+                    </Routes>
+                </main>
                 {/*<div style={{position: 'fixed', bottom: '5%', right: '2rem'}}>Preview</div>*/}
             </section>)
         : (<main className={styles.AdminPage_notAuth}>Вы не авторизованы</main>)

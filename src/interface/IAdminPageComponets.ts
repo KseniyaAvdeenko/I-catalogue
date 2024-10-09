@@ -2,6 +2,10 @@ import {blockHeadingTypes} from "./IPagesSettings";
 import {SeoTagType} from "./ISeoSettings";
 import {SocialLinkIcons, SocialLinkIconType} from "./INavbar";
 
+export interface IIntro{
+    display: 'block'|'none'; justifyContent: 'start'|"center"
+}
+
 export interface IAdminComponentsProps {
     onChangeHandler: Function;
 }

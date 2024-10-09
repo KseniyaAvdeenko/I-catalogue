@@ -5,13 +5,13 @@ import NavLinksForm from "./NavLinks/NavLinksForm";
 import SocialLinksForm from "./SocialLinks/SocialLinksForm";
 
 
-const AdminNavbar = React.forwardRef<HTMLElement, {}>((props, ref) => {
+const AdminNavbar = React.forwardRef<HTMLDivElement, {}>((props, ref) => {
     return (
-        <main ref={ref} className={styles.AdminNavbar}>
+        <div ref={ref} className={styles.AdminNavbar}>
             <ContactsForm/>
             <SocialLinksForm/>
             <NavLinksForm/>
-        </main>
+        </div>
     );
 })
 

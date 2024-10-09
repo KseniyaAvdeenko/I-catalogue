@@ -82,7 +82,7 @@ const Product = () => {
             })
     }
     return (
-        <main className={styles.AdminNavbar}>
+        <div className={styles.AdminNavbar}>
             <section id={'editingProduct'}
                      className={[styles.AdminNavbar__container, styles.AdminNavbar__container_margin].join(' ')}>
                 <div className={[styles.selectProd].join()}>
@@ -112,7 +112,7 @@ const Product = () => {
                     )}
                 </div>
             </section>
-        </main>
+        </div>
     );
 }
 
