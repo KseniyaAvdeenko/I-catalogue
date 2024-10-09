@@ -15,6 +15,7 @@ import Favicon from '../../assets/img/I-Catalogue.svg'
 import SeoSettings from "../../components/AdminMain/AdminSeoSettings/SeoSettings";
 import {useAppSelector} from "../../hooks/redux";
 import {IIntro} from "../../interface/IAdminPageComponets";
+import AdminOrders from "../../components/AdminMain/AdminOrders/AdminOrders";
 
 const AdminPage = () => {
     const auth = useAppSelector(state => state.authReducer)
@@ -22,6 +23,7 @@ const AdminPage = () => {
     const navbarContentRef = useRef<HTMLDivElement>(null);
     const productSettingsRef = useRef<HTMLDivElement>(null)
     const modalFormSettingsRef = useRef<HTMLDivElement>(null)
+    const ordersRef = useRef<HTMLDivElement>(null)
 
     const [intro, setIntro] = useState<IIntro>({display: "block", justifyContent: "center"})
 
@@ -47,6 +49,7 @@ const AdminPage = () => {
                         <Route path={'products_settings/'} element={<ProductSettings ref={productSettingsRef}/>}/>
                         <Route path={'editing_products/'} element={<Product/>}/>
                         <Route path={'modal_form/'} element={<ModalFormSettings ref={modalFormSettingsRef}/>}/>
+                        <Route path={'orders/'} element={<AdminOrders ref={ordersRef}/>}/>
                     </Routes>
                 </main>
                 {/*<div style={{position: 'fixed', bottom: '5%', right: '2rem'}}>Preview</div>*/}

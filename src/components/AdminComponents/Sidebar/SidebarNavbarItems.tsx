@@ -3,6 +3,7 @@ import styles from "./Sidebar.module.sass";
 import {NavLink} from "react-router-dom";
 import ArrowDown from "../../../assets/img/arrowDown.svg";
 import {ISidebarItemsVisibility} from "../../../interface/IAdminPageComponets";
+import {navbarPaths} from "./AdminSidebarPaths";
 
 
 interface ISidebarNavbarItemsProps {
@@ -23,15 +24,11 @@ const SidebarNavbarItems: React.FC<ISidebarNavbarItemsProps> = ({scrollToBlock, 
                      alt="arrowDown"/>
             </div>
             <div className={styles.Sidebar__itemContainer} style={{display: navbarItems.display}}>
-                <div className={[styles.Sidebar__item, styles.Sidebar__item_margin].join(' ')}
-                     onClick={() => scrollToBlock('contactsSection')}>Контакты
-                </div>
-                <div className={[styles.Sidebar__item, styles.Sidebar__item_margin].join(' ')}
-                     onClick={() => scrollToBlock('socialLinksSection')}>Социальные ссылки-иконки
-                </div>
-                <div className={[styles.Sidebar__item, styles.Sidebar__item_margin].join(' ')}
-                     onClick={() => scrollToBlock('navLinksSection')}>Навигационные ссылки
-                </div>
+                {navbarPaths.map(path=>(
+                    <div key={path.section} className={[styles.Sidebar__item, styles.Sidebar__item_margin].join(' ')}
+                         onClick={() => scrollToBlock(path.section)}>{path.content}
+                    </div>
+                ))}
             </div>
         </div>
     );

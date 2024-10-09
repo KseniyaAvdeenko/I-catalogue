@@ -9,6 +9,7 @@ import SidebarEditProdItems from "./SidebarEditProdItems";
 import SidebarModalFormSettingsItems from "./SidebarModalFormSettingsItems";
 import {IIntro, ISidebarItemsVisibility} from "../../../interface/IAdminPageComponets";
 import SidebarSeoSettings from "./SidebarSeoSettings";
+import SidebarOrdersItems from "./SidebarOrdersItems";
 
 interface ISidebarProps {
     scrollToBlock: Function;
@@ -31,10 +32,14 @@ const Sidebar: React.FC<ISidebarProps> = ({scrollToBlock, intro, setIntro}) => {
     const [modalFormSettingsItems, setModalSettingsItems] = useState<ISidebarItemsVisibility>({
         display: 'none', rotate: 180, open: false
     })
+    const [ordersItems, setOrdersItems] = useState<ISidebarItemsVisibility>({
+        display: 'none', rotate: 180, open: false
+    })
 
     //methods
     const getItemsVisibility = (block: string) => {
         if (block === 'commonSettings') {
+            setOrdersItems({...ordersItems, open: false, rotate: 180, display: 'none'})
             setNavbarItems({...navbarItems, open: false, rotate: 180, display: 'none'});
             setProdSettingsItems({...prodSettingsItems, open: false, rotate: 180, display: 'none'});
             setModalSettingsItems({...modalFormSettingsItems, open: false, rotate: 180, display: 'none'})
@@ -42,6 +47,7 @@ const Sidebar: React.FC<ISidebarProps> = ({scrollToBlock, intro, setIntro}) => {
                 ? setCommonSettingsItems({...commonSettingsItems, open: false, rotate: 180, display: 'none'})
                 : setCommonSettingsItems({...commonSettingsItems, open: true, rotate: 0, display: 'flex'})
         } else if (block === 'navbar') {
+            setOrdersItems({...ordersItems, open: false, rotate: 180, display: 'none'})
             setCommonSettingsItems({...commonSettingsItems, open: false, rotate: 180, display: 'none'});
             setProdSettingsItems({...prodSettingsItems, open: false, rotate: 180, display: 'none'});
             setModalSettingsItems({...modalFormSettingsItems, open: false, rotate: 180, display: 'none'})
@@ -49,6 +55,7 @@ const Sidebar: React.FC<ISidebarProps> = ({scrollToBlock, intro, setIntro}) => {
                 ? setNavbarItems({...navbarItems, open: false, rotate: 180, display: 'none'})
                 : setNavbarItems({...navbarItems, open: true, rotate: 0, display: 'flex'})
         } else if (block === 'prodSettings') {
+            setOrdersItems({...ordersItems, open: false, rotate: 180, display: 'none'})
             setCommonSettingsItems({...commonSettingsItems, open: false, rotate: 180, display: 'none'});
             setNavbarItems({...navbarItems, open: false, rotate: 180, display: 'none'});
             setModalSettingsItems({...modalFormSettingsItems, open: false, rotate: 180, display: 'none'})
@@ -56,13 +63,22 @@ const Sidebar: React.FC<ISidebarProps> = ({scrollToBlock, intro, setIntro}) => {
                 ? setProdSettingsItems({...prodSettingsItems, open: false, rotate: 180, display: 'none'})
                 : setProdSettingsItems({...prodSettingsItems, open: true, rotate: 0, display: 'flex'})
         } else if (block === 'modalFormSettings') {
+            setOrdersItems({...ordersItems, open: false, rotate: 180, display: 'none'})
             setCommonSettingsItems({...commonSettingsItems, open: false, rotate: 180, display: 'none'});
             setNavbarItems({...navbarItems, open: false, rotate: 180, display: 'none'});
             setProdSettingsItems({...prodSettingsItems, open: false, rotate: 180, display: 'none'});
             modalFormSettingsItems.open
                 ? setModalSettingsItems({...modalFormSettingsItems, open: false, rotate: 180, display: 'none'})
                 : setModalSettingsItems({...modalFormSettingsItems, open: true, rotate: 0, display: 'flex'})
-        } else {
+        } else if (block === 'adminOrders') {
+            setModalSettingsItems({...modalFormSettingsItems, open: false, rotate: 180, display: 'none'})
+            setCommonSettingsItems({...commonSettingsItems, open: false, rotate: 180, display: 'none'});
+            setNavbarItems({...navbarItems, open: false, rotate: 180, display: 'none'});
+            setProdSettingsItems({...prodSettingsItems, open: false, rotate: 180, display: 'none'});
+            ordersItems.open
+                ? setOrdersItems({...ordersItems, open: false, rotate: 180, display: 'none'})
+                : setOrdersItems({...ordersItems, open: true, rotate: 0, display: 'flex'})
+        }else {
             setNavbarItems({...navbarItems, open: false, rotate: 180, display: 'none'});
             setCommonSettingsItems({...commonSettingsItems, open: false, rotate: 180, display: 'none'});
             setModalSettingsItems({...modalFormSettingsItems, open: false, rotate: 180, display: 'none'})
@@ -102,6 +118,10 @@ const Sidebar: React.FC<ISidebarProps> = ({scrollToBlock, intro, setIntro}) => {
                 <SidebarModalFormSettingsItems
                     getItemsVisibility={getItemsVisibility}
                     modalFormSettingsItems={modalFormSettingsItems}
+                    scrollToBlock={scrollToBlock}/>
+                <SidebarOrdersItems
+                    getItemsVisibility={getItemsVisibility}
+                    ordersItems={ordersItems}
                     scrollToBlock={scrollToBlock}/>
             </div>
         </aside>

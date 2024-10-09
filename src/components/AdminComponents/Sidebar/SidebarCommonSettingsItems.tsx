@@ -3,6 +3,7 @@ import styles from "./Sidebar.module.sass";
 import {NavLink} from "react-router-dom";
 import ArrowDown from "../../../assets/img/arrowDown.svg";
 import {ISidebarItemsVisibility} from "../../../interface/IAdminPageComponets";
+import {commonSettingsPaths} from "./AdminSidebarPaths";
 
 
 interface ISidebarCommonSettingsItemsProps {
@@ -28,18 +29,10 @@ const SidebarCommonSettingsItems: React.FC<ISidebarCommonSettingsItemsProps> = (
                      alt="arrowDown"/>
             </div>
             <div className={styles.Sidebar__itemContainer} style={{display: commonSettingsItems.display}}>
-                <div className={[styles.Sidebar__item, styles.Sidebar__item_margin].join(' ')}
-                     onClick={() => scrollToBlock('commonSettingsSection')}>Общие настройки сайта
-                </div>
-                <div className={[styles.Sidebar__item, styles.Sidebar__item_margin].join(' ')}
-                     onClick={() => scrollToBlock('headerSettingsSection')}>Настройка ‘шапки’ сайта
-                </div>
-                <div className={[styles.Sidebar__item, styles.Sidebar__item_margin].join(' ')}
-                     onClick={() => scrollToBlock('footerSettingsSection')}>Настройка “подвала” сайта
-                </div>
-                <div className={[styles.Sidebar__item].join(' ')}
-                     onClick={() => scrollToBlock('buttonSettingsSection')}>Настройка кнопок
-                </div>
+                {commonSettingsPaths.map(path => (
+                    <div key={path.section} className={[styles.Sidebar__item].join(' ')}
+                         onClick={() => scrollToBlock(path.section)}>{path.content}</div>
+                ))}
             </div>
         </div>
     );
