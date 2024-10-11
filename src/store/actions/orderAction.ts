@@ -76,7 +76,7 @@ export const checkPayment = (youkassaId: string, orderId: number, paymentId: num
     }
 }
 
-export const loadOrderStats = () => async (dispatch: AppDispatch) => {
+export const loadOrderStats = (access: string) => async (dispatch: AppDispatch) => {
     if (access) {
         try {
             const response = await axios.get(apiUrl + `order/orders_stats/`, getAuthConfigApplicationJson(access));

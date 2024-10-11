@@ -6,6 +6,7 @@ import {Link} from "react-router-dom";
 import {logout, refreshToken} from "../../../store/actions/authAction";
 import {loadCurrentUser} from "../../../store/actions/userAction";
 import {decodeToken} from "../../../hooks/encodeDecodeTokens";
+import {loadOrderStats} from "../../../store/actions/orderAction";
 
 
 interface IAdminHeader {
@@ -28,6 +29,7 @@ const AdminHeader: React.FC<IAdminHeader> = ({children}) => {
 
     useEffect(() => {
         if (access) dispatch(loadCurrentUser(decodeToken(access)));
+        if (access) dispatch(loadOrderStats(decodeToken(access)))
     }, [access])
 
     return (
