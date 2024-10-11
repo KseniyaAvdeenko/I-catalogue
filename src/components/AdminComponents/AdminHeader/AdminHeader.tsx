@@ -29,7 +29,6 @@ const AdminHeader: React.FC<IAdminHeader> = ({children}) => {
 
     useEffect(() => {
         if (access) dispatch(loadCurrentUser(decodeToken(access)));
-        if (access) dispatch(loadOrderStats(decodeToken(access)))
     }, [access])
 
     return (

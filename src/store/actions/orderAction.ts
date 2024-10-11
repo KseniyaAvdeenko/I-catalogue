@@ -76,10 +76,10 @@ export const checkPayment = (youkassaId: string, orderId: number, paymentId: num
     }
 }
 
-export const loadOrderStats = (access: string) => async (dispatch: AppDispatch) => {
+export const loadOrderStats = (access: string, num: number, interval:string) => async (dispatch: AppDispatch) => {
     if (access) {
         try {
-            const response = await axios.get(apiUrl + `order/orders_stats/`, getAuthConfigApplicationJson(access));
+            const response = await axios.get(apiUrl + `order/orders_stats/?num=${num}&interval=${interval}`, getAuthConfigApplicationJson(access));
             dispatch(orderSlice.actions.loadOrdersStatsSuccess(response.data))
         } catch (e) {
             dispatch(errorSlice.actions.oderLoadingError('Ошибка загрузки статистики по заказам'))
