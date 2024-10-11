@@ -33,7 +33,6 @@ const HeaderSettingsForm = () => {
                 ...hoverStyleOptionsVisibility,
                 open: false,
                 display: 'none',
-                bottom: '-17rem'
             })
         }
     }

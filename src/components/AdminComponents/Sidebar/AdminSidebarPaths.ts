@@ -26,7 +26,7 @@ export const modalFormSettingsPaths: IAdminPaths[] = [
 ]
 export const adminOrdersPaths: IAdminPaths[] = [
     {section: 'ordersTable', content: 'Сводная таблица заказов'},
-    {section: 'addingFormInputsSection', content: 'Статистика по заказам'},
+    {section: 'ordersStatistics', content: 'Статистика по заказам'},
 ]
 
 export interface ISidebarContent {

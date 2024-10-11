@@ -23,13 +23,11 @@ const FormSettings = () => {
                 ...headingTypeOptionsVisibility,
                 open: false,
                 display: 'none',
-                bottom: '-20.2rem'
             })
             : setHeadingTypeOptionsVisibility({
                 ...headingTypeOptionsVisibility,
                 open: true,
                 display: 'flex',
-                bottom: '-20.2rem'
             })
     }
 

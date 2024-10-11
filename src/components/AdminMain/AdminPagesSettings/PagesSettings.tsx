@@ -77,8 +77,7 @@ const PagesSettings = () => {
         if (e.target.name === 'blockHeadingType') setHeadingTypeOptionsVisibility({
             ...headingTypeOptionsVisibility,
             open: false,
-            display: 'none',
-            bottom: '-20.2rem'
+            display: 'none'
         })
     }
     const changeHeadingTypeOptionsContainerVisibility = () => {
@@ -86,14 +85,12 @@ const PagesSettings = () => {
             ? setHeadingTypeOptionsVisibility({
                 ...headingTypeOptionsVisibility,
                 open: false,
-                display: 'none',
-                bottom: '-20.2rem'
+                display: 'none'
             })
             : setHeadingTypeOptionsVisibility({
                 ...headingTypeOptionsVisibility,
                 open: true,
-                display: 'flex',
-                bottom: '-20.2rem'
+                display: 'flex'
             })
     }
     return (

@@ -32,8 +32,6 @@ const Sidebar: React.FC<ISidebarProps> = ({scrollToBlock, intro, setIntro}) => {
         }
     }, [pages])
 
-    console.log(sidebarContent)
-
     //methods
     const getItemsVisibility = (block: string) => {
         setSidebarContent(sidebarContent =>

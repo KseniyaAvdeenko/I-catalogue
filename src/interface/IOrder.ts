@@ -24,12 +24,17 @@ export interface IPaymentBase {
     status: string
 }
 
-export interface IPayment extends IPaymentBase{
+export interface IPayment extends IPaymentBase {
     id: number
 }
 
-export interface IOrder extends INewOrder {
+export interface IOrder {
+    id: number
+    paid: boolean;
     order_date: string;
-    product: IProdForOrder;
-    payment: IPayment|{}
+    prod: IProdForOrder;
+    payment: IPayment | {}
+    total_price: number;
+    form_input_values: { [key: string]: string | number }
+    currency: string
 }
