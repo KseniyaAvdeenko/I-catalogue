@@ -1,11 +1,12 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {IOrderInitial, IPaymentData} from "../../interface/IInitialStates";
-import {INewOrder, IOrder} from "../../interface/IOrder";
+import {INewOrder, IOrder, IOrderStats} from "../../interface/IOrder";
 import {encodeToken} from "../../hooks/encodeDecodeTokens";
 
 
 const initialState: IOrderInitial = {
     isLoading: false,
+    ordersStats: null,
     orders: null,
     newOrder: null,
     paymentPaid: false,
@@ -59,6 +60,9 @@ export const orderSlice = createSlice({
         },
         paymentPaidSuccess(state){
             state.paymentPaid = true
+        },
+        loadOrdersStatsSuccess(state, action: PayloadAction<IOrderStats[]>) {
+            state.ordersStats = action.payload
         }
     }
 })

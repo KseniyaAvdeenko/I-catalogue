@@ -7,11 +7,16 @@ import DetailedProdHeading from "../../components/UI/Heading/DetailedProdHeading
 import {IProdReadOnly} from "../../interface/IProduct";
 import DetailProdLayout1 from "../../components/SiteComponents/DetaiProductPage/DetailProdLayout1";
 import DetailProdLayout2 from "../../components/SiteComponents/DetaiProductPage/DetailProdLayout2";
-import {IButtonSettings} from "../../interface/ICommonSettings";
 import ModalPopUp from "../../components/SiteComponents/ModalPopup/ModalPopUp";
 import Loader from "../../components/UI/Loader/Loader";
 
-const ProductPage = () => {
+interface IProdPageProps {
+    formData: { [key: string]: string | number; };
+    getFormInputs: Function;
+    setFormData: Function
+}
+
+const ProductPage: React.FC<IProdPageProps> = ({formData, setFormData, getFormInputs}) => {
     const {prodId} = useParams();
     const dispatch = useAppDispatch();
     const {prodPageSettings} = useAppSelector(state => state.prodPageSettingsReducer)
@@ -53,9 +58,13 @@ const ProductPage = () => {
                 isModalOpen={modalVisibility}
                 onClose={() => setModalVisibility(false)}
                 data={modalData}
+                formData={formData}
+                setFormData={setFormData}
+                getFormInputs={getFormInputs}
             />
         </main>)
-        : (<main className={styles.page__container} style={{alignItems: 'center', justifyContent: 'center'}}>{isLoading && (<Loader/>)}</main>)
+        : (<main className={styles.page__container}
+                 style={{alignItems: 'center', justifyContent: 'center'}}>{isLoading && (<Loader/>)}</main>)
 };
 
 export default ProductPage;

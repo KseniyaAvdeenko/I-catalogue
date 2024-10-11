@@ -14,8 +14,6 @@ const OrdersFilter: React.FC<IOrdersFilterProps> = ({filter, setFilter}) => {
 
     const [filterOptionVisibility, setFilterOptionVisibility] = useState<IOptions>({display: 'none', open: false})
 
-    console.log(filter)
-
     function onChangeHandler(e: React.ChangeEvent<HTMLInputElement>) {
         setFilter({...filter, [e.target.name]: e.target.value})
         if (e.target.name === 'filter') setFilterOptionVisibility({

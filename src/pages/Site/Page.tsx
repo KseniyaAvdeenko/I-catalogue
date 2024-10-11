@@ -10,7 +10,13 @@ import PageContent from "../../components/SiteComponents/PageContent/PageContent
 import ModalPopUp from "../../components/SiteComponents/ModalPopup/ModalPopUp";
 import Loader from "../../components/UI/Loader/Loader";
 
-const Page = () => {
+interface IPageProps {
+    formData: { [key: string]: string | number; };
+    getFormInputs: Function;
+    setFormData: Function
+}
+
+const Page: React.FC<IPageProps> = ({setFormData, formData, getFormInputs}) => {
     const {pageSlug} = useParams();
     const dispatch = useAppDispatch();
     const {page, isLoading} = useAppSelector(state => state.pageSettingsReducer)
@@ -34,14 +40,22 @@ const Page = () => {
                 {page.isBlockWithProds
                     ? <>
                         <ProductList
-                        prodCardBg={page.prodBackground}
-                        payClickHandle={payClickHandle}/>
-                        <ModalPopUp isModalOpen={modalVisibility} onClose={()=>setModalVisibility(false)} data={modalData}/>
+                            prodCardBg={page.prodBackground}
+                            payClickHandle={payClickHandle}/>
+                        <ModalPopUp
+                            isModalOpen={modalVisibility}
+                            onClose={() => setModalVisibility(false)}
+                            data={modalData}
+                            formData={formData}
+                            setFormData={setFormData}
+                            getFormInputs={getFormInputs}
+                        />
                     </>
                     : <PageContent pageContent={page.content} containerClassName={styles.page__content}/>
                 }
             </main>)
-        : (<main className={styles.page__container} style={{alignItems: 'center', justifyContent: 'center'}}>{isLoading && (<Loader/>)}</main>);
+        : (<main className={styles.page__container}
+                 style={{alignItems: 'center', justifyContent: 'center'}}>{isLoading && (<Loader/>)}</main>);
 };
 
 export default Page;

@@ -38,3 +38,8 @@ export interface IOrder {
     form_input_values: { [key: string]: string | number }
     currency: string
 }
+
+export interface IOrderStats{
+    date: string;
+    count: number
+}

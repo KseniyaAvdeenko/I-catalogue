@@ -8,8 +8,13 @@ import {IProdReadOnly} from "../../interface/IProduct";
 import ModalPopUp from "../../components/SiteComponents/ModalPopup/ModalPopUp";
 import Loader from "../../components/UI/Loader/Loader";
 
+interface IMainPageProps {
+    formData: { [key: string]: string | number; };
+    getFormInputs: Function;
+    setFormData: Function
+}
 
-const Main = () => {
+const Main:React.FC<IMainPageProps> = ({formData, setFormData, getFormInputs}) => {
     const {mainPageSettings, isLoading} = useAppSelector(state => state.mainPageSettingsReducer)
     const [mainPageStyles, setMainPageStyles] = useState<{ background: string; prodCardBg: string;}>({
         background: '',
@@ -56,6 +61,9 @@ const Main = () => {
                 isModalOpen={modalVisibility}
                 onClose={()=> setModalVisibility(false)}
                 data={modalData}
+                formData={formData}
+                setFormData={setFormData}
+                getFormInputs={getFormInputs}
             />
         </main>
     ):(<main className={styles.page__container} style={{alignItems: 'center', justifyContent: 'center'}}>{isLoading && (<Loader/>)}</main>)
