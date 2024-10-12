@@ -172,3 +172,8 @@ export const filterOptions: Array<{id: string, name: string}> = [
     {id: 'paid', name: 'Только оплаченные'},
     {id: 'unpaid', name: 'Только неоплаченные'},
 ]
+export const intervalOptions: Array<{id: string, name: string}> = [
+    {id: 'days', name: 'дни'},
+    {id: 'months', name: 'месяцы'},
+    {id: 'years', name: 'года'}
+]
