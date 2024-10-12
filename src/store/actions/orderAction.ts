@@ -1,10 +1,11 @@
 import {AppDispatch} from "../store";
 import {orderSlice} from "../reducers/orderSlice";
 import axios from "axios";
-import {INewOrder, INewOrderBase, IOrder, IPayment} from "../../interface/IOrder";
-import {apiUrl, getRequestHeaders} from "./apiUrl";
+import {INewOrder, INewOrderBase, IOrder, IOrderStats, IPayment} from "../../interface/IOrder";
+import {apiUrl, getAuthConfigApplicationJson, getRequestHeaders} from "./apiUrl";
 import {IPaymentData} from "../../interface/IInitialStates";
 import {errorSlice} from '../reducers/errorSlice'
+import {decodeToken} from "../../hooks/encodeDecodeTokens";
 
 export const loadOrders = () => async (dispatch: AppDispatch) => {
     try {
@@ -58,17 +59,30 @@ export const editPayment = (id: number, data: any) => async (dispatch: AppDispat
         dispatch(errorSlice.actions.orderErrors('Ошибка обновления оплаты заказа'))
     }
 }
-export const checkPayment = (youkassaId: string, orderId: number, paymentId: number ) => async (dispatch: AppDispatch) => {
-    try{
+export const checkPayment = (youkassaId: string, orderId: number, paymentId: number) => async (dispatch: AppDispatch) => {
+    try {
         const response = await axios.get<{ id: string; status: string }>(apiUrl + `order/payment_info/${youkassaId}/`, getRequestHeaders())
         if (response.data.status === 'succeeded') {
             dispatch(editPayment(paymentId, {status: 'succeeded'}))
             dispatch(updateOrder(orderId, {paid: true}))
             dispatch(orderSlice.actions.paymentPaidSuccess())
-            setTimeout(()=>{dispatch(orderSlice.actions.destroyNewOrderAfterSuccessfulPayment())}, 4000)
+            setTimeout(() => {
+                dispatch(orderSlice.actions.destroyNewOrderAfterSuccessfulPayment())
+            }, 4000)
         }
         if (response.data.status === 'canceled') dispatch(editPayment(paymentId, {status: 'canceled'}))
-    }catch (e) {
+    } catch (e) {
         dispatch(errorSlice.actions.orderErrors('Ошибка проверки оплаты заказа'))
+    }
+}
+
+export const loadOrderStats = (access: string, num: number, interval:string) => async (dispatch: AppDispatch) => {
+    if (access) {
+        try {
+            const response = await axios.get(apiUrl + `order/orders_stats/?num=${num}&interval=${interval}`, getAuthConfigApplicationJson(access));
+            dispatch(orderSlice.actions.loadOrdersStatsSuccess(response.data))
+        } catch (e) {
+            dispatch(errorSlice.actions.oderLoadingError('Ошибка загрузки статистики по заказам'))
+        }
     }
 }

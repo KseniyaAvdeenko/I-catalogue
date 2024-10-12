@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import styles from './Layout.module.sass'
-import {useAppDispatch, useAppSelector} from "../../hooks/redux";
+import {useAppSelector} from "../../hooks/redux";
 import Header from "./Header/Header";
 import Footer from "./Footer/Footer";
 import {setFavicon} from "../../hooks/setFavicon";
@@ -20,7 +20,6 @@ const Layout: React.FC<ILayoutProps> = ({children, setErrorNtfs, setSuccessNtfs,
     const {commonSettings} = useAppSelector(state => state.commonSettingsReducer)
     const {seoTags} = useAppSelector(state => state.seoSettingsReducer)
     const [basicStyles, setBasicStyles] = useState({color: 'black', fontSize: 16, fontFamily: 'Rubik'})
-    const dispatch = useAppDispatch()
 
     useEffect(() => {
         if (commonSettings) {
@@ -44,7 +43,7 @@ const Layout: React.FC<ILayoutProps> = ({children, setErrorNtfs, setSuccessNtfs,
             })
             setFavicon(commonSettings.favicon)
         }
-        if(seoTags) getSeoTags(seoTags)
+        if (seoTags) getSeoTags(seoTags)
 
     }, [seoTags]);
 

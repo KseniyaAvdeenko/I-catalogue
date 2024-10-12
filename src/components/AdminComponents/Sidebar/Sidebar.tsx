@@ -1,74 +1,53 @@
 import React, {useEffect, useState} from 'react';
 import styles from './Sidebar.module.sass';
-import SidebarPagesItems from "./SidebarPagesItems";
-import SidebarCommonSettingsItems from "./SidebarCommonSettingsItems";
-import SidebarNavbarItems from "./SidebarNavbarItems";
-import SidebarMainPageItems from "./SidebarMainPageItems";
-import SidebarProdSettings from "./SidebarProdSettings";
-import SidebarEditProdItems from "./SidebarEditProdItems";
-import SidebarModalFormSettingsItems from "./SidebarModalFormSettingsItems";
-import {ISidebarItemsVisibility} from "../../../interface/IAdminPageComponets";
-import SidebarSeoSettings from "./SidebarSeoSettings";
+import {IIntro} from "../../../interface/IAdminPageComponets";
+import {ISidebarContent, SidebarContent} from "./AdminSidebarPaths";
+import {useAppSelector} from "../../../hooks/redux";
+import SidebarItemsWithSubsections from "./SidebarItemsWithSubsections";
+import SidebarWithoutSubsections from "./SidebarWithoutSubsections";
+
 
 interface ISidebarProps {
-    scrollToBlock: Function
+    scrollToBlock: Function;
+    intro: IIntro;
+    setIntro: Function
 }
 
-
-const Sidebar: React.FC<ISidebarProps> = ({scrollToBlock}) => {
+const Sidebar: React.FC<ISidebarProps> = ({scrollToBlock, intro, setIntro}) => {
     //states
-    const [commonSettingsItems, setCommonSettingsItems] = useState<ISidebarItemsVisibility>({
-        display: 'none', rotate: 180, open: false
-    })
-    const [navbarItems, setNavbarItems] = useState<ISidebarItemsVisibility>({
-        display: 'none', rotate: 180, open: false
-    })
-    const [prodSettingsItems, setProdSettingsItems] = useState<ISidebarItemsVisibility>({
-        display: 'none', rotate: 180, open: false
-    })
-    const [modalFormSettingsItems, setModalSettingsItems] = useState<ISidebarItemsVisibility>({
-        display: 'none', rotate: 180, open: false
-    })
+    const [sidebarContent, setSidebarContent] = useState<ISidebarContent[]>(SidebarContent)
+    const {pages} = useAppSelector(state => state.pageSettingsReducer)
+
+    useEffect(() => {
+        if (pages) {
+            if (!sidebarContent.find(el => el.section === 'pagesSettings'))
+                setSidebarContent(sidebarContent => [...sidebarContent, {
+                    order: 4,
+                    section: 'pagesSettings',
+                    content: ``,
+                    getItemsVisibilitySection: 'none',
+                    link: 'pages_settings/',
+                    subsections: false
+                }])
+        }
+    }, [pages])
 
     //methods
     const getItemsVisibility = (block: string) => {
-        if (block === 'commonSettings') {
-            setNavbarItems({...navbarItems, open: false, rotate: 180, display: 'none'});
-            setProdSettingsItems({...prodSettingsItems, open: false, rotate: 180, display: 'none'});
-            setModalSettingsItems({...modalFormSettingsItems, open: false, rotate: 180, display: 'none'})
-            commonSettingsItems.open
-                ? setCommonSettingsItems({...commonSettingsItems, open: false, rotate: 180, display: 'none'})
-                : setCommonSettingsItems({...commonSettingsItems, open: true, rotate: 0, display: 'flex'})
-        } else if (block === 'navbar') {
-            setCommonSettingsItems({...commonSettingsItems, open: false, rotate: 180, display: 'none'});
-            setProdSettingsItems({...prodSettingsItems, open: false, rotate: 180, display: 'none'});
-            setModalSettingsItems({...modalFormSettingsItems, open: false, rotate: 180, display: 'none'})
-            navbarItems.open
-                ? setNavbarItems({...navbarItems, open: false, rotate: 180, display: 'none'})
-                : setNavbarItems({...navbarItems, open: true, rotate: 0, display: 'flex'})
-        } else if (block === 'prodSettings') {
-            setCommonSettingsItems({...commonSettingsItems, open: false, rotate: 180, display: 'none'});
-            setNavbarItems({...navbarItems, open: false, rotate: 180, display: 'none'});
-            setModalSettingsItems({...modalFormSettingsItems, open: false, rotate: 180, display: 'none'})
-            prodSettingsItems.open
-                ? setProdSettingsItems({...prodSettingsItems, open: false, rotate: 180, display: 'none'})
-                : setProdSettingsItems({...prodSettingsItems, open: true, rotate: 0, display: 'flex'})
-        } else if (block === 'modalFormSettings') {
-            setCommonSettingsItems({...commonSettingsItems, open: false, rotate: 180, display: 'none'});
-            setNavbarItems({...navbarItems, open: false, rotate: 180, display: 'none'});
-            setProdSettingsItems({...prodSettingsItems, open: false, rotate: 180, display: 'none'});
-            modalFormSettingsItems.open
-                ? setModalSettingsItems({...modalFormSettingsItems, open: false, rotate: 180, display: 'none'})
-                : setModalSettingsItems({...modalFormSettingsItems, open: true, rotate: 0, display: 'flex'})
-        } else {
-            setNavbarItems({...navbarItems, open: false, rotate: 180, display: 'none'});
-            setCommonSettingsItems({...commonSettingsItems, open: false, rotate: 180, display: 'none'});
-            setModalSettingsItems({...modalFormSettingsItems, open: false, rotate: 180, display: 'none'})
-            setProdSettingsItems({...prodSettingsItems, open: false, rotate: 180, display: 'none'});
-        }
+        setSidebarContent(sidebarContent =>
+            sidebarContent.map(item =>
+                item.getItemsVisibilitySection === block
+                    ? item.subsectionsOpen
+                        ? {...item, subsectionsOpen: false, arrowRotation: 180, subsectionsDisplay: 'none'}
+                        : {...item, subsectionsOpen: true, arrowRotation: 0, subsectionsDisplay: 'flex'}
+                    : {...item, subsectionsOpen: false, arrowRotation: 180, subsectionsDisplay: 'none'}
+            ))
     }
 
     useEffect(() => {
+        window.location.pathname === '/admin_page/'
+            ? setIntro({...intro, display: 'block', justifyContent: 'center'})
+            : setIntro({...intro, display: 'none', justifyContent: 'start'})
         if (window.location.pathname === "/admin_page/common_settings/") getItemsVisibility('commonSettings')
         if (window.location.pathname === "/admin_page/navbar/") getItemsVisibility('navbar')
         if (window.location.pathname === "/admin_page/products_settings/") getItemsVisibility('prodSettings')
@@ -76,27 +55,61 @@ const Sidebar: React.FC<ISidebarProps> = ({scrollToBlock}) => {
     }, [window.location.pathname])
 
     return (
-        <aside className={styles.Sidebar__container}>
-            <SidebarCommonSettingsItems
-                getItemsVisibility={getItemsVisibility}
-                commonSettingsItems={commonSettingsItems}
-                scrollToBlock={scrollToBlock}/>
-            <SidebarSeoSettings getItemsVisibility={getItemsVisibility}/>
-            <SidebarNavbarItems
-                getItemsVisibility={getItemsVisibility}
-                navbarItems={navbarItems}
-                scrollToBlock={scrollToBlock}/>
-            <SidebarMainPageItems getItemsVisibility={getItemsVisibility}/>
-            <SidebarPagesItems getItemsVisibility={getItemsVisibility}/>
-            <SidebarProdSettings
-                getItemsVisibility={getItemsVisibility}
-                prodSettingsItems={prodSettingsItems}
-                scrollToBlock={scrollToBlock}/>
-            <SidebarEditProdItems getItemsVisibility={getItemsVisibility}/>
-            <SidebarModalFormSettingsItems
-                getItemsVisibility={getItemsVisibility}
-                modalFormSettingsItems={modalFormSettingsItems}
-                scrollToBlock={scrollToBlock}/>
+        <aside className={styles.Sidebar}>
+            <div className={styles.Sidebar__container}>
+                {sidebarContent.sort((a, b) => a.order - b.order).map(content => (
+                    content.subsections
+                        ? content.section === 'prodSettings'
+                            ? <SidebarItemsWithSubsections
+                                key={content.link}
+                                sidebarItem={content}
+                                getItemsVisibility={getItemsVisibility}
+                                scrollToBlock={scrollToBlock}
+                                prodsCondition={true}
+                                modalFormCondition={false}
+                            />
+                            : content.section === 'modalFormSettings'
+                                ? <SidebarItemsWithSubsections
+                                    key={content.link}
+                                    sidebarItem={content}
+                                    getItemsVisibility={getItemsVisibility}
+                                    scrollToBlock={scrollToBlock}
+                                    prodsCondition={false}
+                                    modalFormCondition={true}
+                                />
+                                : <SidebarItemsWithSubsections
+                                    key={content.link}
+                                    sidebarItem={content}
+                                    getItemsVisibility={getItemsVisibility}
+                                    scrollToBlock={scrollToBlock}
+                                    prodsCondition={false}
+                                    modalFormCondition={false}
+                                />
+                        : content.section === 'pagesSettings'
+                            ? <SidebarWithoutSubsections
+                                key={content.link}
+                                getItemsVisibility={getItemsVisibility}
+                                sidebarItem={content}
+                                pagesCondition={true}
+                                editingProdCondition={false}
+                            />
+                            : content.section === 'editingProduct'
+                                ? <SidebarWithoutSubsections
+                                    key={content.link}
+                                    getItemsVisibility={getItemsVisibility}
+                                    sidebarItem={content}
+                                    pagesCondition={false}
+                                    editingProdCondition={true}
+                                />
+                                : <SidebarWithoutSubsections
+                                    key={content.link}
+                                    getItemsVisibility={getItemsVisibility}
+                                    sidebarItem={content}
+                                    pagesCondition={false}
+                                    editingProdCondition={false}
+                                />
+                ))}
+            </div>
         </aside>
     );
 };

@@ -5,9 +5,19 @@
   display: flex
   @extend .p_30
   width: 100%
-  min-height: calc(100vh - 6rem - 6rem)
+  min-height: 87vh
   background: $bg100
   position: relative
+
+  &__container
+    @extend .flexColumn
+    width: 100%
+    align-items: center
+
+  &__intro
+    font-size: $h3
+    text-align: center
+
   &_notAuth
     @extend .baseFont
     @extend .flexRow

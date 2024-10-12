@@ -23,13 +23,11 @@ const NavLinksFontColorHoverStyle: React.FC<INavLinksFontColorHoverStyleProps> =
                 ...hoverStyleOptionsVisibility,
                 open: false,
                 display: 'none',
-                bottom: '-17rem'
             })
             : setHoverStyleOptionsVisibility({
                 ...hoverStyleOptionsVisibility,
                 open: true,
                 display: 'flex',
-                bottom: '-17rem'
             })
     }
     const getNavLinksStyle = (hoverStyle: string | undefined): string => {
@@ -51,7 +49,7 @@ const NavLinksFontColorHoverStyle: React.FC<INavLinksFontColorHoverStyleProps> =
                 {getNavLinksStyle(navLinksFontColorHoverStyle)}
             </div>
             <div className={styles.form__optionsContainer}
-                 style={{display: hoverStyleOptionsVisibility.display, bottom: hoverStyleOptionsVisibility.bottom}}>
+                 style={{display: hoverStyleOptionsVisibility.display}}>
                 {navLinksHoverStyles.map(style => (
                     <label
                         key={style.id}

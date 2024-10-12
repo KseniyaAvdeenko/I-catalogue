@@ -156,3 +156,24 @@ export const socialIconTypes: ISocialIconType[] = [
     {id: 'outlinedOriginal', icon: OutlinedOriginal, name: 'Контур оригинального цвета'},
     {id: 'outlinedMonotone', icon: OutlinedMonotone, name: 'Контур монотонный'},
 ]
+
+export const tableHead: Array<{id: string, name:string, width: string}> = [
+    {id: 'id', name: '#', width: '3%'},
+    {id:'orderDate', name:'Дата заказа', width: '8%'},
+    {id:'product', name:'Товар/услуга', width: '15%'},
+    {id:'totalPrice', name:'Итоговая стоимость', width: '8%'},
+    {id:'data', name:'Данные формы', width: '30%'},
+    {id:'paid', name:'Оплачено', width: '5%'},
+    {id:'paymentData', name:'Данные об оплате', width: '20%'},
+]
+
+export const filterOptions: Array<{id: string, name: string}> = [
+    {id: 'all', name: 'Все'},
+    {id: 'paid', name: 'Только оплаченные'},
+    {id: 'unpaid', name: 'Только неоплаченные'},
+]
+export const intervalOptions: Array<{id: string, name: string}> = [
+    {id: 'days', name: 'дни'},
+    {id: 'months', name: 'месяцы'},
+    {id: 'years', name: 'года'}
+]

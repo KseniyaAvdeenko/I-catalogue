@@ -6,6 +6,7 @@ import {Link} from "react-router-dom";
 import {logout, refreshToken} from "../../../store/actions/authAction";
 import {loadCurrentUser} from "../../../store/actions/userAction";
 import {decodeToken} from "../../../hooks/encodeDecodeTokens";
+import {loadOrderStats} from "../../../store/actions/orderAction";
 
 
 interface IAdminHeader {
@@ -32,7 +33,7 @@ const AdminHeader: React.FC<IAdminHeader> = ({children}) => {
 
     return (
         <header className={styles.adminHeader}>
-            <img src={AppLogo} alt="app logo"/>
+            <Link to={'/admin_page/'} className={styles.adminHeader__logo}><img src={AppLogo} alt="app logo"/></Link>
             {children && children}
             {isAuth
                 ? <div className={styles.auth}>

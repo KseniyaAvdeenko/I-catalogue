@@ -15,36 +15,37 @@ import Loader from "../../UI/Loader/Loader";
 interface IModalPopUpProps {
     isModalOpen: boolean;
     onClose: () => void;
-    data: IProdReadOnly | null
+    data: IProdReadOnly | null;
+    formData: { [key: string]: string | number; };
+    getFormInputs: Function;
+    setFormData: Function
 }
 
 const ModalPopUp: React.FC<IModalPopUpProps> = ({
+                                                    setFormData,
                                                     isModalOpen,
                                                     data,
-                                                    onClose
+                                                    onClose,
+                                                    formData,
+                                                    getFormInputs
                                                 }) => {
+
     const {modalForm, isLoading} = useAppSelector(state => state.modalFormReducer);
     const [modalClass, setModalClass] = useState<string>(styles.modal)
-    const [formData, setFormData] = useState<{ [key: string]: string | number; }>({})
     const [totalPrice, setTotalPrice] = useState<number>(0)
     const dispatch = useAppDispatch()
-
 
     useEffect(() => {
         isModalOpen
             ? setModalClass([styles.modal, styles.modal__open].join(' '))
             : setModalClass([styles.modal].join(' '))
-
-        getFormInputs()
-        if (data) setTotalPrice(data.price)
     }, [isModalOpen])
 
-    const getFormInputs = () => {
-        if (modalForm) modalForm.labels.map(el => setFormData(formData => ({
-            ...formData,
-            [el.inputIdName]: el.inputType === 'number' ? 1 : ''
-        })))
-    }
+
+    useEffect(() => {
+        if (data) setTotalPrice(data.price)
+    }, [data])
+
 
     const formOrder = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
@@ -87,9 +88,9 @@ const ModalPopUp: React.FC<IModalPopUpProps> = ({
                             </p>
                         </div>
                     </div>)}
-                    <form onSubmit={e => formOrder(e)} className={styles.modal__form}>
+                    {formData && (<form onSubmit={e => formOrder(e)} className={styles.modal__form}>
                         <div className={styles.modal__inputItems}>
-                            {formData && modalForm.labels.map(el => (
+                            {modalForm.labels.map(el => (
                                 <ModalInputContainer key={el.id} label={el} formData={formData}
                                                      changeHandler={changeHandler}/>
                             ))}
@@ -98,7 +99,7 @@ const ModalPopUp: React.FC<IModalPopUpProps> = ({
                             стоимость: {totalPrice} {getCurrency(data.currency)}</div>)}
                         {data && (<SiteButton product={data} type={'button'} btnType={'submit'} btnText={'Оплатить'}
                                               btnClassName={styles.modal__button}/>)}
-                    </form>
+                    </form>)}
                 </div>
                 : <div className={styles.modal__formContainer}>{isLoading && (<Loader/>)}</div>
             }

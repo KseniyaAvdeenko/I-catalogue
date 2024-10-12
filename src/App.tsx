@@ -37,36 +37,45 @@ function App() {
     const products = useAppSelector(state => state.productReducer);
     const orders = useAppSelector(state => state.orderReducer)
     const {adminErrors, siteErrors} = useAppSelector(state => state.errorReducer)
+    const {modalForm} = useAppSelector(state => state.modalFormReducer);
+
 
     const [errorAdminNtfs, setErrorAdminNtFs] = useState<string[]>([])
     const [successAdminNtfs, setSuccessAdminNtFs] = useState<string[]>([])
     const [errorNtfs, setErrorNtFs] = useState<string[]>([])
     const [successNtfs, setSuccessNtFs] = useState<string[]>([])
+    const [formData, setFormData] = useState<{ [key: string]: string | number; }>({})
 
     useEffect(() => {
         if (orders.createdOrderSuccess) setSuccessNtFs([...successNtfs, 'Заказ создан. В ближайшее время с Вами свяжется наш менеджер'])
         if (orders.paymentPaid) setSuccessNtFs([...successNtfs, 'Оплата заказа прошла успешно'])
         if (auth.isSignedUp) setSuccessAdminNtFs([...successAdminNtfs, 'Регистрация прошла успешно'])
-
-        if(adminErrors.length) setErrorAdminNtFs(adminErrors)
-        if(siteErrors.length) setErrorNtFs(siteErrors)
-
+        if (adminErrors.length) setErrorAdminNtFs(adminErrors)
+        if (siteErrors.length) setErrorNtFs(siteErrors)
     }, [adminErrors.length, siteErrors.length, auth.isSignedUp, orders.createdOrderSuccess, orders.paymentPaid])
 
     useEffect(() => {
-        if(errorAdminNtfs.length) setTimeout(()=>{
-            setErrorAdminNtFs([]); dispatch(errorSlice.actions.clearAdminErrors())}, 7000)
-        if(successAdminNtfs.length) setTimeout(()=>{setSuccessAdminNtFs([])}, 9000)
-        if(successNtfs.length) setTimeout(()=>{setErrorAdminNtFs([])}, 7000)
+        if (errorAdminNtfs.length) setTimeout(() => {
+            setErrorAdminNtFs([]);
+            dispatch(errorSlice.actions.clearAdminErrors())
+        }, 7000)
+        if (successAdminNtfs.length) setTimeout(() => {
+            setSuccessAdminNtFs([])
+        }, 9000)
+        if (successNtfs.length) setTimeout(() => {
+            setErrorAdminNtFs([])
+        }, 7000)
         if (errorNtfs.length) setTimeout(() => {
-            setErrorNtFs([]); dispatch(errorSlice.actions.clearSiteErrors())}, 7000)
+            setErrorNtFs([]);
+            dispatch(errorSlice.actions.clearSiteErrors())
+        }, 7000)
     }, [errorNtfs.length, errorAdminNtfs.length, successNtfs.length, successAdminNtfs.length]);
 
-    if (localStorage.paymentId && localStorage.orderId && localStorage.youkassaPaymentId)
-            dispatch(checkPayment(decodeToken(localStorage.youkassaPaymentId), +localStorage.orderId, +localStorage.paymentId))
-    // useEffect(() => {
-    //
-    // }, [localStorage.paymentId, localStorage.orderId, localStorage.youkassaPaymentId])
+    useEffect(() => {
+        if (orders.newOrderPaymentData.orderPaymentId && orders.newOrderPaymentData.orderId && orders.newOrderPaymentData.youkassaPaymentId) {
+            dispatch(checkPayment(decodeToken(orders.newOrderPaymentData.youkassaPaymentId), orders.newOrderPaymentData.orderId, orders.newOrderPaymentData.orderPaymentId))
+        }
+    }, [orders.newOrderPaymentData.orderPaymentId, orders.newOrderPaymentData.orderId, orders.newOrderPaymentData.youkassaPaymentId])
 
     useEffect(() => {
         dispatch(loadButtonSettings());
@@ -87,30 +96,47 @@ function App() {
         dispatch(loadSeoTags());
     }, [])
 
+    useEffect(() => {
+        if (modalForm) getFormInputs()
+    }, [modalForm])
+
+    function getFormInputs() {
+        modalForm && modalForm.labels.map(el => setFormData(formData => ({
+            ...formData,
+            [el.inputIdName]: el.inputType === 'number' ? 1 : ''
+        })))
+    }
+
     return (
         <BrowserRouter>
             <Routes>
                 {pages && pages.pages && pages.pages.map(elem => (
                     <Route key={elem.id} path={`page/:pageSlug`} element={
                         <Layout
-                        errorNtfs={errorNtfs}
-                        successNtfs={successNtfs}
-                        setErrorNtfs={setErrorNtFs}
-                        setSuccessNtfs={setSuccessNtFs}><Page/></Layout>}/>))}
+                            errorNtfs={errorNtfs}
+                            successNtfs={successNtfs}
+                            setErrorNtfs={setErrorNtFs}
+                            setSuccessNtfs={setSuccessNtFs}>
+                            <Page formData={formData} getFormInputs={getFormInputs} setFormData={setFormData}/>
+                        </Layout>}/>))}
                 {products && products.productsReadOnly && products.productsReadOnly.map(elem => (
                     <Route key={elem.id} path={`product/:prodId`} element={
                         <Layout
-                        errorNtfs={errorNtfs}
-                        successNtfs={successNtfs}
-                        setErrorNtfs={setErrorNtFs}
-                        setSuccessNtfs={setSuccessNtFs}><ProductPage/></Layout>}/>
+                            errorNtfs={errorNtfs}
+                            successNtfs={successNtfs}
+                            setErrorNtfs={setErrorNtFs}
+                            setSuccessNtfs={setSuccessNtFs}>
+                            <ProductPage formData={formData} getFormInputs={getFormInputs} setFormData={setFormData}/>
+                        </Layout>}/>
                 ))}
                 <Route path={'/'} element={
                     <Layout
-                    errorNtfs={errorNtfs}
-                    successNtfs={successNtfs}
-                    setErrorNtfs={setErrorNtFs}
-                    setSuccessNtfs={setSuccessNtFs}><Main/></Layout>}/>
+                        errorNtfs={errorNtfs}
+                        successNtfs={successNtfs}
+                        setErrorNtfs={setErrorNtFs}
+                        setSuccessNtfs={setSuccessNtFs}>
+                        <Main formData={formData} getFormInputs={getFormInputs} setFormData={setFormData}/>
+                    </Layout>}/>
                 <Route path={'sign_in/'} element={<AdminLayout
                     errorNtfs={errorAdminNtfs}
                     successNtfs={successAdminNtfs}

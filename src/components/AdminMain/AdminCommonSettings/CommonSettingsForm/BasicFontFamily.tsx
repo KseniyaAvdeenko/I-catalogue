@@ -19,8 +19,8 @@ const BasicFontFamily: React.FC<IBasicFontFamilyProps> = ({
 
     const changeFontOptionsContainerVisibility = () => {
         fontOptionsVisibility.open
-            ? setFontOptionsVisibility({...fontOptionsVisibility, open: false, display: 'none', bottom: '-20.2rem'})
-            : setFontOptionsVisibility({...fontOptionsVisibility, open: true, display: 'flex', bottom: '-20.2rem'})
+            ? setFontOptionsVisibility({...fontOptionsVisibility, open: false, display: 'none'})
+            : setFontOptionsVisibility({...fontOptionsVisibility, open: true, display: 'flex'})
     }
     return (
         <div className={styles.form__inputContainer_select}>

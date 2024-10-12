@@ -18,8 +18,8 @@ const AdminLayout: React.FC<IAdminLayoutProps> = ({children, setSuccessNtFs, set
             position: 'relative',
             height: '100vh',
             display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'space-between'
+            flexDirection: "column",
+            justifyContent:"space-between"
         }}>
             <AdminHeader></AdminHeader>
             <Notifications setErrorNtFs={setErrorNtFs}

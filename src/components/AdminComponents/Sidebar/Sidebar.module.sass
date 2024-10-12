@@ -1,13 +1,17 @@
 @import "../../../assets/styles/Common.module"
 
 .Sidebar
+  @extend .baseFont
+  @extend .flexColumn
+  flex-basis: 24%
+  min-height: 78vh
+  border-right: 2px solid $primary100
+
   &__container
-    @extend .baseFont
     @extend .flexColumn
-    flex-basis: 24%
+    width: 100%
+    overflow-y: auto
     @extend .p_20
-    min-height: calc(100vh - 12rem - 6rem)
-    border-right: 2px solid $primary100
 
   &__items
     @extend .flexColumn
@@ -26,6 +30,7 @@
     font-weight: 700
     text-decoration: none
     transition: all .4s ease-in
+    flex-basis: 90%
 
     &:hover
       @extend .linkActive

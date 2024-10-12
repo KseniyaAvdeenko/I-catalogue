@@ -10,15 +10,13 @@ interface IPasswordInputProps {
     onBlurHandler: React.FocusEventHandler<HTMLInputElement>;
     value: string;
     required: boolean;
-    labelStyle: { top: string, color: string };
     label: string;
     imgClassName: string;
     image: string;
-    passwordVisibilityHandler: React.MouseEventHandler
+    passwordVisibilityHandler: React.MouseEventHandler;
 }
 
 const PasswordInput: React.FC<IPasswordInputProps> = ({
-                                                          labelStyle,
                                                           inputContainerClass,
                                                           onBlurHandler,
                                                           onFocusHandler,
@@ -34,7 +32,7 @@ const PasswordInput: React.FC<IPasswordInputProps> = ({
                                                       }) => {
     return (
         <div className={inputContainerClass}>
-            <label htmlFor={name} style={labelStyle}>{label}</label>
+            <label htmlFor={name} style={{top: '1rem', color: '#333333'}}>{label} {required && (<sup style={{color: 'red'}}>*</sup>)}</label>
             <AuthInput type={type} name={name}
                        onChangeHandler={onChangeHandler}
                        onBlurHandler={onBlurHandler}
@@ -42,8 +40,8 @@ const PasswordInput: React.FC<IPasswordInputProps> = ({
                        value={value}
                        required={required}
             />
+            <div style={{display: 'none'}}></div>
             <img src={image} alt="icon" className={imgClassName} onClick={passwordVisibilityHandler}/>
-
         </div>
     );
 };

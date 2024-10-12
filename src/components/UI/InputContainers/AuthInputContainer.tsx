@@ -9,12 +9,10 @@ interface ILoginInputProps {
     onBlurHandler: React.FocusEventHandler<HTMLInputElement>;
     value: string;
     required: boolean;
-    labelStyle: { top: string, color: string };
     label: string;
 }
 
 const AuthInputContainer: React.FC<ILoginInputProps> = ({
-                                                            labelStyle,
                                                             inputContainerClass,
                                                             onBlurHandler,
                                                             onFocusHandler,
@@ -23,11 +21,11 @@ const AuthInputContainer: React.FC<ILoginInputProps> = ({
                                                             value,
                                                             type,
                                                             required,
-                                                            label
+                                                            label,
                                                         }) => {
     return (
         <div className={inputContainerClass}>
-            <label htmlFor={name} style={labelStyle}>{label}</label>
+            <label htmlFor={name} style={{top: '1rem', color: '#333333'}}>{label} {required && (<sup style={{color: 'red'}}>*</sup>)}</label>
             <input type={type} name={name} id={name}
                    onFocus={e => onFocusHandler(e)}
                    onBlur={e => onBlurHandler(e)}
@@ -35,6 +33,7 @@ const AuthInputContainer: React.FC<ILoginInputProps> = ({
                    value={value}
                    required={required}
             />
+            <div style={{display: 'none'}}></div>
         </div>
     );
 };

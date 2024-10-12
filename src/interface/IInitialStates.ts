@@ -4,7 +4,7 @@ import {IContacts, ISocialLink} from "./INavbar";
 import {IUser} from "./IUser";
 import {IImage, IProd, IProdAttrs, IProdReadOnly, IProductPageSettings} from "./IProduct";
 import {IModalForm} from "./IModalForm";
-import {INewOrder, IOrder} from "./IOrder";
+import {INewOrder, IOrder, IOrderStats} from "./IOrder";
 import {ISeoSettings} from "./ISeoSettings";
 
 export interface IInitialStatesBase {
@@ -97,7 +97,8 @@ export interface IOrderInitial extends IInitialStatesBase {
     newOrder: INewOrder | null;
     newOrderPaymentData: IPaymentData;
     paymentPaid: boolean,
-    createdOrderSuccess: boolean
+    createdOrderSuccess: boolean;
+    ordersStats: IOrderStats[]|null
 }
 
 export interface IPaginatedProdsInitial extends IInitialStatesBase {
