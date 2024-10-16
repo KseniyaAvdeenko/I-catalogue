@@ -70,14 +70,16 @@ export interface IFile {
     mainImg: boolean;
 }
 
-export interface ISeoTagType {
+export interface IOptionBase{
     name: string;
+}
+
+export interface ISeoTagType extends IOptionBase{
     id: SeoTagType;
 }
 
-export interface IInputType {
-    type: string,
-    name: string
+export interface IInputType extends IOptionBase{
+    type: string;
 }
 
 export interface ISocialIcons {
@@ -86,14 +88,17 @@ export interface ISocialIcons {
     iconOutlined: string,
 }
 
-export interface ISocialIconType {
+export interface ISocialIconType extends IOptionBase{
     id: SocialLinkIconType,
     icon: string,
-    name: string
 }
 
 export interface IFilter {
     filter: string;
     queryDateStart: string,
     queryDateEnd: string,
-};
+}
+
+export interface IOptionItem extends IOptionBase{
+    id: string;
+}

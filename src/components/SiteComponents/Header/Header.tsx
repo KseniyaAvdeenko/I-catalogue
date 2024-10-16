@@ -5,7 +5,7 @@ import HeaderLayout1 from "./HeaderLayout1";
 import HeaderLayout2 from "./HeaderLayout2";
 
 interface IHeaderProps {
-    logo: string | undefined
+    logo: string | null
 }
 
 const Header: React.FC<IHeaderProps> = ({logo}) => {
@@ -75,17 +75,17 @@ const Header: React.FC<IHeaderProps> = ({logo}) => {
         }
     }
 
-    function getHeaderLayout(layout: string, logo: string | undefined) {
+    function getHeaderLayout(layout: string, logo: string | null) {
         if (layout === '1') {
             return (
                 <HeaderLayout1 headerContainerClass={headerContainerClass}
-                               logo={logo ?? ''} onHoverOut={onHoverOut} onHoverIn={onHoverIn}
+                               logo={logo ? logo : ''} onHoverOut={onHoverOut} onHoverIn={onHoverIn}
                                navLinksStyle={navLinksStyle} headerStyles={headerStyles}/>
             )
         } else if (layout === '2') {
             return (
                 <HeaderLayout2 headerContainerClass={headerContainerClass}
-                               logo={logo ?? ''} onHoverOut={onHoverOut} onHoverIn={onHoverIn}
+                               logo={logo ? logo : ''} onHoverOut={onHoverOut} onHoverIn={onHoverIn}
                                navLinksStyle={navLinksStyle} headerStyles={headerStyles}/>
             )
         }

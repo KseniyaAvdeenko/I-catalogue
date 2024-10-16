@@ -1,4 +1,4 @@
-import React, {useRef, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import styles from './AdminPage.module.sass'
 import AdminCommonSettings from "../../components/AdminMain/AdminCommonSettings/AdminCommonSettings";
 import {Route, Routes} from "react-router-dom";
@@ -16,6 +16,10 @@ import SeoSettings from "../../components/AdminMain/AdminSeoSettings/SeoSettings
 import {useAppSelector} from "../../hooks/redux";
 import {IIntro} from "../../interface/IAdminPageComponets";
 import AdminOrders from "../../components/AdminMain/AdminOrders/AdminOrders";
+import {setPageTitle} from "../../hooks/getTitle";
+import PreviewButton from "../../components/AdminMain/Preview/PreviewButton";
+import Preview from "../../components/AdminMain/Preview/Preview";
+
 
 const AdminPage = () => {
     const auth = useAppSelector(state => state.authReducer)
@@ -26,6 +30,7 @@ const AdminPage = () => {
     const ordersRef = useRef<HTMLDivElement>(null)
 
     const [intro, setIntro] = useState<IIntro>({display: "block", justifyContent: "center"})
+    const [isPreviewOpen, setIsPreviewOpen] = useState<boolean>(false)
 
     const scrollToBlock = (sectionId: string) => {
         scrollingToSection(sectionId, commonSettingsRef.current);
@@ -33,13 +38,21 @@ const AdminPage = () => {
         scrollingToSection(sectionId, productSettingsRef.current);
         scrollingToSection(sectionId, modalFormSettingsRef.current)
     }
-    setFavicon(Favicon)
+    useEffect(() => {
+        setFavicon(Favicon)
+        setPageTitle('Административная панель')
+    }, [])
+
+    const getPreviewVisibility = () => setIsPreviewOpen(isPreviewOpen => !isPreviewOpen)
 
     return auth.isAuth ? (
             <section className={styles.AdminPage}>
+                <Preview isOpen={isPreviewOpen}/>
                 <Sidebar scrollToBlock={scrollToBlock} intro={intro} setIntro={setIntro}/>
                 <main className={styles.AdminPage__container} style={{justifyContent: intro.justifyContent}}>
-                    <div style={{display: intro.display}} className={styles.AdminPage__intro}>Здесь Вы сможете настроить свой интернет-каталог</div>
+                    <div style={{display: intro.display}} className={styles.AdminPage__intro}>Здесь Вы сможете настроить
+                        свой интернет-каталог
+                    </div>
                     <Routes>
                         <Route path={'common_settings/'} element={<AdminCommonSettings ref={commonSettingsRef}/>}/>
                         <Route path={'navbar/'} element={<AdminNavbar ref={navbarContentRef}/>}/>
@@ -52,7 +65,7 @@ const AdminPage = () => {
                         <Route path={'orders/'} element={<AdminOrders ref={ordersRef}/>}/>
                     </Routes>
                 </main>
-                {/*<div style={{position: 'fixed', bottom: '5%', right: '2rem'}}>Preview</div>*/}
+                <PreviewButton getPreviewVisibility={getPreviewVisibility}/>
             </section>)
         : (<main className={styles.AdminPage_notAuth}>Вы не авторизованы</main>)
 };

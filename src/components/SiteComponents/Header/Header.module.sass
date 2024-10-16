@@ -19,8 +19,9 @@
 
 
   &__layout2
-    @extend .flexRow
-    justify-content: space-between
+    display: grid
+    grid-template-columns: 10% 85%
+    column-gap: 3rem
 
     & > a
       flex-basis: fit-content

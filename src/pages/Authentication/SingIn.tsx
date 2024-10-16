@@ -12,6 +12,7 @@ import {
     changeAuthLabelsAndValidationViewOnBlur,
     changeAuthLabelsOnFocus
 } from "../../utils/changeAuthLabelsAndValidationView";
+import {setPageTitle} from "../../hooks/getTitle";
 
 
 const SignIn = () => {
@@ -34,7 +35,7 @@ const SignIn = () => {
             setUser({...user, username: '', password: ''})
         }
     }
-
+    setPageTitle('Вход')
     useEffect(() => {
         if (auth.isAuth) navigate('/admin_page/')
     }, [auth.isAuth])

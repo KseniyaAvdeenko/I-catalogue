@@ -1,0 +1,136 @@
+@import "../../../assets/styles/Common.module"
+
+.previewButton
+  position: fixed
+  bottom: 7%
+  right: 3%
+  z-index: 2
+  width: 6rem
+  height: 6rem
+  border-radius: 50%
+  background: $primary100
+  @extend .flexRow
+  justify-content: center
+  transition: all .5s ease-in
+
+  &:hover
+    background: $primary200
+
+.previewWindow
+  position: absolute
+  width: 55%
+  height: 90%
+  display: none
+  bottom: 7%
+  right: 7%
+  z-index: 3
+  border-radius: 2rem
+  background: $bg100
+  padding: 3rem
+  overflow-y: auto
+  transition: display .5s ease-in
+
+  &_open
+    display: flex !important
+    border: .1rem solid $primary100
+    flex-direction: column
+
+  &__select
+    width: 100%
+    @extend .flexRow
+    justify-content: center
+    @extend .mb_20
+
+    & > div
+      margin: 0 2rem
+
+  &__showingContainer
+    width: 100%
+    @extend .flexColumn
+    height: 100%
+    justify-content: center
+
+.showingItems
+  flex-direction: column
+  justify-content: center
+  align-items: center
+  width: 100%
+  height: 100%
+
+
+  &__button
+    padding: 1rem 10%
+
+.layout
+  @extend .flexColumn
+  width: 100%
+
+  &__inline
+    border-radius: 1rem 1rem 0 0
+    border: .1rem solid #333333
+    padding: 1rem
+    width: 30%
+    @extend .flexRow
+
+    & > img
+      margin-right: 2rem
+
+  &__container
+    @extend .flexColumn
+    width: 100%
+    justify-content: space-between
+
+  &__mainPage
+    height: fit-content
+    @extend .flexColumn
+    align-items: center
+    width: 100%
+    padding: 3rem 7%
+
+.prodList
+  display: grid
+  gap: 2rem
+  width: 100%
+  padding: 2rem 0
+  grid-template-columns: repeat(4, 1fr)
+
+  &__prodItem
+    @extend .flexColumn
+    width: 100%
+    border-radius: 2rem
+    padding: 2rem
+
+  &__imageWrapper
+    height: 13rem
+    width: 100%
+    @extend .mb_30
+
+    & > img
+      height: 100%
+      width: 100%
+      object-fit: cover
+      border-radius: 2rem
+      object-position: top center
+
+  &__items
+    @extend .flexColumn
+    align-items: center
+    width: 100%
+
+  &__name
+    font-size: $h4
+    font-weight: 600
+    @extend .mb_10
+
+  &__price
+    @extend .mb_20
+    font-size: $h6
+
+  &__moreBtn
+    text-decoration: none
+    padding: 1.5rem 2rem
+    @extend .mb_20
+
+  &__payButton
+    padding: 1.5rem 3rem
+    cursor: pointer

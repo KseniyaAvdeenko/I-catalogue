@@ -9,6 +9,7 @@ import {IProdReadOnly} from "../../interface/IProduct";
 import PageContent from "../../components/SiteComponents/PageContent/PageContent";
 import ModalPopUp from "../../components/SiteComponents/ModalPopup/ModalPopUp";
 import Loader from "../../components/UI/Loader/Loader";
+import {setPageTitle} from "../../hooks/getTitle";
 
 interface IPageProps {
     formData: { [key: string]: string | number; };
@@ -23,11 +24,14 @@ const Page: React.FC<IPageProps> = ({setFormData, formData, getFormInputs}) => {
     const [modalVisibility, setModalVisibility] = useState<boolean>(false)
     const [modalData, setModalData] = useState<IProdReadOnly | null>(null)
 
-
     useEffect(() => {
         if (pageSlug) dispatch(loadPageWithNavLink(pageSlug))
-        if (page) document.title = page.navLink
     }, [pageSlug])
+
+    useEffect(() => {
+        if (page) setPageTitle(page.navLink)
+    }, [page])
+
 
     function payClickHandle(prod: IProdReadOnly) {
         setModalVisibility(true)
@@ -41,7 +45,11 @@ const Page: React.FC<IPageProps> = ({setFormData, formData, getFormInputs}) => {
                     ? <>
                         <ProductList
                             prodCardBg={page.prodBackground}
-                            payClickHandle={payClickHandle}/>
+                            payClickHandle={payClickHandle}
+                            cardBorder={page.cardBorder}
+                            cardBorderColor={page.cardBorderColor}
+                            cardBorderWidth={page.cardBorderWidth}
+                        />
                         <ModalPopUp
                             isModalOpen={modalVisibility}
                             onClose={() => setModalVisibility(false)}

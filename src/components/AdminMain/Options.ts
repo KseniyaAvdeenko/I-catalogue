@@ -7,7 +7,7 @@ import {
     IHeaderLayout,
     IHeadingType, IInputType,
     INavLink,
-    INavLinksHoverStyle, ISeoTagType, ISocialIcons, ISocialIconType
+    INavLinksHoverStyle, IOptionItem, ISeoTagType, ISocialIcons, ISocialIconType
 } from "../../interface/IAdminPageComponets";
 import FooterLayout1 from '../../assets/img/FooterLayout1.svg';
 import FooterLayout2 from '../../assets/img/FooterLayout2.svg';
@@ -157,23 +157,32 @@ export const socialIconTypes: ISocialIconType[] = [
     {id: 'outlinedMonotone', icon: OutlinedMonotone, name: 'Контур монотонный'},
 ]
 
-export const tableHead: Array<{id: string, name:string, width: string}> = [
+export const tableHead: Array<{ id: string, name: string, width: string }> = [
     {id: 'id', name: '#', width: '3%'},
-    {id:'orderDate', name:'Дата заказа', width: '8%'},
-    {id:'product', name:'Товар/услуга', width: '15%'},
-    {id:'totalPrice', name:'Итоговая стоимость', width: '8%'},
-    {id:'data', name:'Данные формы', width: '30%'},
-    {id:'paid', name:'Оплачено', width: '5%'},
-    {id:'paymentData', name:'Данные об оплате', width: '20%'},
+    {id: 'orderDate', name: 'Дата заказа', width: '8%'},
+    {id: 'product', name: 'Товар/услуга', width: '15%'},
+    {id: 'totalPrice', name: 'Итоговая стоимость', width: '8%'},
+    {id: 'data', name: 'Данные формы', width: '30%'},
+    {id: 'paid', name: 'Оплачено', width: '5%'},
+    {id: 'paymentData', name: 'Данные об оплате', width: '20%'},
 ]
 
-export const filterOptions: Array<{id: string, name: string}> = [
+
+
+export const filterOptions:IOptionItem[] = [
     {id: 'all', name: 'Все'},
     {id: 'paid', name: 'Только оплаченные'},
     {id: 'unpaid', name: 'Только неоплаченные'},
 ]
-export const intervalOptions: Array<{id: string, name: string}> = [
+export const intervalOptions: IOptionItem[] = [
     {id: 'days', name: 'дни'},
     {id: 'months', name: 'месяцы'},
     {id: 'years', name: 'года'}
+]
+
+export const showingItemsOptions: IOptionItem[] = [
+    {id: 'header', name: '"Шапка" сайта'},
+    {id: 'footer', name: '"Подвал" сайта'},
+    {id: 'button', name: 'Кнопка'},
+    {id: 'modalForm', name: 'Модальное окно'},
 ]

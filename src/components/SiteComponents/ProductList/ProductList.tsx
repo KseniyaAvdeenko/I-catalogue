@@ -9,10 +9,19 @@ import Loader from "../../UI/Loader/Loader";
 
 interface IProductListProps {
     prodCardBg: string;
+    cardBorder: boolean;
+    cardBorderColor: string;
+    cardBorderWidth: number;
     payClickHandle: Function
 }
 
-const ProductList: React.FC<IProductListProps> = ({payClickHandle, prodCardBg}) => {
+const ProductList: React.FC<IProductListProps> = ({
+                                                      payClickHandle,
+                                                      prodCardBg,
+                                                      cardBorder,
+                                                      cardBorderWidth,
+                                                      cardBorderColor
+                                                  }) => {
     const {
         prodsPaginated,
         isLoading,
@@ -32,24 +41,24 @@ const ProductList: React.FC<IProductListProps> = ({payClickHandle, prodCardBg}) 
         dispatch(changePageAction(page, pageSize))
     }
 
-    return (
+    return prodsPaginated ? (
         <div className={styles.page__content}>
-            {prodsPaginated
-                ? <div className={styles.prodList}>
-                    {prodsPaginated.map(prod => (
-                        <ProductItem
-                            key={prod.id}
-                            prod={prod}
-                            prodCardBg={prodCardBg}
-                            payClickHandle={payClickHandle}
-                        />
-                    ))}
-                </div>
-                : <div style={{margin: '0 auto'}}>{isLoading && (<Loader/>)}</div>
-            }
+            <div className={styles.prodList}>
+                {prodsPaginated.map(prod => (
+                    <ProductItem
+                        key={prod.id}
+                        prod={prod}
+                        prodCardBg={prodCardBg}
+                        payClickHandle={payClickHandle}
+                        cardBorder={cardBorder}
+                        cardBorderColor={cardBorderColor}
+                        cardBorderWidth={cardBorderWidth}
+                    />
+                ))}
+            </div>
             <ProdsPagination getToPage={getToPage} onChangePage={onChangePage} pages={pages} currentPage={currentPage}/>
         </div>
-    );
+    ) : (<div style={{margin: '0 auto'}}>{isLoading && (<Loader/>)}</div>);
 };
 
 export default ProductList;

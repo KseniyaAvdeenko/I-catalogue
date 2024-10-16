@@ -34,30 +34,19 @@ const Layout: React.FC<ILayoutProps> = ({children, setErrorNtfs, setSuccessNtfs,
     }, [commonSettings]);
 
     useEffect(() => {
-        if (commonSettings) {
-            setBasicStyles({
-                ...basicStyles,
-                color: commonSettings.basicFontColor,
-                fontSize: commonSettings.basicFontSize,
-                fontFamily: commonSettings.basicFontFamily
-            })
-            setFavicon(commonSettings.favicon)
-        }
         if (seoTags) getSeoTags(seoTags)
-
     }, [seoTags]);
-
 
     return (
         <div className={styles.layout} style={basicStyles}>
-            <Header logo={commonSettings?.logo}/>
+            <Header logo={commonSettings?.logo ? commonSettings.logo : ''}/>
             <Notifications setErrorNtFs={setErrorNtfs}
                            setSuccessNtFs={setSuccessNtfs}
                            errorNotifications={errorNtfs}
                            successNotifications={successNtfs}
             />
             {children}
-            <Footer logo={commonSettings?.logo}/>
+            <Footer logo={commonSettings?.logo ? commonSettings.logo : ''}/>
         </div>
     );
 };

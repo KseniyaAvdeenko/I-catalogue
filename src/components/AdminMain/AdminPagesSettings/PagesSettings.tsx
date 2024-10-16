@@ -3,7 +3,6 @@ import styles from '../AdminMain.module.sass'
 import {useParams} from "react-router-dom";
 import {useAppDispatch, useAppSelector} from "../../../hooks/redux";
 import {loadPageWithNavLink, updatePageWithNavLink} from "../../../store/actions/pageSettingsAction";
-import PageBackground from "./PageBackground";
 import PageProdBackground from "./PageProdBackground";
 import PageHeadingContent from "./PageHeadingContent";
 import {IOptions} from "../../../interface/IAdminPageComponets";
@@ -12,6 +11,10 @@ import PageContent from "./PageContent";
 import AdminInputContainer from "../../UI/InputContainers/AdminInputContainer";
 import HeadingType from "../HeadingType";
 import Loader from "../../UI/Loader/Loader";
+import PageBorderColor from "./PageBorderColor";
+import PageBorderWidth from "./PageBorderWidth";
+import pageProdBackground from "./PageProdBackground";
+import PageCardBorder from "./PageCardBorder";
 
 
 const PagesSettings = () => {
@@ -24,55 +27,46 @@ const PagesSettings = () => {
         open: false, display: 'none', bottom: '-20.2rem'
     })
 
-
     //methods
     useEffect(() => {
         if (slug) dispatch(loadPageWithNavLink(slug))
     }, [slug])
 
     const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-        if (slug && page && localStorage.access) {
+        if (slug && page) {
             const pageRequiredFields = {headingSettings: page.headingSettings}
-            if (e.target.type === 'checkbox') {
-                dispatch(updatePageWithNavLink(decodeToken(localStorage.access), slug,
-                    Object.assign({[e.target.name]: e.target.checked}, pageRequiredFields)))
-            } else {
-                e.target.type === 'number'
-                    ? dispatch(updatePageWithNavLink(decodeToken(localStorage.access), slug,
-                        Object.assign({[e.target.name]: parseInt(e.target.value)}, pageRequiredFields)))
-                    : dispatch(updatePageWithNavLink(decodeToken(localStorage.access), slug,
-                        Object.assign({[e.target.name]: e.target.value}, pageRequiredFields)))
-            }
+            dispatch(updatePageWithNavLink(decodeToken(localStorage.access), slug,
+                Object.assign({
+                        [e.target.name]: e.target.type === 'checkbox'
+                            ? e.target.checked
+                            : e.target.type === 'number'
+                                ? parseInt(e.target.value)
+                                : e.target.value
+                    },
+                    pageRequiredFields
+                )))
         }
     }
     const onChangeHeadingHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (slug && page) {
-            e.target.type === 'number'
+            e.target.name === 'headingContent'
                 ? dispatch(updatePageWithNavLink(decodeToken(localStorage.access), slug,
                     {
                         headingSettings: {
+                            [e.target.name]: e.target.value,
+                            id: page.headingSettings.id
+                        }
+                    }))
+                : dispatch(updatePageWithNavLink(decodeToken(localStorage.access), slug,
+                    {
+                        headingSettings: {
                             id: page.headingSettings.id,
-                            [e.target.name]: parseInt(e.target.value),
+                            [e.target.name]: e.target.type === 'number' ? parseInt(e.target.value) : e.target.value,
                             headingContent: page.headingSettings.headingContent
                         }
                     }
                 ))
-                : e.target.type === 'text'
-                    ? dispatch(updatePageWithNavLink(decodeToken(localStorage.access), slug,
-                        {
-                            headingSettings: {
-                                [e.target.name]: e.target.value,
-                                id: page.headingSettings.id
-                            }
-                        }))
-                    : dispatch(updatePageWithNavLink(decodeToken(localStorage.access), slug,
-                        {
-                            headingSettings: {
-                                id: page.headingSettings.id,
-                                [e.target.name]: e.target.value,
-                                headingContent: page.headingSettings.headingContent
-                            }
-                        }))
+
         }
         if (e.target.name === 'blockHeadingType') setHeadingTypeOptionsVisibility({
             ...headingTypeOptionsVisibility,
@@ -80,6 +74,7 @@ const PagesSettings = () => {
             display: 'none'
         })
     }
+
     const changeHeadingTypeOptionsContainerVisibility = () => {
         headingTypeOptionsVisibility.open
             ? setHeadingTypeOptionsVisibility({
@@ -93,6 +88,7 @@ const PagesSettings = () => {
                 display: 'flex'
             })
     }
+
     return (
         <div className={styles.AdminMain}>
             <section className={[styles.AdminMain__container, styles.AdminMain__container_margin].join(' ')}>
@@ -101,18 +97,40 @@ const PagesSettings = () => {
                 {page
                     ? <div className={styles.AdminMain__formContainer}>
                         <div className={styles.form__items}>
-                            <PageBackground pageName={page.navLink} background={page.background}
-                                            onChangeHandler={onChangeHandler}/>
+                            <AdminInputContainer
+                                type={'color'} name={'background'} inputId={'background'}
+                                value={page.background} checked={false} required={false}
+                                readonly={false} inputClassname={''} label={`Фон страницы ` + page.navLink}
+                                inputContainerClassname={styles.form__inputContainer}
+                                labelClassName={''} onChangeHandler={onChangeHandler}
+                            />
                             <AdminInputContainer
                                 type={'checkbox'} name={'isBlockWithProds'} inputId={'isBlockWithProds'}
-                                value={''} checked={page.isBlockWithProds}
+                                value={''} checked={page.isBlockWithProds} onChangeHandler={onChangeHandler}
                                 required={false} readonly={false} inputClassname={''}
                                 inputContainerClassname={styles.form__inputContainer}
                                 labelClassName={''} label={'Является ли станица каталогом товаров/услуг'}
-                                onChangeHandler={onChangeHandler}/>
-                            <PageProdBackground prodBackground={page.prodBackground}
-                                                isBlockWithProds={page.isBlockWithProds}
-                                                onChangeHandler={onChangeHandler}/>
+                            />
+                            <PageProdBackground
+                                value={page.prodBackground} checked={false} inputClass={''}
+                                onChangeHandler={onChangeHandler} label={'Фон карточки товара/услуги'}
+                                inputId={'prodBackground'} name={'prodBackground'} readonly={false}
+                                isBlockWithProds={page.isBlockWithProds} required={false} type={'color'}
+                            />
+                            <PageCardBorder
+                                type={'checkbox'} name={'cardBorder'} inputId={'cardBorder'} value={''}
+                                checked={page.cardBorder} required={false} readonly={false}
+                                label={'Граница карточки товара/услуги'} inputClass={''}
+                                isBlockWithProds={page.isBlockWithProds} onChangeHandler={onChangeHandler}/>
+
+                            <PageBorderColor
+                                cardBorder={page.cardBorder} type={'color'} name={'cardBorderColor'}
+                                id={'cardBorderColor'} value={page.cardBorderColor} checked={false} required={false}
+                                readonly={false} inputClass={''} onChangeHandler={onChangeHandler}/>
+                            <PageBorderWidth
+                                type={'number'} name={'cardBorderWidth'} id={'cardBorderWidth'}
+                                value={page.cardBorderWidth} checked={false} required={false} readonly={false}
+                                inputClass={''} cardBorder={page.cardBorder} min={1} onChangeHandler={onChangeHandler}/>
                         </div>
                         <div className={styles.form__items}>
                             <PageHeadingContent headingContent={page.headingSettings.headingContent}
