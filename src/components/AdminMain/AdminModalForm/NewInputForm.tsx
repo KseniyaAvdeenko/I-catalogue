@@ -14,7 +14,13 @@ interface INewInputFormProps {
     savedLabelsTypes: string[]
 }
 
-const NewInputForm: React.FC<INewInputFormProps> = ({savedLabelsTypes, fields, saveNewInput, deleteField, onChangeHandler}) => {
+const NewInputForm: React.FC<INewInputFormProps> = ({
+                                                        savedLabelsTypes,
+                                                        fields,
+                                                        saveNewInput,
+                                                        deleteField,
+                                                        onChangeHandler
+                                                    }) => {
 
 
     return (
@@ -41,8 +47,10 @@ const NewInputForm: React.FC<INewInputFormProps> = ({savedLabelsTypes, fields, s
                         labelClassName={[styles.savedItems__item, styles.savedItems__item_labelMargin].join(' ')}
                         label={'ID и название поля ввода'}
                         onChangeHandler={onChangeHandler} pattern={'[A-Za-z]'}/>
-                    <img src={SaveIcon} alt="save icon" onClick={() => saveNewInput(field.id)}/>
-                    <img src={DeleteIcon} alt="delete icon" onClick={() => deleteField(field.id)}/>
+                    <div style={{display: 'flex'}}>
+                        <img src={SaveIcon} alt="save icon" onClick={() => saveNewInput(field.id)} style={{marginRight: '1rem'}}/>
+                        <img src={DeleteIcon} alt="delete icon" onClick={() => deleteField(field.id)}/>
+                    </div>
                 </div>
             ))}
         </div>

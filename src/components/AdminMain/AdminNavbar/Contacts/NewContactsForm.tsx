@@ -55,8 +55,11 @@ const NewContactsForm: React.FC<INewContactsFormProps> = ({saveNewContact, delet
                         onChangeHandler={onChangeHandler}
                         contactLinkType={field.linkType}
                     />
-                    <img src={SaveIcon} alt="save icon" onClick={()=>saveNewContact(field.id)} />
-                    <img src={DeleteIcon} alt="delete icon" onClick={() => deleteField(field.id)}/>
+                    <div style={{display: 'flex'}}>
+                        <img src={SaveIcon} alt="save icon" onClick={() => saveNewContact(field.id)} style={{marginRight: '1rem'}}/>
+                        <img src={DeleteIcon} alt="delete icon" onClick={() => deleteField(field.id)}/>
+                    </div>
+
                 </div>
             ))}
         </div>

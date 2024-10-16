@@ -68,12 +68,12 @@ const EditProdForm: React.FC<IEditProdFormProps> = ({
                                          labelClassName={styles.form__items_labelMargin}
                                          onChangeHandler={onProdAttrsChangeHandler}/>
                 ))}
-                <div className={styles.AdminMain__button}
-                     onClick={() => deleteProd(selectedProd.id)}>Удалить
-                </div>
             </div>
             <div className={styles.prodForm__item}>
                 <ProdImages selectedProd={selectedProd}/>
+                <div className={styles.AdminMain__button} style={{marginTop: '2rem'}}
+                     onClick={() => deleteProd(selectedProd.id)}>Удалить товар/услугу
+                </div>
             </div>
         </div>
     );

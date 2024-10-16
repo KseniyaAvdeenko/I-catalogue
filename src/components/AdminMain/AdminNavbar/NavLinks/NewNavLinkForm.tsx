@@ -35,8 +35,8 @@ const NewNavLinkForm: React.FC<INewNavLinkFormProps> = ({fields, onChangeHandler
                         required={false}
                         value={field.slug}
                     />
-                    <div className={styles.savedItems__items} style={{flexBasis: '10%'}}>
-                        <img src={SaveIcon} alt="save icon"  onClick={() => saveNewLink(field.id)}/>
+                    <div style={{display: 'flex'}}>
+                        <img src={SaveIcon} alt="save icon"  onClick={() => saveNewLink(field.id)} style={{marginRight: '1rem'}}/>
                         <img src={DeleteIcon} alt="delete icon" onClick={() => deleteField(field.id)}/>
                     </div>
                 </div>

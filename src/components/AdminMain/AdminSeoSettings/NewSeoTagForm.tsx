@@ -48,8 +48,8 @@ const NewSeoTagForm: React.FC<INewSeoTagFormProps> = ({fields, saveNewSeoTag, on
                         onChangeHandler={onChangeHandler}
                         label={'Код тега'} id={'code*' + field.id}
                         name={'code'} value={field.code}/>
-                    <div className={styles.savedItems__items} style={{flexBasis: '7%'}}>
-                        <img src={SaveIcon} alt="save icon"  onClick={() => saveNewSeoTag(field.id)}/>
+                    <div style={{display: 'flex'}}>
+                        <img src={SaveIcon} alt="save icon"  onClick={() => saveNewSeoTag(field.id)} style={{marginRight: '1rem'}}/>
                         <img src={DeleteIcon} alt="delete icon" onClick={() => deleteField(field.id)}/>
                     </div>
 

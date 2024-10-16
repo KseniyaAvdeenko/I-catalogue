@@ -6,16 +6,16 @@
   align-items: center
   height: fit-content
   background: $bg300
-  padding: 1.5rem 4rem
+  padding: 1.5rem 3rem
   @extend .baseFont
 
   &__logo
-    width: 10%
-    height: fit-content
+    width: fit-content
+    height: 3rem
 
 .auth
   display: flex
-  width: 20%
+  width: fit-content
 
   &__items
     margin-right: 2rem
@@ -43,3 +43,11 @@
 
   &__link:hover:after
     width: 100%
+
+    
+@media screen and (max-width: 320px)
+  .adminHeader
+    flex-direction: column
+
+    &__logo
+      margin-bottom: 1rem

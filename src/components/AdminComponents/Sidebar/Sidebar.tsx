@@ -13,7 +13,7 @@ interface ISidebarProps {
     setIntro: Function
 }
 
-const Sidebar: React.FC<ISidebarProps> = ({scrollToBlock, intro, setIntro}) => {
+const Sidebar = React.forwardRef<HTMLDivElement, ISidebarProps>(({scrollToBlock, intro, setIntro}, ref) => {
     //states
     const [sidebarContent, setSidebarContent] = useState<ISidebarContent[]>(SidebarContent)
     const {pages} = useAppSelector(state => state.pageSettingsReducer)
@@ -55,7 +55,7 @@ const Sidebar: React.FC<ISidebarProps> = ({scrollToBlock, intro, setIntro}) => {
     }, [window.location.pathname])
 
     return (
-        <aside className={styles.Sidebar}>
+        <aside ref={ref} className={styles.Sidebar}>
             <div className={styles.Sidebar__container}>
                 {sidebarContent.sort((a, b) => a.order - b.order).map(content => (
                     content.subsections
@@ -112,6 +112,6 @@ const Sidebar: React.FC<ISidebarProps> = ({scrollToBlock, intro, setIntro}) => {
             </div>
         </aside>
     );
-};
+});
 
 export default Sidebar;

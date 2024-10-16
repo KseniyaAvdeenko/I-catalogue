@@ -56,7 +56,7 @@ const DetailPageSettings = () => {
             <h2 className={styles.AdminMain__heading}>Настройка и контент товаров\услуг</h2>
             <h3 className={styles.AdminMain__subheading}>Детальная страница товара\услуги</h3>
             {prodPageSettings
-                ? <div className={styles.AdminMain__formContainer} style={{gridTemplateColumns: '1fr 2fr'}}>
+                ? <div className={styles.AdminMain__formContent}>
                     <div className={styles.form__items}>
                         <AdminInputContainer type={'color'} name={'background'} inputId={'background'}
                                              value={prodPageSettings.background} checked={false} required={false}

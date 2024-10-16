@@ -19,6 +19,7 @@ import AdminOrders from "../../components/AdminMain/AdminOrders/AdminOrders";
 import {setPageTitle} from "../../hooks/getTitle";
 import PreviewButton from "../../components/AdminMain/Preview/PreviewButton";
 import Preview from "../../components/AdminMain/Preview/Preview";
+import {useWindowWidth} from "../../hooks/useWindowWidth";
 
 
 const AdminPage = () => {
@@ -28,9 +29,11 @@ const AdminPage = () => {
     const productSettingsRef = useRef<HTMLDivElement>(null)
     const modalFormSettingsRef = useRef<HTMLDivElement>(null)
     const ordersRef = useRef<HTMLDivElement>(null)
+    const sidebarRef = useRef<HTMLDivElement>(null)
 
     const [intro, setIntro] = useState<IIntro>({display: "block", justifyContent: "center"})
     const [isPreviewOpen, setIsPreviewOpen] = useState<boolean>(false)
+    const windowWidth = useWindowWidth();
 
     const scrollToBlock = (sectionId: string) => {
         scrollingToSection(sectionId, commonSettingsRef.current);
@@ -45,10 +48,26 @@ const AdminPage = () => {
 
     const getPreviewVisibility = () => setIsPreviewOpen(isPreviewOpen => !isPreviewOpen)
 
+    useEffect(() => {
+        if(windowWidth > 1024 && sidebarRef.current) sidebarRef.current.style.display = 'flex'
+        if(windowWidth <= 1024 && sidebarRef.current) sidebarRef.current.style.display = 'none'
+    }, [windowWidth]);
+
+
+    function openSideBar(e: React.MouseEvent<HTMLDivElement>) {
+        if (sidebarRef.current) {
+            sidebarRef.current.style.display === 'none'
+                ? sidebarRef.current.style.display = 'flex'
+                : sidebarRef.current.style.display = 'none';
+        }
+
+    }
+
     return auth.isAuth ? (
             <section className={styles.AdminPage}>
                 <Preview isOpen={isPreviewOpen}/>
-                <Sidebar scrollToBlock={scrollToBlock} intro={intro} setIntro={setIntro}/>
+                <Sidebar ref={sidebarRef} scrollToBlock={scrollToBlock} intro={intro} setIntro={setIntro}/>
+                <div className={styles.AdminPage__sidebarButton} onClick={e => openSideBar(e)}>menu</div>
                 <main className={styles.AdminPage__container} style={{justifyContent: intro.justifyContent}}>
                     <div style={{display: intro.display}} className={styles.AdminPage__intro}>Здесь Вы сможете настроить
                         свой интернет-каталог

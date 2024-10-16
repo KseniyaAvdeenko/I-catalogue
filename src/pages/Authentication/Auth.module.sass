@@ -8,8 +8,10 @@
     background: $bg100
     width: 100%
     position: relative
-    min-height: calc(100vh - 6.5rem - 6rem)
+    height: 100%
     @extend .flexRow
+    @extend .p_30
+    -ms-flex-pack: center
     justify-content: center
 
   &__form
@@ -39,12 +41,13 @@
       top: 1rem
 
     & input
-        @extend .styledInput
-        @extend .p_10
-        width: 100%
-        &:focus
-          outline: none
-          border-bottom-color: $accent200
+      @extend .styledInput
+      @extend .p_10
+      width: 100%
+
+      &:focus
+        outline: none
+        border-bottom-color: $accent200
 
     & div
       margin-top: 1rem
@@ -60,9 +63,11 @@
         @extend .styledInput
         @extend .p_10
         width: 100%
+
         &:focus
           outline: none
           border-bottom-color: $accent200
+
   &__heading
     @extend .baseFont
     font-size: $h4
@@ -80,3 +85,71 @@
   top: 1rem
   right: 1rem
   z-index: 2
+
+
+@media screen and (max-width: 1440px)
+  .auth
+    &__form
+      width: 35%
+
+@media screen and (max-height: 610px)
+  .auth
+    &__heading
+      font-size: $h5
+      margin-bottom: 2rem
+      margin-top: 1rem
+
+    &__button
+      margin-top: 2rem
+
+@media screen and (max-width: 880px)
+  .auth
+    &__form
+      width: 45%
+
+@media screen and (max-width: 600px)
+  .auth
+    &__form
+      width: 60%
+
+    &__button
+      font-size: 1.8rem
+      padding: 1rem 2.5rem
+
+@media screen and (max-width: 440px)
+  .auth
+    &__form
+      width: 80%
+
+@media screen and (max-width: 420px)
+  .auth
+    &__form
+      width: 90%
+
+@media screen and (max-width: 395px)
+  .auth
+    &__form
+      width: 100%
+
+@media screen and (max-width: 380px)
+ .auth
+    &__heading
+      font-size: $h5
+      margin-bottom: 2rem
+      margin-top: 1rem
+
+    &__button
+      font-size: 1.8rem
+      padding: 1rem 2.5rem
+
+    &__form
+      padding: 2rem
+
+@media screen and (max-width: 320px)
+  .auth
+    &__container
+      padding: 2rem
+      height: fit-content
+
+    &__inputContainer
+      margin: 1rem 0

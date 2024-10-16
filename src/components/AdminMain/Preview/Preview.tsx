@@ -26,13 +26,13 @@ const Preview: React.FC<IPreviewProps> = ({isOpen}) => {
     const [showDetailPageSelect, setShowDetailPageSelect] = useState<'none' |'flex'>('none')
 
     const [showingItemsOptionsVisibility, setShowingItemsOptionsVisibility] = useState<IOptions>({
-        open: false, display: 'none', top: '-17.2rem'
+        open: false, display: 'none', top: '8rem'
     })
     const [showingPagesOptionsVisibility, setShowingPagesOptionsVisibility] = useState<IOptions>({
-        open: false, display: 'none', top: '-17.2rem'
+        open: false, display: 'none', top: '8rem'
     })
     const [showingDetailPagesOptionsVisibility, setShowingDetailPagesOptionsVisibility] = useState<IOptions>({
-        open: false, display: 'none', top: '-15.2rem'
+        open: false, display: 'none', top: '8rem'
     })
 
     const changeShowingItemsVisibility = () => showingItemsOptionsVisibility.open
@@ -54,7 +54,9 @@ const Preview: React.FC<IPreviewProps> = ({isOpen}) => {
     }
     const onChangeShowPage = (e: React.ChangeEvent<HTMLInputElement>) => {
         setShowPage(e.target.value)
-        if(e.target.value === 'detailProdPage') setShowDetailPageSelect('flex')
+        e.target.value === 'detailProdPage'
+            ? setShowDetailPageSelect('flex')
+            : setShowDetailPageSelect('none')
         setShowingPagesOptionsVisibility({...showingPagesOptionsVisibility, display: 'none', open: false})
         setShowingContainers({...showingContainers, itemsDisplay: 'none', pagesDisplay: 'flex'})
     }

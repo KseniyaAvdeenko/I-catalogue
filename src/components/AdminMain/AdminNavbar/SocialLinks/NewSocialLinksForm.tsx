@@ -55,8 +55,11 @@ const NewSocialLinksForm: React.FC<INewSocialLinksFormProps> = ({
                         type={'text'}
                         name={'linkHref'}
                     />
-                    <img src={SaveIcon} alt="save icon" onClick={() => saveNewSocialLink(field.id)}/>
-                    <img src={DeleteIcon} alt="delete icon" onClick={() => deleteField(field.id)}/>
+                    <div style={{display: 'flex'}}>
+                        <img src={SaveIcon} alt="save icon" onClick={() => saveNewSocialLink(field.id)} style={{marginRight: '1rem'}}/>
+                        <img src={DeleteIcon} alt="delete icon" onClick={() => deleteField(field.id)}/>
+                    </div>
+
                 </div>
             ))}
         </div>

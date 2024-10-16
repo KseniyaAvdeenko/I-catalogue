@@ -49,6 +49,7 @@
     padding: .5rem 0 1.5rem
 
     & > img
+      margin-right: 1rem
       cursor: pointer
 
   &_inputRadio
@@ -144,3 +145,69 @@
     margin-right: 3rem
     font-size: $h3
     text-align: center
+
+
+@media screen and (max-width: 600px)
+  .AdminNavbar
+    &__container
+      align-items: center
+
+    &__formContainer
+      width: fit-content
+      align-items: center
+
+  .savedItems
+    width: fit-content
+
+    &__items
+      flex-direction: column
+      align-items: center
+
+      & > img
+        margin-bottom: 1rem
+
+    &__item
+      margin-bottom: 1rem
+
+  .formItems
+    width: fit-content
+
+    &__items
+      flex-direction: column
+      justify-content: space-between
+      padding: .5rem 0
+      width: 100%
+
+      & > img
+        margin-bottom: 1rem
+
+    &__item
+      margin-bottom: 1rem
+  .selectProd
+    flex-direction: column
+    & > h2
+      margin-bottom: 2rem
+      font-size: $h4
+
+
+
+@media screen and (max-width: 440px)
+  .AdminNavbar
+    &__heading
+      font-size: $h3
+
+    &__subheading
+      font-size: $h4
+
+
+@media screen and (max-width: 420px)
+  .AdminNavbar
+    &__heading
+      font-size: 2.8rem
+
+    &__subheading
+      font-size: 2.3rem
+
+@media screen and (max-width: 395px)
+  .AdminNavbar
+    font-size: $small

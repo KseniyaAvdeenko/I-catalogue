@@ -4,7 +4,7 @@
   @extend .baseFont
   @extend .flexColumn
   flex-basis: 24%
-  min-height: 78vh
+  height: 100%
   border-right: 2px solid $primary100
 
   &__container
@@ -68,6 +68,30 @@
     &_margin
       @extend .mb_15
 
+
 .linkActive
   text-decoration: none
   color: $primary100
+
+@media screen and (max-width: 1440px)
+  .Sidebar
+    flex-basis: 30%
+
+@media screen and (max-width: 1024px)
+  .Sidebar
+    display: none
+    position: absolute
+    top: 7%
+    left: 0
+    width: 100%
+    flex-basis: fit-content
+    height: 45%
+    border-right: none
+    background: $bg100
+    z-index: 4
+    padding: 2rem
+    border-bottom: 2px solid $primary100
+
+@media screen and (max-width: 940px)
+  .Sidebar
+    top: 15%

@@ -5,7 +5,7 @@
   display: flex
   @extend .p_30
   width: 100%
-  min-height: 87vh
+  height: 100%
   background: $bg100
   position: relative
 
@@ -18,6 +18,24 @@
     font-size: $h3
     text-align: center
 
+  &__sidebarButton
+    display: none
+    @extend .flexRow
+    justify-content: center
+    color: $bg100
+    text-transform: uppercase
+    letter-spacing: .5rem
+    transition: all .5s ease-in
+    width: 100%
+    background: $primary100
+    padding: 4rem 0
+    cursor: pointer
+
+    &:hover,
+    &:active
+      background: $primary200
+
+
   &_notAuth
     @extend .baseFont
     @extend .flexRow
@@ -25,5 +43,28 @@
     background: $bg100
     min-height: calc(100vh - 6rem - 6rem)
 
+@media screen and (max-width: 1680px)
+  .AdminPage
+    height: 88vh
+
+@media screen and (max-width: 1024px)
+  .AdminPage
+    flex-direction: column
+    padding: 0 0 2rem
+
+    &__container
+      overflow-y: auto
+
+    &__sidebarButton
+      display: flex
+
+
+@media screen and (max-height: 800px)
+  .AdminPage
+    height: 85%
+
+@media screen and (max-height: 730px)
+  .AdminPage
+    height: 83vh
 
 

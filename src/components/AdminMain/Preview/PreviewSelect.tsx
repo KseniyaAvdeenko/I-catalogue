@@ -25,7 +25,7 @@ const PreviewSelect: React.FC<IPreviewSelectProps> = ({
                                                           selectOptionVisibility
                                                       }) => {
     return (
-        <div className={styles.form__inputContainer_select} style={{width: '30%', display: selectVisibility ? selectVisibility : 'flex'}}>
+        <div className={styles.form__inputContainer_select} style={{display: selectVisibility ? selectVisibility : 'flex'}}>
             <div className={styles.form__inputContainer_label}>{selectLabel}</div>
             <div className={styles.form__selectContainer}
                  onClick={changeSelectOptionsVisibility}>{optionsArray.map(option => (option.id === selectedOption ? option.name : ''))}</div>

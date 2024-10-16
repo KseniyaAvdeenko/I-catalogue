@@ -26,6 +26,13 @@
     display: grid
     grid-template-columns: repeat(3, 1fr)
     column-gap: 2.4rem
+  &__formContent
+    @extend .box
+    width: 100%
+    display: grid
+    grid-template-columns: 1fr 2fr
+    column-gap: 2.4rem
+
 
   &__formContainerUnLoaded
     @extend .box
@@ -298,3 +305,77 @@
     text-align: justify
 
 
+@media screen and (max-width: 940px)
+  .AdminMain
+    &__formContainer
+      grid-template-columns: auto
+      grid-template-rows: auto auto auto
+      column-gap: 0
+      row-gap: 2rem
+
+  .form
+    &__items
+      @extend .flexColumn
+      height: fit-content
+
+@media screen and (max-width: 600px)
+  .AdminMain
+    &__heading
+      font-size: $h3
+
+    &__subheading
+      font-size: $h4
+    &__formContent
+      grid-template-columns: 1fr
+      grid-template-rows: auto
+      row-gap: 2.4rem
+      column-gap: 2.4rem
+
+  .form
+    &__selectContainer
+      margin-bottom: 1rem
+
+  .prodForm
+    &__items
+      grid-template-columns: 1fr
+      grid-auto-rows: auto
+      row-gap: 2rem
+      column-gap: 2rem
+@media screen and (max-width: 440px)
+  .AdminMain
+    &__heading
+      font-size: $h4
+
+    &__subheading
+      font-size: $h5
+
+@media screen and (max-width: 420px)
+  .AdminMain
+    &__heading
+      font-size: 2.8rem
+
+    &__subheading
+      font-size: 2.3rem
+
+@media screen and (max-width: 395px)
+  .AdminMain
+    padding: 1rem
+    font-size: $small
+
+  .form
+    &__selectContainer
+      height: 4rem
+
+    &__inputContainer
+      flex-direction: column
+      justify-content: start
+      @extend .mb_20
+
+      & > label
+        flex-basis: fit-content
+        margin-bottom: 1rem
+        text-align: center
+
+  .choiceBox
+    & > img
+      width: 100%
