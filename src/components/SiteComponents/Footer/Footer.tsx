@@ -8,7 +8,7 @@ import styles from './Footer.module.sass';
 
 
 interface IFooterProps {
-    logo: string | undefined
+    logo: string | null
 }
 
 const Footer: React.FC<IFooterProps> = ({logo}) => {
@@ -52,11 +52,13 @@ const Footer: React.FC<IFooterProps> = ({logo}) => {
 
     function getFooterLayout(contentLayout: string) {
         if (contentLayout === '1') {
-            return (<FooterLayout1 onHoverIn={onHoverIn} onHoverOut={onHoverOut} footerStyles={footerStyles} logo={logo ?? ''}/>)
+            return (<FooterLayout1 onHoverIn={onHoverIn} onHoverOut={onHoverOut} footerStyles={footerStyles}
+                                   logo={logo ? logo : ''}/>)
         } else if (contentLayout === '2') {
             return (<FooterLayout2 onHoverIn={onHoverIn} onHoverOut={onHoverOut} footerStyles={footerStyles}/>)
         } else if (contentLayout === '3') {
-            return (<FooterLayout3 onHoverIn={onHoverIn} onHoverOut={onHoverOut} footerStyles={footerStyles} logo={logo ?? ''}/>)
+            return (<FooterLayout3 onHoverIn={onHoverIn} onHoverOut={onHoverOut} footerStyles={footerStyles}
+                                   logo={logo ? logo : ''}/>)
         }
     }
 

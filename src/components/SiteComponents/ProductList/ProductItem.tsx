@@ -5,34 +5,48 @@ import {getCurrency} from "../../../hooks/getCurrency";
 import SiteButton from "../../UI/SiteButton/SiteButton";
 import {IProdReadOnly} from "../../../interface/IProduct";
 
-interface IProductItemProps{
+interface IProductItemProps {
     prod: IProdReadOnly;
     prodCardBg: string;
-    payClickHandle:Function
+    payClickHandle: Function
+    cardBorder: boolean;
+    cardBorderColor: string;
+    cardBorderWidth: number;
 }
 
-const ProductItem: React.FC<IProductItemProps> = ({payClickHandle, prod, prodCardBg}) => {
+const ProductItem: React.FC<IProductItemProps> = ({
+                                                      cardBorderWidth,
+                                                      cardBorderColor,
+                                                      cardBorder,
+                                                      payClickHandle,
+                                                      prod,
+                                                      prodCardBg
+                                                  }) => {
     return (
-        <div key={prod.id} className={styles.prodItem} style={{background: prodCardBg}}>
-                        <ProdImage images={prod.images} imageWrapperClassname={styles.prodItem__imageWrapper}/>
-                        <div className={styles.prodItem__items}>
-                            <div className={styles.prodItem__name}>{prod.name}</div>
-                            <div className={styles.prodItem__price}>
-                                <b>Цена:</b> {prod.price} {getCurrency(prod.currency)} {prod.priceAttrs && `/ ${prod.priceAttrs}`}
-                            </div>
-                            <SiteButton product={prod}
-                                        type={'link'}
-                                        btnText={'Подробнее'}
-                                        btnClassName={styles.prodItem__moreBtn}
-                            />
-                            <SiteButton product={prod}
-                                        type={'button'}
-                                        btnText={'Оплатить'}
-                                        clickHandler={payClickHandle}
-                                        btnClassName={styles.prodItem__payButton}
-                            />
-                        </div>
-                    </div>
+        <div key={prod.id} className={styles.prodItem}
+             style={{
+                 background: prodCardBg,
+                 border: cardBorder ? cardBorderWidth + 'px solid ' + cardBorderColor : 'none'
+             }}>
+            <ProdImage images={prod.images} imageWrapperClassname={styles.prodItem__imageWrapper}/>
+            <div className={styles.prodItem__items}>
+                <div className={styles.prodItem__name}>{prod.name}</div>
+                <div className={styles.prodItem__price}>
+                    <b>Цена:</b> {prod.price} {getCurrency(prod.currency)} {prod.priceAttrs && `/ ${prod.priceAttrs}`}
+                </div>
+                <SiteButton product={prod}
+                            type={'link'}
+                            btnText={'Подробнее'}
+                            btnClassName={styles.prodItem__moreBtn}
+                />
+                <SiteButton product={prod}
+                            type={'button'}
+                            btnText={'Оплатить'}
+                            clickHandler={payClickHandle}
+                            btnClassName={styles.prodItem__payButton}
+                />
+            </div>
+        </div>
     );
 };
 

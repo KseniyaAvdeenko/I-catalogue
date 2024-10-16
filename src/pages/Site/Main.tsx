@@ -7,6 +7,8 @@ import ProductList from "../../components/SiteComponents/ProductList/ProductList
 import {IProdReadOnly} from "../../interface/IProduct";
 import ModalPopUp from "../../components/SiteComponents/ModalPopup/ModalPopUp";
 import Loader from "../../components/UI/Loader/Loader";
+import {setPageTitle} from "../../hooks/getTitle";
+import {logout} from "../../store/actions/authAction";
 
 interface IMainPageProps {
     formData: { [key: string]: string | number; };
@@ -40,7 +42,7 @@ const Main:React.FC<IMainPageProps> = ({formData, setFormData, getFormInputs}) =
                 background: mainPageSettings.background
             })
             setMainPageHeading(mainPageSettings.headingSettings)
-            document.title = mainPageSettings.title
+            setPageTitle(mainPageSettings.title)
         }
     }, [mainPageSettings]);
 
@@ -56,6 +58,9 @@ const Main:React.FC<IMainPageProps> = ({formData, setFormData, getFormInputs}) =
             <ProductList
                 prodCardBg={mainPageStyles.prodCardBg}
                 payClickHandle={payClickHandle}
+                cardBorder={mainPageSettings.cardBorder}
+                cardBorderColor={mainPageSettings.cardBorderColor}
+                cardBorderWidth={mainPageSettings.cardBorderWidth}
             />
             <ModalPopUp
                 isModalOpen={modalVisibility}

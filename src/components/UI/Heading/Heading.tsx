@@ -6,7 +6,7 @@ const Heading: React.FC<{pageHeading: IHeading, headingContent: string }> = ({pa
     return (<Heading style={{
                 margin: '5rem 0 5rem',
                 textAlign: 'center',
-                fontSize: pageHeading.headingFontSize,
+                fontSize: `clamp(2rem, ${pageHeading.headingFontSize}px, 6rem)`,
                 color: pageHeading.headingFontColor,
                 fontWeight: pageHeading.headingFontWeight
             }}>{headingContent}</Heading>)

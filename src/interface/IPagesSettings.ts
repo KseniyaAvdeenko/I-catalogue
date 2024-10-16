@@ -18,6 +18,9 @@ export interface IMainPageSetting {
     title: string;
     background: string;
     prodCardBg: string;
+    cardBorder: boolean;
+    cardBorderColor: string;
+    cardBorderWidth: number;
     headingSettings: IHeading
 }
 
@@ -28,7 +31,10 @@ export interface IPageSettingBase {
     background: string;
     isBlockWithProds: boolean;
     prodBackground: string;
-    content: string|null
+    cardBorder: boolean;
+    cardBorderColor: string;
+    cardBorderWidth: number;
+    content: string | null
 }
 
 export interface IPageSetting extends IPageSettingBase {

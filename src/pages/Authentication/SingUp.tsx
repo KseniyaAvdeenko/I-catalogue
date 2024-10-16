@@ -12,6 +12,7 @@ import {
     changeAuthLabelsAndValidationViewOnBlur,
     changeAuthLabelsOnFocus, isPasswordsMatching
 } from "../../utils/changeAuthLabelsAndValidationView";
+import {setPageTitle} from "../../hooks/getTitle";
 
 const SignUp = () => {
     const auth = useAppSelector(state => state.authReducer)
@@ -30,7 +31,7 @@ const SignUp = () => {
         image: InVisibleIcon,
         type: 'password'
     })
-
+    setPageTitle("Регистрация")
     //--methods
     const onBlurInput = (e: React.ChangeEvent<HTMLInputElement>) => changeAuthLabelsAndValidationViewOnBlur(e)
 

@@ -9,6 +9,7 @@ import DetailProdLayout1 from "../../components/SiteComponents/DetaiProductPage/
 import DetailProdLayout2 from "../../components/SiteComponents/DetaiProductPage/DetailProdLayout2";
 import ModalPopUp from "../../components/SiteComponents/ModalPopup/ModalPopUp";
 import Loader from "../../components/UI/Loader/Loader";
+import {setPageTitle} from "../../hooks/getTitle";
 
 interface IProdPageProps {
     formData: { [key: string]: string | number; };
@@ -26,9 +27,11 @@ const ProductPage: React.FC<IProdPageProps> = ({formData, setFormData, getFormIn
 
     useEffect(() => {
         if (prodId) dispatch(loadProductRead(parseInt(prodId)))
-        if (productReadOnly) document.title = productReadOnly.name
     }, [prodId])
 
+    useEffect(() => {
+        if (productReadOnly) setPageTitle(productReadOnly.name)
+    }, [productReadOnly])
 
     function payClickHandle(prod: IProdReadOnly) {
         setModalVisibility(true);

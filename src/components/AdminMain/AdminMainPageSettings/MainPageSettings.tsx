@@ -7,6 +7,8 @@ import {decodeToken} from "../../../hooks/encodeDecodeTokens";
 import AdminInputContainer from "../../UI/InputContainers/AdminInputContainer";
 import HeadingType from "../HeadingType";
 import Loader from "../../UI/Loader/Loader";
+import MainPageBorderColor from "./MainPageBorderColor";
+import MainPageBorderWidth from "./MainPageBorderWidth";
 
 
 const MainPageSettings = () => {
@@ -18,39 +20,32 @@ const MainPageSettings = () => {
     })
     //--methods
     const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-        if (mainPageSettings && localStorage.access) {
-            e.target.type === 'number'
-                ? dispatch(updateMainPageSettings(
-                    decodeToken(localStorage.access),
-                    mainPageSettings.id,
-                    {[e.target.name]: parseInt(e.target.value)}
-                ))
-                : dispatch(updateMainPageSettings(
-                    decodeToken(localStorage.access),
-                    mainPageSettings.id,
-                    {[e.target.name]: e.target.value}
-                ))
+        if (mainPageSettings) {
+            dispatch(updateMainPageSettings(
+                decodeToken(localStorage.access),
+                mainPageSettings.id,
+                {
+                    [e.target.name]: e.target.type === 'number'
+                        ? parseInt(e.target.value)
+                        : e.target.type === 'checkbox'
+                            ? e.target.checked
+                            : e.target.value
+                }
+            ))
         }
     }
     const onChangeHeadingHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-        if (mainPageSettings && localStorage.access) {
-            if (e.target.type === 'number') {
+        if (mainPageSettings) {
+            if (e.target.name === "headingContent") {
                 dispatch(updateMainPageSettings(
                     decodeToken(localStorage.access),
                     mainPageSettings.id,
                     {
                         headingSettings: {
+                            [e.target.name]: e.target.value,
                             id: mainPageSettings.headingSettings.id,
-                            headingContent: mainPageSettings.headingSettings.headingContent,
-                            [e.target.name]: parseInt(e.target.value)
                         }
                     }
-                ))
-            } else if (e.target.type === 'text') {
-                dispatch(updateMainPageSettings(
-                    decodeToken(localStorage.access),
-                    mainPageSettings.id,
-                    {headingSettings: {[e.target.name]: e.target.value, id: mainPageSettings.headingSettings.id,}}
                 ))
             } else {
                 dispatch(updateMainPageSettings(
@@ -58,9 +53,9 @@ const MainPageSettings = () => {
                     mainPageSettings.id,
                     {
                         headingSettings: {
-                            headingContent: mainPageSettings.headingSettings.headingContent,
-                            [e.target.name]: e.target.value,
                             id: mainPageSettings.headingSettings.id,
+                            headingContent: mainPageSettings.headingSettings.headingContent,
+                            [e.target.name]: e.target.type === 'number' ? parseInt(e.target.value) : e.target.value
                         }
                     }
                 ))
@@ -87,6 +82,7 @@ const MainPageSettings = () => {
                 display: 'flex',
             })
     }
+
     return (
         <div className={styles.AdminMain}>
             <section className={[styles.AdminMain__container, styles.AdminMain__container_margin].join(' ')}>
@@ -108,6 +104,24 @@ const MainPageSettings = () => {
                                 inputContainerClassname={styles.form__inputContainer}
                                 labelClassName={''} label={'Фон карточки товара/услуги'}
                                 onChangeHandler={onChangeHandler}/>
+                            <AdminInputContainer
+                                type={'checkbox'} name={'cardBorder'} inputId={'cardBorder'}
+                                value={''} checked={mainPageSettings.cardBorder}
+                                required={false} readonly={false} inputClassname={''}
+                                inputContainerClassname={styles.form__inputContainer}
+                                labelClassName={''} label={'Граница карточки'}
+                                onChangeHandler={onChangeHandler}/>
+                            <MainPageBorderColor
+                                cardBorder={mainPageSettings.cardBorder} readonly={false}
+                                onChangeHandler={onChangeHandler} checked={false} inputClass={''}
+                                type={'color'} name={'cardBorderColor'} required={false}
+                                id={'cardBorderColor'} value={mainPageSettings.cardBorderColor}
+                            />
+                            <MainPageBorderWidth
+                                type={'number'} name={'cardBorderWidth'} id={'cardBorderWidth'} checked={false}
+                                value={mainPageSettings.cardBorderWidth} required={false} readonly={false}
+                                inputClass={''} cardBorder={mainPageSettings.cardBorder} min={1}
+                                onChangeHandler={onChangeHandler} />
                         </div>
                         <div className={styles.form__items}>
                             <AdminInputContainer

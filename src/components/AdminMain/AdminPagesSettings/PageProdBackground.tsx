@@ -4,26 +4,42 @@ import styles from "../AdminMain.module.sass";
 import AdminInput from "../../UI/Inputs/AdminInput";
 
 interface IPageProdBackgroundProps extends IAdminComponentsProps {
-    prodBackground: string | undefined;
+    type: string;
+    name: string;
+    inputId: string;
+    value: string | number;
+    checked: boolean
+    required: boolean
+    readonly: boolean;
+    label: string;
+    inputClass: string;
     isBlockWithProds: boolean;
 }
 
 const PageProdBackground: React.FC<IPageProdBackgroundProps> = ({
-                                                                    prodBackground,
+                                                                    inputClass,
+                                                                    value,
+                                                                    checked,
+                                                                    label,
+                                                                    readonly,
+                                                                    type,
+                                                                    name,
+                                                                    required,
+                                                                    inputId,
                                                                     isBlockWithProds,
                                                                     onChangeHandler
                                                                 }) => {
     return (
         <div className={styles.form__inputContainer} style={{display: isBlockWithProds ? 'flex' : 'none'}}>
-            <label htmlFor="prodBackground">Фон карточки товара\услуги</label>
-            <AdminInput type={"color"}
-                        value={prodBackground ?? '#bbb'}
-                        name={'prodBackground'}
-                        id={'prodBackground'}
-                        classname={''}
-                        checked={false}
-                        required={false}
-                        readonly={false}
+            <label htmlFor={inputId}>{label}</label>
+            <AdminInput type={type}
+                        value={value}
+                        name={name}
+                        id={inputId}
+                        classname={inputClass}
+                        checked={checked}
+                        required={required}
+                        readonly={readonly}
                         onChangeHandler={onChangeHandler}
             />
         </div>
