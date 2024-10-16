@@ -16,7 +16,7 @@ const MainPageSettings = () => {
     const dispatch = useAppDispatch()
     //--states
     const [headingTypeOptionsVisibility, setHeadingTypeOptionsVisibility] = useState<IOptions>({
-        open: false, display: 'none', bottom: '-20.2rem'
+        open: false, display: 'none', top: '8rem'
     })
     //--methods
     const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -65,7 +65,6 @@ const MainPageSettings = () => {
             ...headingTypeOptionsVisibility,
             open: false,
             display: 'none',
-            bottom: '-20.2rem'
         })
     }
 

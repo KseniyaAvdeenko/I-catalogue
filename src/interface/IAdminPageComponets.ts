@@ -24,7 +24,7 @@ export interface INavLinksHoverStyle {
 export interface IOptions {
     open: boolean;
     display: string;
-    bottom?: string;
+    top?: string;
 }
 
 export interface IHeaderLayout {

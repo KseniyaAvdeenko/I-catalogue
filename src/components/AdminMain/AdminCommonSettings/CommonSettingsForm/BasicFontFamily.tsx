@@ -28,7 +28,7 @@ const BasicFontFamily: React.FC<IBasicFontFamilyProps> = ({
             <div className={styles.form__selectContainer}
                  onClick={changeFontOptionsContainerVisibility}>{basicFontFamily}</div>
             <div className={styles.form__optionsContainer}
-                 style={{display: fontOptionsVisibility.display, bottom: fontOptionsVisibility.bottom}}>
+                 style={{display: fontOptionsVisibility.display, top: fontOptionsVisibility.top}}>
                 {appFonts.map(font => (
                         <label key={font.id} htmlFor={font.id}
                                  className={font.font === basicFontFamily

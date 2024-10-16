@@ -19,8 +19,8 @@ const SelectProd: React.FC<ISelectProdProps> = ({
 
     const changeProdOptionsContainerVisibility = () => {
         prodsOptionsVisibility.open
-            ? setProdsOptionsVisibility({...prodsOptionsVisibility, open: false, display: 'none', bottom: '-8.8rem'})
-            : setProdsOptionsVisibility({...prodsOptionsVisibility, open: true, display: 'flex', bottom: '-8.8rem'})
+            ? setProdsOptionsVisibility({...prodsOptionsVisibility, open: false, display: 'none'})
+            : setProdsOptionsVisibility({...prodsOptionsVisibility, open: true, display: 'flex'})
     }
 
 
@@ -30,7 +30,7 @@ const SelectProd: React.FC<ISelectProdProps> = ({
                  onClick={changeProdOptionsContainerVisibility}>
                 {selectedProd && selectedProd.name}</div>
             <div className={styles.form__optionsContainer}
-                 style={{display: prodsOptionsVisibility.display, bottom: prodsOptionsVisibility.bottom}}>
+                 style={{display: prodsOptionsVisibility.display, top: prodsOptionsVisibility.top}}>
                 {products && products.map(product => (
                     <label key={product.id} htmlFor={product.id + product.name}
                            className={selectedProd && product.id === selectedProd.id

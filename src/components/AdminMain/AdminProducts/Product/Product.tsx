@@ -17,10 +17,10 @@ const Product = () => {
     const [selectedProdsAttrs, setSelectedProdAttrs] = useState<IOtherValue | {} | undefined>(selectedProd?.otherValues)
 
     const [prodsOptionsVisibility, setProdsOptionsVisibility] = useState<IOptions>({
-        open: false, display: 'none', bottom: '-8.8rem'
+        open: false, display: 'none', top: '5rem'
     })
     const [currencyOptionsVisibility, setCurrencyOptionsVisibility] = useState<IOptions>({
-        open: false, display: 'none', bottom: '-12.9rem'
+        open: false, display: 'none', top: '8rem'
     })
     //methods
     useEffect(() => {
@@ -31,7 +31,7 @@ const Product = () => {
     const onSelectHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
         e.preventDefault()
         dispatch(loadProductRead(parseInt(e.target.value)))
-        setProdsOptionsVisibility({...prodsOptionsVisibility, open: false, display: 'none', bottom: '-8.8rem'})
+        setProdsOptionsVisibility({...prodsOptionsVisibility, open: false, display: 'none'})
     }
 
     function onChangeProdHandler(e: React.ChangeEvent<HTMLInputElement>) {
@@ -50,7 +50,6 @@ const Product = () => {
             ...currencyOptionsVisibility,
             open: false,
             display: 'none',
-            bottom: '-12.9rem'
         })
     }
 
@@ -72,13 +71,11 @@ const Product = () => {
                 ...currencyOptionsVisibility,
                 open: false,
                 display: 'none',
-                bottom: '-12.9rem'
             })
             : setCurrencyOptionsVisibility({
                 ...currencyOptionsVisibility,
                 open: true,
                 display: 'flex',
-                bottom: '-12.9rem'
             })
     }
     return (

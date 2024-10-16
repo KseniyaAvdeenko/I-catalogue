@@ -16,7 +16,7 @@ const CommonSettingsForm = () => {
     const dispatch = useAppDispatch()
     //--states
     const [fontOptionsVisibility, setFontOptionsVisibility] = useState<IOptions>({
-        open: false, display: 'none', bottom: '-20.2rem'
+        open: false, display: 'none', top: '8rem'
     })
     const [logoInput, setLogoInput] = useState<{ imgDisplay: string, background: string }>(
         {imgDisplay: 'block', background: '#F2F2F2'})

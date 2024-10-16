@@ -15,7 +15,7 @@ const HeaderSettingsForm = () => {
     const dispatch = useAppDispatch();
     //--states
     const [hoverStyleOptionsVisibility, setHoverStyleOptionsVisibility] = useState<IOptions>({
-        open: false, display: 'none', bottom: '-17rem'
+        open: false, display: 'none', top: '8rem'
     })
     //methods
     const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {

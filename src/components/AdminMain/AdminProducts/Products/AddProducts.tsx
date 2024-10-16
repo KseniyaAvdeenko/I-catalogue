@@ -24,7 +24,7 @@ const AddProducts = () => {
         otherValues: newProdAttrs
     })
     const [currencyOptionsVisibility, setCurrencyOptionsVisibility] = useState<IOptions>({
-        open: false, display: 'none', bottom: '-12.9rem'
+        open: false, display: 'none', top: '8rem'
     })
     const [files, setFiles] = useState<IFile[]>([])
 
@@ -46,7 +46,6 @@ const AddProducts = () => {
             ...currencyOptionsVisibility,
             open: false,
             display: 'none',
-            bottom: '-12.9rem'
         })
     }
 
@@ -93,14 +92,12 @@ const AddProducts = () => {
             ? setCurrencyOptionsVisibility({
                 ...currencyOptionsVisibility,
                 open: false,
-                display: 'none',
-                bottom: '-12.9rem'
+                display: 'none'
             })
             : setCurrencyOptionsVisibility({
                 ...currencyOptionsVisibility,
                 open: true,
-                display: 'flex',
-                bottom: '-12.9rem'
+                display: 'flex'
             })
     }
     const deleteProdImageFile = (name: string) => {

@@ -30,7 +30,7 @@ const PreviewSelect: React.FC<IPreviewSelectProps> = ({
             <div className={styles.form__selectContainer}
                  onClick={changeSelectOptionsVisibility}>{optionsArray.map(option => (option.id === selectedOption ? option.name : ''))}</div>
             <div className={styles.form__optionsContainer}
-                 style={{display: selectOptionVisibility.display, bottom: selectOptionVisibility.bottom}}>
+                 style={{display: selectOptionVisibility.display, top: selectOptionVisibility.top}}>
                 {optionsArray.map(option => (
                     <label key={option.id} htmlFor={option.id}
                            className={option.id === selectedOption

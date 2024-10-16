@@ -26,13 +26,13 @@ const Preview: React.FC<IPreviewProps> = ({isOpen}) => {
     const [showDetailPageSelect, setShowDetailPageSelect] = useState<'none' |'flex'>('none')
 
     const [showingItemsOptionsVisibility, setShowingItemsOptionsVisibility] = useState<IOptions>({
-        open: false, display: 'none', bottom: '-17.2rem'
+        open: false, display: 'none', top: '-17.2rem'
     })
     const [showingPagesOptionsVisibility, setShowingPagesOptionsVisibility] = useState<IOptions>({
-        open: false, display: 'none', bottom: '-17.2rem'
+        open: false, display: 'none', top: '-17.2rem'
     })
     const [showingDetailPagesOptionsVisibility, setShowingDetailPagesOptionsVisibility] = useState<IOptions>({
-        open: false, display: 'none', bottom: '-15.2rem'
+        open: false, display: 'none', top: '-15.2rem'
     })
 
     const changeShowingItemsVisibility = () => showingItemsOptionsVisibility.open

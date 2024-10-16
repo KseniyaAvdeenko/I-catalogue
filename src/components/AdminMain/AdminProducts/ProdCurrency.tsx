@@ -23,7 +23,7 @@ const ProdCurrency: React.FC<IProdCurrencyProps> = ({
             <div className={styles.form__selectContainer}
                  onClick={changeCurrencyOptionsContainerVisibility}>{currencyTypes.map(cur => (cur.id === prodCurrency ? cur.currency : ''))}</div>
             <div className={styles.form__optionsContainer}
-                 style={{display: currencyOptionsVisibility.display, bottom: currencyOptionsVisibility.bottom}}>
+                 style={{display: currencyOptionsVisibility.display, top: currencyOptionsVisibility.top}}>
                 {currencyTypes.map(type => (
                     <label key={type.id} htmlFor={type.id}
                            className={type.id === prodCurrency

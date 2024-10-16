@@ -24,7 +24,7 @@ const PagesSettings = () => {
 
     //states
     const [headingTypeOptionsVisibility, setHeadingTypeOptionsVisibility] = useState<IOptions>({
-        open: false, display: 'none', bottom: '-20.2rem'
+        open: false, display: 'none', top: '8rem'
     })
 
     //methods

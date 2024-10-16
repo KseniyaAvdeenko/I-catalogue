@@ -22,7 +22,7 @@ const HeadingType: React.FC<IMainPageHeadingTypeProps> = ({
             <div className={styles.form__selectContainer}
                  onClick={changeHeadingTypeOptionsContainerVisibility}>Заголовок {blockHeadingType}</div>
             <div className={styles.form__optionsContainer}
-                 style={{display: headingTypeOptionsVisibility.display, bottom: headingTypeOptionsVisibility.bottom}}>
+                 style={{display: headingTypeOptionsVisibility.display, top: headingTypeOptionsVisibility.top}}>
                 {headingTypes.map(type => (
                     <label key={type.id} htmlFor={type.id}
                            className={type.id === blockHeadingType
