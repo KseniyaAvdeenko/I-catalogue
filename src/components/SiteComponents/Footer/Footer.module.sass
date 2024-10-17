@@ -19,7 +19,8 @@
       justify-content: space-between
 
       & > a
-        width: 10%
+        width: fit-content
+        height: 5rem
 
         & > img
           @extend .imgWrapper
@@ -39,7 +40,8 @@
 
 
   &__Layout3
-    &__LogoCopyrights
+    &__LogoCopyrights,
+    &__LogoCopyrightsMedia
       width: 100%
       flex-basis: 15%
       @extend .flexColumn
@@ -50,6 +52,9 @@
 
         & > img
           @extend .imgWrapper
+
+    &__LogoCopyrightsMedia
+      display: none
 
   &__navColumnItems,
   &__contactsItems
@@ -81,6 +86,7 @@
     & > svg
       margin-right: 1rem
 
+
 .socialLinks
   &__items
     @extend .flexRow
@@ -94,3 +100,28 @@
       width: 100%
       height: 100%
       object-fit: contain
+
+
+@media screen and (max-width: 768px)
+  .footer
+    &__Layout1,
+    &__Layout2,
+    &__Layout3
+      &__container
+        display: grid
+        grid-template-columns: 1fr
+        grid-auto-rows: auto
+        row-gap: 3rem
+        justify-items: center
+
+    &__navRowItems
+      flex-direction: column
+
+    &__Layout3
+      &__LogoCopyrights
+        display: none
+
+      &__LogoCopyrightsMedia
+        display: flex
+        &__imageContainer
+          height: 5rem

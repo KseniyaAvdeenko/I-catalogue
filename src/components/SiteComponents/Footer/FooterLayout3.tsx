@@ -25,6 +25,10 @@ const FooterLayout3: React.FC<IFooterLayout3Props> = ({logo, footerStyles, onHov
                                   navClassName={styles.footer__navColumnItems} footerStyles={footerStyles}
                                   onHoverOut={onHoverOut} onHoverIn={onHoverIn}/>
                 <FooterContacts footerStyles={footerStyles}/>
+                <div className={styles.footer__Layout3__LogoCopyrightsMedia}>
+                    <Link to={'/'} className={styles.footer__Layout3__LogoCopyrightsMedia__imageContainer}>{logo && (<img src={logo} alt={'logo'}/>)}</Link>
+                    {footerStyles.copyrightsContent && (<FooterCopyRights footerStyles={footerStyles}/>)}
+                </div>
             </div>
 
         </div>
