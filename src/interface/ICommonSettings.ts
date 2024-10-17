@@ -45,16 +45,13 @@ export interface IButtonSettings {
     buttonBorderColor: string;
     buttonBorderWidth: number;
     buttonTextColor: string;
-    buttonTextFontSize: number;
+    buttonTextFontSize: number
 }
 
 export interface IButtonStyles {
     borderRadius: number;
     background: string;
     border:string;
-    borderStyle: string;
-    borderColor: string;
-    borderWidth: number;
     color: string;
-    fontSize: number;
+    fontSize: string
 }

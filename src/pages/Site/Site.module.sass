@@ -5,6 +5,7 @@
     padding: 3rem 10%
     @extend .flexColumn
     width: 100%
+
   &__content
     @extend .flexColumn
     width: 100%
@@ -29,12 +30,13 @@
     height: 23rem
     width: 100%
     @extend .mb_30
+
     & > img
       height: 100%
       width: 100%
-      object-fit: cover
+      object-fit: contain
       border-radius: 2rem
-      object-position: top center
+      object-position: center center
 
   &__items
     @extend .flexColumn
@@ -65,6 +67,7 @@
   @extend .flexRow
   width: fit-content
   margin: 2rem auto
+  flex-wrap: wrap
 
   &__nav,
   &__item
@@ -78,6 +81,7 @@
     color: inherit
     font-size: inherit
     transition: all .5s ease-in
+
     &:hover
       transform: scale(110%)
 
@@ -85,3 +89,76 @@
     width: fit-content
     padding: 0 1rem
 
+
+
+@media screen and (max-width: 1600px)
+  .prodItem
+    &__imageWrapper
+      height: 20rem
+
+@media screen and (max-width: 1280px)
+  .prodItem
+    &__imageWrapper
+      height: 15rem
+
+@media screen and (max-width: 1024px)
+  .page
+    &__container
+      padding: 3rem 7%
+
+  .prodList
+    grid-template-columns: repeat(3, 1fr)
+
+  .prodItem
+    &__imageWrapper
+      height: 20rem
+
+@media screen and (max-width: 840px)
+  .prodList
+    grid-template-columns: repeat(2, 1fr)
+
+@media screen and (max-width: 768px)
+  .prodItem
+    &__name
+      font-size: 3.5rem
+
+@media screen and (max-width: 600px)
+  .prodItem
+    &__imageWrapper
+      height: 18rem
+    &__name
+      font-size: $h4
+
+@media screen and (max-width: 540px)
+  .prodList
+    grid-template-columns: 1fr
+
+  .prodItem
+    &__imageWrapper
+      height: 30rem
+
+@media screen and (max-width: 420px)
+  .page
+    &__container
+      padding: 3rem
+
+  .prodItem
+    &__imageWrapper
+      height: 25rem
+
+@media screen and (max-width: 390px)
+  .page
+    &__container
+      padding: 3rem 2rem
+
+  .prodItem
+    &__imageWrapper
+      height: 20rem
+    &__name
+      font-size: $h5
+
+
+@media screen and (max-width: 320px)
+  .prodItem
+    &__imageWrapper
+      height: 15rem

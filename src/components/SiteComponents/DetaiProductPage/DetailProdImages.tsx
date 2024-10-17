@@ -43,11 +43,14 @@ const DetailProdImages: React.FC<{ images: IProdImg[] }> = ({images}) => {
                 <ArrowRight strokeColor={background} clickHandler={goToNext}
                             classname={[styles.imageCarousel__arrows, styles.imageCarousel__arrows_right].join(' ')}/>
                 <div className={styles.imageCarousel__dots}>
-                    {images.map((image, i)=>(
+                    {images.map((image, i) => (
                         <div key={image.id}
                              className={styles.imageCarousel__dot}
-                             onClick={()=>goToImage(i)}
-                             style={{background: background}}
+                             onClick={() => goToImage(i)}
+                             style={{
+                                 border: `.1rem solid ${background}`,
+                                 background: i === currentIndex ? background : 'transparent'
+                             }}
                         ></div>
                     ))}
                 </div>

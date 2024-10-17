@@ -1,12 +1,21 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {IHeading} from "../../../interface/IPagesSettings";
+import {useWindowWidth} from "../../../hooks/useWindowWidth";
 
 const Heading: React.FC<{pageHeading: IHeading, headingContent: string }> = ({pageHeading, headingContent})=> {
+    const windowWidth = useWindowWidth()
+    const [fontSize, setFontSize] = useState<string>(pageHeading.headingFontSize + 'px')
+    useEffect(()=>{
+        if(windowWidth > 1024) setFontSize(pageHeading.headingFontSize + 'px')
+        if(windowWidth < 1024) setFontSize('4.9rem');
+        if(windowWidth < 840) setFontSize('4.1rem')
+        if(windowWidth < 600) setFontSize('3.5rem')
+    }, [windowWidth])
     const Heading = pageHeading.blockHeadingType
     return (<Heading style={{
                 margin: '5rem 0 5rem',
                 textAlign: 'center',
-                fontSize: `clamp(2rem, ${pageHeading.headingFontSize}px, 6rem)`,
+                fontSize: fontSize,
                 color: pageHeading.headingFontColor,
                 fontWeight: pageHeading.headingFontWeight
             }}>{headingContent}</Heading>)

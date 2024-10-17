@@ -8,7 +8,7 @@ import {IProdReadOnly} from "../../interface/IProduct";
 import ModalPopUp from "../../components/SiteComponents/ModalPopup/ModalPopUp";
 import Loader from "../../components/UI/Loader/Loader";
 import {setPageTitle} from "../../hooks/getTitle";
-import {logout} from "../../store/actions/authAction";
+
 
 interface IMainPageProps {
     formData: { [key: string]: string | number; };

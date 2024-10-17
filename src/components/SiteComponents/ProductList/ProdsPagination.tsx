@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import styles from "../../../pages/Site/Site.module.sass";
 import {useAppSelector} from "../../../hooks/redux";
 import {IButtonStyles} from "../../../interface/ICommonSettings";
-import {defaultBtnStyles, getButtonSettings} from "../../../utils/getButtonSettings";
+import {getButtonStyles} from "../../../utils/getButtonStyles";
 
 interface IProdsPaginationProps {
     pages: number[] | [];
@@ -13,12 +13,8 @@ interface IProdsPaginationProps {
 
 const ProdsPagination: React.FC<IProdsPaginationProps> = ({getToPage, onChangePage, pages, currentPage}) => {
     const {buttonSettings} = useAppSelector(state => state.buttonSettingsReducer)
-    const [btnStyles, setBtnStyles] = useState<IButtonStyles>(defaultBtnStyles)
+    const btnStyles: IButtonStyles = getButtonStyles(buttonSettings)
     const pagesLastIndex = pages.length - 1
-    useEffect(() => {
-        if (buttonSettings) setBtnStyles(getButtonSettings(buttonSettings))
-    }, [buttonSettings]);
-
 
     function onHoverInNav(e: React.MouseEvent<HTMLDivElement>) {
         e.currentTarget.style.color = btnStyles.color;
@@ -29,7 +25,6 @@ const ProdsPagination: React.FC<IProdsPaginationProps> = ({getToPage, onChangePa
         e.currentTarget.style.color = btnStyles.background;
         e.currentTarget.style.background = ''
     }
-
 
     return (
         <div className={styles.pagination}>
