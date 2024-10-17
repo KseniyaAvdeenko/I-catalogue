@@ -77,14 +77,6 @@ const DetailPageSettings = () => {
                             labelClassName={styles.labelWithTip}
                             label={'Заголовок страницы'}
                             onChangeHandler={onChangeHeadingHandler}/>
-                        {/*<AdminInputContainer type={'text'} name={'headingContent'}*/}
-                        {/*                     inputId={'headingContent'} required={true}*/}
-                        {/*                     value={prodPageSettings.headingSettings.headingContent}*/}
-                        {/*                     checked={false} readonly={false} inputClassname={''}*/}
-                        {/*                     inputContainerClassname={[styles.form__items, styles.form__items_margin].join(' ')}*/}
-                        {/*                     labelClassName={styles.form__inputContainer_label}*/}
-                        {/*                     label={'Заголовок страницы'}*/}
-                        {/*                     onChangeHandler={onChangeHeadingHandler}/>*/}
                         <AdminInputContainer type={'color'} name={'headingFontColor'} inputId={'headingFontColor'}
                                              value={prodPageSettings.headingSettings.headingFontColor}
                                              checked={false} required={false} readonly={false}

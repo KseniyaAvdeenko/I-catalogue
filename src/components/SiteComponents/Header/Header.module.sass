@@ -7,14 +7,16 @@
   width: 100%
   padding: 3rem 10%
   height: fit-content
+  position: relative
 
   &__container
     width: 100%
     height: 100%
 
+
   &__layout1
     display: grid
-    grid-template-columns: 10% 75% min-content
+    grid-template-columns: auto 1fr max-content
     column-gap: 2rem
 
 
@@ -38,7 +40,7 @@
 
 .navLayout1
   @extend .flexRow
-  justify-content: space-evenly
+  justify-content: center
   width: 100%
 
   &__item
@@ -46,6 +48,7 @@
     text-decoration: none
     transition: all .5s ease-in
     position: relative
+    margin: 0 1rem
 
   &__underline
     display: block
@@ -85,6 +88,7 @@
     @extend .flexColumn
     justify-content: center
     flex-wrap: wrap
+
     & > nav
       @extend .flexColumn
       justify-content: center
@@ -95,11 +99,13 @@
     width: 100%
     margin-bottom: 1rem
     padding-bottom: 1rem
+
     & > nav
       @extend .flexRow
       justify-content: space-evenly
       width: 100%
       flex-basis: 75%
+
 
 .contactsItem
   &__Layout1
@@ -111,6 +117,7 @@
 
     & > svg
       margin-right: 1rem
+
 
 .socialLinks
   &__items
@@ -125,3 +132,88 @@
       width: 100%
       height: 100%
       object-fit: contain
+
+
+.burgerMenu
+  position: fixed
+  width: 0
+  backdrop-filter: blur(.5rem)
+  background: rgba(245, 245, 245, 0.05)
+  top: 0
+  right: 0
+  z-index: 5
+  height: 100vh
+  transition: all .5s ease-in
+  display: flex
+  justify-content: flex-end
+
+  &_open
+    width: 100%
+
+  &__container
+    display: none
+    transition: all .5s ease-in
+    padding: 2rem
+    box-shadow: -3px 0px 20px 0 rgba(0, 0, 0, 0.25)
+
+    &_open
+      display: flex !important
+      width: fit-content
+      flex-direction: column
+      align-items: flex-end
+
+  &__navLinks,
+  &__contacts
+    @extend .flexColumn
+    justify-content: center
+    flex-wrap: wrap
+    margin: 1rem 0
+
+  &__navLinks
+    &__item
+      @extend .navLayout1__item
+      width: fit-content
+
+  &__button
+    display: none
+    cursor: pointer
+
+  &__closeBtn
+    width: 2rem
+    height: 2rem
+    cursor: pointer
+
+    & > img
+      @extend .imgWrapper
+
+
+@media screen and (max-width: 1024px)
+  .header
+    padding: 3rem 7%
+
+    &__layout1,
+    &__layout2
+      display: flex
+      align-items: center
+      justify-content: space-between
+
+  .burgerMenu
+    &__button
+      display: block
+
+  .navLayout1,
+  .navLayout2
+    display: none
+
+  .contactItems
+    &__Layout1,
+    &__Layout2
+      display: none
+
+  .image
+    &__container
+      width: fit-content
+
+
+
+

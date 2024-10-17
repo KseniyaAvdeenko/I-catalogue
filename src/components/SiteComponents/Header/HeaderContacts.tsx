@@ -24,7 +24,7 @@ const HeaderContacts: FC<IHeaderContactsProps> = ({containerClassName, headerSty
                         ? <Link key={contact.id} target={'_blank'}
                                 style={{
                                     color: headerStyles.fontColor,
-                                    fontSize: headerSettings?.contactsFontSize ?? 16
+                                    fontSize: headerSettings?.contactsFontSize ? `clamp(1.3rem, 1.6rem, ${headerSettings?.contactsFontSize}px)` : 16
                                 }}
                                 to={`${contact.linkType}:${contact.linkHref}`}
                                 className={styles.contactsItem__Layout1}>
@@ -38,7 +38,7 @@ const HeaderContacts: FC<IHeaderContactsProps> = ({containerClassName, headerSty
                         </Link>
                         : <div key={contact.id} style={{
                             color: headerStyles.fontColor,
-                            fontSize: headerSettings?.contactsFontSize ?? 16
+                            fontSize: headerSettings?.contactsFontSize ? `clamp(1.3rem, 1.6rem, ${headerSettings?.contactsFontSize}px)` : 16
                         }} className={styles.contactsItem__Layout1}>
                             {contact.linkType === 'address' && (
                                 <GeoIcon color={headerStyles.fontColor}

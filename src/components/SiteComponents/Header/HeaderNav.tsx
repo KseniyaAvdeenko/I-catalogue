@@ -6,7 +6,7 @@ import {Link} from "react-router-dom";
 interface IHeaderNavProps {
     onHoverOut: React.MouseEventHandler<HTMLAnchorElement>
     onHoverIn: React.MouseEventHandler<HTMLAnchorElement>
-    navLinksStyle: { color: string; fontSize: number; hoverColor: string; hoverStyle: string }
+    navLinksStyle: { color: string; fontSize: string; hoverColor: string; hoverStyle: string }
 }
 
 const HeaderNav: React.FC<IHeaderNavProps> = ({onHoverOut, onHoverIn, navLinksStyle}) => {

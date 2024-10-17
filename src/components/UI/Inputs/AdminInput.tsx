@@ -5,7 +5,7 @@ interface IInput {
     type: string;
     name: string;
     id: string;
-    value: string | number | undefined;
+    value: string | number ;
     checked: boolean
     onChangeHandler: Function
     required: boolean
@@ -37,7 +37,7 @@ const AdminInput: React.FC<IInput> = ({
         ? (<input type={type}
                   name={name}
                   id={id}
-                  value={value ?? ''}
+                  value={value}
                   onChange={e => onChangeHandler(e)}
                   required={required}
                   readOnly={readonly}
@@ -49,7 +49,7 @@ const AdminInput: React.FC<IInput> = ({
                 <input type={type}
                        name={name}
                        id={id}
-                       value={value ?? ''}
+                       value={value}
                        onChange={e => onChangeHandler(e)}
                        required={required}
                        readOnly={readonly}
@@ -64,7 +64,7 @@ const AdminInput: React.FC<IInput> = ({
                     <input type={type}
                            name={name}
                            id={id}
-                           value={value ?? ''}
+                           value={value}
                            onChange={e => onChangeHandler(e)}
                            required={required}
                            readOnly={readonly}
@@ -77,7 +77,7 @@ const AdminInput: React.FC<IInput> = ({
                                name={name}
                                id={id}
                                checked={checked}
-                               value={value ?? ''}
+                               value={value}
                                onChange={e => onChangeHandler(e)}
                                required={required}
                                readOnly={readonly}
