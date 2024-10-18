@@ -1,7 +1,8 @@
 @import "../Layout.module"
+@import "../../../assets/styles/Common.module"
 
 .footer
-  flex-basis: fit-content
+  @include flexBasis(fit-content)
   width: 100%
   padding: 3rem 10%
   @extend .flexColumn
@@ -15,20 +16,23 @@
 
     &__container
       width: 100%
-      display: flex
-      justify-content: space-between
+      @extend .flexRow
+      @extend .JContentSpaceBtw
 
       & > a
         width: fit-content
         height: 5rem
 
         & > img
-          @extend .imgWrapper
+          height: 100%
+          width: 100%
+          -o-object-fit: contain
+          object-fit: contain
 
     &__copyrights
       width: 100%
       @extend .flexRow
-      justify-content: center
+      @extend .JContentCenter
       padding: 2rem
       margin-top: 2rem
 
@@ -36,14 +40,14 @@
     &__container
       width: 100%
       @extend .flexRow
-      justify-content: center
+      @extend .JContentCenter
 
 
   &__Layout3
     &__LogoCopyrights,
     &__LogoCopyrightsMedia
       width: 100%
-      flex-basis: 15%
+      @include flexBasis(15%)
       @extend .flexColumn
 
       &__imageContainer
@@ -51,7 +55,10 @@
         width: 100%
 
         & > img
-          @extend .imgWrapper
+          height: 100%
+          width: 100%
+          -o-object-fit: contain
+          object-fit: contain
 
     &__LogoCopyrightsMedia
       display: none
@@ -59,7 +66,7 @@
   &__navColumnItems,
   &__contactsItems
     @extend .flexColumn
-    flex-basis: max-content
+    @include flexBasis(max-content)
 
   &__navColumnItem,
   &__contactsItem
@@ -69,7 +76,7 @@
 
   &__navRowItems
     @extend .flexRow
-    justify-content: center
+    @extend .JContentCenter
 
   &__navRowItem
     margin: 0 1rem
@@ -77,7 +84,7 @@
 
   &__navRowItem,
   &__navColumnItem
-    transition: all .5s ease-in
+    @extend .commonTransition
 
 
   &__contactsItem
@@ -99,6 +106,7 @@
     & > img
       width: 100%
       height: 100%
+      -o-object-fit: contain
       object-fit: contain
 
 @media screen and (max-width: 1024px)

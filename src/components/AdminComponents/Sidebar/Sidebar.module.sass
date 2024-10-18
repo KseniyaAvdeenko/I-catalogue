@@ -3,7 +3,7 @@
 .Sidebar
   @extend .baseFont
   @extend .flexColumn
-  flex-basis: 24%
+  @include flexBasis(24%)
   height: 100%
   border-right: 2px solid $primary100
 
@@ -20,7 +20,7 @@
 
   &__itemsContainer
     @extend .flexRow
-    justify-content: space-between
+    @extend .JContentSpaceBtw
     cursor: pointer
     width: 100%
 
@@ -29,8 +29,8 @@
     font-size: $h6
     font-weight: 700
     text-decoration: none
-    transition: all .4s ease-in
-    flex-basis: 90%
+    @extend .commonTransition
+    @include flexBasis(90%)
 
     &:hover
       @extend .linkActive
@@ -49,7 +49,7 @@
     @extend .mb_15
     text-decoration: none
     color: $text100
-    transition: all .5s ease-in
+    @extend .commonTransition
 
 
     &:visited
@@ -75,6 +75,7 @@
 
 @media screen and (max-width: 1440px)
   .Sidebar
+    -ms-flex-preferred-size: 30%
     flex-basis: 30%
 
 @media screen and (max-width: 1024px)
@@ -84,6 +85,7 @@
     top: 7%
     left: 0
     width: 100%
+    -ms-flex-preferred-size: fit-content
     flex-basis: fit-content
     height: 45%
     border-right: none

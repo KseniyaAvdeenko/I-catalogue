@@ -1,9 +1,8 @@
 @import "../../../assets/styles/Common.module"
 .adminHeader
-  display: flex
+  @extend .flexRow
   width: 100%
-  justify-content: space-between
-  align-items: center
+  @extend .JContentSpaceBtw
   height: fit-content
   background: $bg300
   padding: 1.5rem 3rem
@@ -14,6 +13,8 @@
     height: 3rem
 
 .auth
+  display: -webkit-box
+  display: -ms-flexbox
   display: flex
   width: fit-content
 
@@ -25,7 +26,7 @@
   &__link
     position: relative
     color: $text100
-    transition: all .5s ease
+    @extend .commonTransition
 
     &:hover
       color: $primary100
@@ -39,7 +40,7 @@
     left: 0
     bottom: -5%
     background: $primary100
-    transition: width .5s ease
+    @extend .commonTransition
 
   &__link:hover:after
     width: 100%
@@ -47,6 +48,9 @@
     
 @media screen and (max-width: 320px)
   .adminHeader
+    -webkit-box-orient: vertical
+    -webkit-box-direction: normal
+    -ms-flex-direction: column
     flex-direction: column
 
     &__logo

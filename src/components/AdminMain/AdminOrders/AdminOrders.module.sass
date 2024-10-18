@@ -3,6 +3,7 @@
 .table
   display: table
   width: 100%
+  -webkit-box-sizing: border-box
   box-sizing: border-box
   border-collapse: collapse
   border: .1rem solid $primary100
@@ -25,16 +26,16 @@
 
 
   &__tableData
-    display: grid
+    @extend .grid
     grid-template-columns: repeat(2, 1fr)
     gap: .5rem
     padding: 1rem
     border-top: .1rem solid $primary100
 
 .filterSort
-  display: grid
+  @extend .grid
   grid-template-columns: repeat(3, 1fr)
-  column-gap: 2rem
+  @include columnGap(2rem)
   width: 100%
   @extend .mb_30
 
@@ -64,7 +65,7 @@
     width: 100%
     @extend .flexRow
     margin-top: 3rem
-    justify-content: center
+    @extend .JContentCenter
 
   &__items
     @extend .flexRow
@@ -84,8 +85,14 @@
     column-gap: 0
     row-gap: 2rem
     width: 100%
+
     &__inputContainer
+      -webkit-box-orient: vertical
+      -webkit-box-direction: normal
+      -ms-flex-direction: column
       flex-direction: column
+      -webkit-box-align: start
+      -ms-flex-align: start
       align-items: start
       width: 100%
       margin-right: 0

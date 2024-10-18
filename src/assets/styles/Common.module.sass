@@ -17,27 +17,82 @@ $small: 1.3rem
 $extraSmall: 1rem
 $baseFont: 'Nunito Sans'
 
+@mixin flexBasis($value)
+  -ms-flex-preferred-size: $value
+  flex-basis: $value
+
+
+@mixin backdropFilter($value)
+  -webkit-backdrop-filter: blur($value)
+  backdrop-filter: blur($value)
+
+
+@mixin columnGap($gap)
+  -webkit-column-gap: $gap
+  -moz-column-gap: $gap
+  column-gap: $gap
+
+
+@mixin boxShadow($value)
+  -webkit-box-shadow: $value
+  box-shadow: $value
+
+
 .baseFont
   color: $text100
   font-family: $baseFont
   font-size: $text
 
-.flexRow
+
+.grid
+  display: -ms-grid
+  display: grid
+
+
+.dFlex
   display: -webkit-box
   display: -ms-flexbox
   display: flex
+
+
+.flexRow
+  @extend .dFlex
   -webkit-box-align: center
   -ms-flex-align: center
   align-items: center
 
+
 .flexColumn
-  display: -webkit-box
-  display: -ms-flexbox
-  display: flex
+  @extend .dFlex
   -webkit-box-orient: vertical
   -webkit-box-direction: normal
   -ms-flex-direction: column
   flex-direction: column
+
+
+.JContentCenter
+  -webkit-box-pack: center
+  -ms-flex-pack: center
+  justify-content: center
+
+
+.AItemsCenter
+  -webkit-box-align: center
+  -ms-flex-align: center
+  align-items: center
+
+
+.JContentSpaceBtw
+  -webkit-box-pack: justify
+  -ms-flex-pack: justify
+  justify-content: space-between
+
+
+.commonTransition
+  -webkit-transition: all 0.5s ease-in
+  -o-transition: all 0.5s ease-in
+  transition: all .5s ease-in
+
 
 .mb_10
   margin-bottom: 1rem
@@ -72,6 +127,8 @@ $baseFont: 'Nunito Sans'
 .p_30
   padding: 3rem
 
+
+
 .baseAdminButton
   padding: 1.5rem 3rem
   font-family: $baseFont
@@ -81,9 +138,7 @@ $baseFont: 'Nunito Sans'
   color: $accent200
   font-weight: 700
   border-radius: 3rem
-  -webkit-transition: all 0.5s ease-in
-  -o-transition: all 0.5s ease-in
-  transition: all .5s ease-in
+  @extend .commonTransition
 
   &:hover,
   &:active
@@ -95,13 +150,13 @@ $baseFont: 'Nunito Sans'
     color: $text100
     cursor: not-allowed
 
+
 @media screen and (max-width: 395px)
   .baseAdminButton
     font-size: 1.8rem
 
 .box
-  -webkit-box-shadow: 0 4px 10px 0 rgba(51, 51, 51, 0.25)
-  box-shadow: 0 4px 10px 0 rgba(51, 51, 51, 0.25)
+  @include boxShadow(0 4px 10px 0 rgba(51, 51, 51, 0.25))
   background: $bg200
   border-radius: 2rem
   @extend .p_20
@@ -120,7 +175,7 @@ $baseFont: 'Nunito Sans'
 
 .mainCommon
   @extend .flexColumn
-  flex-basis: auto
+  @include flexBasis(auto)
   width: 100%
   @extend .p_20
   @extend .baseFont

@@ -50,6 +50,7 @@ input[type='color']::-moz-focus-inner {
 input[type='color']::-moz-color-swatch {
     border: none;
     border-radius: 50%;
+    -webkit-box-shadow: 0 0 1rem 0 rgba(146, 107, 106, 0.20);
     box-shadow: 0 0 1rem 0 rgba(146, 107, 106, 0.20);
     height: 4rem;
     width: 4rem;

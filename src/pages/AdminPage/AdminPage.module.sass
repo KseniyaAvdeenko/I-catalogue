@@ -2,7 +2,7 @@
 
 .AdminPage
   @extend .baseFont
-  display: flex
+  @extend .dFlex
   @extend .p_30
   width: 100%
   height: 100%
@@ -12,7 +12,7 @@
   &__container
     @extend .flexColumn
     width: 100%
-    align-items: center
+    @extend .AItemsCenter
 
   &__intro
     font-size: $h3
@@ -21,7 +21,7 @@
   &__sidebarButton
     display: none
     @extend .flexRow
-    justify-content: center
+    @extend .JContentCenter
     color: $bg100
     text-transform: uppercase
     letter-spacing: .5rem
@@ -39,7 +39,7 @@
   &_notAuth
     @extend .baseFont
     @extend .flexRow
-    justify-content: center
+    @extend .JContentCenter
     background: $bg100
     min-height: calc(100vh - 6rem - 6rem)
 
@@ -49,6 +49,9 @@
 
 @media screen and (max-width: 1024px)
   .AdminPage
+    -webkit-box-orient: vertical
+    -webkit-box-direction: normal
+    -ms-flex-direction: column
     flex-direction: column
     padding: 0 0 2rem
 
@@ -56,6 +59,8 @@
       overflow-y: auto
 
     &__sidebarButton
+      display: -webkit-box
+      display: -ms-flexbox
       display: flex
 
 

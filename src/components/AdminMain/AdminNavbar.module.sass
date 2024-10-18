@@ -10,15 +10,18 @@
     &_margin
       @extend .mb_50
 
+
   &__heading
     font-size: $h2
     text-align: center
     @extend .mb_40
 
+
   &__subheading
     font-size: $h3
     text-align: center
     @extend .mb_40
+
 
   &__formContainer
     @extend .box
@@ -26,8 +29,9 @@
     @extend .flexColumn
 
     &_UnLoaded
-      align-items: center
-      justify-content: center
+      @extend .JContentCenter
+      @extend .AItemsCenter
+
 
   &__button
     @extend .baseAdminButton
@@ -40,12 +44,12 @@
 
   &_UnLoaded
     @extend .savedItems
-    align-items: center
-    justify-content: center
+    @extend .JContentCenter
+    @extend .AItemsCenter
 
   &__items
     @extend .flexRow
-    justify-content: space-between
+    @extend .JContentSpaceBtw
     padding: .5rem 0 1.5rem
 
     & > img
@@ -61,13 +65,14 @@
     width: 100%
     border: 1px solid $accent200
     border-radius: 1rem
-    transition: all .5s ease-in
+    @extend .commonTransition
+
 
   &_inputRadioLabelSelected
     border: 1px solid $primary200
     background: $primary200
     color: $bg100
-    box-shadow: 0 .4rem 1rem 0 rgba(146, 107, 106, 0.4)
+    @include boxShadow(0 .4rem 1rem 0 rgba(146, 107, 106, 0.4))
 
 
   &__item
@@ -102,7 +107,7 @@
 
   &__items
     @extend .flexRow
-    justify-content: space-between
+    @extend .JContentSpaceBtw
     padding: .5rem 0
     width: 100%
 
@@ -111,23 +116,24 @@
 
   &__item
     @extend .flexColumn
-    justify-content: space-between
+    @extend .JContentSpaceBtw
     padding: .5rem 0
-    flex-basis: 16.5%
+    @include flexBasis(16.5%)
 
   &__selectContainer
-    display: grid
+    @extend .grid
     grid-template-columns: repeat(2, 1fr)
     grid-template-rows: repeat(2, 1fr)
-    column-gap: .5rem
+    @include columnGap(.5rem)
     row-gap: .5rem
 
     &_column
-      display: grid
+      @extend .grid
       grid-template-columns: 1fr
       grid-template-rows: auto
-      column-gap: .5rem
+      @include columnGap(.5rem)
       row-gap: .5rem
+
 
 .hr
   @extend .hrCommon
@@ -136,8 +142,7 @@
 
 .selectProd
   @extend .flexRow
-  justify-content: center
-  align-items: center
+  @extend .JContentCenter
   @extend .mb_40
   width: 100%
 
@@ -150,11 +155,17 @@
 @media screen and (max-width: 600px)
   .AdminNavbar
     &__container
-      align-items: center
+      -webkit-box-pack: center
+      -ms-flex-pack: center
+      justify-content: center
+
 
     &__formContainer
       width: fit-content
-      align-items: center
+      -webkit-box-pack: center
+      -ms-flex-pack: center
+      justify-content: center
+
 
   .savedItems
     width: fit-content
@@ -168,6 +179,7 @@
 
     &__item
       margin-bottom: 1rem
+
 
   .formItems
     width: fit-content
@@ -183,12 +195,15 @@
 
     &__item
       margin-bottom: 1rem
+
   .selectProd
+    -webkit-box-orient: vertical
+    -webkit-box-direction: normal
+    -ms-flex-direction: column
     flex-direction: column
     & > h2
       margin-bottom: 2rem
       font-size: $h4
-
 
 
 @media screen and (max-width: 440px)
@@ -207,6 +222,7 @@
 
     &__subheading
       font-size: 2.3rem
+
 
 @media screen and (max-width: 395px)
   .AdminNavbar

@@ -1,9 +1,7 @@
-@import "../Layout.module"
-
-//-------------header
+@import "../../../assets/styles/Common.module"
 
 .header
-  flex-basis: 15%
+  @include flexBasis(15%)
   width: 100%
   padding: 3rem 10%
   height: fit-content
@@ -15,18 +13,18 @@
 
 
   &__layout1
-    display: grid
+    @extend .grid
     grid-template-columns: auto 1fr max-content
-    column-gap: 2rem
+    @include columnGap(2rem)
 
 
   &__layout2
-    display: grid
+    @extend .grid
     grid-template-columns: 10% 85%
-    column-gap: 3rem
+    @include columnGap(3rem)
 
     & > a
-      flex-basis: fit-content
+      @include flexBasis(fit-content)
 
 .image
   &__container
@@ -35,7 +33,10 @@
     width: 100%
 
     & > img
-      @extend .imgWrapper
+      height: 100%
+      width: 100%
+      -o-object-fit: contain
+      object-fit: contain
 
 
 .navLayout1
@@ -46,7 +47,7 @@
   &__item
     color: inherit
     text-decoration: none
-    transition: all .5s ease-in
+    @extend .commonTransition
     position: relative
     margin: 0 1rem
 
@@ -57,11 +58,11 @@
     bottom: -.1rem
     left: 0
     height: .2rem
-    transition: all .5s ease-in
+    @extend .commonTransition
 
     &:hover
       width: 100%
-      transition: all .5s ease-in
+      @extend .commonTransition
 
   &__overline
     display: block
@@ -70,32 +71,33 @@
     top: -.1rem
     right: 0
     height: .2rem
-    transition: all .5s ease-in
+    @extend .commonTransition
 
     &:hover
       width: 100%
-      transition: all .5s ease-in
+      @extend .commonTransition
 
 
 .navLayout2
   @extend .flexColumn
   width: 100%
-  flex-basis: 80%
+  @include flexBasis(80%)
 
 
 .contactItems
   &__Layout1
     @extend .flexColumn
-    justify-content: center
+    @extend .JContentCenter
+    -ms-flex-wrap: wrap
     flex-wrap: wrap
 
     & > nav
       @extend .flexColumn
-      justify-content: center
+      @extend .JContentCenter
 
   &__Layout2
     @extend .flexRow
-    justify-content: space-between
+    @extend .JContentSpaceBtw
     width: 100%
     margin-bottom: 1rem
     padding-bottom: 1rem
@@ -104,7 +106,7 @@
       @extend .flexRow
       justify-content: space-evenly
       width: 100%
-      flex-basis: 75%
+      @include flexBasis(75%)
 
 
 .contactsItem
@@ -112,7 +114,7 @@
     @extend .flexRow
     padding: .5rem 0
     text-decoration: none
-    transition: all .5s ease-in
+    @extend .commonTransition
     cursor: pointer
 
     & > svg
@@ -131,20 +133,24 @@
     & > img
       width: 100%
       height: 100%
+      -o-object-fit: contain
       object-fit: contain
 
 
 .burgerMenu
   position: fixed
   width: 0
+  -webkit-backdrop-filter: blur(.5rem)
   backdrop-filter: blur(.5rem)
   background: rgba(245, 245, 245, 0.05)
   top: 0
   right: 0
   z-index: 5
   height: 100vh
-  transition: all .5s ease-in
-  display: flex
+  @extend .commonTransition
+  @extend .flexRow
+  -webkit-box-pack: end
+  -ms-flex-pack: end
   justify-content: flex-end
 
   &_open
@@ -152,20 +158,28 @@
 
   &__container
     display: none
-    transition: all .5s ease-in
+    @extend .commonTransition
     padding: 2rem
-    box-shadow: -3px 0px 20px 0 rgba(0, 0, 0, 0.25)
+    @include boxShadow(-3px 0px 20px 0 rgba(0, 0, 0, 0.25))
 
     &_open
+      display: -webkit-box !important
+      display: -ms-flexbox !important
       display: flex !important
       width: fit-content
+      -webkit-box-orient: vertical
+      -webkit-box-direction: normal
+      -ms-flex-direction: column
       flex-direction: column
+      -webkit-box-align: end
+      -ms-flex-align: end
       align-items: flex-end
 
   &__navLinks,
   &__contacts
     @extend .flexColumn
-    justify-content: center
+    @extend .JContentCenter
+    -ms-flex-wrap: wrap
     flex-wrap: wrap
     margin: 1rem 0
 
@@ -184,7 +198,10 @@
     cursor: pointer
 
     & > img
-      @extend .imgWrapper
+      height: 100%
+      width: 100%
+      -o-object-fit: contain
+      object-fit: contain
 
 
 @media screen and (max-width: 1024px)
@@ -193,8 +210,14 @@
 
     &__layout1,
     &__layout2
+      display: -webkit-box
+      display: -ms-flexbox
       display: flex
+      -webkit-box-align: center
+      -ms-flex-align: center
       align-items: center
+      -webkit-box-pack: justify
+      -ms-flex-pack: justify
       justify-content: space-between
 
   .burgerMenu
