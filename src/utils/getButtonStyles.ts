@@ -13,7 +13,7 @@ export const getButtonStyles = (buttonSettings: IButtonSettings | null) => {
         }
     } else {
         return {
-            borderRadius: 0,
+            borderRadius: 20,
             background: '#bbb',
             color: '#000',
             fontSize: '2.2rem',

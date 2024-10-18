@@ -27,7 +27,6 @@
   border-radius: 2rem
   background: $bg100
   padding: 3rem
-  overflow-y: auto
   transition: display .5s ease-in
 
   &_open
@@ -43,12 +42,15 @@
 
     & > div
       margin: 0 2rem
+      width: 20%
 
   &__showingContainer
     width: 100%
     @extend .flexColumn
     height: 100%
     justify-content: center
+    overflow-y: auto
+    overflow-x: hidden
 
 .showingItems
   flex-direction: column
@@ -69,7 +71,7 @@
     border-radius: 1rem 1rem 0 0
     border: .1rem solid #333333
     padding: 1rem
-    width: 30%
+    width: fit-content
     @extend .flexRow
 
     & > img
@@ -108,9 +110,9 @@
     & > img
       height: 100%
       width: 100%
-      object-fit: cover
+      object-fit: contain
       border-radius: 2rem
-      object-position: top center
+      object-position: center center
 
   &__items
     @extend .flexColumn
@@ -136,21 +138,67 @@
     cursor: pointer
 
 
+@media screen and (max-width: 1680px)
+  .previewWindow
+    width: 65%
+
 @media screen and (max-width: 1440px)
   .previewWindow
     width: 75%
 
+@media screen and (max-width: 1280px)
+  .previewWindow
+    width: 82%
 
 @media screen and (max-width: 1024px)
   .previewWindow
-    width: 90%
-    right: 5%
+    width: 95%
+    right: 2%
+    bottom: 8%
+
+  .prodList
+    grid-template-columns: repeat(3, 1fr)
+
+@media screen and (max-width: 840px)
+  .previewWindow
+    width: 100%
+    right: 0
+    bottom: 9%
+
+  .prodList
+    grid-template-columns: repeat(3, 1fr)
+
+
+@media screen and (max-width: 768px)
+  .previewWindow
+    &__select
+      & > div
+        width: 24%
+
+  .prodList
+    grid-template-columns: repeat(2, 1fr)
+
 
 @media screen and (max-width: 600px)
   .previewWindow
     &__select
       flex-direction: column
+      & > div
+        width: 100%
+@media screen and (max-width: 540px)
+  .prodList
+    &__imageWrapper
+      height: 9rem
 
-//@media screen and (max-width: 420px)
-//
-//@media screen and (max-width: 395px)
+@media screen and (max-width: 500px)
+  .prodList
+    grid-template-columns: 1fr
+    &__imageWrapper
+      height: 13rem
+
+
+@media screen and (max-width: 395px)
+  .prodList
+    &__imageWrapper
+      height: 9rem
+

@@ -11,6 +11,7 @@ import {INewOrderBase} from "../../../interface/IOrder";
 import ModalInputContainer from "./ModalInputContainer";
 import Loader from "../../UI/Loader/Loader";
 import CloseButton from '../../../assets/img/closeCross.svg';
+import {useWindowScrollPosition} from "../../../hooks/useWindowScrollPosition";
 
 interface IModalPopUpProps {
     isModalOpen: boolean;
@@ -34,6 +35,8 @@ const ModalPopUp: React.FC<IModalPopUpProps> = ({
     const [modalClass, setModalClass] = useState<string>(styles.modal)
     const [totalPrice, setTotalPrice] = useState<number>(0)
     const dispatch = useAppDispatch()
+    const scrollPosition = useWindowScrollPosition()
+    const [topModalPosition, setTopModalPosition] = useState<number>(0)
 
     useEffect(() => {
         isModalOpen
@@ -45,6 +48,10 @@ const ModalPopUp: React.FC<IModalPopUpProps> = ({
     useEffect(() => {
         if (data) setTotalPrice(data.price)
     }, [data])
+
+    useEffect(() => {
+        setTopModalPosition(scrollPosition)
+    }, [scrollPosition])
 
 
     const formOrder = (e: React.FormEvent<HTMLFormElement>) => {
@@ -71,7 +78,7 @@ const ModalPopUp: React.FC<IModalPopUpProps> = ({
     }
 
     return (
-        <div className={modalClass} onClick={onClose}>
+        <div className={modalClass} onClick={onClose} style={{top: topModalPosition + 'px'}}>
             {modalForm
                 ? <div className={styles.modal__formContainer}
                        onClick={e => e.stopPropagation()}

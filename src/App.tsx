@@ -27,6 +27,8 @@ import {loadSeoTags} from "./store/actions/seoSettingsAction";
 import AdminLayout from "./components/AdminComponents/AdminLayout";
 import {errorSlice} from "./store/reducers/errorSlice";
 import {decodeToken} from "./hooks/encodeDecodeTokens";
+import {IProdReadOnly} from "./interface/IProduct";
+import ModalPopUp from "./components/SiteComponents/ModalPopup/ModalPopUp";
 
 function App() {
     const dispatch = useAppDispatch()
@@ -45,6 +47,16 @@ function App() {
     const [errorNtfs, setErrorNtFs] = useState<string[]>([])
     const [successNtfs, setSuccessNtFs] = useState<string[]>([])
     const [formData, setFormData] = useState<{ [key: string]: string | number; }>({})
+    const [modalVisibility, setModalVisibility] = useState<boolean>(false)
+    const [modalData, setModalData] = useState<IProdReadOnly | null>(null)
+
+    function payClickHandle(prod: IProdReadOnly) {
+        setModalVisibility(true);
+        setModalData(prod)
+    }
+
+    const closeModal = () => setModalVisibility(false)
+
 
     useEffect(() => {
         if (orders.createdOrderSuccess) setSuccessNtFs([...successNtfs, 'Заказ создан. В ближайшее время с Вами свяжется наш менеджер'])
@@ -117,7 +129,15 @@ function App() {
                             successNtfs={successNtfs}
                             setErrorNtfs={setErrorNtFs}
                             setSuccessNtfs={setSuccessNtFs}>
-                            <Page formData={formData} getFormInputs={getFormInputs} setFormData={setFormData}/>
+                            <ModalPopUp
+                                isModalOpen={modalVisibility}
+                                onClose={closeModal}
+                                data={modalData}
+                                formData={formData}
+                                setFormData={setFormData}
+                                getFormInputs={getFormInputs}
+                            />
+                            <Page payClickHandle={payClickHandle}/>
                         </Layout>}/>))}
                 {products && products.productsReadOnly && products.productsReadOnly.map(elem => (
                     <Route key={elem.id} path={`product/:prodId`} element={
@@ -126,7 +146,15 @@ function App() {
                             successNtfs={successNtfs}
                             setErrorNtfs={setErrorNtFs}
                             setSuccessNtfs={setSuccessNtFs}>
-                            <ProductPage formData={formData} getFormInputs={getFormInputs} setFormData={setFormData}/>
+                            <ModalPopUp
+                                isModalOpen={modalVisibility}
+                                onClose={closeModal}
+                                data={modalData}
+                                formData={formData}
+                                setFormData={setFormData}
+                                getFormInputs={getFormInputs}
+                            />
+                            <ProductPage payClickHandle={payClickHandle}/>
                         </Layout>}/>
                 ))}
                 <Route path={'/'} element={
@@ -135,7 +163,15 @@ function App() {
                         successNtfs={successNtfs}
                         setErrorNtfs={setErrorNtFs}
                         setSuccessNtfs={setSuccessNtFs}>
-                        <Main formData={formData} getFormInputs={getFormInputs} setFormData={setFormData}/>
+                        <ModalPopUp
+                            isModalOpen={modalVisibility}
+                            onClose={closeModal}
+                            data={modalData}
+                            formData={formData}
+                            setFormData={setFormData}
+                            getFormInputs={getFormInputs}
+                        />
+                        <Main payClickHandle={payClickHandle}/>
                     </Layout>}/>
                 <Route path={'sign_in/'} element={<AdminLayout
                     errorNtfs={errorAdminNtfs}

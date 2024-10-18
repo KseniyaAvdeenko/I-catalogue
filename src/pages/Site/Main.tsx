@@ -4,19 +4,15 @@ import {useAppSelector} from "../../hooks/redux";
 import {IHeading} from "../../interface/IPagesSettings";
 import Heading from "../../components/UI/Heading/Heading";
 import ProductList from "../../components/SiteComponents/ProductList/ProductList";
-import {IProdReadOnly} from "../../interface/IProduct";
-import ModalPopUp from "../../components/SiteComponents/ModalPopup/ModalPopUp";
 import Loader from "../../components/UI/Loader/Loader";
 import {setPageTitle} from "../../hooks/getTitle";
 
 
 interface IMainPageProps {
-    formData: { [key: string]: string | number; };
-    getFormInputs: Function;
-    setFormData: Function
+    payClickHandle: Function
 }
 
-const Main:React.FC<IMainPageProps> = ({formData, setFormData, getFormInputs}) => {
+const Main:React.FC<IMainPageProps> = ({payClickHandle}) => {
     const {mainPageSettings, isLoading} = useAppSelector(state => state.mainPageSettingsReducer)
     const [mainPageStyles, setMainPageStyles] = useState<{ background: string; prodCardBg: string;}>({
         background: '',
@@ -31,8 +27,6 @@ const Main:React.FC<IMainPageProps> = ({formData, setFormData, getFormInputs}) =
         id: 0
     })
 
-    const [modalVisibility, setModalVisibility] = useState<boolean>(false)
-    const [modalData, setModalData] = useState<IProdReadOnly | null>(null)
 
     useEffect(() => {
         if (mainPageSettings) {
@@ -46,10 +40,6 @@ const Main:React.FC<IMainPageProps> = ({formData, setFormData, getFormInputs}) =
         }
     }, [mainPageSettings]);
 
-    function payClickHandle(prod: IProdReadOnly) {
-        setModalVisibility(true);
-        setModalData(prod)
-    }
 
     return mainPageSettings ? (
         <main className={[styles.page__container].join(' ')}
@@ -61,14 +51,6 @@ const Main:React.FC<IMainPageProps> = ({formData, setFormData, getFormInputs}) =
                 cardBorder={mainPageSettings.cardBorder}
                 cardBorderColor={mainPageSettings.cardBorderColor}
                 cardBorderWidth={mainPageSettings.cardBorderWidth}
-            />
-            <ModalPopUp
-                isModalOpen={modalVisibility}
-                onClose={()=> setModalVisibility(false)}
-                data={modalData}
-                formData={formData}
-                setFormData={setFormData}
-                getFormInputs={getFormInputs}
             />
         </main>
     ):(<main className={styles.page__container} style={{alignItems: 'center', justifyContent: 'center'}}>{isLoading && (<Loader/>)}</main>)

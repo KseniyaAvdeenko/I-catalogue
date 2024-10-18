@@ -13,7 +13,7 @@ const Heading: React.FC<{pageHeading: IHeading, headingContent: string }> = ({pa
     }, [windowWidth])
     const Heading = pageHeading.blockHeadingType
     return (<Heading style={{
-                margin: '5rem 0 5rem',
+                margin: windowWidth > 1024 ?'5rem 0': '3rem 0',
                 textAlign: 'center',
                 fontSize: fontSize,
                 color: pageHeading.headingFontColor,
