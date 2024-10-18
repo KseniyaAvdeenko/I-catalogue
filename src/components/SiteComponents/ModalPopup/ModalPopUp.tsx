@@ -6,11 +6,11 @@ import Heading from "../../UI/Heading/Heading";
 import ProdImage from "../../UI/ProdImage/ProdImage";
 import {getCurrency} from "../../../hooks/getCurrency";
 import SiteButton from "../../UI/SiteButton/SiteButton";
-import {checkPayment, createOrder} from "../../../store/actions/orderAction";
+import {createOrder} from "../../../store/actions/orderAction";
 import {INewOrderBase} from "../../../interface/IOrder";
-import {decodeToken} from "../../../hooks/encodeDecodeTokens";
 import ModalInputContainer from "./ModalInputContainer";
 import Loader from "../../UI/Loader/Loader";
+import CloseButton from '../../../assets/img/closeCross.svg';
 
 interface IModalPopUpProps {
     isModalOpen: boolean;
@@ -76,6 +76,8 @@ const ModalPopUp: React.FC<IModalPopUpProps> = ({
                 ? <div className={styles.modal__formContainer}
                        onClick={e => e.stopPropagation()}
                        style={{background: modalForm.background}}>
+                    <div className={styles.modal__formContainer__closeBtn}
+                    onClick={onClose}><img src={CloseButton} alt="Закрыть"/></div>
                     <Heading pageHeading={modalForm.headingSettings}
                              headingContent={modalForm.headingSettings.headingContent}/>
                     {data && (<div className={styles.modal__prodContent}>

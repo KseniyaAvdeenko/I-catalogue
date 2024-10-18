@@ -24,6 +24,11 @@
     align-items: center
     padding: 3rem
     border-radius: 2rem
+    position: relative
+
+    &__closeBtn
+      position: absolute
+      display: none
 
 
   &__prodContent
@@ -39,9 +44,9 @@
       & > img
         height: 100%
         width: 100%
-        object-fit: cover
+        object-fit: contain
         border-radius: 2rem
-        object-position: top center
+        object-position: center center
 
     &__podItems
       @extend .flexColumn
@@ -73,7 +78,7 @@
     width: 100%
     height: fit-content
     display: grid
-    grid-template-columns: 1fr 1.5fr
+    grid-template-columns: 1fr 2fr
     column-gap: 2rem
     margin: 1rem 0
 
@@ -95,3 +100,68 @@
 
     & > input[type="number"]
       width: 40%
+
+
+@media screen and (max-width: 1440px)
+  .modal
+    &__formContainer
+      flex-basis: 60%
+
+@media screen and (max-width: 1280px)
+  .modal
+    &__formContainer
+      flex-basis: 65%
+
+@media screen and (max-width: 1024px)
+  .modal
+    &__formContainer
+      flex-basis: 75%
+
+@media screen and (max-width: 900px)
+  .modal
+    &__formContainer
+      flex-basis: 80%
+
+@media screen and (max-width: 768px)
+  .modal
+    padding: 2rem
+    &__formContainer
+      flex-basis: 100%
+
+@media screen and (max-width: 600px)
+  .modal
+    &__prodContent
+      flex-direction: column
+      height: fit-content
+      &__imageWrapper
+        margin-right: 0
+        margin-bottom: 2rem
+        height: 6rem
+        flex-basis: fit-content
+
+@media screen and (max-width: 540px)
+  .modal
+    &__inputItem
+      grid-template-columns: 1fr
+      grid-auto-rows: auto
+      column-gap: 0
+      row-gap: 1rem
+      margin: 1rem 0
+    &__prodContent
+      &__imageWrapper
+        height: fit-content
+        width: 100%
+
+@media screen and (max-width: 440px)
+  .modal
+    padding: 0
+    &__formContainer
+      flex-basis: 100%
+      height: 100vh
+      border-radius: 0
+      padding: 2rem
+      overflow-y: hidden
+      &__closeBtn
+        display: block
+        top: 2rem
+        right: 2rem
