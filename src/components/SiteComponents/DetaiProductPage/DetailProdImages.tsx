@@ -36,7 +36,7 @@ const DetailProdImages: React.FC<{ images: IProdImg[] }> = ({images}) => {
     return images.length ? (
             <div className={styles.imageCarousel}>
                 <div className={styles.imageCarousel__inner} style={{border: `.1rem solid ${background}`}}>
-                    <img src={images[currentIndex].prodImg} alt={'image ' + currentIndex}/>
+                    <img itemProp="image" src={images[currentIndex].prodImg} alt={'image ' + currentIndex}/>
                 </div>
                 <ArrowLeft strokeColor={background} clickHandler={goToPrevious}
                            classname={[styles.imageCarousel__arrows, styles.imageCarousel__arrows_left].join(' ')}/>

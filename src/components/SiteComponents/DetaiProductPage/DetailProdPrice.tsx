@@ -9,7 +9,11 @@ interface IDetailProdPriceProps {
 
 const DetailProdPrice: FC<IDetailProdPriceProps> = ({price, priceAttrs, currency}) => {
 
-    return (<p><b>Цена: </b>{price} {getCurrency(currency)} {priceAttrs && `/ ${priceAttrs}`}</p>);
+    return (<p itemProp="price" content={String(price)}>
+        <b>Цена: </b>{price}
+        <span style={{marginLeft: 5}} itemProp="priceCurrency" content={currency}>{getCurrency(currency)} {priceAttrs && `/ ${priceAttrs}`}
+        </span>
+    </p>);
 };
 
 export default DetailProdPrice;

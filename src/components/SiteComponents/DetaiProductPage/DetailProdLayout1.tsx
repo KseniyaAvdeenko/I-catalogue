@@ -9,10 +9,10 @@ import DetailProdImages from "./DetailProdImages";
 const DetailProdLayout1: React.FC<IDetailProdLayoutProps> = ({productReadOnly, payClickHandle}) => {
 
     return (
-        <div className={styles.Layout1}>
+        <div itemScope itemType="https://schema.org/Product" className={styles.Layout1}>
             <DetailProdImages images={productReadOnly.images}/>
             <div className={styles.Layout1__prodItems}>
-                <h3 className={styles.Layout1__prodItems__prodName}>{productReadOnly.name}</h3>
+                <h3 itemProp="name" className={styles.Layout1__prodItems__prodName}>{productReadOnly.name}</h3>
                 <div className={styles.Layout1__prodItems}>
                     <DetailProdPrice
                         price={productReadOnly.price}

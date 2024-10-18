@@ -23,16 +23,16 @@ const ProductItem: React.FC<IProductItemProps> = ({
                                                       prodCardBg
                                                   }) => {
     return (
-        <div key={prod.id} className={styles.prodItem}
+        <div key={prod.id} itemScope itemType="https://schema.org/Product" className={styles.prodItem}
              style={{
                  background: prodCardBg,
                  border: cardBorder ? cardBorderWidth + 'px solid ' + cardBorderColor : 'none'
              }}>
             <ProdImage images={prod.images} imageWrapperClassname={styles.prodItem__imageWrapper}/>
             <div className={styles.prodItem__items}>
-                <div className={styles.prodItem__name}>{prod.name}</div>
-                <div className={styles.prodItem__price}>
-                    <b>Цена:</b> {prod.price} {getCurrency(prod.currency)} {prod.priceAttrs && `/ ${prod.priceAttrs}`}
+                <div itemProp="name" className={styles.prodItem__name}>{prod.name}</div>
+                <div itemProp="price" content={String(prod.price)} className={styles.prodItem__price}>
+                    <b>Цена:</b> {prod.price} <span itemProp="priceCurrency" content={prod.currency}>{getCurrency(prod.currency)} {prod.priceAttrs && `/ ${prod.priceAttrs}`}</span>
                 </div>
                 <SiteButton product={prod}
                             type={'link'}

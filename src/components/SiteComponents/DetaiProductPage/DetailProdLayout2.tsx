@@ -8,10 +8,10 @@ import SiteButton from "../../UI/SiteButton/SiteButton";
 
 const DetailProdLayout2: React.FC<IDetailProdLayoutProps> = ({productReadOnly, payClickHandle}) => {
     return (
-        <div className={styles.Layout2}>
+        <div itemScope itemType="https://schema.org/Product" className={styles.Layout2}>
             <DetailProdImages images={productReadOnly.images}/>
             <div className={styles.Layout1__prodItems}>
-                <h3 className={styles.Layout1__prodItems__prodName}>{productReadOnly.name}</h3>
+                <h3 itemProp="name" className={styles.Layout1__prodItems__prodName}>{productReadOnly.name}</h3>
                 <div className={styles.Layout2__prodItems}>
                     <DetailProdPrice
                         price={productReadOnly.price}
